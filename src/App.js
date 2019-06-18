@@ -1,17 +1,15 @@
 import React from 'react';
 import './App.css';
-import axios from 'axios';
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+import Main from './Main';
+import About from './About';
 
 function App() {
-  // sample axios call to the backend
-  axios.get('http://localhost:8080/').then(res => {
-    console.log(res.data);
-  });
-
   return (
-    <div className="App">
-      <header className="App-header" />
-    </div>
+    <Router>
+      <Route path="/" exact component={Main} />
+      <Route path="/about" component={About} />
+    </Router>
   );
 }
 
