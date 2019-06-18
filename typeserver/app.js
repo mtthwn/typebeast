@@ -1,25 +1,28 @@
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
-var cors = require('cors');
+const createError = require('http-errors');
+const express = require('express');
+/* eslint-disable */
+const path = require('path');
+/* eslint-enable */
+const cookieParser = require('cookie-parser');
+const logger = require('morgan');
+const cors = require('cors');
 const mongoose = require('mongoose');
 
-mongoose.connect('mongodb://localhost:27017/typebeast', { useNewUrlParser: true });
+mongoose.connect('mongodb://localhost:27017/typebeast', {
+  useNewUrlParser: true
+});
 
 const db = mongoose.connection;
 
-db.on('error', console.error.bind(console, 'connection error:'));
+db.on('error', process.stdout.write(console, 'connection error: \n'));
 db.once('open', () => {
-  console.log('Connected to MongoDB');
+  process.stdout.write('Connected to MongoDB \n');
 });
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+const indexRouter = require('./routes/index');
+// const usersRouter = require('./routes/users');
 
-var app = express();
-
+const app = express();
 
 app.use(logger('dev'));
 app.use(express.json());
@@ -30,12 +33,12 @@ app.use(cookieParser());
 app.use('/', indexRouter);
 
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
+app.use((req, res, next) => {
   next(createError(404));
 });
 
 // error handler
-app.use(function(err, req, res, next) {
+app.use((err, req, res) => {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};

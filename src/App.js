@@ -3,17 +3,14 @@ import './App.css';
 import axios from 'axios';
 
 function App() {
-
   // sample axios call to the backend
-  axios.get('http://localhost:8080/')
-    .then(res => {
-      console.log(res.data)
-    });
-  
+  axios.get('http://localhost:8080/').then(res => {
+    console.log(res.data);
+  });
+
   return (
     <div className="App">
-      <header className="App-header">
-      </header>
+      <header className="App-header" />
     </div>
   );
 }
