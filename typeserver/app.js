@@ -6,7 +6,7 @@ var logger = require('morgan');
 var cors = require('cors');
 const mongoose = require('mongoose');
 
-mongoose.connect('mongodb://localhost:279017/typebeast');
+mongoose.connect('mongodb://localhost:27017/typebeast', { useNewUrlParser: true });
 
 const db = mongoose.connection;
 
