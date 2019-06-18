@@ -14,10 +14,12 @@ mongoose.connect('mongodb://localhost:27017/typebeast', {
 
 const db = mongoose.connection;
 
-db.on('error', process.stdout.write(console, 'connection error: \n'));
+/* eslint-disable */
+db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', () => {
   process.stdout.write('Connected to MongoDB \n');
 });
+/* eslint-enable */
 
 const indexRouter = require('./routes/index');
 // const usersRouter = require('./routes/users');
