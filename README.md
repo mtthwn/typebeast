@@ -12,9 +12,13 @@ MongoDB must be running in the background in order to start the API.
 
 `cd typeserver` and `npm start`.
 
+Server will run on `http://localhost:8080`
+
 ### Running the React App
 
-`yarn start`.
+`yarn start`
+
+App will run on `localhost:3000`
 
 ### Code cleanup
 
