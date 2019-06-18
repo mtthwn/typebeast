@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 import Home from './home/Home';
 
-function App() {
+function Root() {
   return (
     <Router>
       <Route path="/" exact component={Home} />
@@ -12,4 +12,4 @@ function App() {
   );
 }
 
-export default App;
+export default Root;
