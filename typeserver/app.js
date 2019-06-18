@@ -4,6 +4,16 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var cors = require('cors');
+const mongoose = require('mongoose');
+
+mongoose.connect('mongodb://localhost:27017/typebeast', { useNewUrlParser: true });
+
+const db = mongoose.connection;
+
+db.on('error', console.error.bind(console, 'connection error:'));
+db.once('open', () => {
+  console.log('Connected to MongoDB');
+});
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
