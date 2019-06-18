@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 function Home() {
   // sample axios call to the backend
@@ -9,7 +10,7 @@ function Home() {
 
   return (
     <div className="App">
-      <header className="App-header" />
+      <Link to="/about">About</Link>
     </div>
   );
 }
