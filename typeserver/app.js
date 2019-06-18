@@ -1,6 +1,8 @@
 const createError = require('http-errors');
 const express = require('express');
+/* eslint-disable */
 const path = require('path');
+/* eslint-enable */
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const cors = require('cors');
