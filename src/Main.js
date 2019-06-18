@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 function Main() {
   // sample axios call to the backend
@@ -9,6 +10,8 @@ function Main() {
   return (
     <div className="App">
       <h1>Hello!</h1>
+
+      <Link to="/about">About</Link>
     </div>
   );
 }
