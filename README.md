@@ -15,3 +15,7 @@ MongoDB must be running in the background in order to start the API.
 ### Running the React App
 
 `yarn start`.
+
+### Code cleanup
+
+Install Prettier and run ESLint to ensure the code follows the project's code styleguide.
