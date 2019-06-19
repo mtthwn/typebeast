@@ -10,7 +10,8 @@ const GameStatSchema = new Schema({
   },
   wpm: {
     type: Number,
-    required: true
+    required: true,
+    default: 0
   }
 });
 
