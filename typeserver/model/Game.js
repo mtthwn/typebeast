@@ -3,9 +3,7 @@ const mongoose = require('mongoose');
 const { Schema } = mongoose.Schema;
 
 const GameSchema = new Schema({
-  Users: {
-    type: Array
-  }
+  stats: [{ type: Schema.Types.ObjectId, ref: 'GameStat' }]
 });
 
 const Game = mongoose.model('Game', GameSchema);
