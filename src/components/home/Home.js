@@ -1,8 +1,8 @@
 import React from 'react';
-import './App.css';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
-function App() {
+function Home() {
   // sample axios call to the backend
   axios.get('http://localhost:8080/').then(res => {
     console.log(res.data);
@@ -10,9 +10,13 @@ function App() {
 
   return (
     <div className="App">
-      <header className="App-header" />
+      <nav>
+        <Link to="/about">About</Link>
+        <br />
+        <Link to="/">Home</Link>
+      </nav>
     </div>
   );
 }
 
-export default App;
+export default Home;
