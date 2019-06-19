@@ -10,7 +10,11 @@ function Home() {
 
   return (
     <div className="App">
-      <Link to="/about">About</Link>
+      <nav>
+        <Link to="/about">About</Link>
+        <br />
+        <Link to="/">Home</Link>
+      </nav>
     </div>
   );
 }
