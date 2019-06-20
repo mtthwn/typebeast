@@ -14,6 +14,10 @@ const UserSchema = new Schema({
   games: {
     type: Array,
     default: []
+  },
+  password: {
+    type: String,
+    required: true
   }
 });
 
