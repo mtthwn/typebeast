@@ -22,8 +22,8 @@ db.once('open', () => {
 /* eslint-enable */
 
 const indexRouter = require('./routes/index/index');
-// const usersRouter = require('./routes/users');
 const usersRouter = require('./routes/user/index');
+const gamesRouter = require('./routes/game/index');
 
 const app = express();
 
@@ -33,8 +33,9 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cors());
 app.use(cookieParser());
 
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
+app.use('/api', indexRouter);
+app.use('/api/users', usersRouter);
+app.use('/api/games', gamesRouter);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
