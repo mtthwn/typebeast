@@ -21,8 +21,9 @@ db.once('open', () => {
 });
 /* eslint-enable */
 
-const indexRouter = require('./routes/index');
-const usersRouter = require('./routes/users');
+const indexRouter = require('./routes/index/index');
+// const usersRouter = require('./routes/users');
+const usersRouter = require('./routes/user/index');
 
 const app = express();
 
