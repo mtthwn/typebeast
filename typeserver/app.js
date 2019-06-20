@@ -6,24 +6,12 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const cors = require('cors');
-const mongoose = require('mongoose');
 
-mongoose.connect('mongodb://localhost:27017/typebeast', {
-  useNewUrlParser: true
-});
-
-const db = mongoose.connection;
-
-/* eslint-disable */
-db.on('error', console.error.bind(console, 'connection error:'));
-db.once('open', () => {
-  process.stdout.write('Connected to MongoDB \n');
-});
-/* eslint-enable */
+require('./db/config');
 
 const indexRouter = require('./routes/index/index');
 const usersRouter = require('./routes/user/index');
-const gamesRouter = require('./routes/game/index');
+// const gamesRouter = require('./routes/game/index');
 
 const app = express();
 
@@ -35,7 +23,7 @@ app.use(cookieParser());
 
 app.use('/api', indexRouter);
 app.use('/api/users', usersRouter);
-app.use('/api/games', gamesRouter);
+// app.use('/api/games', gamesRouter);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
