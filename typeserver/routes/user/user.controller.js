@@ -6,6 +6,16 @@ function index(req, res) {
   });
 }
 
+function getUser(req, res) {
+  const { email, password } = req.body;
+
+  User.findOne({ email, password }).then(foundUser => {
+    res
+      .status(200)
+      .json({ success: true, email: foundUser.email, name: foundUser.name });
+  });
+}
+
 function addUser(req, res) {
   const { name, email, password } = req.body;
 
@@ -16,5 +26,6 @@ function addUser(req, res) {
 
 module.exports = {
   index,
+  getUser,
   addUser
 };
