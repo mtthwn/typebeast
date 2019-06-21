@@ -1,4 +1,4 @@
-const User = require('../../model/User');
+const User = require('../../db/model/User');
 
 function index(req, res) {
   res.status(200).json({
