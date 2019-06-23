@@ -1,38 +1,23 @@
 import React from 'react';
-import DisplayQuoteInput from '../DisplayQuote/DisplayQuoteInput';
-import DisplayQuoteArea from '../DisplayQuote/DisplayQuoteArea';
-import CarWPMGauge from '../Gauges/CarWPMGauge';
-import NosGauge from '../Gauges/NosGauge';
-import Minimap from '../Minimap/Minimap';
-import './Quote.scss';
 
-const displayQuote = props => {
-  const {
-    fullPhrase,
-    userInput,
-    onUserInputChange,
-    onFinish,
-    second,
-    char
-  } = props;
+const DisplayQuoteArea = ({ userInput, fullPhrase }) => {
+  const splitQuoteIntoChars = fullPhrase.split('');
+  return (
+    <div className="DisplayQuote-previewQuote">
+      {splitQuoteIntoChars.map((char, index) => {
+        let color;
+        if (index < userInput.length) {
+          color = char === userInput[index] ? '#04ad67' : '#ff373e';
+        }
 
-  return onFinish ? (
-    <div className="DisplayQuote-container">
-      <div className="DisplayQuote-previewQuote">
-        <h1 className="DisplayQuote-h1">Congrats mffferrr</h1>
-      </div>
-    </div>
-  ) : (
-    <div className="DisplayQuoteUI-container">
-      <CarWPMGauge second={second} char={char} />
-      <div className="DisplayQuote-container">
-        <Minimap />
-        <DisplayQuoteArea fullPhrase={fullPhrase} userInput={userInput} />
-        <DisplayQuoteInput onUserInputChange={onUserInputChange} />
-      </div>
-      <NosGauge />
+        return (
+          <span key={index} style={{ background: color }}>
+            {char}
+          </span>
+        );
+      })}
     </div>
   );
 };
 
-export default displayQuote;
+export default DisplayQuoteArea;
