@@ -1,6 +1,6 @@
 import React from 'react';
-import car from './../../img/gtx.png';
-import './Cars.scss';
+import car from './../../../img/gtx.png';
+import './Car.scss';
 
 const Car = ({ carPositioning, onFinish }) => {
   return (

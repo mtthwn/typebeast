@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 import Main from './Main/Main';
 import About from './about/About';
 import Header from './Header/Header';
+import Game from './Game/Game';
 
 function Root() {
   return (
@@ -12,6 +13,7 @@ function Root() {
       <Header />
       <Route path="/" exact component={Main} />
       <Route path="/about" component={About} />
+      <Route path='/play' component={Game} />
     </Router>
   );
 }

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './Game.scss';
 import DisplayQuote from './Quote/Quote';
-import Background from './../Background/Background';
+import Background from './Background/Background';
 
 export default class PlayGame extends Component {
   constructor() {
@@ -41,7 +41,6 @@ export default class PlayGame extends Component {
           onFinishButton={this.onRestart}
           second={this.state.sec}
           char={this.state.char}
-          word={this.state.word}
         />
       </div>
     );
