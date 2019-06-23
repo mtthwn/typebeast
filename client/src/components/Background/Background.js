@@ -1,5 +1,5 @@
 import React from 'react';
-// import Car1 from '../Cars/Car1';
+import Car1 from '../Cars/Car1';
 // import Car2 from "../Cars/Car2";
 // import Car3 from "../Cars/Car3";
 import gameStartBG from './../../img/forest-bg3.jpg';
