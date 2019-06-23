@@ -19,7 +19,7 @@ const displayQuote = props => {
   return onFinish ? (
     <div className="DisplayQuote-container">
       <div className="DisplayQuote-previewQuote">
-        <h1 className="DisplayQuote-h1">Congrats mffferrr</h1>
+        <h1 className="DisplayQuote-h1">Congrats mffferr</h1>
       </div>
     </div>
   ) : (
