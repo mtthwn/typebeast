@@ -2,7 +2,7 @@ import React from 'react';
 import { Nav, Navbar, Button, Form, FormControl } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import './PlayNow.scss';
-import ferarriSideView from '../../images/ferarri-side.png';
+import ferarriSideView from './../../img/ferarri-side.png';
 
 const PlayNow = () => {
   return (
