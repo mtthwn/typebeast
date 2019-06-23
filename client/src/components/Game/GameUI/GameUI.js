@@ -1,9 +1,9 @@
 import React from 'react';
 import DisplayQuoteInput from './../GameInput/GameInput';
 import DisplayQuoteArea from './../Quote/Quote';
-import CarWPMGauge from '../Gauges/CarWPMGauge';
-import NosGauge from '../Gauges/NosGauge';
-import Minimap from '../Minimap/Minimap';
+import CarWPMGauge from './../Guages/WPMGuage';
+import NosGauge from './../Guages/NOSGuage';
+import Minimap from './../Minimap/Minimap';
 import './GameUI.scss';
 
 const displayQuote = props => {

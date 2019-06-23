@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './Game.scss';
-import DisplayQuote from './Quote/Quote';
+import DisplayQuote from './GameUI/GameUI';
 import Background from './Background/Background';
 
 export default class PlayGame extends Component {
