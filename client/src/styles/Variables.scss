@@ -1,0 +1,19 @@
+$main-color: #d40d2e;
+$bg-color: #151515;
+$text-color: #fff;
+$border-color: #383838;
+$text-secondary: #888888;
+$header-font: "Nunito Sans", sans-serif;
+
+@mixin Main-btn {
+  margin-right: 1rem;
+  width: 10rem;
+  background-color: $main-color;
+  border: none;
+  border-radius: 0;
+  padding: 1rem 0.5rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 700;
+  letter-spacing: 2px;
+}
