@@ -4,7 +4,7 @@ import DisplayQuoteArea from '../DisplayQuote/DisplayQuoteArea';
 import CarWPMGauge from '../Gauges/CarWPMGauge';
 import NosGauge from '../Gauges/NosGauge';
 import Minimap from '../Minimap/Minimap';
-import './DisplayQuote.scss';
+import './Quote.scss';
 
 const displayQuote = props => {
   const {
