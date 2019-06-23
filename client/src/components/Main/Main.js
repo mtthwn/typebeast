@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import CarSlider from './CarSlider';
+import CarSlider from './../CarSlider/CarSlider';
 // import SocialMedia from './SocialMedia';
 // import PlayNow from './PlayNow';
 
@@ -9,6 +9,7 @@ class MainPage extends Component {
   render() {
     return (
       <div>
+        <CarSlider />
       </div>
     );
   }
