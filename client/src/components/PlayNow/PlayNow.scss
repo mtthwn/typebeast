@@ -1,0 +1,73 @@
+@import "./../../styles/Variables.scss";
+
+.PlayNow-container {
+  position: fixed;
+  display: flex;
+  background-color: #000;
+  bottom: 0;
+  right: 0;
+  border-top: 1px solid $border-color;
+  border-left: 1px solid $border-color;
+  z-index: 2;
+  justify-self: flex-end;
+  width: 70vw;
+  height: 15%;
+  align-content: center;
+  justify-content: space-between;
+
+  &:before {
+    content: " ";
+    position: absolute;
+    border-left: 1px solid $border-color;
+    height: 20rem;
+    width: 10rem;
+    transform: rotate(45deg);
+    top: 10px;
+    left: -8.6rem;
+    background: #000;
+  }
+}
+
+.PlayNow-current,
+.PlayNow-specs {
+  align-self: baseline;
+  margin: 2rem 2rem;
+  z-index: 15;
+  color: $text-secondary;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+
+  p {
+    font-size: 0.8rem;
+    margin-bottom: 0;
+  }
+
+  h5 {
+    letter-spacing: 1px;
+    font-size: 1rem;
+    color: #fff;
+  }
+}
+
+.PlayNow-content {
+  display: flex;
+  justify-content: space-between;
+  margin-right: 4rem;
+
+  img {
+    align-self: center;
+    max-width: 300px;
+    max-height: 75px;
+    width: auto;
+    height: auto;
+  }
+}
+.PlayNow-btn {
+  @include Main-btn;
+  width: 30rem;
+  font-weight: 600;
+  font-size: 1.2rem;
+  height: 100%;
+  padding: 0 0;
+  margin: 0 0;
+}
