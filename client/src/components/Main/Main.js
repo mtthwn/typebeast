@@ -7,12 +7,14 @@ import { BrowserRouter as Router } from 'react-router-dom';
 
 class MainPage extends Component {
   render() {
+    console.log(SocialMedia);
+
     return (
       <div>
         <Router>
           <div>
-            <CarSlider />
             <SocialMedia />
+            <CarSlider />
             <PlayNow />
           </div>
         </Router>
