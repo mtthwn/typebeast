@@ -1,0 +1,62 @@
+.Car1-img {
+  position: absolute;
+  bottom: 225px;
+  transition: all 1s linear;
+}
+
+.Car2-img {
+  position: absolute;
+  left: 300px;
+  bottom: 180px;
+  animation: car2 50s linear infinite;
+}
+
+.Car3-img {
+  position: absolute;
+  left: 100px;
+  bottom: 135px;
+  animation: car3 55s linear infinite;
+}
+
+.Car-finish {
+  position: absolute;
+  bottom: 225px;
+  transition: all 1s linear;
+  animation: carfinish 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+@keyframes carfinish {
+  from {
+    left: -100px;
+  }
+  to {
+    left: 500px;
+  }
+}
+
+@keyframes car2 {
+  from {
+    left: 0px;
+  }
+  to {
+    left: 2500px;
+  }
+}
+
+@keyframes car3 {
+  from {
+    left: 0px;
+  }
+  to {
+    left: 2500px;
+  }
+}
+
+@keyframes fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}

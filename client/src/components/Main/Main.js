@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import CarSlider from './../CarSlider/CarSlider';
+import CarSlider from '../Game/CarSlider/CarSlider';
 import SocialMedia from './../SocialMedia/SocialMedia';
 import PlayNow from './../PlayNow/PlayNow';
 

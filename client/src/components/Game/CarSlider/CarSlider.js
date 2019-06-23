@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { Carousel } from 'react-bootstrap';
 import './CarSlider.scss';
-import carSlide1 from './../../img/car_slider1.jpg';
-import carSlide3 from './../../img/car_slider2.jpg';
-import carSlide2 from './../../img/car_slider3.jpeg';
-import carSlide4 from './../../img/car_slider4.jpeg';
+import carSlide1 from './../../../img/car_slider1.jpg';
+import carSlide3 from './../../../img/car_slider2.jpg';
+import carSlide2 from './../../../img/car_slider3.jpeg';
+import carSlide4 from './../../../img/car_slider4.jpeg';
 
 class CarSlider extends Component {
   constructor(props, context) {

@@ -1,0 +1,19 @@
+.Background-img {
+  position: relative;
+  width: 100%;
+  height: 45%;
+  margin-bottom: 40px;
+  background-color: #080416;
+  background-position: center;
+  animation: move-background 30s linear infinite;
+  overflow: hidden;
+}
+
+@keyframes move-background {
+  from {
+    background-position: bottom left;
+  }
+  to {
+    background-position: bottom right;
+  }
+}
