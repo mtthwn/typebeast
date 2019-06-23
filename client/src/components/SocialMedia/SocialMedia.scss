@@ -1,0 +1,24 @@
+@import "../Variables";
+
+.SocialMedia {
+  position: fixed;
+  justify-content: center;
+  align-content: center;
+  border-right: 1px solid $border-color;
+  background-color: #000;
+  z-index: 10;
+  width: 5%;
+  height: 100vh;
+}
+
+.SocialMedia .nav-link {
+  color: $text-color;
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+  transition: all 0.2s ease-in;
+
+  &:hover {
+    color: $main-color;
+    opacity: 1;
+  }
+}
