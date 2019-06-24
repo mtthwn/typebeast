@@ -119,6 +119,7 @@ export default class PlayGame extends Component {
           onFinishButton={this.onRestart}
           second={this.state.sec}
           char={this.state.char}
+          socket={this.state.socket}
         />
       </div>
     );

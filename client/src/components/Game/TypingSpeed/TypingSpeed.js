@@ -1,7 +1,11 @@
 import React from 'react';
+import socketIOClient from "socket.io-client";
 
-const TypingSpeed = ({ second, char }) => {
+const TypingSpeed = ({ second, char, socket }) => {
   const wpm = char / 5 / (second / 60);
+  if (socket) {
+    socket.emit('progress-update', wpm)
+  }
   return (
     <div className="TypingSpeed-wpm">
       <div className="TypingSpeed-num">

@@ -4,6 +4,7 @@ import DisplayQuoteArea from './../Quote/Quote';
 import CarWPMGauge from './../Guages/WPMGuage';
 import NosGauge from './../Guages/NOSGuage';
 import Minimap from './../Minimap/Minimap';
+import socketIOClient from "socket.io-client";
 import './GameUI.scss';
 
 const displayQuote = props => {
@@ -13,7 +14,8 @@ const displayQuote = props => {
     onUserInputChange,
     onFinish,
     second,
-    char
+    char,
+    socket
   } = props;
 
   return onFinish ? (
@@ -24,7 +26,7 @@ const displayQuote = props => {
     </div>
   ) : (
     <div className="DisplayQuoteUI-container">
-      <CarWPMGauge second={second} char={char} />
+      <CarWPMGauge second={second} char={char} socket={socket} />
       <div className="DisplayQuote-container">
         <Minimap />
         <DisplayQuoteArea fullPhrase={fullPhrase} userInput={userInput} />
