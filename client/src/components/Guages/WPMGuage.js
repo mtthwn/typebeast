@@ -4,7 +4,6 @@ import socketIOClient from 'socket.io-client';
 import './Guages.scss';
 
 const CarGauge = ({ second, char, socket, wpm }) => {
-  console.log(wpm);
   return (
     <div className="CarGauge-border">
       <div className="CarGauge">
