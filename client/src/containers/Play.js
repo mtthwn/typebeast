@@ -100,6 +100,23 @@ export default class PlayGame extends Component {
   }
 
   render() {
+
+    const displayQuote = onFinish ? (<div className="DisplayQuote-container">
+      <div className="DisplayQuote-previewQuote">
+        <h1 className="DisplayQuote-h1">Congrats mffferr</h1>
+      </div>
+    </div>
+  ) : (
+    <div className="DisplayQuoteUI-container">
+      <CarWPMGauge second={second} char={char} socket={socket} />
+      <div className="DisplayQuote-container">
+        <Minimap />
+        <DisplayQuoteArea fullPhrase={fullPhrase} userInput={userInput} />
+        <DisplayQuoteInput onUserInputChange={onUserInputChange} />
+      </div>
+      <NosGauge />
+    </div>)
+
     return (
       <div className="PlayGame">
         <Background
