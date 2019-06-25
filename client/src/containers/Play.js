@@ -47,7 +47,7 @@ class PlayGameLogic extends Component {
       fullPhrase: 'Hope is the first step on the road to regret.',
       char: 0,
       sec: 0,
-      carPositioning: 0,
+      carPositioning: {},
       timer: 0,
       timerStart: false,
       timerFinished: false,
@@ -137,7 +137,13 @@ class PlayGameLogic extends Component {
     });
 
     socket.on('progress-broadcast', message => {
-      console.log(message);
+      // console.log(message);
+      this.setState({
+        carPositioning: {
+          [message.socketId]: message.completion
+        }
+      })
+      console.log(this.state.carPositioning)
     });
 
     socket.on('player-left', message => {
