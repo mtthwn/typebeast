@@ -1,7 +1,8 @@
 import React from 'react';
-import Car1 from './../Car/Car';
-// import Car2 from "../Cars/Car2";
-// import Car3 from "../Cars/Car3";
+import Player1Car from './../Car/Player1Car';
+import Player2Car from './../Car/Player2Car';
+import Player3Car from './../Car/Player3Car';
+
 import gameStartBG from './../../img/forest-bg3.jpg';
 import finishLineBG from './../../img/finish-line.jpg';
 import './Background.scss';
@@ -16,10 +17,14 @@ const bgFinish = {
   animation: 'fade 1s linear'
 };
 
+// const { opp1: socketID, opp2: socketID } = opponents;
+
 const Background = ({ carPositioning, onFinish }) => {
   return (
     <div className="Background-img" style={onFinish ? bgFinish : bgStart}>
-      <Car1 onFinish={onFinish} carPositioning={carPositioning} />
+      <Player1Car onFinish={onFinish} carPositioning={carPositioning} />
+      <Player2Car onFinish={onFinish} carPositioning={carPositioning} />
+      <Player3Car onFinish={onFinish} carPositioning={carPositioning} />
     </div>
   );
 };

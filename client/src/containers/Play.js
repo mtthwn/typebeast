@@ -22,8 +22,10 @@ const renderGame = props => {
       <div className="DisplayQuote-container">
         <Minimap />
         <DisplayQuoteArea
-          fullPhrase={props.fullPhrase}
-          userInput={props.userInput}
+          completed={props.wordsCompleted}
+          input={props.userInput}
+          currentWord={props.words[props.index]}
+          remaining={props.remainingPhrase}
         />
         <DisplayQuoteInput onUserInputChange={props.onUserInputChange} />
       </div>
@@ -37,11 +39,12 @@ class PlayGameLogic extends Component {
     super();
 
     this.state = {
+      loading: true,
       words: [],
-      index: 0,
-      fullPhrase:
-        'Your self-image is the result of all you have given your subconscious mind as a database, so regardless of your background, what you are willing to become is the only reality that counts.',
       userInput: '',
+      remainingPhrase: 'Hope is the first step on the road to regret.',
+      index: 0,
+      fullPhrase: 'Hope is the first step on the road to regret.',
       char: 0,
       sec: 0,
       carPositioning: 0,
@@ -54,6 +57,11 @@ class PlayGameLogic extends Component {
       gameStart: false,
       playersInRoom: [],
       playerSocket:'',
+      playerProgress: {
+        progress: 0,
+        wpm: 0
+      },
+      wordsCompleted: ''
     };
   }
 
@@ -132,6 +140,21 @@ class PlayGameLogic extends Component {
     socket.on('player-left', message => {
       console.log(message.description);
     });
+
+    const wordsArray = this.state.fullPhrase.split(' ');
+
+    this.setState({
+      words: wordsArray.map((word, index) => {
+        if (index < wordsArray.length - 1) {
+          return word + ' ';
+        }
+
+        return word;
+      }),
+      loading: false
+    });
+
+    // this.setState({ re})
   }
 
   render() {
@@ -142,19 +165,48 @@ class PlayGameLogic extends Component {
   }
 
   onUserInputChange = e => {
-    let value = e.target.value;
+    e.preventDefault();
 
-    if (this.state.timerFinished) {
+    let value = e.target.value;
+    const { index, words, wordsCompleted } = this.state;
+
+    if (value.length > words[index].length) {
+      return;
+    } else {
+      this.setState({ userInput: value });
+    }
+
+    if (index === words.length - 1 && value === words[index]) {
+      this.setState({ timerFinished: true });
+      return;
+    }
+
+    if (value === words[index]) {
+      this.setState({ wordsCompleted: wordsCompleted + value });
+      this.setState({ index: index + 1 });
+      this.setState({
+        remainingPhrase: this.state.remainingPhrase.substring(
+          words[index].length
+        )
+      });
+      this.setState({ userInput: '' });
+
       e.target.value = '';
     }
 
-    this.onStartTimer();
-    this.onFinishTimer(value);
-    this.setState({
-      userInput: value,
-      char: this.calculateCorrectChars(value),
-      carPositioning: this.calculateCorrectChars(value) * 10
-    });
+    // console.log(value);
+
+    // if (this.state.timerFinished) {
+    //   e.target.value = '';
+    // }
+
+    // this.onStartTimer();
+    // this.onFinishTimer(value);
+    // this.setState({
+    //   userInput: value,
+    //   char: this.calculateCorrectChars(value),
+    //   carPositioning: this.calculateCorrectChars(value) * 10
+    // });
   };
 
   calculateCorrectChars(userInput) {
@@ -197,9 +249,11 @@ export default () => {
             onFinish={values.timerFinished}
           />
 
-          {renderGame({
-            ...values
-          })}
+          {!values.loading
+            ? renderGame({
+                ...values
+              })
+            : 'loading'}
         </div>
       )}
     </PlayGameLogic>
