@@ -68,12 +68,12 @@ io.on('connection', function(socket){
   }
 
   //When receiving an update from a user, broadcast to all users in the room
-  socket.on('progress-update', (wpm) => {
+  socket.on('progress-update', (completion) => {
     // console.log('What room is this', Object.keys(socket.rooms));
     io.to(Object.keys(socket.rooms)[1]).emit('progress-broadcast', {
       socketId: socket.id,
       roomId: socket.rooms[1],
-      wpm: wpm
+      completion: completion
     });
   })
 

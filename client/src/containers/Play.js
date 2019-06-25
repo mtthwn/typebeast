@@ -57,10 +57,7 @@ class PlayGameLogic extends Component {
       gameStart: false,
       playersInRoom: [],
       playerSocket:'',
-      playerProgress: {
-        progress: 0,
-        wpm: 0
-      },
+      playerProgress: 0,
       wordsCompleted: ''
     };
   }
@@ -128,7 +125,13 @@ class PlayGameLogic extends Component {
         }, 1000);
       }
 
-      countdown();
+      // countdown();
+
+      setInterval( () => {
+        socket.emit('progress-update', {
+          progress: this.state.playerProgress
+        })
+      }, 4000)
 
       // this.onFinishTimer(value);
     });
@@ -194,6 +197,7 @@ class PlayGameLogic extends Component {
       e.target.value = '';
     }
 
+    this.calculateProgress();
     // console.log(value);
 
     // if (this.state.timerFinished) {
@@ -208,6 +212,13 @@ class PlayGameLogic extends Component {
     //   carPositioning: this.calculateCorrectChars(value) * 10
     // });
   };
+
+  calculateProgress() {
+    let progressPercent = this.state.index / this.state.words.length
+    this.setState({
+      playerProgress: progressPercent
+    })
+  }
 
   calculateCorrectChars(userInput) {
     //remove whitespace
