@@ -1,7 +1,12 @@
 import React, { Component } from 'react';
 import './Game.scss';
-import DisplayQuote from './GameUI/GameUI';
-import Background from './Background/Background';
+// import DisplayQuote from './GameUI/GameUI';
+import Background from './../components/Background/Background';
+import DisplayQuoteArea from './../components/Quote/Quote';
+import CarWPMGauge from './../components/Guages/WPMGuage';
+import Minimap from './../components/Minimap/Minimap'
+import DisplayQuoteInput from './../components/GameInput/GameInput';
+import NosGauge from './../components/Guages/NOSGuage'
 import socketIOClient from 'socket.io-client';
 
 export default class PlayGame extends Component {
@@ -100,22 +105,30 @@ export default class PlayGame extends Component {
   }
 
   render() {
-
-    const displayQuote = onFinish ? (<div className="DisplayQuote-container">
-      <div className="DisplayQuote-previewQuote">
-        <h1 className="DisplayQuote-h1">Congrats mffferr</h1>
-      </div>
-    </div>
-  ) : (
-    <div className="DisplayQuoteUI-container">
-      <CarWPMGauge second={second} char={char} socket={socket} />
+    const displayQuote = this.state.timerFinished ? (
       <div className="DisplayQuote-container">
-        <Minimap />
-        <DisplayQuoteArea fullPhrase={fullPhrase} userInput={userInput} />
-        <DisplayQuoteInput onUserInputChange={onUserInputChange} />
+        <div className="DisplayQuote-previewQuote">
+          <h1 className="DisplayQuote-h1">Congrats mffferr</h1>
+        </div>
       </div>
-      <NosGauge />
-    </div>)
+    ) : (
+      <div className="DisplayQuoteUI-container">
+        <CarWPMGauge
+          second={this.state.sec}
+          char={this.state.char}
+          socket={this.state.socket}
+        />
+        <div className="DisplayQuote-container">
+          <Minimap />
+          <DisplayQuoteArea
+            fullPhrase={this.state.fullPhrase}
+            userInput={this.state.userInput}
+          />
+          <DisplayQuoteInput onUserInputChange={this.onUserInputChange} />
+        </div>
+        <NosGauge />
+      </div>
+    );
 
     return (
       <div className="PlayGame">
