@@ -7,7 +7,6 @@ const port = process.env.PORT || 8080;
 let roomNum = 1
 
 let userCount = {
-  roomNum,
   totalUsers: 0
 };
 
@@ -42,14 +41,23 @@ io.on('connection', function(socket){
     console.log(userCount);
   }
 
+  //Set up variable to get array of socket IDs in current room
+  let clients = io.sockets.adapter.rooms['room-'+roomNum];
+  let clientsArray = Object.keys(clients.sockets);
+  console.log(clientsArray)
+
   //Welcome message for new user
   socket.emit('welcome', {
     description: `Welcome! You are in room ${roomNum}! Current user count: ${userCount['room-'+roomNum]}`,
+    socket: socket.id,
+    clients: clientsArray,
     userCount
   })
   //Broadcast that a new user joined to everyone ~else~
   socket.broadcast.to('room-'+roomNum).emit('new-user-join', {
     description : `New user has joined. Current user count: ${userCount['room-'+roomNum]}`,
+    socket: socket.id,
+    clients: clientsArray,
     userCount
   })
   //Check if the room is at capacity
