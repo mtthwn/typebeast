@@ -41,10 +41,16 @@ const renderGame = props => {
       <div className="DisplayQuote-previewQuote">
         <h1 className="DisplayQuote-h1">Congrats mffferr</h1>
       </div>
+      <div>WPM: {props.wpm}</div>
     </div>
   ) : (
     <div className="DisplayQuoteUI-container">
-      <CarWPMGauge wpm={props.wpm} second={props.sec} char={props.char} socket={props.socket} />
+      <CarWPMGauge
+        wpm={props.wpm}
+        second={props.sec}
+        char={props.char}
+        socket={props.socket}
+      />
       <div className="DisplayQuote-container">
         <Minimap />
         {gameStart}
@@ -65,9 +71,11 @@ class PlayGameLogic extends Component {
       loading: true,
       words: [],
       userInput: '',
-      remainingPhrase: 'Hope is the first step on the road to regret.',
+      remainingPhrase:
+        'I was having a similar issue and realised that I was not importing Router correctly.',
       index: 0,
-      fullPhrase: 'Hope is the first step on the road to regret.',
+      fullPhrase:
+        'I was having a similar issue and realised that I was not importing Router correctly.',
       char: 0,
       sec: 0,
       carPositioning: 0,
@@ -188,7 +196,7 @@ class PlayGameLogic extends Component {
     }
 
     if (index === words.length - 1 && value === words[index]) {
-      this.setState({ timerFinished: true });
+      this.onFinishTimer();
       return;
     }
 
@@ -250,9 +258,16 @@ class PlayGameLogic extends Component {
     if (!this.state.timerStart) {
       this.setState({ timerStart: true });
       this.interval = setInterval(() => {
-        const wpm = Math.floor(((this.state.wordsCompleted + this.state.userInput).length / this.state.index) / (this.state.sec * 60));
+        if (this.state.sec > 0) {
+          const wpm = Math.floor(
+            ((this.state.index + 1) / this.state.sec) * 60
+          );
 
-        this.setState({ })
+          this.setState({ wpm });
+        } else {
+          this.setState({ wpm: 0 });
+        }
+
         this.setState(prevProps => {
           return { sec: prevProps.sec + 1 };
         });
@@ -260,14 +275,12 @@ class PlayGameLogic extends Component {
     }
   };
 
-  onFinishTimer(userInput) {
-    if (userInput === this.state.fullPhrase) {
-      clearInterval(this.interval);
-      this.setState({
-        timerFinished: true
-      });
-    }
-  }
+  onFinishTimer = () => {
+    clearInterval(this.interval);
+    this.setState({
+      timerFinished: true
+    });
+  };
 }
 
 export default () => {
