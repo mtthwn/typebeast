@@ -78,15 +78,16 @@ class PlayGameLogic extends Component {
         'I was having a similar issue and realised that I was not importing Router correctly.',
       char: 0,
       sec: 0,
-      carPositioning: 0,
+      carPositioning: {},
       timer: 0,
       timerStart: false,
       timerFinished: false,
       finishLine: false,
       // Socket related properties:
       endpoint: 'http://127.0.0.1:8080',
-      playerCount: 0,
       gameStart: false,
+      playersInRoom: [],
+      playerSocket:'',
       playerProgress: 0,
       wpm: 0,
       wordsCompleted: ''
@@ -98,18 +99,28 @@ class PlayGameLogic extends Component {
     const { endpoint } = this.state;
     // Connect to the socket
     const socket = socketIOClient(endpoint);
+
     this.setState({
       socket
     });
 
     socket.on('welcome', message => {
       console.log(message.description);
-      // Display welcome message. This should render so I want to set the state
+      // Display welcome message. Import the player's socket and room-player list from server.
+      this.setState({
+        playersInRoom: message.clients,
+        playerSocket: message.socket
+      })
+      console.log(`${this.state.playersInRoom} in room now`)
     });
 
     socket.on('new-user-join', message => {
       console.log(message.description);
-      // Display join message, this should also set state
+      // Display message when new player joins. Import updated room-player list from server.
+      this.setState({
+        playersInRoom: message.clients,
+      })
+      console.log(`${this.state.playersInRoom} in room now`)
     });
 
     socket.on('game-start', message => {
@@ -146,13 +157,24 @@ class PlayGameLogic extends Component {
         }, 1000);
       }
 
-      countdown();
+      // countdown();
+
+      setInterval( () => {
+        socket.emit('progress-update', {
+          progress: this.state.playerProgress
+        })
+      }, 4000)
 
       // this.onFinishTimer(value);
     });
 
     socket.on('progress-broadcast', message => {
-      console.log(message);
+      const carPositioning = this.state.carPositioning;
+
+      carPositioning[message.socketId] = message.completion;
+      // console.log(message);
+      this.setState({ carPositioning });
+      console.log(this.state.carPositioning)
     });
 
     socket.on('player-left', message => {
@@ -221,6 +243,7 @@ class PlayGameLogic extends Component {
       e.target.value = '';
     }
 
+    this.calculateProgress();
     // console.log(value);
 
     // if (this.state.timerFinished) {
@@ -235,6 +258,13 @@ class PlayGameLogic extends Component {
     //   carPositioning: this.calculateCorrectChars(value) * 10
     // });
   };
+
+  calculateProgress() {
+    let progressPercent = this.state.index / this.state.words.length
+    this.setState({
+      playerProgress: progressPercent
+    })
+  }
 
   // calculateCorrectChars(userInput) {
   //   //remove whitespace
