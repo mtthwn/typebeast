@@ -52,9 +52,9 @@ const renderGame = props => {
         socket={props.socket}
       />
       <div className="DisplayQuote-container">
+        {countdown}
         <Minimap />
         {gameStart}
-        {countdown}
       </div>
       <NosGauge />
     </div>
@@ -189,6 +189,14 @@ class PlayGameLogic extends Component {
     let value = e.target.value;
     const { index, words, wordsCompleted } = this.state;
 
+    if (this.state.sec > 0) {
+      const wpm = Math.floor(((this.state.index + 1) / this.state.sec) * 60);
+
+      this.setState({ wpm });
+    } else {
+      this.setState({ wpm: 0 });
+    }
+
     if (value.length > words[index].length) {
       return;
     } else {
@@ -258,16 +266,6 @@ class PlayGameLogic extends Component {
     if (!this.state.timerStart) {
       this.setState({ timerStart: true });
       this.interval = setInterval(() => {
-        if (this.state.sec > 0) {
-          const wpm = Math.floor(
-            ((this.state.index + 1) / this.state.sec) * 60
-          );
-
-          this.setState({ wpm });
-        } else {
-          this.setState({ wpm: 0 });
-        }
-
         this.setState(prevProps => {
           return { sec: prevProps.sec + 1 };
         });
