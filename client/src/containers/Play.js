@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import './Game.scss';
 import './GameUI.scss'
 // import DisplayQuote from './GameUI/GameUI';
 import Background from './../components/Background/Background';
