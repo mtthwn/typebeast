@@ -1,4 +1,5 @@
 @import './../../styles/Variables';
+@import '../../styles/Mixins';
 
 .Header-signup {
   width: 30%;
@@ -18,6 +19,10 @@
   letter-spacing: 1px;
   font-weight: 700;
   letter-spacing: 2px;
+
+  @include respond(tab-portrait) {
+    font-size: 1.5rem;
+  }
 }
 .sign-up {
   background-color: #fff;
@@ -36,10 +41,18 @@
   width: 100vw;
   background-color: #000;
   padding: 0 0 0 0;
-  font-size: 1.6rem;
+  font-size: 2rem;
   text-transform: uppercase;
   font-weight: 500;
   border-bottom: 1px solid $border-color;
+
+  @include respond(phone) {
+    font-size: 0.5rem;
+  }
+
+  @include respond(tab-portrait) {
+    font-size: 1.5rem;
+  }
 
   &-brand {
     font-size: 2.5rem;
@@ -50,7 +63,12 @@
     font-weight: 800;
     letter-spacing: 3px;
     text-align: center;
-    width: 25rem;
+    width: 20%;
+
+    @include respond(tab-portrait) {
+      font-size: 2rem;
+      padding-top: 1.2rem;
+    }
 
     & a {
       color: #fff;
