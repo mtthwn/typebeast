@@ -1,10 +1,38 @@
 import React, { Component } from 'react';
-import './Game.scss';
-import DisplayQuote from './GameUI/GameUI';
-import Background from './Background/Background';
-import socketIOClient from "socket.io-client";
+import './GameUI.scss';
+// import DisplayQuote from './GameUI/GameUI';
+import Background from './../components/Background/Background';
+import DisplayQuoteArea from './../components/Quote/Quote';
+import CarWPMGauge from './../components/Guages/WPMGuage';
+import Minimap from './../components/Minimap/Minimap';
+import DisplayQuoteInput from './../components/GameInput/GameInput';
+import NosGauge from './../components/Guages/NOSGuage';
+import socketIOClient from 'socket.io-client';
 
-export default class PlayGame extends Component {
+const renderGame = props => {
+  return props.timerFinished ? (
+    <div className="DisplayQuote-container">
+      <div className="DisplayQuote-previewQuote">
+        <h1 className="DisplayQuote-h1">Congrats mffferr</h1>
+      </div>
+    </div>
+  ) : (
+    <div className="DisplayQuoteUI-container">
+      <CarWPMGauge second={props.sec} char={props.char} socket={props.socket} />
+      <div className="DisplayQuote-container">
+        <Minimap />
+        <DisplayQuoteArea
+          fullPhrase={props.fullPhrase}
+          userInput={props.userInput}
+        />
+        <DisplayQuoteInput onUserInputChange={props.onUserInputChange} />
+      </div>
+      <NosGauge />
+    </div>
+  );
+};
+
+class PlayGameLogic extends Component {
   constructor() {
     super();
 
@@ -22,7 +50,7 @@ export default class PlayGame extends Component {
       timerFinished: false,
       finishLine: false,
       // Socket related properties:
-      endpoint: "http://127.0.0.1:8080",
+      endpoint: 'http://127.0.0.1:8080',
       playerCount: 0,
       gameStart: false,
       playerProgress: {
@@ -34,95 +62,76 @@ export default class PlayGame extends Component {
 
   componentDidMount() {
     // Deconstruct this.state.endpoint
-    const {endpoint} = this.state;
+    const { endpoint } = this.state;
     // Connect to the socket
     const socket = socketIOClient(endpoint);
     this.setState({
       socket
-    })
+    });
 
-    socket.on('welcome', (message) => {
-      console.log(message.description)
+    socket.on('welcome', message => {
+      console.log(message.description);
       // Display welcome message. This should render so I want to set the state
-    })
+    });
 
-    socket.on('new-user-join', (message) => {
-      console.log(message.description)
+    socket.on('new-user-join', message => {
+      console.log(message.description);
       // Display join message, this should also set state
-    })
+    });
 
-    socket.on('game-start', (message) => {
-      console.log(message.description)
+    socket.on('game-start', message => {
+      console.log(message.description);
       // Display message saying game will start soon
 
       // Set a countdown and render the typing content
-      let timerCount = 5
-      let that = this
+      let timerCount = 5;
+      let that = this;
 
-      function countdown () {
-        setTimeout( () => {
+      function countdown() {
+        setTimeout(() => {
           if (timerCount === 0) {
-            console.log("Game start.")
+            console.log('Game start.');
             // finished = true;
-            timerStuff()
+            timerStuff();
             // return true;
           } else {
-            console.log(timerCount)
-            timerCount--
+            console.log(timerCount);
+            timerCount--;
             countdown();
           }
         }, 1000);
-      };
-
+      }
 
       function timerStuff() {
-      console.log("START")
+        console.log('START');
         that.onStartTimer();
         that.setState({ timerStart: true });
         that.interval = setInterval(() => {
           that.setState(prevProps => {
-            return { sec: prevProps.sec + 1, timer: prevProps.timer + 1};
+            return { sec: prevProps.sec + 1, timer: prevProps.timer + 1 };
           });
         }, 1000);
       }
 
-
       countdown();
 
       // this.onFinishTimer(value);
+    });
 
-    })
+    socket.on('progress-broadcast', message => {
+      console.log(message);
+    });
 
-    socket.on('progress-broadcast', (message) => {
-      console.log(message)
-    })
-
-    socket.on('player-left', (message) => {
-      console.log(message.description)
-    })
+    socket.on('player-left', message => {
+      console.log(message.description);
+    });
   }
 
   render() {
-    return (
-      <div className="PlayGame">
-        <Background
-          carPositioning={this.state.carPositioning}
-          onFinish={this.state.timerFinished}
-        />
-        <DisplayQuote
-          style={{ color: this.state.color }}
-          word={this.state.word}
-          fullPhrase={this.state.fullPhrase}
-          userInput={this.state.userInput}
-          onUserInputChange={this.onUserInputChange}
-          onFinish={this.state.timerFinished}
-          onFinishButton={this.onRestart}
-          second={this.state.sec}
-          char={this.state.char}
-          socket={this.state.socket}
-        />
-      </div>
-    );
+    return this.props.children({
+      ...this.state,
+      onUserInputChange: this.onUserInputChange
+    });
   }
 
   onUserInputChange = e => {
@@ -170,3 +179,22 @@ export default class PlayGame extends Component {
     }
   }
 }
+
+export default () => {
+  return (
+    <PlayGameLogic>
+      {values => (
+        <div className="PlayGame">
+          <Background
+            carPositioning={values.carPositioning}
+            onFinish={values.timerFinished}
+          />
+
+          {renderGame({
+            ...values
+          })}
+        </div>
+      )}
+    </PlayGameLogic>
+  );
+};
