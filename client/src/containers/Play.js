@@ -56,7 +56,8 @@ class PlayGameLogic extends Component {
       playerProgress: {
         progress: 0,
         wpm: 0
-      }
+      },
+      wordsCompleted: ''
     };
   }
 
@@ -125,6 +126,8 @@ class PlayGameLogic extends Component {
     socket.on('player-left', message => {
       console.log(message.description);
     });
+
+    this.setState({ words: this.state.fullPhrase.split(' ').map(word => word + ' ')});
   }
 
   render() {
@@ -137,17 +140,33 @@ class PlayGameLogic extends Component {
   onUserInputChange = e => {
     let value = e.target.value;
 
-    if (this.state.timerFinished) {
+    const { index, words, wordsCompleted } = this.state;
+
+    console.log(
+      value,
+      words[index]
+    );
+
+    if (value === words[index]) {
+      this.setState({ wordsCompleted: wordsCompleted + value });
+      this.setState({ index: index + 1 });
       e.target.value = '';
     }
 
-    this.onStartTimer();
-    this.onFinishTimer(value);
-    this.setState({
-      userInput: value,
-      char: this.calculateCorrectChars(value),
-      carPositioning: this.calculateCorrectChars(value) * 10
-    });
+
+    // console.log(value);
+
+    // if (this.state.timerFinished) {
+    //   e.target.value = '';
+    // }
+
+    // this.onStartTimer();
+    // this.onFinishTimer(value);
+    // this.setState({
+    //   userInput: value,
+    //   char: this.calculateCorrectChars(value),
+    //   carPositioning: this.calculateCorrectChars(value) * 10
+    // });
   };
 
   calculateCorrectChars(userInput) {
