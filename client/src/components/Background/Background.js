@@ -2,6 +2,7 @@ import React from 'react';
 import Player1Car from './../Car/Player1Car';
 import Player2Car from './../Car/Player2Car';
 import Player3Car from './../Car/Player3Car';
+import Car from './../Car/Car';
 
 import gameStartBG from './../../img/forest-bg3.jpg';
 import finishLineBG from './../../img/finish-line.jpg';
@@ -20,13 +21,24 @@ const bgFinish = {
 // const { opp1: socketID, opp2: socketID } = opponents;
 
 const Background = ({ carPositioning, onFinish }) => {
+
+  const carIds = Object.keys(carPositioning);
+  const Cars = carIds.map((car, index) => {
+    return (
+      <Car percentageComplete={`${Number(carPositioning[car].progress) * 100}%`} onFinish={onFinish} positioning={index + 1} />
+      )
+  })
+
   return (
     <div className="Background-img" style={onFinish ? bgFinish : bgStart}>
-      <Player1Car onFinish={onFinish} carPositioning={carPositioning} />
-      <Player2Car onFinish={onFinish} carPositioning={carPositioning} />
-      <Player3Car onFinish={onFinish} carPositioning={carPositioning} />
+    {Cars}
     </div>
   );
 };
+
+ // <Player1Car onFinish={onFinish} carPositioning={carPositioning} />
+ //      <Player2Car onFinish={onFinish} carPositioning={carPositioning} />
+ //      <Player3Car onFinish={onFinish} carPositioning={carPositioning} />
+
 
 export default Background;
