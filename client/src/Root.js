@@ -1,5 +1,5 @@
 import React from 'react';
-import './Root.css';
+import './Root.scss';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 import Main from './containers/Main';
@@ -11,7 +11,7 @@ function Root() {
     <Router>
       <Header />
       <Route path="/" exact component={Main} />
-      <Route path='/play' component={Game} />
+      <Route path="/play" component={Game} />
     </Router>
   );
 }

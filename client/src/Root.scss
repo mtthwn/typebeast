@@ -1,0 +1,36 @@
+@import './styles/Mixins';
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Roboto', sans-serif;
+
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #070a1d;
+}
+
+html {
+  font-size: 62.5%; //1 rem = 10px
+
+  @include respond(phone) {
+    font-size: 50%; //1 rem = 8px
+  }
+
+  @include respond(tab-portrait) {
+    font-size: 50%; //1 rem = 8px
+  }
+
+  @include respond(tab-landscape) {
+    font-size: 50%; //1 rem = 9px
+  }
+
+  @include respond(big-desktop) {
+    font-size: 100%; //1rem = 12px
+  }
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
