@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import './GameUI.scss';
 // import DisplayQuote from './GameUI/GameUI';
 import Background from './../components/Background/Background';
@@ -8,9 +8,34 @@ import Minimap from './../components/Minimap/Minimap';
 import DisplayQuoteInput from './../components/GameInput/GameInput';
 import NosGauge from './../components/Guages/NOSGuage';
 import socketIOClient from 'socket.io-client';
-import StartGameButton from './../components/StartGameButton/StartGameButton'
+import StartGameButton from './../components/StartGameButton/StartGameButton';
 
 const renderGame = props => {
+  const countdown = props.countdown ? (
+    <h1>{props.countdownCount}</h1>
+  ) : (
+    <StartGameButton startGame={props.onStartCountdown} />
+  );
+
+  const gameStart = props.timerStart ? (
+    <Fragment>
+      <DisplayQuoteArea
+        completed={props.wordsCompleted}
+        input={props.userInput}
+        currentWord={props.words[props.index]}
+        remaining={props.remainingPhrase}
+      />
+      <DisplayQuoteInput onUserInputChange={props.onUserInputChange} />
+    </Fragment>
+  ) : (
+    <DisplayQuoteArea
+      completed={''}
+      input={''}
+      currentWord={''}
+      remaining={'Please wait for the game to start'}
+    />
+  );
+
   return props.timerFinished ? (
     <div className="DisplayQuote-container">
       <div className="DisplayQuote-previewQuote">
@@ -22,14 +47,8 @@ const renderGame = props => {
       <CarWPMGauge second={props.sec} char={props.char} socket={props.socket} />
       <div className="DisplayQuote-container">
         <Minimap />
-        <DisplayQuoteArea
-          completed={props.wordsCompleted}
-          input={props.userInput}
-          currentWord={props.words[props.index]}
-          remaining={props.remainingPhrase}
-        />
-        <DisplayQuoteInput onUserInputChange={props.onUserInputChange} />
-        <StartGameButton startGame={props.startGame} />
+        {gameStart}
+        {countdown}
       </div>
       <NosGauge />
     </div>
@@ -41,6 +60,8 @@ class PlayGameLogic extends Component {
     super();
 
     this.state = {
+      countdownCount: 5,
+      countdown: false,
       loading: true,
       words: [],
       userInput: '',
@@ -152,14 +173,8 @@ class PlayGameLogic extends Component {
     return this.props.children({
       ...this.state,
       onUserInputChange: this.onUserInputChange,
-      startGame: this.startGame
+      onStartCountdown: this.onStartCountdown
     });
-  }
-
-  startGame = e => {
-    e.preventDefault();
-
-    this.setState({ timerStart: true });
   }
 
   onUserInputChange = e => {
@@ -215,8 +230,28 @@ class PlayGameLogic extends Component {
   //   //return how many characters user is typing correctly
   //   return userInput.filter((char, i) => char === text[i]).length;
   // }
+  onStartCountdown = () => {
+    if (!this.state.countdown) {
+      this.setState({ countdown: true });
+      this.interval = setInterval(() => {
+        if (this.state.countdownCount === 1) {
+          clearInterval(this.interval);
+          console.log('timer stopped');
 
-  onStartTimer() {
+          this.setState({ timerStart: true });
+          return;
+        }
+        this.setState(prevProps => {
+          console.log(prevProps.countdownCount);
+          return { countdownCount: prevProps.countdownCount - 1 };
+        });
+      }, 1000);
+    }
+
+
+  };
+
+  onStartTimer = () => {
     if (!this.state.timerStart) {
       this.setState({ timerStart: true });
       this.interval = setInterval(() => {

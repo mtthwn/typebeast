@@ -1,5 +1,8 @@
 import React from 'react';
 
-export default (props) => (
-    <button onClick={props.startGame}>Start Game</button>
-)
+export default (props) => {
+    console.log(props.startGame);
+    return (
+        <button onClick={props.startGame}>Start Game</button>
+    )
+}
