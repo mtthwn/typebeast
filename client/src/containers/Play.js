@@ -79,10 +79,8 @@ class PlayGameLogic extends Component {
       endpoint: 'http://127.0.0.1:8080',
       playerCount: 0,
       gameStart: false,
-      playerProgress: {
-        progress: 0,
-        wpm: 0
-      },
+      playerProgress: 0,
+      wpm: 0,
       wordsCompleted: ''
     };
   }
@@ -236,31 +234,31 @@ class PlayGameLogic extends Component {
       this.interval = setInterval(() => {
         if (this.state.countdownCount === 1) {
           clearInterval(this.interval);
-          console.log('timer stopped');
 
-          this.setState({ timerStart: true });
+          this.setState({ countdownCount: '' });
+          this.onStartTimer();
           return;
         }
         this.setState(prevProps => {
-          console.log(prevProps.countdownCount);
           return { countdownCount: prevProps.countdownCount - 1 };
         });
       }, 1000);
     }
-
-
   };
 
   onStartTimer = () => {
     if (!this.state.timerStart) {
       this.setState({ timerStart: true });
       this.interval = setInterval(() => {
+        const wpm = Math.floor(((this.state.wordsCompleted + this.state.userInput).length / this.state.index) / (this.state.sec * 60));
+
+        this.setState({ })
         this.setState(prevProps => {
           return { sec: prevProps.sec + 1 };
         });
       }, 1000);
     }
-  }
+  };
 
   onFinishTimer(userInput) {
     if (userInput === this.state.fullPhrase) {
