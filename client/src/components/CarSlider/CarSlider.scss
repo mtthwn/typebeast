@@ -1,25 +1,22 @@
-@import "./../../styles/Variables.scss";
+@import './../../styles/Variables';
+@import '../../styles/Mixins';
 
 .carousel {
   position: relative;
   height: 100vh;
-
-  // &-indicators {
-  //   margin-bottom: 10rem;
-  //   position: absolute;
-  //   display: flex;
-  //   top: 0;
-  //   left: 20px;
-  //   flex-direction: column;
-
-  // & li {
-  //   height: 30px;
-  //   width: 5px;
-  // }
 }
 
 .carousel-item {
   height: 100vh;
+
+  @include respond(tab-landscape) {
+    padding-top: 30rem;
+    background-color: #000;
+  }
+
+  @include respond(phone) {
+    padding-top: 0rem;
+  }
 }
 
 .CarSlider-content {
@@ -30,29 +27,58 @@
   left: 10%;
   text-transform: uppercase;
 
+  @include respond(tab-landscape) {
+    top: 20%;
+  }
+
   h1 {
     color: #fff;
     font-family: $header-font;
     font-style: italic;
-    font-size: 6rem;
+    font-size: 10rem;
     letter-spacing: 8px;
-    line-height: 6rem;
+    line-height: 8rem;
     text-transform: uppercase;
     font-weight: 900;
     margin-bottom: 2rem;
+
+    @include respond(tab-landscape) {
+      font-size: 8rem;
+      line-height: 7rem;
+    }
+
+    @include respond(tab-portrait) {
+      font-size: 7rem;
+      line-height: 6rem;
+    }
   }
 
   h5 {
     color: $main-color;
     font-weight: 600;
     letter-spacing: 1px;
+
+    @include respond(tab-landscape) {
+      font-size: 2.2rem;
+    }
+
+    @include respond(tab-portrait) {
+      font-size: 2.8rem;
+      font-weight: 500;
+      line-height: 3.3rem;
+    }
   }
 
   p {
     text-transform: none;
-    font-size: 1.2rem;
-    line-height: 2.5rem;
+    font-size: 1.8rem;
+    line-height: 3rem;
     font-weight: 300;
     color: rgb(226, 226, 226);
+
+    @include respond(tab-landscape) {
+      font-size: 2.6rem;
+      line-height: 4rem;
+    }
   }
 }
