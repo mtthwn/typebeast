@@ -6,7 +6,7 @@ const DisplayQuoteInput = ({ onUserInputChange }) => {
       <input
         id="DisplayQuote-inputWord"
         onChange={onUserInputChange}
-        autoFocus="true"
+        autoFocus={true}
         autoComplete="off"
       />
     </div>

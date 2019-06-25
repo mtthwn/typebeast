@@ -44,7 +44,7 @@ const renderGame = props => {
     </div>
   ) : (
     <div className="DisplayQuoteUI-container">
-      <CarWPMGauge second={props.sec} char={props.char} socket={props.socket} />
+      <CarWPMGauge wpm={props.wpm} second={props.sec} char={props.char} socket={props.socket} />
       <div className="DisplayQuote-container">
         <Minimap />
         {gameStart}
