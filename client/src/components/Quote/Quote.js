@@ -21,32 +21,36 @@ import React from 'react';
 // };
 
 const DisplayQuoteArea = ({ completed, input, currentWord, remaining }) => {
-  const correct = `{ background: '#04ad67'}`;
-  const incorrect = `{ background: '#ff373e' }`;
+  const correct = { background: '#04ad67' };
+  const incorrect = { background: '#ff373e' };
+
+  let correctSoFar = true;
 
   let currentCorrect = '';
   let currentIncorrect = '';
 
   for (let i = 0; i < input.length; i++) {
-    if (input[i] === currentWord[i]) {
-      currentCorrect += i;
+    if (input[i] === currentWord[i] && correctSoFar) {
+      currentCorrect += currentWord[i];
     } else {
-      return;
+      correctSoFar = false;
+      currentIncorrect += currentWord[i];
     }
   }
 
-  if (currentCorrect.length < input.length) {
-    currentIncorrect += input.substring(currentCorrect.length);
-  }
+  const displayWord = currentWord.substring(input.length);
+
+  const displayRemaining = remaining.substring(currentWord.length);
 
   return (
     <div className="DisplayQuote-previewQuote">
       <span style={correct}>{completed}</span>
       <span style={correct}>{currentCorrect}</span>
       <span style={incorrect}>{currentIncorrect}</span>
-      <span>{remaining}</span>
+      <span>{displayWord}</span>
+      <span>{displayRemaining}</span>
     </div>
-  )
+  );
 };
 
 export default DisplayQuoteArea;

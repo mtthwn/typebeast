@@ -22,8 +22,10 @@ const renderGame = props => {
       <div className="DisplayQuote-container">
         <Minimap />
         <DisplayQuoteArea
-          fullPhrase={props.fullPhrase}
-          userInput={props.userInput}
+          completed={props.wordsCompleted}
+          input={props.userInput}
+          currentWord={props.words[props.index]}
+          remaining={props.remainingPhrase}
         />
         <DisplayQuoteInput onUserInputChange={props.onUserInputChange} />
       </div>
@@ -37,11 +39,14 @@ class PlayGameLogic extends Component {
     super();
 
     this.state = {
+      loading: true,
       words: [],
+      userInput: '',
+      remainingPhrase:
+        'Your self-image is the result of all you have given your subconscious mind as a database, so regardless of your background, what you are willing to become is the only reality that counts.',
       index: 0,
       fullPhrase:
         'Your self-image is the result of all you have given your subconscious mind as a database, so regardless of your background, what you are willing to become is the only reality that counts.',
-      userInput: '',
       char: 0,
       sec: 0,
       carPositioning: 0,
@@ -127,7 +132,12 @@ class PlayGameLogic extends Component {
       console.log(message.description);
     });
 
-    this.setState({ words: this.state.fullPhrase.split(' ').map(word => word + ' ')});
+    this.setState({
+      words: this.state.fullPhrase.split(' ').map(word => word + ' '),
+      loading: false
+    });
+
+    // this.setState({ re})
   }
 
   render() {
@@ -138,21 +148,29 @@ class PlayGameLogic extends Component {
   }
 
   onUserInputChange = e => {
-    let value = e.target.value;
+    e.preventDefault();
 
+    let value = e.target.value;
     const { index, words, wordsCompleted } = this.state;
 
-    console.log(
-      value,
-      words[index]
-    );
+    if (value.length > words[index].length) {
+      return;
+    } else {
+      this.setState({ userInput: value });
+    }
 
     if (value === words[index]) {
       this.setState({ wordsCompleted: wordsCompleted + value });
       this.setState({ index: index + 1 });
+      this.setState({
+        remainingPhrase: this.state.remainingPhrase.substring(
+          words[index].length
+        )
+      });
+      this.setState({ userInput: ''});
+
       e.target.value = '';
     }
-
 
     // console.log(value);
 
@@ -209,9 +227,11 @@ export default () => {
             onFinish={values.timerFinished}
           />
 
-          {renderGame({
-            ...values
-          })}
+          {!values.loading
+            ? renderGame({
+                ...values
+              })
+            : 'loading'}
         </div>
       )}
     </PlayGameLogic>
