@@ -25,7 +25,6 @@ const DisplayQuoteArea = ({ completed, input, currentWord, remaining }) => {
   const incorrect = { background: '#ff373e' };
 
   let correctSoFar = true;
-
   let currentCorrect = '';
   let currentIncorrect = '';
 
@@ -39,7 +38,6 @@ const DisplayQuoteArea = ({ completed, input, currentWord, remaining }) => {
   }
 
   const displayWord = currentWord.substring(input.length);
-
   const displayRemaining = remaining.substring(currentWord.length);
 
   return (

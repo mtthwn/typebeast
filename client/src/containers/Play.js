@@ -42,11 +42,9 @@ class PlayGameLogic extends Component {
       loading: true,
       words: [],
       userInput: '',
-      remainingPhrase:
-        'Your self-image is the result of all you have given your subconscious mind as a database, so regardless of your background, what you are willing to become is the only reality that counts.',
+      remainingPhrase: 'Hope is the first step on the road to regret.',
       index: 0,
-      fullPhrase:
-        'Your self-image is the result of all you have given your subconscious mind as a database, so regardless of your background, what you are willing to become is the only reality that counts.',
+      fullPhrase: 'Hope is the first step on the road to regret.',
       char: 0,
       sec: 0,
       carPositioning: 0,
@@ -132,8 +130,16 @@ class PlayGameLogic extends Component {
       console.log(message.description);
     });
 
+    const wordsArray = this.state.fullPhrase.split(' ');
+
     this.setState({
-      words: this.state.fullPhrase.split(' ').map(word => word + ' '),
+      words: wordsArray.map((word, index) => {
+        if (index < wordsArray.length - 1) {
+          return word + ' ';
+        }
+
+        return word;
+      }),
       loading: false
     });
 
@@ -159,6 +165,11 @@ class PlayGameLogic extends Component {
       this.setState({ userInput: value });
     }
 
+    if (index === words.length - 1 && value === words[index]) {
+      this.setState({ timerFinished: true });
+      return;
+    }
+
     if (value === words[index]) {
       this.setState({ wordsCompleted: wordsCompleted + value });
       this.setState({ index: index + 1 });
@@ -167,7 +178,7 @@ class PlayGameLogic extends Component {
           words[index].length
         )
       });
-      this.setState({ userInput: ''});
+      this.setState({ userInput: '' });
 
       e.target.value = '';
     }
