@@ -8,6 +8,7 @@ import Minimap from './../components/Minimap/Minimap';
 import DisplayQuoteInput from './../components/GameInput/GameInput';
 import NosGauge from './../components/Guages/NOSGuage';
 import socketIOClient from 'socket.io-client';
+import StartGameButton from './../components/StartGameButton/StartGameButton'
 
 const renderGame = props => {
   return props.timerFinished ? (
@@ -28,6 +29,7 @@ const renderGame = props => {
           remaining={props.remainingPhrase}
         />
         <DisplayQuoteInput onUserInputChange={props.onUserInputChange} />
+        <StartGameButton startGame={props.startGame} />
       </div>
       <NosGauge />
     </div>
@@ -149,8 +151,15 @@ class PlayGameLogic extends Component {
   render() {
     return this.props.children({
       ...this.state,
-      onUserInputChange: this.onUserInputChange
+      onUserInputChange: this.onUserInputChange,
+      startGame: this.startGame
     });
+  }
+
+  startGame = e => {
+    e.preventDefault();
+
+    this.setState({ timerStart: true });
   }
 
   onUserInputChange = e => {
@@ -198,14 +207,14 @@ class PlayGameLogic extends Component {
     // });
   };
 
-  calculateCorrectChars(userInput) {
-    //remove whitespace
-    const text = this.state.fullPhrase.replace(' ', '');
-    //remove whitespace from user input and turn into array
-    userInput = userInput.replace(' ', '').split('');
-    //return how many characters user is typing correctly
-    return userInput.filter((char, i) => char === text[i]).length;
-  }
+  // calculateCorrectChars(userInput) {
+  //   //remove whitespace
+  //   const text = this.state.fullPhrase.replace(' ', '');
+  //   //remove whitespace from user input and turn into array
+  //   userInput = userInput.replace(' ', '').split('');
+  //   //return how many characters user is typing correctly
+  //   return userInput.filter((char, i) => char === text[i]).length;
+  // }
 
   onStartTimer() {
     if (!this.state.timerStart) {
