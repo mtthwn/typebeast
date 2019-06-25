@@ -2,10 +2,10 @@ import React from 'react';
 import './Root.css';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 
-import Main from './Main/Main';
-import About from './about/About';
-import Header from './Header/Header';
-import Game from './Game/Game';
+import Main from './containers/Main';
+import About from './components/about/About';
+import Header from './components/Header/Header';
+import Game from './containers/Play';
 
 function Root() {
   return (

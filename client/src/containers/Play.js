@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './Game.scss';
+import './GameUI.scss'
 // import DisplayQuote from './GameUI/GameUI';
 import Background from './../components/Background/Background';
 import DisplayQuoteArea from './../components/Quote/Quote';
@@ -136,18 +137,8 @@ export default class PlayGame extends Component {
           carPositioning={this.state.carPositioning}
           onFinish={this.state.timerFinished}
         />
-        <DisplayQuote
-          style={{ color: this.state.color }}
-          word={this.state.word}
-          fullPhrase={this.state.fullPhrase}
-          userInput={this.state.userInput}
-          onUserInputChange={this.onUserInputChange}
-          onFinish={this.state.timerFinished}
-          onFinishButton={this.onRestart}
-          second={this.state.sec}
-          char={this.state.char}
-          socket={this.state.socket}
-        />
+
+        {displayQuote}
       </div>
     );
   }
