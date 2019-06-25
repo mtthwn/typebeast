@@ -1,15 +1,38 @@
 import React, { Component } from 'react';
-import './GameUI.scss'
+import './GameUI.scss';
 // import DisplayQuote from './GameUI/GameUI';
 import Background from './../components/Background/Background';
 import DisplayQuoteArea from './../components/Quote/Quote';
 import CarWPMGauge from './../components/Guages/WPMGuage';
-import Minimap from './../components/Minimap/Minimap'
+import Minimap from './../components/Minimap/Minimap';
 import DisplayQuoteInput from './../components/GameInput/GameInput';
-import NosGauge from './../components/Guages/NOSGuage'
+import NosGauge from './../components/Guages/NOSGuage';
 import socketIOClient from 'socket.io-client';
 
-export default class PlayGame extends Component {
+const renderGame = props => {
+  return props.timerFinished ? (
+    <div className="DisplayQuote-container">
+      <div className="DisplayQuote-previewQuote">
+        <h1 className="DisplayQuote-h1">Congrats mffferr</h1>
+      </div>
+    </div>
+  ) : (
+    <div className="DisplayQuoteUI-container">
+      <CarWPMGauge second={props.sec} char={props.char} socket={props.socket} />
+      <div className="DisplayQuote-container">
+        <Minimap />
+        <DisplayQuoteArea
+          fullPhrase={props.fullPhrase}
+          userInput={props.userInput}
+        />
+        <DisplayQuoteInput onUserInputChange={props.onUserInputChange} />
+      </div>
+      <NosGauge />
+    </div>
+  );
+};
+
+class PlayGameLogic extends Component {
   constructor() {
     super();
 
@@ -105,41 +128,10 @@ export default class PlayGame extends Component {
   }
 
   render() {
-    const displayQuote = this.state.timerFinished ? (
-      <div className="DisplayQuote-container">
-        <div className="DisplayQuote-previewQuote">
-          <h1 className="DisplayQuote-h1">Congrats mffferr</h1>
-        </div>
-      </div>
-    ) : (
-      <div className="DisplayQuoteUI-container">
-        <CarWPMGauge
-          second={this.state.sec}
-          char={this.state.char}
-          socket={this.state.socket}
-        />
-        <div className="DisplayQuote-container">
-          <Minimap />
-          <DisplayQuoteArea
-            fullPhrase={this.state.fullPhrase}
-            userInput={this.state.userInput}
-          />
-          <DisplayQuoteInput onUserInputChange={this.onUserInputChange} />
-        </div>
-        <NosGauge />
-      </div>
-    );
-
-    return (
-      <div className="PlayGame">
-        <Background
-          carPositioning={this.state.carPositioning}
-          onFinish={this.state.timerFinished}
-        />
-
-        {displayQuote}
-      </div>
-    );
+    return this.props.children({
+      ...this.state,
+      onUserInputChange: this.onUserInputChange
+    });
   }
 
   onUserInputChange = e => {
@@ -187,3 +179,22 @@ export default class PlayGame extends Component {
     }
   }
 }
+
+export default () => {
+  return (
+    <PlayGameLogic>
+      {values => (
+        <div className="PlayGame">
+          <Background
+            carPositioning={values.carPositioning}
+            onFinish={values.timerFinished}
+          />
+
+          {renderGame({
+            ...values
+          })}
+        </div>
+      )}
+    </PlayGameLogic>
+  );
+};
