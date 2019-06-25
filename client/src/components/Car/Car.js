@@ -8,7 +8,7 @@ const Car = ({ percentageComplete, onFinish, positioning }) => {
   return (
     <div
       className={`${styling}`}
-      style={{ left: `${percentageComplete}` }}
+      style={{ left: `${percentageComplete}`, transition: 'all 1s ease-in', animation: 'car2 50s linear forward' }}
     >
       <img src={car} alt="car" />
     </div>
