@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import './GameUI.scss';
 // import DisplayQuote from './GameUI/GameUI';
 import Background from './../components/Background/Background';
@@ -8,26 +8,53 @@ import Minimap from './../components/Minimap/Minimap';
 import DisplayQuoteInput from './../components/GameInput/GameInput';
 import NosGauge from './../components/Guages/NOSGuage';
 import socketIOClient from 'socket.io-client';
+import StartGameButton from './../components/StartGameButton/StartGameButton';
 
 const renderGame = props => {
+  const countdown = props.countdown ? (
+    <h1>{props.countdownCount}</h1>
+  ) : (
+    <StartGameButton startGame={props.onStartCountdown} />
+  );
+
+  const gameStart = props.timerStart ? (
+    <Fragment>
+      <DisplayQuoteArea
+        completed={props.wordsCompleted}
+        input={props.userInput}
+        currentWord={props.words[props.index]}
+        remaining={props.remainingPhrase}
+      />
+      <DisplayQuoteInput onUserInputChange={props.onUserInputChange} />
+    </Fragment>
+  ) : (
+    <DisplayQuoteArea
+      completed={''}
+      input={''}
+      currentWord={''}
+      remaining={'Please wait for the game to start'}
+    />
+  );
+
   return props.timerFinished ? (
     <div className="DisplayQuote-container">
       <div className="DisplayQuote-previewQuote">
         <h1 className="DisplayQuote-h1">Congrats mffferr</h1>
       </div>
+      <div>WPM: {props.wpm}</div>
     </div>
   ) : (
     <div className="DisplayQuoteUI-container">
-      <CarWPMGauge second={props.sec} char={props.char} socket={props.socket} />
+      <CarWPMGauge
+        wpm={props.wpm}
+        second={props.sec}
+        char={props.char}
+        socket={props.socket}
+      />
       <div className="DisplayQuote-container">
+        {countdown}
         <Minimap />
-        <DisplayQuoteArea
-          completed={props.wordsCompleted}
-          input={props.userInput}
-          currentWord={props.words[props.index]}
-          remaining={props.remainingPhrase}
-        />
-        <DisplayQuoteInput onUserInputChange={props.onUserInputChange} />
+        {gameStart}
       </div>
       <NosGauge />
     </div>
@@ -39,12 +66,16 @@ class PlayGameLogic extends Component {
     super();
 
     this.state = {
+      countdownCount: 5,
+      countdown: false,
       loading: true,
       words: [],
       userInput: '',
-      remainingPhrase: 'Hope is the first step on the road to regret.',
+      remainingPhrase:
+        'I was having a similar issue and realised that I was not importing Router correctly.',
       index: 0,
-      fullPhrase: 'Hope is the first step on the road to regret.',
+      fullPhrase:
+        'I was having a similar issue and realised that I was not importing Router correctly.',
       char: 0,
       sec: 0,
       carPositioning: 0,
@@ -56,10 +87,8 @@ class PlayGameLogic extends Component {
       endpoint: 'http://127.0.0.1:8080',
       playerCount: 0,
       gameStart: false,
-      playerProgress: {
-        progress: 0,
-        wpm: 0
-      },
+      playerProgress: 0,
+      wpm: 0,
       wordsCompleted: ''
     };
   }
@@ -149,7 +178,8 @@ class PlayGameLogic extends Component {
   render() {
     return this.props.children({
       ...this.state,
-      onUserInputChange: this.onUserInputChange
+      onUserInputChange: this.onUserInputChange,
+      onStartCountdown: this.onStartCountdown
     });
   }
 
@@ -159,6 +189,14 @@ class PlayGameLogic extends Component {
     let value = e.target.value;
     const { index, words, wordsCompleted } = this.state;
 
+    if (this.state.sec > 0) {
+      const wpm = Math.floor(((this.state.index + 1) / this.state.sec) * 60);
+
+      this.setState({ wpm });
+    } else {
+      this.setState({ wpm: 0 });
+    }
+
     if (value.length > words[index].length) {
       return;
     } else {
@@ -166,7 +204,7 @@ class PlayGameLogic extends Component {
     }
 
     if (index === words.length - 1 && value === words[index]) {
-      this.setState({ timerFinished: true });
+      this.onFinishTimer();
       return;
     }
 
@@ -198,16 +236,33 @@ class PlayGameLogic extends Component {
     // });
   };
 
-  calculateCorrectChars(userInput) {
-    //remove whitespace
-    const text = this.state.fullPhrase.replace(' ', '');
-    //remove whitespace from user input and turn into array
-    userInput = userInput.replace(' ', '').split('');
-    //return how many characters user is typing correctly
-    return userInput.filter((char, i) => char === text[i]).length;
-  }
+  // calculateCorrectChars(userInput) {
+  //   //remove whitespace
+  //   const text = this.state.fullPhrase.replace(' ', '');
+  //   //remove whitespace from user input and turn into array
+  //   userInput = userInput.replace(' ', '').split('');
+  //   //return how many characters user is typing correctly
+  //   return userInput.filter((char, i) => char === text[i]).length;
+  // }
+  onStartCountdown = () => {
+    if (!this.state.countdown) {
+      this.setState({ countdown: true });
+      this.interval = setInterval(() => {
+        if (this.state.countdownCount === 1) {
+          clearInterval(this.interval);
 
-  onStartTimer() {
+          this.setState({ countdownCount: '' });
+          this.onStartTimer();
+          return;
+        }
+        this.setState(prevProps => {
+          return { countdownCount: prevProps.countdownCount - 1 };
+        });
+      }, 1000);
+    }
+  };
+
+  onStartTimer = () => {
     if (!this.state.timerStart) {
       this.setState({ timerStart: true });
       this.interval = setInterval(() => {
@@ -216,16 +271,14 @@ class PlayGameLogic extends Component {
         });
       }, 1000);
     }
-  }
+  };
 
-  onFinishTimer(userInput) {
-    if (userInput === this.state.fullPhrase) {
-      clearInterval(this.interval);
-      this.setState({
-        timerFinished: true
-      });
-    }
-  }
+  onFinishTimer = () => {
+    clearInterval(this.interval);
+    this.setState({
+      timerFinished: true
+    });
+  };
 }
 
 export default () => {
