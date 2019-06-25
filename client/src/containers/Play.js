@@ -137,12 +137,11 @@ class PlayGameLogic extends Component {
     });
 
     socket.on('progress-broadcast', message => {
+      const carPositioning = this.state.carPositioning;
+
+      carPositioning[message.socketId] = message.completion;
       // console.log(message);
-      this.setState({
-        carPositioning: {
-          [message.socketId]: message.completion
-        }
-      })
+      this.setState({ carPositioning });
       console.log(this.state.carPositioning)
     });
 
