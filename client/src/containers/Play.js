@@ -84,10 +84,10 @@ class PlayGameLogic extends Component {
       timerFinished: false,
       finishLine: false,
       // Socket related properties:
-      endpoint: 'http://172.46.3.66:8080',
+      endpoint: 'http://127.0.0.1:8080',
       gameStart: false,
       playersInRoom: [],
-      playerSocket:'',
+      playerSocket: '',
       playerProgress: 0,
       wpm: 0,
       wordsCompleted: ''
@@ -110,17 +110,17 @@ class PlayGameLogic extends Component {
       this.setState({
         playersInRoom: message.clients,
         playerSocket: message.socket
-      })
-      console.log(`${this.state.playersInRoom} in room now`)
+      });
+      console.log(`${this.state.playersInRoom} in room now`);
     });
 
     socket.on('new-user-join', message => {
       console.log(message.description);
       // Display message when new player joins. Import updated room-player list from server.
       this.setState({
-        playersInRoom: message.clients,
-      })
-      console.log(`${this.state.playersInRoom} in room now`)
+        playersInRoom: message.clients
+      });
+      console.log(`${this.state.playersInRoom} in room now`);
     });
 
     socket.on('game-start', message => {
@@ -159,11 +159,11 @@ class PlayGameLogic extends Component {
 
       // countdown();
 
-      setInterval( () => {
+      setInterval(() => {
         socket.emit('progress-update', {
           progress: this.state.playerProgress
-        })
-      }, 500)
+        });
+      }, 4000);
 
       // this.onFinishTimer(value);
     });
@@ -174,7 +174,7 @@ class PlayGameLogic extends Component {
       carPositioning[message.socketId] = message.completion;
       // console.log(message);
       this.setState({ carPositioning });
-      console.log(this.state.carPositioning)
+      console.log(this.state.carPositioning);
     });
 
     socket.on('player-left', message => {
@@ -226,6 +226,7 @@ class PlayGameLogic extends Component {
     }
 
     if (index === words.length - 1 && value === words[index]) {
+      console.log(index + 1, words.length, 'here');
       this.onFinishTimer();
       return;
     }
@@ -260,10 +261,12 @@ class PlayGameLogic extends Component {
   };
 
   calculateProgress() {
-    let progressPercent = this.state.index / this.state.words.length
+    let progressPercent = this.state.index / this.state.words.length;
+    console.log(this.state.index, this.state.words.length);
+
     this.setState({
       playerProgress: progressPercent
-    })
+    });
   }
 
   // calculateCorrectChars(userInput) {
@@ -305,6 +308,7 @@ class PlayGameLogic extends Component {
 
   onFinishTimer = () => {
     clearInterval(this.interval);
+    this.calculateProgress();
     this.setState({
       timerFinished: true
     });
