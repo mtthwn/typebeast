@@ -132,44 +132,6 @@ class PlayGameLogic extends Component {
 
       // Display message saying game will start soon
 
-      // Set a countdown and render the typing content
-      // let timerCount = 5;
-
-      // function countdown() {
-      //   setTimeout(() => {
-      //     if (timerCount === 0) {
-      //       console.log('Game start.');
-      //       // finished = true;
-      //       timerStuff();
-      //       // return true;
-      //     } else {
-      //       console.log(timerCount);
-      //       timerCount--;
-      //       countdown();
-      //     }
-      //   }, 1000);
-      // }
-
-      // function timerStuff() {
-      //   console.log('START');
-      //   that.onStartTimer();
-      //   that.setState({ timerStart: true });
-      //   that.interval = setInterval(() => {
-      //     that.setState(prevProps => {
-      //       return { sec: prevProps.sec + 1, timer: prevProps.timer + 1 };
-      //     });
-      //   }, 1000);
-      // }
-
-      // countdown();
-
-      // setInterval(() => {
-      //   socket.emit('progress-update', {
-      //     progress: this.state.playerProgress
-      //   });
-      // }, 1000);
-
-      // this.onFinishTimer(value);
     });
 
     socket.on('progress-broadcast', message => {
@@ -318,6 +280,9 @@ class PlayGameLogic extends Component {
       this.interval = setInterval(() => {
         this.setState(prevProps => {
           return { sec: prevProps.sec + 1 };
+        });
+        this.state.socket.emit('progress-update', {
+          progress: this.state.playerProgress
         });
       }, 1000);
     }

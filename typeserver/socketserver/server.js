@@ -115,13 +115,11 @@ io.on('connection', function(socket) {
 
   //Check if the room is at capacity
   socket.on('initiate', () => {
-    console.log("Yeah, I got the emit")
-    // if (io.sockets.adapter.rooms['room-' + roomNum].length === 3) {
-      io.to('room-' + roomNum).emit('game-start', {
-        description: '3 players in room. Game starting shortly.',
-        quote: userCount['room-' + roomNum]['quote']
-      });
-    // }
+    roomNum++ // Stops more people from joining the initiated room.
+    io.to(Object.keys(socket.rooms)[1]).emit('game-start', {
+      description: '3 players in room. Game starting shortly.',
+      quote: userCount[Object.keys(socket.rooms)[1]]['quote']
+    });
   })
 
 
