@@ -25,8 +25,6 @@ const seed = [
   }
 ];
 
-let savedQuotes = [];
-
 const seedQuotes = async quotes => {
     db.dropCollection('quotes', (err, result) => {
       if (err) {
@@ -48,14 +46,13 @@ const seedQuotes = async quotes => {
       quotes.map(quote => {
         return new Quote(quote)
           .save()
-          .then(savedQuote => {
+          .then(async savedQuote => {
             const sampleGame = new Game({
               quote: savedQuote._id
             });
 
-            sampleGame
+            await sampleGame
               .save()
-              .then(game => console.log(game))
               .catch(e => console.log(e.message));
           })
           .catch(e => console.log(`Quote not saved`));

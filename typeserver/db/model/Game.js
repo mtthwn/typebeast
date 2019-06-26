@@ -4,10 +4,14 @@ const { Schema } = mongoose;
 
 const GameSchema = new Schema({
   stats: [{ type: Schema.Types.ObjectId, ref: 'GameStat' }],
-  playedAt: Number,
+  playedAt: {
+    type: Date,
+    default: Date.now
+  },
   quote: {
     type: Schema.Types.ObjectId,
-    ref: 'Quote'
+    ref: 'Quote',
+    required: true
   }
 });
 
