@@ -6,14 +6,7 @@ const http = require('http').createServer(app);
 const io = require('socket.io')(http);
 const port = process.env.PORT || 8080;
 
-let roomNum = 1;
-
-const roomData = [
-  {
-    roomNum,
-    quote: ''
-  }
-];
+let roomNum = 1; // Var tracks the room new users will be directed to.
 
 let userCount = {
   totalUsers: 0
@@ -27,21 +20,6 @@ let userCount = {
   room-4: 3
 }
 */
-// const checkRoomQuote = roomData => {
-//   for (const room in roomData) {
-//     if (!roomData[room].quote) {
-//       axios
-//         .get('http://127.0.0.1:8081/api/quotes')
-//         .then(res => {
-//           roomData[room].quote = res.data.data.quote;
-//           console.log(roomData);
-//         })
-//         .catch(e => console.log(e.message));
-//     }
-//   }
-// };
-
-// checkRoomQuote(roomData);
 
 const getQuote = (room) => {
   if (!userCount['room-' + roomNum]['quote']) {
@@ -57,7 +35,7 @@ const getQuote = (room) => {
 
 io.on('connection', function(socket) {
   userCount.totalUsers++;
-  console.log('a user connected, total users:', userCount.totalUsers);
+  console.log('\na user connected, users in server:', userCount.totalUsers);
 
   //If it's the first user, the room doesn't exist - make the room.
   if (!userCount['room-' + roomNum]) {
@@ -91,7 +69,7 @@ io.on('connection', function(socket) {
   //Set up variable to get array of socket IDs in current room
   let clients = io.sockets.adapter.rooms['room-' + roomNum];
   let clientsArray = Object.keys(clients.sockets);
-  console.log(clientsArray);
+  console.log('IDs in current room:', clientsArray);
 
   //Welcome message for new user
   socket.emit('welcome', {

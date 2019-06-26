@@ -126,7 +126,6 @@ class PlayGameLogic extends Component {
       console.log(message.description);
       console.log(message.quote)
 
-      // let that = this;
       this.onStartCountdown();
       this.onSetQuote(message.quote);
 
@@ -138,7 +137,7 @@ class PlayGameLogic extends Component {
       const carPositioning = this.state.carPositioning;
 
       carPositioning[message.socketId] = message.completion;
-      // console.log(message);
+
       this.setState({ carPositioning });
       console.log(this.state.carPositioning);
     });
@@ -160,7 +159,6 @@ class PlayGameLogic extends Component {
       loading: false
     });
 
-    // this.setState({ re})
   }
 
   render() {
@@ -212,19 +210,7 @@ class PlayGameLogic extends Component {
     }
 
     this.calculateProgress();
-    // console.log(value);
 
-    // if (this.state.timerFinished) {
-    //   e.target.value = '';
-    // }
-
-    // this.onStartTimer();
-    // this.onFinishTimer(value);
-    // this.setState({
-    //   userInput: value,
-    //   char: this.calculateCorrectChars(value),
-    //   carPositioning: this.calculateCorrectChars(value) * 10
-    // });
   };
 
   calculateProgress() {
@@ -235,15 +221,6 @@ class PlayGameLogic extends Component {
       playerProgress: progressPercent
     });
   }
-
-  // calculateCorrectChars(userInput) {
-  //   //remove whitespace
-  //   const text = this.state.fullPhrase.replace(' ', '');
-  //   //remove whitespace from user input and turn into array
-  //   userInput = userInput.replace(' ', '').split('');
-  //   //return how many characters user is typing correctly
-  //   return userInput.filter((char, i) => char === text[i]).length;
-  // }
 
   onEmitStart = () => {
     this.state.socket.emit('initiate')
