@@ -20,20 +20,25 @@ const bgFinish = {
 
 // const { opp1: socketID, opp2: socketID } = opponents;
 
-const Background = ({ carPositioning, onFinish }) => {
+const Background = ({ carPositioning, onFinish, playerSocket }) => {
 
   const carIds = Object.keys(carPositioning);
   const Cars = carIds.map((car, index) => {
     return (
       <Car percentageComplete={`${Number(carPositioning[car].progress) * 100}%`} onFinish={onFinish} positioning={index + 1} />
-      )
+    )
   })
 
   return (
-    <div className="Background-img" style={onFinish ? bgFinish : bgStart}>
-    {Cars}
-    </div>
-  );
+    onFinish ?
+      <div className="Background-img" style={onFinish ? bgFinish : bgStart}>
+        <Car onFinish={onFinish} positioning={1} />
+      </div>
+    :
+      <div className="Background-img" style={onFinish ? bgFinish : bgStart}>
+      {Cars}
+      </div>
+  )
 };
 
  // <Player1Car onFinish={onFinish} carPositioning={carPositioning} />

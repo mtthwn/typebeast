@@ -321,6 +321,7 @@ export default () => {
       {values => (
         <div className="PlayGame">
           <Background
+            playerSocket={values.playerSocket}
             carPositioning={values.carPositioning}
             onFinish={values.timerFinished}
           />
