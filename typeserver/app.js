@@ -9,9 +9,10 @@ const cors = require('cors');
 
 require('./db/config');
 
-const indexRouter = require('./routes/index/index');
-const usersRouter = require('./routes/user/index');
-const authRoutes = require('./routes/auth/auth.index');
+const indexRouter = require('./routes/index');
+const usersRouter = require('./routes/user/');
+const authRoutes = require('./routes/auth/');
+const quoteRoutes = require('./routes/quote');
 // const gamesRouter = require('./routes/game/index');
 
 const app = express();
@@ -25,6 +26,7 @@ app.use(cookieParser());
 app.use('/api', indexRouter);
 app.use('/api/users', usersRouter);
 app.use('/api/auth', authRoutes);
+app.use('/api/quotes', quoteRoutes);
 // app.use('/api/games', gamesRouter);
 
 // catch 404 and forward to error handler
