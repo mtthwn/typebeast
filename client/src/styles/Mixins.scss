@@ -17,7 +17,7 @@
   }
 
   @if $breakpoint == tab-portrait {
-    @media (max-width: 56.25em) {
+    @media (max-width: 990px) {
       @content;
     }
   }
