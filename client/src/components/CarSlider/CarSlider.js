@@ -30,15 +30,6 @@ class CarSlider extends Component {
 
     return (
       <div className="CarSlider-container">
-        <div className="CarSlider-content">
-          <h5>Realtime Competitive Typing</h5>
-          <h1>Type Faster</h1>
-          <p>
-            Improve your typing skills while competing in fast-paced races with
-            up to 5 typers from around the world. Compete against your friends,
-            earn new cars, track your scores, and so much more... all for free!
-          </p>
-        </div>
         <Carousel
           activeIndex={index}
           direction={direction}
@@ -61,6 +52,15 @@ class CarSlider extends Component {
             <img className="d-block w-100" src={carSlide4} alt="Fourth slide" />
           </Carousel.Item>
         </Carousel>
+        <div className="CarSlider-content">
+          <h5>Realtime Competitive Typing</h5>
+          <h1>Type Faster</h1>
+          <p>
+            Improve your typing skills while competing in fast-paced races with
+            up to 5 typers from around the world. Compete against your friends,
+            earn new cars, track your scores, and so much more... all for free!
+          </p>
+        </div>
       </div>
     );
   }
