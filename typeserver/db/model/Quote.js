@@ -9,7 +9,8 @@ const QuoteSchema = new mongoose.Schema({
   },
   quote: {
     type: String,
-    required: true
+    required: true,
+    unique: true
   }
 });
 
