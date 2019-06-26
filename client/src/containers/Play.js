@@ -163,7 +163,7 @@ class PlayGameLogic extends Component {
         socket.emit('progress-update', {
           progress: this.state.playerProgress
         });
-      }, 4000);
+      }, 1000);
 
       // this.onFinishTimer(value);
     });
