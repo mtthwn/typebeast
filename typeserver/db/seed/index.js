@@ -2,6 +2,8 @@ const { mongoose, db } = require('./../config');
 const Quote = require('./../model/Quote');
 const Game = require('./../model/Game');
 
+let counter = 0;
+
 const seed = [
   {
     author: 'Henry David Thoreau',
@@ -48,7 +50,8 @@ const seedQuotes = async quotes => {
           .save()
           .then(async savedQuote => {
             const sampleGame = new Game({
-              quote: savedQuote._id
+              quote: savedQuote._id,
+              socketId: `room-${counter++}`
             });
 
             await sampleGame
