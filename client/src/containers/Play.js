@@ -108,7 +108,8 @@ class PlayGameLogic extends Component {
       // Display welcome message. Import the player's socket and room-player list from server.
       this.setState({
         playersInRoom: message.clients,
-        playerSocket: message.socket
+        playerSocket: message.socket,
+        loading: false
       });
       console.log(`${this.state.playersInRoom} in room now`);
     });
@@ -144,19 +145,6 @@ class PlayGameLogic extends Component {
 
     socket.on('player-left', message => {
       console.log(message.description);
-    });
-
-    const wordsArray = this.state.fullPhrase.split(' ');
-
-    this.setState({
-      words: wordsArray.map((word, index) => {
-        if (index < wordsArray.length - 1) {
-          return word + ' ';
-        }
-
-        return word;
-      }),
-      loading: false
     });
 
   }
@@ -223,7 +211,7 @@ class PlayGameLogic extends Component {
   }
 
   onEmitStart = () => {
-    this.state.socket.emit('initiate')
+    this.state.socket.emit('initiate');
   }
 
   onStartCountdown = () => {
@@ -245,9 +233,21 @@ class PlayGameLogic extends Component {
   };
 
   onSetQuote = (phrase) => {
+    const wordsArray = phrase.split(' ');
+
     if (!this.state.fullPhrase && !this.state.remainingPhrase) {
       this.setState({fullPhrase: phrase})
       this.setState({remainingPhrase: phrase})
+
+      this.setState({
+            words: wordsArray.map((word, index) => {
+              if (index < wordsArray.length - 1) {
+                return word + ' ';
+              }
+
+              return word;
+            }),
+          });
     }
   }
 
