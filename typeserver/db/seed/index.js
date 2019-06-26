@@ -1,6 +1,6 @@
-const Quote = require('./../model/Quote')
+const Quote = require('./../model/Quote');
 
-const quotes = [
+const seed = [
   {
     author: 'Henry David Thoreau',
     quote:
@@ -23,12 +23,17 @@ const quotes = [
   }
 ];
 
-const seedData = () => {
-    quotes.forEach(quote => {
-        new Quote(quote).save().then(quote => {
-            console.log(`Quote saved!`);
-        }).catch(e => console.log('error occured when saving the quote', e.message));
-    })
-}
+const seedData = quotes => {
+  quotes.forEach(quote => {
+    new Quote(quote)
+      .save()
+      .then(savedQuote => {
+        console.log(`Quote saved!`);
+      })
+      .catch(e =>
+        console.log('error occured when saving the quote', e.message)
+      );
+  });
+};
 
-module.exports = seedData
+module.exports = seedData(seed);
