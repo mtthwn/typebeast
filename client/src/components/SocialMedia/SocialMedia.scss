@@ -1,4 +1,4 @@
-@import "./../../styles/Variables.scss";
+@import './../../styles/Variables.scss';
 
 .SocialMedia {
   position: fixed;
@@ -13,8 +13,8 @@
 
 .SocialMedia .nav-link {
   color: $text-color;
-  font-size: 1.2rem;
-  margin-bottom: 1rem;
+  font-size: 3rem;
+  margin-bottom: 3rem;
   transition: all 0.2s ease-in;
 
   &:hover {
