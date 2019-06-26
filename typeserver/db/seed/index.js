@@ -1,5 +1,6 @@
 const { mongoose, db } = require('./../config');
 const Quote = require('./../model/Quote');
+const Game = require('./../model/Quote')
 
 const seed = [
   {
@@ -55,8 +56,8 @@ const seedQuotes = async quotes => {
   
 };
 
-const seedGames = () => {
-  
+const seedGames = async () => {
+
 }
 
 module.exports = seedQuotes(seed);

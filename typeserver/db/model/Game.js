@@ -6,7 +6,8 @@ const GameSchema = new Schema({
   stats: [{ type: Schema.Types.ObjectId, ref: 'GameStat' }],
   playedAt: Number,
   quote: {
-    type: String,
+    type: Schema.Types.ObjectId, 
+    ref: 'Quote',
     required: true
   }
 });
