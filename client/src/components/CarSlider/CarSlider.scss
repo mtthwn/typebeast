@@ -2,13 +2,21 @@
 @import '../../styles/Mixins';
 
 .carousel {
-  position: relative;
+  // position: relative;
   height: 100vh;
+  width: 100vw;
 }
 
 .carousel-item {
-  height: 100vh;
-  background-position: center;
+  position: relative;
+  img {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+  }
 
   @include respond(tab-landscape) {
     padding-top: 30rem;
@@ -22,8 +30,6 @@
 
 .CarSlider-container {
   display: flex;
-  align-content: center;
-  justify-content: center;
 }
 
 .CarSlider-content {
