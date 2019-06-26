@@ -71,11 +71,9 @@ class PlayGameLogic extends Component {
       loading: true,
       words: [],
       userInput: '',
-      remainingPhrase:
-        'I was having a similar issue and realised that I was not importing Router correctly.',
+      remainingPhrase: '',
       index: 0,
-      fullPhrase:
-        'I was having a similar issue and realised that I was not importing Router correctly.',
+      fullPhrase: '',
       char: 0,
       sec: 0,
       carPositioning: {},
@@ -90,7 +88,8 @@ class PlayGameLogic extends Component {
       playerSocket: '',
       playerProgress: 0,
       wpm: 0,
-      wordsCompleted: ''
+      wordsCompleted: '',
+      socket: ''
     };
   }
 
@@ -125,6 +124,7 @@ class PlayGameLogic extends Component {
 
     socket.on('game-start', message => {
       console.log(message.description);
+      console.log(message.quote)
       // Display message saying game will start soon
 
       // Set a countdown and render the typing content
@@ -159,11 +159,11 @@ class PlayGameLogic extends Component {
 
       // countdown();
 
-      setInterval(() => {
-        socket.emit('progress-update', {
-          progress: this.state.playerProgress
-        });
-      }, 1000);
+      // setInterval(() => {
+      //   socket.emit('progress-update', {
+      //     progress: this.state.playerProgress
+      //   });
+      // }, 1000);
 
       // this.onFinishTimer(value);
     });

@@ -27,21 +27,33 @@ let userCount = {
   room-4: 3
 }
 */
-const checkRoomQuote = roomData => {
-  for (const room in roomData) {
-    if (!roomData[room].quote) {
-      axios
-        .get('http://127.0.0.1:8081/api/quotes')
-        .then(res => {
-          roomData[room].quote = res.data.data.quote;
-          console.log(roomData);
-        })
-        .catch(e => console.log(e.message));
-    }
-  }
-};
+// const checkRoomQuote = roomData => {
+//   for (const room in roomData) {
+//     if (!roomData[room].quote) {
+//       axios
+//         .get('http://127.0.0.1:8081/api/quotes')
+//         .then(res => {
+//           roomData[room].quote = res.data.data.quote;
+//           console.log(roomData);
+//         })
+//         .catch(e => console.log(e.message));
+//     }
+//   }
+// };
 
-checkRoomQuote(roomData);
+// checkRoomQuote(roomData);
+
+const getQuote = (room) => {
+  if (!userCount['room-' + roomNum]['quote']) {
+    axios
+      .get('http://127.0.0.1:8081/api/quotes')
+      .then(res => {
+        room['quote'] = res.data.data.quote;
+        console.log(userCount)
+      })
+      .catch(e => console.log(e.message));
+  }
+}
 
 io.on('connection', function(socket) {
   userCount.totalUsers++;
@@ -50,18 +62,29 @@ io.on('connection', function(socket) {
   //If it's the first user, the room doesn't exist - make the room.
   if (!userCount['room-' + roomNum]) {
     socket.join('room-' + roomNum);
-    userCount['room-' + roomNum] = 1; // Increase the user count of the room
-    console.log(userCount);
+    // Create an object to track the users and quote in a room
+    userCount['room-' + roomNum] = {
+      users: 1,
+      quote: ''
+    }
+    getQuote(userCount['room-' + roomNum]);
+
     //If the room is not at max capacity (3), add user to the room
-  } else if (userCount['room-' + roomNum] && userCount['room-' + roomNum] < 3) {
+  } else if (userCount['room-' + roomNum] && userCount['room-' + roomNum]['users'] < 3) {
     socket.join('room-' + roomNum);
-    userCount['room-' + roomNum]++;
+    userCount['room-' + roomNum]['users']++;
     console.log(userCount);
+
     //If the room exists and is at capacity, increase the room number, join the new room, set count to 1
   } else {
     roomNum++;
     socket.join('room-' + roomNum);
-    userCount['room-' + roomNum] = 1;
+    userCount['room-' + roomNum] = {
+      users: 1,
+      quote: ''
+    }
+    getQuote(userCount['room-' + roomNum])
+
     console.log(userCount);
   }
 
@@ -73,7 +96,7 @@ io.on('connection', function(socket) {
   //Welcome message for new user
   socket.emit('welcome', {
     description: `Welcome! You are in room ${roomNum}! Current user count: ${
-      userCount['room-' + roomNum]
+      userCount['room-' + roomNum]['users']
     }`,
     socket: socket.id,
     clients: clientsArray,
@@ -82,16 +105,18 @@ io.on('connection', function(socket) {
   //Broadcast that a new user joined to everyone ~else~
   socket.broadcast.to('room-' + roomNum).emit('new-user-join', {
     description: `New user has joined. Current user count: ${
-      userCount['room-' + roomNum]
+      userCount['room-' + roomNum]['users']
     }`,
     socket: socket.id,
     clients: clientsArray,
     userCount
   });
+
   //Check if the room is at capacity
   if (io.sockets.adapter.rooms['room-' + roomNum].length === 3) {
     io.to('room-' + roomNum).emit('game-start', {
-      description: '3 players in room. Game starting shortly.'
+      description: '3 players in room. Game starting shortly.',
+      quote: userCount['room-' + roomNum]['quote']
     });
   }
 
