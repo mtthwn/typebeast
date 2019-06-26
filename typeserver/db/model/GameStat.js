@@ -4,9 +4,9 @@ const { Schema } = mongoose;
 
 const GameStatSchema = new Schema({
   player: {
-    type: Schema.Types.ObjectId,
-    ref: 'User',
-    required: true
+    type: String,
+    required: true,
+    default: 'Guest'
   },
   wpm: {
     type: Number,
