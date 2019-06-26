@@ -1,3 +1,4 @@
+const { mongoose } = require('./../config')
 const Quote = require('./../model/Quote');
 
 const seed = [
@@ -34,6 +35,8 @@ const seedData = quotes => {
         console.log('error occured when saving the quote', e.message)
       );
   });
+
+  return;
 };
 
 module.exports = seedData(seed);
