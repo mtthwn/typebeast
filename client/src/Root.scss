@@ -22,7 +22,7 @@ html {
   }
 
   @include respond(tab-landscape) {
-    font-size: 50%;
+    font-size: 60%;
   }
 
   @include respond(big-desktop) {
