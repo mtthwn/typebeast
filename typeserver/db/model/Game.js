@@ -8,6 +8,10 @@ const GameSchema = new Schema({
     type: Date,
     default: Date.now
   },
+  socketId: {
+    type: String,
+    required: true,
+  },
   quote: {
     type: Schema.Types.ObjectId,
     ref: 'Quote',
