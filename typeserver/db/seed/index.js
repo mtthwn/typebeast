@@ -24,8 +24,12 @@ const seed = [
   }
 ];
 
+const quoteIds = [];
+
 const seedQuotes = async quotes => {
-  db.dropCollection('quotes', (err, result) => {
+
+  return new Promise(async (res, rej) => {
+    db.dropCollection('quotes', (err, result) => {
     if (err) {
       console.log('error occured while deleting collection');
     } else {
@@ -37,12 +41,22 @@ const seedQuotes = async quotes => {
     quotes.map(quote => {
       return new Quote(quote)
         .save()
-        .then(quote => console.log(`Quote saved! ${quote}`))
+        .then(quote => {
+          console.log(`Quote saved! ${quote}`)
+
+          quoteIds.push(quote._id);
+        })
         .catch(e => console.log(`Quote not saved`));
     })
   );
 
-  process.exit()
+  console.log(quoteIds);
+  })
+  
 };
+
+const seedGames = () => {
+  
+}
 
 module.exports = seedQuotes(seed);

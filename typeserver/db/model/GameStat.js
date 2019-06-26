@@ -12,6 +12,11 @@ const GameStatSchema = new Schema({
     type: Number,
     required: true,
     default: 0
+  },
+  quote: {
+    type: Schema.Types.ObjectId, 
+    ref: 'Quote',
+    required: true
   }
 });
 
