@@ -103,6 +103,8 @@ class PlayGameLogic extends Component {
       socket
     });
 
+    let that = this;
+
     socket.on('welcome', message => {
       console.log(message.description);
       // Display welcome message. Import the player's socket and room-player list from server.
@@ -129,7 +131,6 @@ class PlayGameLogic extends Component {
 
       // Set a countdown and render the typing content
       let timerCount = 5;
-      let that = this;
 
       function countdown() {
         setTimeout(() => {
@@ -279,6 +280,7 @@ class PlayGameLogic extends Component {
   // }
   onStartCountdown = () => {
     if (!this.state.countdown) {
+      this.state.socket.emit('initiate')
       this.setState({ countdown: true });
       this.interval = setInterval(() => {
         if (this.state.countdownCount === 1) {
@@ -294,6 +296,12 @@ class PlayGameLogic extends Component {
       }, 1000);
     }
   };
+
+  onSetQuote = () => {
+    if (!this.state.fullPhrase) {
+      this.setState({fullPhrase: ''})
+    }
+  }
 
   onStartTimer = () => {
     if (!this.state.timerStart) {

@@ -113,12 +113,16 @@ io.on('connection', function(socket) {
   });
 
   //Check if the room is at capacity
-  if (io.sockets.adapter.rooms['room-' + roomNum].length === 3) {
-    io.to('room-' + roomNum).emit('game-start', {
-      description: '3 players in room. Game starting shortly.',
-      quote: userCount['room-' + roomNum]['quote']
-    });
-  }
+  socket.on('initiate', () => {
+    console.log("Yeah, I got the emit")
+    if (io.sockets.adapter.rooms['room-' + roomNum].length === 3) {
+      io.to('room-' + roomNum).emit('game-start', {
+        description: '3 players in room. Game starting shortly.',
+        quote: userCount['room-' + roomNum]['quote']
+      });
+    }
+  })
+
 
   //When receiving an update from a user, broadcast to all users in the room
   socket.on('progress-update', completion => {
