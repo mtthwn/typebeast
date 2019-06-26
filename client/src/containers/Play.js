@@ -14,7 +14,7 @@ const renderGame = props => {
   const countdown = props.countdown ? (
     <h1>{props.countdownCount}</h1>
   ) : (
-    <StartGameButton startGame={props.onStartCountdown} />
+    <StartGameButton emitStart={props.onEmitStart} />
   );
 
   const gameStart = props.timerStart ? (
@@ -103,8 +103,6 @@ class PlayGameLogic extends Component {
       socket
     });
 
-    let that = this;
-
     socket.on('welcome', message => {
       console.log(message.description);
       // Display welcome message. Import the player's socket and room-player list from server.
@@ -127,36 +125,41 @@ class PlayGameLogic extends Component {
     socket.on('game-start', message => {
       console.log(message.description);
       console.log(message.quote)
+
+      // let that = this;
+      this.onStartCountdown();
+      this.onSetQuote(message.quote);
+
       // Display message saying game will start soon
 
       // Set a countdown and render the typing content
-      let timerCount = 5;
+      // let timerCount = 5;
 
-      function countdown() {
-        setTimeout(() => {
-          if (timerCount === 0) {
-            console.log('Game start.');
-            // finished = true;
-            timerStuff();
-            // return true;
-          } else {
-            console.log(timerCount);
-            timerCount--;
-            countdown();
-          }
-        }, 1000);
-      }
+      // function countdown() {
+      //   setTimeout(() => {
+      //     if (timerCount === 0) {
+      //       console.log('Game start.');
+      //       // finished = true;
+      //       timerStuff();
+      //       // return true;
+      //     } else {
+      //       console.log(timerCount);
+      //       timerCount--;
+      //       countdown();
+      //     }
+      //   }, 1000);
+      // }
 
-      function timerStuff() {
-        console.log('START');
-        that.onStartTimer();
-        that.setState({ timerStart: true });
-        that.interval = setInterval(() => {
-          that.setState(prevProps => {
-            return { sec: prevProps.sec + 1, timer: prevProps.timer + 1 };
-          });
-        }, 1000);
-      }
+      // function timerStuff() {
+      //   console.log('START');
+      //   that.onStartTimer();
+      //   that.setState({ timerStart: true });
+      //   that.interval = setInterval(() => {
+      //     that.setState(prevProps => {
+      //       return { sec: prevProps.sec + 1, timer: prevProps.timer + 1 };
+      //     });
+      //   }, 1000);
+      // }
 
       // countdown();
 
@@ -202,7 +205,8 @@ class PlayGameLogic extends Component {
     return this.props.children({
       ...this.state,
       onUserInputChange: this.onUserInputChange,
-      onStartCountdown: this.onStartCountdown
+      onStartCountdown: this.onStartCountdown,
+      onEmitStart: this.onEmitStart
     });
   }
 
@@ -278,9 +282,13 @@ class PlayGameLogic extends Component {
   //   //return how many characters user is typing correctly
   //   return userInput.filter((char, i) => char === text[i]).length;
   // }
+
+  onEmitStart = () => {
+    this.state.socket.emit('initiate')
+  }
+
   onStartCountdown = () => {
     if (!this.state.countdown) {
-      this.state.socket.emit('initiate')
       this.setState({ countdown: true });
       this.interval = setInterval(() => {
         if (this.state.countdownCount === 1) {
@@ -297,9 +305,10 @@ class PlayGameLogic extends Component {
     }
   };
 
-  onSetQuote = () => {
-    if (!this.state.fullPhrase) {
-      this.setState({fullPhrase: ''})
+  onSetQuote = (phrase) => {
+    if (!this.state.fullPhrase && !this.state.remainingPhrase) {
+      this.setState({fullPhrase: phrase})
+      this.setState({remainingPhrase: phrase})
     }
   }
 

@@ -102,6 +102,7 @@ io.on('connection', function(socket) {
     clients: clientsArray,
     userCount
   });
+
   //Broadcast that a new user joined to everyone ~else~
   socket.broadcast.to('room-' + roomNum).emit('new-user-join', {
     description: `New user has joined. Current user count: ${
@@ -115,12 +116,12 @@ io.on('connection', function(socket) {
   //Check if the room is at capacity
   socket.on('initiate', () => {
     console.log("Yeah, I got the emit")
-    if (io.sockets.adapter.rooms['room-' + roomNum].length === 3) {
+    // if (io.sockets.adapter.rooms['room-' + roomNum].length === 3) {
       io.to('room-' + roomNum).emit('game-start', {
         description: '3 players in room. Game starting shortly.',
         quote: userCount['room-' + roomNum]['quote']
       });
-    }
+    // }
   })
 
 
