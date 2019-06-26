@@ -11,4 +11,4 @@ db.once('open', () => {
   process.stdout.write('Connected to MongoDB \n');
 });
 
-module.exports = {mongoose};
+module.exports = { mongoose, db };

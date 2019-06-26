@@ -1,4 +1,4 @@
-const { mongoose } = require('./../config')
+const { mongoose, db } = require('./../config');
 const Quote = require('./../model/Quote');
 
 const seed = [
@@ -24,19 +24,25 @@ const seed = [
   }
 ];
 
-const seedData = quotes => {
-  quotes.forEach(quote => {
-    new Quote(quote)
-      .save()
-      .then(savedQuote => {
-        console.log(`Quote saved!`);
-      })
-      .catch(e =>
-        console.log('error occured when saving the quote', e.message)
-      );
+const seedQuotes = async quotes => {
+  db.dropCollection('quotes', (err, result) => {
+    if (err) {
+      console.log('error occured while deleting collection');
+    } else {
+      console.log('Deleted old quotes');
+    }
   });
 
-  return;
+  await Promise.all(
+    quotes.map(quote => {
+      return new Quote(quote)
+        .save()
+        .then(quote => console.log(`Quote saved! ${quote}`))
+        .catch(e => console.log(`Quote not saved`));
+    })
+  );
+
+  process.exit()
 };
 
-module.exports = seedData(seed);
+module.exports = seedQuotes(seed);
