@@ -7,6 +7,14 @@
   width: 100vw;
 }
 
+.d-block.w-100 {
+  @include respond(tab-portrait) {
+    width: 150% !important;
+    margin-top: 0rem;
+    margin-right: 0rem;
+  }
+}
+
 .carousel-item {
   position: relative;
   img {
@@ -18,13 +26,13 @@
     margin: auto;
   }
 
+  @include respond(phone) {
+    padding-top: 0rem;
+  }
+
   @include respond(tab-landscape) {
     padding-top: 30rem;
     background-color: #000;
-  }
-
-  @include respond(phone) {
-    padding-top: 0rem;
   }
 }
 
@@ -39,16 +47,18 @@
   width: 30%;
   left: 10%;
   text-transform: uppercase;
-
-  @include respond(tab-landscape) {
-    top: 20%;
+  @include respond(tab-portrait) {
+    width: 75%;
+    bottom: 0%;
+    left: 15%;
+    margin-bottom: 20rem;
   }
 
   h1 {
     color: #fff;
     font-family: $header-font;
     font-style: italic;
-    font-size: 10rem;
+    font-size: 9rem;
     letter-spacing: 8px;
     line-height: 8rem;
     text-transform: uppercase;
