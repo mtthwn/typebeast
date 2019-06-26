@@ -8,6 +8,7 @@
 
 .carousel-item {
   height: 100vh;
+  background-position: center;
 
   @include respond(tab-landscape) {
     padding-top: 30rem;
@@ -19,11 +20,17 @@
   }
 }
 
+.CarSlider-container {
+  display: flex;
+  align-content: center;
+  justify-content: center;
+}
+
 .CarSlider-content {
   position: absolute;
+  align-self: center;
   z-index: 50;
   width: 30%;
-  top: 25%;
   left: 10%;
   text-transform: uppercase;
 
@@ -56,6 +63,8 @@
   h5 {
     color: $main-color;
     font-weight: 600;
+    font-size: 1.5rem;
+
     letter-spacing: 1px;
 
     @include respond(tab-landscape) {
@@ -71,7 +80,7 @@
 
   p {
     text-transform: none;
-    font-size: 1.8rem;
+    font-size: 2rem;
     line-height: 3rem;
     font-weight: 300;
     color: rgb(226, 226, 226);
