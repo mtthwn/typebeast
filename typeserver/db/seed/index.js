@@ -1,5 +1,6 @@
 const { mongoose, db } = require('./../config');
 const Quote = require('./../model/Quote');
+const Game = require('./../model/Game');
 
 const seed = [
   {
@@ -25,24 +26,40 @@ const seed = [
 ];
 
 const seedQuotes = async quotes => {
-  db.dropCollection('quotes', (err, result) => {
-    if (err) {
-      console.log('error occured while deleting collection');
-    } else {
-      console.log('Deleted old quotes');
-    }
-  });
+    db.dropCollection('quotes', (err, result) => {
+      if (err) {
+        console.log('error occurred while deleting collection');
+      } else {
+        console.log('Deleted old quotes');
+      }
+    });
 
-  await Promise.all(
-    quotes.map(quote => {
-      return new Quote(quote)
-        .save()
-        .then(quote => console.log(`Quote saved! ${quote}`))
-        .catch(e => console.log(`Quote not saved`));
+    db.dropCollection('games', (err, result) => {
+      if (err) {
+        console.log('error occurred while dropping games');
+      } else {
+        console.log('dropped old games');
+      }
     })
-  );
 
-  process.exit()
+    await Promise.all(
+      quotes.map(quote => {
+        return new Quote(quote)
+          .save()
+          .then(async savedQuote => {
+            const sampleGame = new Game({
+              quote: savedQuote._id
+            });
+
+            await sampleGame
+              .save()
+              .catch(e => console.log(e.message));
+          })
+          .catch(e => console.log(`Quote not saved`));
+      })
+    );
+
+    process.exit();
 };
 
 module.exports = seedQuotes(seed);
