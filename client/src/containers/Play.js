@@ -14,7 +14,7 @@ const renderGame = props => {
   const countdown = props.countdown ? (
     <h1>{props.countdownCount}</h1>
   ) : (
-    <StartGameButton startGame={props.onStartCountdown} />
+    <StartGameButton emitStart={props.onEmitStart} />
   );
 
   const gameStart = props.timerStart ? (
@@ -71,11 +71,9 @@ class PlayGameLogic extends Component {
       loading: true,
       words: [],
       userInput: '',
-      remainingPhrase:
-        'I was having a similar issue and realised that I was not importing Router correctly.',
+      remainingPhrase: '',
       index: 0,
-      fullPhrase:
-        'I was having a similar issue and realised that I was not importing Router correctly.',
+      fullPhrase: '',
       char: 0,
       sec: 0,
       carPositioning: {},
@@ -90,7 +88,8 @@ class PlayGameLogic extends Component {
       playerSocket: '',
       playerProgress: 0,
       wpm: 0,
-      wordsCompleted: ''
+      wordsCompleted: '',
+      socket: ''
     };
   }
 
@@ -109,7 +108,8 @@ class PlayGameLogic extends Component {
       // Display welcome message. Import the player's socket and room-player list from server.
       this.setState({
         playersInRoom: message.clients,
-        playerSocket: message.socket
+        playerSocket: message.socket,
+        loading: false
       });
       console.log(`${this.state.playersInRoom} in room now`);
     });
@@ -125,54 +125,20 @@ class PlayGameLogic extends Component {
 
     socket.on('game-start', message => {
       console.log(message.description);
+      console.log(message.quote)
+
+      this.onStartCountdown();
+      this.onSetQuote(message.quote);
+
       // Display message saying game will start soon
 
-      // Set a countdown and render the typing content
-      let timerCount = 5;
-      let that = this;
-
-      function countdown() {
-        setTimeout(() => {
-          if (timerCount === 0) {
-            console.log('Game start.');
-            // finished = true;
-            timerStuff();
-            // return true;
-          } else {
-            console.log(timerCount);
-            timerCount--;
-            countdown();
-          }
-        }, 1000);
-      }
-
-      function timerStuff() {
-        console.log('START');
-        that.onStartTimer();
-        that.setState({ timerStart: true });
-        that.interval = setInterval(() => {
-          that.setState(prevProps => {
-            return { sec: prevProps.sec + 1, timer: prevProps.timer + 1 };
-          });
-        }, 1000);
-      }
-
-      // countdown();
-
-      setInterval(() => {
-        socket.emit('progress-update', {
-          progress: this.state.playerProgress
-        });
-      }, 1000);
-
-      // this.onFinishTimer(value);
     });
 
     socket.on('progress-broadcast', message => {
       const carPositioning = this.state.carPositioning;
 
       carPositioning[message.socketId] = message.completion;
-      // console.log(message);
+
       this.setState({ carPositioning });
       console.log(this.state.carPositioning);
     });
@@ -181,27 +147,14 @@ class PlayGameLogic extends Component {
       console.log(message.description);
     });
 
-    const wordsArray = this.state.fullPhrase.split(' ');
-
-    this.setState({
-      words: wordsArray.map((word, index) => {
-        if (index < wordsArray.length - 1) {
-          return word + ' ';
-        }
-
-        return word;
-      }),
-      loading: false
-    });
-
-    // this.setState({ re})
   }
 
   render() {
     return this.props.children({
       ...this.state,
       onUserInputChange: this.onUserInputChange,
-      onStartCountdown: this.onStartCountdown
+      onStartCountdown: this.onStartCountdown,
+      onEmitStart: this.onEmitStart
     });
   }
 
@@ -245,19 +198,7 @@ class PlayGameLogic extends Component {
     }
 
     this.calculateProgress();
-    // console.log(value);
 
-    // if (this.state.timerFinished) {
-    //   e.target.value = '';
-    // }
-
-    // this.onStartTimer();
-    // this.onFinishTimer(value);
-    // this.setState({
-    //   userInput: value,
-    //   char: this.calculateCorrectChars(value),
-    //   carPositioning: this.calculateCorrectChars(value) * 10
-    // });
   };
 
   calculateProgress() {
@@ -269,14 +210,10 @@ class PlayGameLogic extends Component {
     });
   }
 
-  // calculateCorrectChars(userInput) {
-  //   //remove whitespace
-  //   const text = this.state.fullPhrase.replace(' ', '');
-  //   //remove whitespace from user input and turn into array
-  //   userInput = userInput.replace(' ', '').split('');
-  //   //return how many characters user is typing correctly
-  //   return userInput.filter((char, i) => char === text[i]).length;
-  // }
+  onEmitStart = () => {
+    this.state.socket.emit('initiate');
+  }
+
   onStartCountdown = () => {
     if (!this.state.countdown) {
       this.setState({ countdown: true });
@@ -295,12 +232,34 @@ class PlayGameLogic extends Component {
     }
   };
 
+  onSetQuote = (phrase) => {
+    const wordsArray = phrase.split(' ');
+
+    if (!this.state.fullPhrase && !this.state.remainingPhrase) {
+      this.setState({fullPhrase: phrase})
+      this.setState({remainingPhrase: phrase})
+
+      this.setState({
+            words: wordsArray.map((word, index) => {
+              if (index < wordsArray.length - 1) {
+                return word + ' ';
+              }
+
+              return word;
+            }),
+          });
+    }
+  }
+
   onStartTimer = () => {
     if (!this.state.timerStart) {
       this.setState({ timerStart: true });
       this.interval = setInterval(() => {
         this.setState(prevProps => {
           return { sec: prevProps.sec + 1 };
+        });
+        this.state.socket.emit('progress-update', {
+          progress: this.state.playerProgress
         });
       }, 1000);
     }
