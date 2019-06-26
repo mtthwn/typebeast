@@ -1,4 +1,5 @@
-@import "./../../styles/Variables.scss";
+@import './../../styles/Variables';
+@import '../../styles/Mixins';
 
 .PlayNow-container {
   position: fixed;
@@ -15,16 +16,24 @@
   align-content: center;
   justify-content: space-between;
 
+  @include respond(phone) {
+    width: 100%;
+  }
+
   &:before {
-    content: " ";
+    content: ' ';
     position: absolute;
     border-left: 1px solid $border-color;
     height: 20rem;
     width: 10rem;
     transform: rotate(45deg);
-    top: 10px;
-    left: -8.6rem;
+    top: 0.6rem;
+    left: -8.7rem;
     background: #000;
+
+    @include respond(phone) {
+      display: none;
+    }
   }
 }
 
@@ -38,14 +47,17 @@
   letter-spacing: 2px;
 
   p {
-    font-size: 0.8rem;
+    font-size: 1.3rem;
     margin-bottom: 0;
   }
 
   h5 {
     letter-spacing: 1px;
-    font-size: 1rem;
+    font-size: 1.6rem;
     color: #fff;
+  }
+  @include respond(phone) {
+    display: none;
   }
 }
 
@@ -54,20 +66,46 @@
   justify-content: space-between;
   margin-right: 4rem;
 
+  @include respond(tab-portrait) {
+    margin-right: 1rem;
+  }
+
   img {
     align-self: center;
     max-width: 300px;
     max-height: 75px;
     width: auto;
     height: auto;
+    @include respond(tab-landscape) {
+      max-width: 200px;
+      max-height: auto;
+    }
+    @include respond(tab-portrait) {
+      display: none;
+    }
+    @include respond(phone) {
+      display: none;
+    }
   }
 }
 .PlayNow-btn {
   @include Main-btn;
-  width: 30rem;
+  width: 40%;
   font-weight: 600;
-  font-size: 1.2rem;
+  font-size: 2rem;
   height: 100%;
   padding: 0 0;
   margin: 0 0;
+
+  @include respond(tab-landscape) {
+    padding: 0 2rem;
+  }
+
+  @include respond(tab-portrait) {
+    width: 100%;
+  }
+
+  @include respond(phone) {
+    width: 100%;
+  }
 }
