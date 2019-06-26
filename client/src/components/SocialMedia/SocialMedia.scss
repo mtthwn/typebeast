@@ -1,4 +1,5 @@
-@import './../../styles/Variables.scss';
+@import './../../styles/Variables';
+@import '../../styles/Mixins';
 
 .SocialMedia {
   position: fixed;
@@ -9,6 +10,18 @@
   z-index: 10;
   width: 5%;
   height: 100vh;
+
+  @include respond(tab-landscape) {
+    width: 8%;
+  }
+
+  @include respond(tab-portrait) {
+    width: 8%;
+  }
+
+  @include respond(phone) {
+    width: 10%;
+  }
 }
 
 .SocialMedia .nav-link {
@@ -20,5 +33,16 @@
   &:hover {
     color: $main-color;
     opacity: 1;
+  }
+  @include respond(tab-landscape) {
+    font-size: 4rem;
+  }
+
+  @include respond(tab-portrait) {
+    font-size: 4rem;
+  }
+
+  @include respond(phone) {
+    font-size: 3rem;
   }
 }
