@@ -23,6 +23,10 @@
   @include respond(tab-portrait) {
     font-size: 1.5rem;
   }
+
+  @include respond(tab-portrait) {
+    font-size: 1.8rem;
+  }
 }
 .sign-up {
   background-color: #fff;
@@ -65,9 +69,13 @@
     text-align: center;
     width: 20%;
 
+    @include respond(tab-lanscape) {
+      font-size: 3rem;
+    }
+
     @include respond(tab-portrait) {
-      font-size: 2rem;
-      padding-top: 1.2rem;
+      font-size: 2.8rem;
+      padding-top: 1rem;
     }
 
     & a {
@@ -88,5 +96,9 @@
   &:hover {
     border-bottom: 3px solid $main-color;
     color: #fff;
+  }
+
+  @include respond(tab-portrait) {
+    font-size: 1.8rem;
   }
 }
