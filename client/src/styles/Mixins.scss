@@ -11,7 +11,7 @@
 
 @mixin respond($breakpoint) {
   @if $breakpoint == phone {
-    @media (max-width: 30em) {
+    @media (max-width: 37.5em) {
       @content;
     }
   }
