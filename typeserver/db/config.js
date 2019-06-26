@@ -10,3 +10,5 @@ db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', () => {
   process.stdout.write('Connected to MongoDB \n');
 });
+
+module.exports = { mongoose, db };
