@@ -2,16 +2,31 @@
 @import '../../styles/Mixins';
 
 .carousel {
-  // position: relative;
   height: 100vh;
   width: 100vw;
 }
 
 .d-block.w-100 {
-  @include respond(tab-portrait) {
+  @include respond(tab-landscape) {
+    position: relative;
+    left: -50%;
     width: 150% !important;
-    margin-top: 0rem;
+    margin-top: -45rem;
+    margin-bottom: 45rem;
     margin-right: 0rem;
+  }
+
+  @include respond(tab-portrait) {
+    position: relative;
+    margin-top: -40rem;
+    width: 150% !important;
+    margin-bottom: 45rem;
+    margin-right: 0rem;
+  }
+
+  @include respond(phone) {
+    position: relative;
+    margin-bottom: 45rem;
   }
 }
 
@@ -26,13 +41,18 @@
     margin: auto;
   }
 
-  @include respond(phone) {
-    padding-top: 0rem;
-  }
-
   @include respond(tab-landscape) {
     padding-top: 30rem;
     background-color: #000;
+  }
+
+  @include respond(tab-portrait) {
+    padding-top: 38rem;
+    background-color: #000;
+  }
+
+  @include respond(phone) {
+    padding-top: 39rem;
   }
 }
 
@@ -47,11 +67,22 @@
   width: 30%;
   left: 10%;
   text-transform: uppercase;
+
+  @include respond(tab-landscape) {
+    width: 75%;
+    bottom: -20%;
+    z-index: 1;
+    left: 15%;
+  }
+
   @include respond(tab-portrait) {
     width: 75%;
-    bottom: 0%;
+    bottom: -10%;
     left: 15%;
-    margin-bottom: 20rem;
+  }
+
+  @include respond(phone) {
+    bottom: 0%;
   }
 
   h1 {
