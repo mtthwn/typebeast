@@ -82,7 +82,7 @@ class PlayGameLogic extends Component {
       timerFinished: false,
       finishLine: false,
       // Socket related properties:
-      endpoint: 'http://172.46.3.66:8080',
+      endpoint: 'http://127.0.0.1:8080',
       gameStart: false,
       playersInRoom: [],
       playerSocket: '',
@@ -172,7 +172,14 @@ class PlayGameLogic extends Component {
     e.preventDefault();
 
     let value = e.target.value;
+    
     const { index, words, wordsCompleted } = this.state;
+
+    // console.log(words[index], value);
+
+    if (value.length > words[index].length) {
+      e.target.value = value.slice(0, words[index].length);
+    }
 
     if (this.state.sec > 0) {
       const wpm = Math.floor(((this.state.index + 1) / this.state.sec) * 60);
