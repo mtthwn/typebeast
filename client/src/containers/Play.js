@@ -11,7 +11,7 @@ import socketIOClient from 'socket.io-client';
 import StartGameButton from './../components/StartGameButton/StartGameButton';
 import RoomDisplay from './../components/RoomDisplay/RoomDisplay';
 import Leaderboard from './../components/Leaderboard/Leaderboard';
-import EndGameButton from './../components/Button/EndGameButton';
+import EndGameButton from './../components/EndGameButtons/EndGameButtons';
 
 const renderGame = props => {
   const countdown = props.countdown ? (
