@@ -82,7 +82,7 @@ class PlayGameLogic extends Component {
       timerFinished: false,
       finishLine: false,
       // Socket related properties:
-      endpoint: 'http://127.0.0.1:8080',
+      endpoint: 'http://172.46.3.66:8080',
       gameStart: false,
       playersInRoom: [],
       playerSocket: '',
