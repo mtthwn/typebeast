@@ -1,6 +1,6 @@
 import React from 'react';
-import { Row, Col }  from 'react-boostrap';
-import Button from './../Button/'
+import { Row, Col }  from 'react-bootstrap';
+import Button from './../Button/Button'
 
 export default props => (
   <Row>
