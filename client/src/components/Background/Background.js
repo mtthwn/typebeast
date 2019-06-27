@@ -35,6 +35,7 @@ const Background = ({
   showUsername
 }) => {
   console.log(carPositioning);
+
   const carIds = Object.keys(carPositioning);
   const Cars = carIds.map((car, index) => {
     return (

@@ -3,7 +3,7 @@ import car from './../../img/gtx.png';
 import './Car.scss';
 
 const Car = ({ percentageComplete, onFinish, positioning }) => {
-  console.log(percentageComplete)
+  // console.log(percentageComplete)
   const styling = onFinish ? `Car-finish` : `Car${positioning}-img`
   return (
     <div

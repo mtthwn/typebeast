@@ -24,12 +24,12 @@ const seed = [
   },
   {
     quote:
-      "I don't believe that if you do good, good things will happen. Everything is completely accidental and random. Sometimes bad things happen to very good people and sometimes good things happen to bad people. But at least if you try to do good things, then you're spending your time doing something worthwhile.",
+      `I don't believe that if you do good, good things will happen. Everything is completely accidental and random. Sometimes bad things happen to very good people and sometimes good things happen to bad people. But at least if you try to do good things, then you're spending your time doing something worthwhile.`,
     author: 'Helen Mirren'
   },
   {
     quote:
-      "When I have a bad day, I dream about opening up a gelato stand on the streets of Sydney, Australia. Doesn't everyone have a random escape fantasy?",
+      `When I have a bad day, I dream about opening up a gelato stand on the streets of Sydney, Australia. Doesn't everyone have a random escape fantasy?`,
     author: 'Nancy Lublin'
   },
   {
@@ -39,7 +39,7 @@ const seed = [
   },
   {
     quote:
-      'When life offers you a dream so far beyond any of your expectations, it’s not reasonable to grieve when it comes to an end.',
+      `When life offers you a dream so far beyond any of your expectations, it's not reasonable to grieve when it comes to an end.`,
     author: 'Stephanie Meyer'
   }
 ];
