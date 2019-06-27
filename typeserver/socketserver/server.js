@@ -115,7 +115,7 @@ io.on('connection', function(socket) {
   socket.on('game-finish', (wpm) => {
     io.to(Object.keys(socket.rooms)[1]).emit('user-finish', {
       socketId: socket.id,
-      roomId: socket.rooms[1],
+      roomId: Object.keys(socket.rooms)[1],
       completion: { progress: 1 },
       wpm: wpm
     });
