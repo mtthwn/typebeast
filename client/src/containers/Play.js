@@ -145,6 +145,11 @@ class PlayGameLogic extends Component {
 
       this.setState({ carPositioning });
       console.log(this.state.carPositioning);
+
+      const leaderboard = this.state.leaderboard;
+      leaderboard[message.socketId] = message;
+
+      this.setState({ leaderboard });
     });
 
     socket.on('user-finish', message => {
