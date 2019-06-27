@@ -5,10 +5,10 @@ import Button from './../Button/'
 export default props => (
   <Row>
     <Col>
-      <Button variant="success" type='newGame' />
+      <Button variant="success" link='/play' text='Play again' />
     </Col>
     <Col>
-      <Button variant="info" type='home' />
+      <Button variant="info" link='/' text='Home' />
     </Col>
   </Row>
 );
