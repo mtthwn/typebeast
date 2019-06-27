@@ -82,7 +82,7 @@ class PlayGameLogic extends Component {
       timerFinished: false,
       finishLine: false,
       // Socket related properties:
-      endpoint: 'http://127.0.0.1:8080',
+      endpoint: 'http://172.46.3.66:8080',
       gameStart: false,
       playersInRoom: [],
       playerSocket: '',
@@ -141,6 +141,16 @@ class PlayGameLogic extends Component {
 
       this.setState({ carPositioning });
       console.log(this.state.carPositioning);
+    });
+
+    socket.on('user-finish', message => {
+      const carPositioning = this.state.carPositioning;
+
+      carPositioning[message.socketId] = message.completion;
+      this.setState({ carPositioning });
+
+      console.log(' this mf is done');
+
     });
 
     socket.on('player-left', message => {
@@ -271,6 +281,7 @@ class PlayGameLogic extends Component {
     this.setState({
       timerFinished: true
     });
+    this.state.socket.emit('game-finish');
   };
 }
 
