@@ -1,6 +1,9 @@
 .Background-img {
   position: relative;
+  top: 10%;
   width: 70%;
+  border-radius: 1rem;
+
   margin: 0 auto;
   height: 45%;
   margin-bottom: 4rem;
@@ -8,7 +11,7 @@
   background-position: center;
   box-shadow: inset 0 0 70px rgba(45, 33, 128, 0.8),
   0px 0px 20px 2px rgba(46, 33, 128, 0.809);
-  border: 3px solid #5effff;
+  border: 2px solid #5effff;
   // animation: move-background 30s linear infinite;
   overflow: hidden;
 }
