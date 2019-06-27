@@ -190,16 +190,6 @@ class PlayGameLogic extends Component {
       e.target.value = value.slice(0, words[index].length);
     }
 
-    // if (this.state.sec > 0) {
-    //   const char = this.state.wordsCompleted.length + value.length
-    //   const wpm = Math.floor(((char/5) / this.state.sec) * 60);
-    //   console.log('WPM: ', wpm)
-
-    //   this.setState({ wpm });
-    // } else {
-    //   this.setState({ wpm: 0 });
-    // }
-
     if (value.length > words[index].length) {
       return;
     } else {
@@ -296,6 +286,17 @@ class PlayGameLogic extends Component {
         this.setState(prevProps => {
           return { sec: prevProps.sec + 1, timer: prevProps.timer + 1 };
         });
+
+        // WPM Calculation
+        if (this.state.sec > 0) {
+          const char = this.state.wordsCompleted.length + this.state.userInput.length
+          const wpm = Math.floor(((char/6) / this.state.sec) * 60);
+          console.log('WPM: ', wpm)
+
+          this.setState({ wpm });
+        } else {
+          this.setState({ wpm: 0 });
+        }
 
         // Progress update to server
         this.state.socket.emit('progress-update', {
