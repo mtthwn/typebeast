@@ -1,6 +1,6 @@
 import React from 'react';
 
-const DisplayQuoteInput = ({ onUserInputChange }) => {
+export default ({ onUserInputChange }) => {
   return (
     <div>
       <input
@@ -12,5 +12,3 @@ const DisplayQuoteInput = ({ onUserInputChange }) => {
     </div>
   );
 };
-
-export default DisplayQuoteInput;
