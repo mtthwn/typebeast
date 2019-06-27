@@ -111,6 +111,14 @@ io.on('connection', function(socket) {
     });
   });
 
+  socket.on('game-finish', () => {
+    io.to(Object.keys(socket.rooms)[1]).emit('user-finish', {
+      socketId: socket.id,
+      roomId: socket.rooms[1],
+      completion: { progress: 1 }
+    });
+  })
+
   socket.on('disconnecting', function() {
     const rooms = Object.keys(socket.rooms).slice();
     io.to(rooms[1]).emit('player-left', {

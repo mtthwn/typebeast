@@ -143,6 +143,16 @@ class PlayGameLogic extends Component {
       console.log(this.state.carPositioning);
     });
 
+    socket.on('user-finish', message => {
+      const carPositioning = this.state.carPositioning;
+
+      carPositioning[message.socketId] = message.completion;
+      this.setState({ carPositioning });
+
+      console.log(' this mf is done');
+
+    });
+
     socket.on('player-left', message => {
       console.log(message.description);
     });
