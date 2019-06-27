@@ -70,7 +70,7 @@ class CarSliderLogic extends Component {
   constructor(props, context) {
     super(props, context);
 
-    this.handleSelect = this.handleSelect.bind(this);
+    // this.handleSelect = this.handleSelect.bind(this);
 
     this.state = {
       index: 0,
@@ -78,54 +78,76 @@ class CarSliderLogic extends Component {
     };
   }
 
-  handleSelect(selectedIndex, e) {
+  handleSelect = (selectedIndex, e) => {
     this.setState({
       index: selectedIndex,
       direction: e.direction
     });
-  }
+  };
 
   render() {
-    return this.props.children({ ...this.state, handleSelect: this.handleSelect})
+    return this.props.children({
+      ...this.state,
+      handleSelect: this.handleSelect
+    });
   }
 }
 
-const CarSliderComponent = () => {
+export default () => {
   return (
-    <div className="CarSlider-container">
-      <Carousel
-        activeIndex={index}
-        direction={direction}
-        onSelect={this.handleSelect}
-        indicators={false}
-        fade={true}
-        controls={false}
-        interval="3000"
-      >
-        <Carousel.Item>
-          <img className="d-block w-100" src={carSlide1} alt="First slide" />
-        </Carousel.Item>
-        <Carousel.Item>
-          <img className="d-block w-100" src={carSlide2} alt="Second slide" />
-        </Carousel.Item>
-        <Carousel.Item>
-          <img className="d-block w-100" src={carSlide3} alt="Third slide" />
-        </Carousel.Item>
-        <Carousel.Item>
-          <img className="d-block w-100" src={carSlide4} alt="Fourth slide" />
-        </Carousel.Item>
-      </Carousel>
-      <div className="CarSlider-content">
-        <h5>Realtime Competitive Typing</h5>
-        <h1>Type Faster</h1>
-        <p>
-          Improve your typing skills while competing in fast-paced races with up
-          to 5 typers from around the world. Compete against your friends, earn
-          new cars, track your scores, and so much more... all for free!
-        </p>
-      </div>
-    </div>
+    <CarSliderLogic>
+      {props => (
+        <div className="CarSlider-container">
+          <Carousel
+            activeIndex={props.index}
+            direction={props.direction}
+            onSelect={props.handleSelect}
+            indicators={false}
+            fade={true}
+            controls={false}
+            interval="3000"
+          >
+            <Carousel.Item>
+              <img
+                className="d-block w-100"
+                src={carSlide1}
+                alt="First slide"
+              />
+            </Carousel.Item>
+            <Carousel.Item>
+              <img
+                className="d-block w-100"
+                src={carSlide2}
+                alt="Second slide"
+              />
+            </Carousel.Item>
+            <Carousel.Item>
+              <img
+                className="d-block w-100"
+                src={carSlide3}
+                alt="Third slide"
+              />
+            </Carousel.Item>
+            <Carousel.Item>
+              <img
+                className="d-block w-100"
+                src={carSlide4}
+                alt="Fourth slide"
+              />
+            </Carousel.Item>
+          </Carousel>
+          <div className="CarSlider-content">
+            <h5>Realtime Competitive Typing</h5>
+            <h1>Type Faster</h1>
+            <p>
+              Improve your typing skills while competing in fast-paced races
+              with up to 5 typers from around the world. Compete against your
+              friends, earn new cars, track your scores, and so much more... all
+              for free!
+            </p>
+          </div>
+        </div>
+      )}
+    </CarSliderLogic>
   );
 };
-
-export default CarSliderComponent;
