@@ -3,6 +3,7 @@ import Player1Car from './../Car/Player1Car';
 import Player2Car from './../Car/Player2Car';
 import Player3Car from './../Car/Player3Car';
 import Car from './../Car/Car';
+import ShowUsernames from '../ShowUsernames/ShowUsernames';
 
 import gameStartBG from './../../img/forest-bg3.jpg';
 import finishLineBG from './../../img/finish-line.jpg';
@@ -26,8 +27,15 @@ const bgFinish = {
 
 // const { opp1: socketID, opp2: socketID } = opponents;
 
-const Background = ({ carPositioning, onFinish, playerSocket, onStart }) => {
-  // console.log(carPositioning);
+const Background = ({
+  carPositioning,
+  onFinish,
+  playerSocket,
+  onStart,
+  showUsername
+}) => {
+  console.log(carPositioning);
+
   const carIds = Object.keys(carPositioning);
   const Cars = carIds.map((car, index) => {
     return (
@@ -45,6 +53,7 @@ const Background = ({ carPositioning, onFinish, playerSocket, onStart }) => {
     </div>
   ) : (
     <div className="Background-img" style={onStart ? bgStarted : bgStart}>
+      <ShowUsernames showUsername={showUsername} />
       {Cars}
     </div>
   );

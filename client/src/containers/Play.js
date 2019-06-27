@@ -11,6 +11,7 @@ import socketIOClient from 'socket.io-client';
 import StartGameButton from './../components/StartGameButton/StartGameButton';
 import RoomDisplay from './../components/RoomDisplay/RoomDisplay';
 import Leaderboard from './../components/Leaderboard/Leaderboard';
+// import ShowUsernames from './../components/ShowUsernames/ShowUsernames';
 import EndGameButton from './../components/EndGameButtons/EndGameButtons';
 
 const renderGame = props => {
@@ -338,6 +339,7 @@ export default () => {
             onFinish={values.timerFinished}
             onStart={values.timerStart}
             timer={values.timer}
+            showUsername={values.playersInRoom}
           />
 
           {!values.loading
