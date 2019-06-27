@@ -178,7 +178,7 @@ class PlayGameLogic extends Component {
     e.preventDefault();
 
     let value = e.target.value;
-    
+
     const { index, words, wordsCompleted } = this.state;
 
     // console.log(words[index], value);
@@ -294,7 +294,9 @@ class PlayGameLogic extends Component {
     this.setState({
       timerFinished: true
     });
-    this.state.socket.emit('game-finish');
+    this.state.socket.emit('game-finish', {
+      wpm: this.state.wpm
+    });
   };
 }
 
