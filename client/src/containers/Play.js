@@ -271,6 +271,7 @@ class PlayGameLogic extends Component {
     this.setState({
       timerFinished: true
     });
+    this.state.socket.emit('game-finish');
   };
 }
 
