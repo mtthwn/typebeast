@@ -28,6 +28,10 @@ const seed = [
   {
     quote: 'When I have a bad day, I dream about opening up a gelato stand on the streets of Sydney, Australia. Doesn\'t everyone have a random escape fantasy?',
     author: 'Nancy Lublin'
+  },
+  {
+    quote: 'We can all fight against loneliness by engaging in random acts of kindness.',
+    author: 'Gail Honeyman'
   }
 ];
 
