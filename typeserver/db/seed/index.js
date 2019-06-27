@@ -36,20 +36,24 @@ const seed = [
     quote:
       'We can all fight against loneliness by engaging in random acts of kindness.',
     author: 'Gail Honeyman'
+  },
+  {
+    quote:
+      'When life offers you a dream so far beyond any of your expectations, it’s not reasonable to grieve when it comes to an end.',
+    author: 'Stephanie Meyer'
   }
 ];
 
 const seedQuotes = async quotes => {
-
   collections.forEach(collection => {
     db.dropCollection(collection, (err, result) => {
       if (err) {
         console.log('Error occured while dropping collection');
       } else {
-        console.log(`Deleted ${collection} collection`)
+        console.log(`Deleted ${collection} collection`);
       }
-    })
-  })
+    });
+  });
 
   await Promise.all(
     quotes.map(quote => {
