@@ -4,6 +4,8 @@ const Game = require('./../model/Game');
 
 let counter = 0;
 
+const collections = ['games', 'quotes'];
+
 const seed = [
   {
     author: 'Henry David Thoreau',
@@ -26,51 +28,46 @@ const seed = [
     author: 'Helen Mirren'
   },
   {
-    quote: 'When I have a bad day, I dream about opening up a gelato stand on the streets of Sydney, Australia. Doesn\'t everyone have a random escape fantasy?',
+    quote:
+      "When I have a bad day, I dream about opening up a gelato stand on the streets of Sydney, Australia. Doesn't everyone have a random escape fantasy?",
     author: 'Nancy Lublin'
   },
   {
-    quote: 'We can all fight against loneliness by engaging in random acts of kindness.',
+    quote:
+      'We can all fight against loneliness by engaging in random acts of kindness.',
     author: 'Gail Honeyman'
   }
 ];
 
 const seedQuotes = async quotes => {
-    db.dropCollection('quotes', (err, result) => {
-      if (err) {
-        console.log('error occurred while deleting collection');
-      } else {
-        console.log('Deleted old quotes');
-      }
-    });
 
-    db.dropCollection('games', (err, result) => {
+  collections.forEach(collection => {
+    db.dropCollection(collection, (err, result) => {
       if (err) {
-        console.log('error occurred while dropping games');
+        console.log('Error occured while dropping collection');
       } else {
-        console.log('dropped old games');
+        console.log(`Deleted ${collection} collection`)
       }
     })
+  })
 
-    await Promise.all(
-      quotes.map(quote => {
-        return new Quote(quote)
-          .save()
-          .then(async savedQuote => {
-            const sampleGame = new Game({
-              quote: savedQuote._id,
-              socketId: `room-${counter++}`
-            });
+  await Promise.all(
+    quotes.map(quote => {
+      return new Quote(quote)
+        .save()
+        .then(async savedQuote => {
+          const sampleGame = new Game({
+            quote: savedQuote._id,
+            socketId: `room-${counter++}`
+          });
 
-            await sampleGame
-              .save()
-              .catch(e => console.log(e.message));
-          })
-          .catch(e => console.log(`Quote not saved`));
-      })
-    );
+          await sampleGame.save().catch(e => console.log(e.message));
+        })
+        .catch(e => console.log(`Quote not saved`));
+    })
+  );
 
-    process.exit();
+  process.exit();
 };
 
 module.exports = seedQuotes(seed);
