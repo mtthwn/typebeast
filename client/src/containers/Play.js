@@ -283,7 +283,6 @@ class PlayGameLogic extends Component {
       this.interval = setInterval(() => {
         this.setState(prevProps => {
           return { sec: prevProps.sec + 1, timer: prevProps.timer + 1 };
-          console.log(this.state.timer);
         });
         this.state.socket.emit('progress-update', {
           progress: this.state.playerProgress
