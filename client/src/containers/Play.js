@@ -9,6 +9,7 @@ import DisplayQuoteInput from './../components/GameInput/GameInput';
 import NosGauge from './../components/Guages/NOSGuage';
 import socketIOClient from 'socket.io-client';
 import StartGameButton from './../components/StartGameButton/StartGameButton';
+import RoomDisplay from './../components/RoomDisplay/RoomDisplay'
 
 const renderGame = props => {
   const countdown = props.countdown ? (
@@ -57,6 +58,9 @@ const renderGame = props => {
         {gameStart}
       </div>
       <NosGauge />
+      <RoomDisplay
+        roomNumber={props.roomNumber}
+      />
     </div>
   );
 };
@@ -84,6 +88,7 @@ class PlayGameLogic extends Component {
       // Socket related properties:
       endpoint: 'http://127.0.0.1:8080',
       gameStart: false,
+      roomNumber: 0,
       playersInRoom: [],
       playerSocket: '',
       playerProgress: 0,
@@ -109,7 +114,8 @@ class PlayGameLogic extends Component {
       this.setState({
         playersInRoom: message.clients,
         playerSocket: message.socket,
-        loading: false
+        loading: false,
+        roomNumber: message.roomNum
       });
       console.log(`${this.state.playersInRoom} in room now`);
     });

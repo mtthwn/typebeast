@@ -78,7 +78,8 @@ io.on('connection', function(socket) {
     }`,
     socket: socket.id,
     clients: clientsArray,
-    userCount
+    userCount,
+    roomNum
   });
 
   //Broadcast that a new user joined to everyone ~else~
