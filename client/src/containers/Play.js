@@ -10,6 +10,7 @@ import NosGauge from './../components/Guages/NOSGuage';
 import socketIOClient from 'socket.io-client';
 import StartGameButton from './../components/StartGameButton/StartGameButton';
 import RoomDisplay from './../components/RoomDisplay/RoomDisplay'
+import Leaderboard from './../components/Leaderboard/Leaderboard'
 
 const renderGame = props => {
   const countdown = props.countdown ? (
@@ -38,12 +39,7 @@ const renderGame = props => {
   );
 
   return props.timerFinished ? (
-    <div className="DisplayQuote-container">
-      <div className="DisplayQuote-previewQuote">
-        <h1 className="DisplayQuote-h1">Congrats mffferr</h1>
-      </div>
-      <div>WPM: {props.wpm}</div>
-    </div>
+    <Leaderboard leaderboard={props.leaderboard} />
   ) : (
     <div className="DisplayQuoteUI-container">
       <CarWPMGauge
@@ -94,7 +90,8 @@ class PlayGameLogic extends Component {
       playerProgress: 0,
       wpm: 0,
       wordsCompleted: '',
-      socket: ''
+      socket: '',
+      leaderboard: {}
     };
   }
 
@@ -149,12 +146,20 @@ class PlayGameLogic extends Component {
     });
 
     socket.on('user-finish', message => {
+      console.log(message)
       const carPositioning = this.state.carPositioning;
 
       carPositioning[message.socketId] = message.completion;
-      this.setState({ carPositioning });
+      this.setState({
+        carPositioning
+      });
 
-      console.log(' this mf is done');
+      const leaderboard = this.state.leaderboard;
+      leaderboard[message.socketId] = message;
+
+      this.setState({
+        leaderboard
+      })
     });
 
     socket.on('player-left', message => {
@@ -175,7 +180,7 @@ class PlayGameLogic extends Component {
     e.preventDefault();
 
     let value = e.target.value;
-    
+
     const { index, words, wordsCompleted } = this.state;
 
     // console.log(words[index], value);
@@ -292,7 +297,9 @@ class PlayGameLogic extends Component {
       timerFinished: true,
       timer: 0
     });
-    this.state.socket.emit('game-finish');
+    this.state.socket.emit('game-finish', {
+      wpm: this.state.wpm
+    });
   };
 }
 
