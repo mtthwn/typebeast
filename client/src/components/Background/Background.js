@@ -10,6 +10,12 @@ import './Background.scss';
 
 const bgStart = {
   backgroundImage: `url(${gameStartBG})`
+  // animation: `move-background 30s linear infinite`
+};
+
+const bgStarted = {
+  backgroundImage: `url(${gameStartBG})`,
+  animation: `move-background 30s linear infinite`
 };
 
 const bgFinish = {
@@ -20,30 +26,32 @@ const bgFinish = {
 
 // const { opp1: socketID, opp2: socketID } = opponents;
 
-const Background = ({ carPositioning, onFinish, playerSocket }) => {
+const Background = ({ carPositioning, onFinish, playerSocket, onStart }) => {
   console.log(carPositioning);
   const carIds = Object.keys(carPositioning);
   const Cars = carIds.map((car, index) => {
     return (
-      <Car percentageComplete={`${Number(carPositioning[car].progress) * 100}%`} onFinish={onFinish} positioning={index + 1} />
-    )
-  })
+      <Car
+        percentageComplete={`${Number(carPositioning[car].progress) * 100}%`}
+        onFinish={onFinish}
+        positioning={index + 1}
+      />
+    );
+  });
 
-  return (
-    onFinish ?
-      <div className="Background-img" style={onFinish ? bgFinish : bgStart}>
-        <Car onFinish={onFinish} positioning={1} />
-      </div>
-    :
-      <div className="Background-img" style={onFinish ? bgFinish : bgStart}>
+  return onFinish ? (
+    <div className="Background-img" style={onFinish ? bgFinish : bgStart}>
+      <Car onFinish={onFinish} positioning={1} />
+    </div>
+  ) : (
+    <div className="Background-img" style={onStart ? bgStarted : bgStart}>
       {Cars}
-      </div>
-  )
+    </div>
+  );
 };
 
- // <Player1Car onFinish={onFinish} carPositioning={carPositioning} />
- //      <Player2Car onFinish={onFinish} carPositioning={carPositioning} />
- //      <Player3Car onFinish={onFinish} carPositioning={carPositioning} />
-
+// <Player1Car onFinish={onFinish} carPositioning={carPositioning} />
+//      <Player2Car onFinish={onFinish} carPositioning={carPositioning} />
+//      <Player3Car onFinish={onFinish} carPositioning={carPositioning} />
 
 export default Background;
