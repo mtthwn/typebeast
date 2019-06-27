@@ -91,7 +91,8 @@ class PlayGameLogic extends Component {
       wpm: 0,
       wordsCompleted: '',
       socket: '',
-      leaderboard: {}
+      leaderboard: {},
+      averageLength: 5
     };
   }
 
@@ -142,7 +143,7 @@ class PlayGameLogic extends Component {
       carPositioning[message.socketId] = message.completion;
 
       this.setState({ carPositioning });
-      console.log(this.state.carPositioning);
+      // console.log(this.state.carPositioning);
     });
 
     socket.on('user-finish', message => {
@@ -189,13 +190,15 @@ class PlayGameLogic extends Component {
       e.target.value = value.slice(0, words[index].length);
     }
 
-    if (this.state.sec > 0) {
-      const wpm = Math.floor(((this.state.index + 1) / this.state.sec) * 60);
+    // if (this.state.sec > 0) {
+    //   const char = this.state.wordsCompleted.length + value.length
+    //   const wpm = Math.floor(((char/5) / this.state.sec) * 60);
+    //   console.log('WPM: ', wpm)
 
-      this.setState({ wpm });
-    } else {
-      this.setState({ wpm: 0 });
-    }
+    //   this.setState({ wpm });
+    // } else {
+    //   this.setState({ wpm: 0 });
+    // }
 
     if (value.length > words[index].length) {
       return;
@@ -227,7 +230,7 @@ class PlayGameLogic extends Component {
 
   calculateProgress() {
     let progressPercent = this.state.index / this.state.words.length;
-    console.log(this.state.index, this.state.words.length);
+    // console.log(this.state.index, this.state.words.length);
 
     this.setState({
       playerProgress: progressPercent
@@ -259,6 +262,8 @@ class PlayGameLogic extends Component {
   onSetQuote = phrase => {
     const wordsArray = phrase.split(' ');
 
+
+
     if (!this.state.fullPhrase && !this.state.remainingPhrase) {
       this.setState({ fullPhrase: phrase });
       this.setState({ remainingPhrase: phrase });
@@ -271,7 +276,15 @@ class PlayGameLogic extends Component {
 
           return word;
         })
+
+
       });
+
+      const averageLength = Math.floor((this.state.words.reduce((acc, curr) => {
+        return acc + curr.length
+      }, 0)) / this.state.words.length);
+      this.setState({averageLength});
+
     }
   };
 
@@ -279,10 +292,12 @@ class PlayGameLogic extends Component {
     if (!this.state.timerStart) {
       this.setState({ timerStart: true });
       this.interval = setInterval(() => {
+        // timer
         this.setState(prevProps => {
           return { sec: prevProps.sec + 1, timer: prevProps.timer + 1 };
-          console.log(this.state.timer);
         });
+
+        // Progress update to server
         this.state.socket.emit('progress-update', {
           progress: this.state.playerProgress
         });
