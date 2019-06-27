@@ -58,7 +58,9 @@ const renderGame = props => {
         {gameStart}
       </div>
       <NosGauge />
-      <RoomDisplay />
+      <RoomDisplay
+        roomNumber={props.roomNumber}
+      />
     </div>
   );
 };
@@ -112,7 +114,8 @@ class PlayGameLogic extends Component {
       this.setState({
         playersInRoom: message.clients,
         playerSocket: message.socket,
-        loading: false
+        loading: false,
+        roomNumber: message.roomNum
       });
       console.log(`${this.state.playersInRoom} in room now`);
     });

@@ -1,8 +1,8 @@
 import React from 'react';
 
-const RoomDisplay = () => {
+const RoomDisplay = (props) => {
   return (
-    <div className="Room-Display"> You are in Room # [Something] </div>
+    <div className="Room-Display"> You are in Room # {props.roomNumber} </div>
   )
 }
 
