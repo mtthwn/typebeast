@@ -131,13 +131,12 @@ class PlayGameLogic extends Component {
 
     socket.on('game-start', message => {
       console.log(message.description);
-      console.log(message.quote)
+      console.log(message.quote);
 
       this.onStartCountdown();
       this.onSetQuote(message.quote);
 
       // Display message saying game will start soon
-
     });
 
     socket.on('progress-broadcast', message => {
@@ -156,13 +155,11 @@ class PlayGameLogic extends Component {
       this.setState({ carPositioning });
 
       console.log(' this mf is done');
-
     });
 
     socket.on('player-left', message => {
       console.log(message.description);
     });
-
   }
 
   render() {
@@ -221,7 +218,6 @@ class PlayGameLogic extends Component {
     }
 
     this.calculateProgress();
-
   };
 
   calculateProgress() {
@@ -235,7 +231,7 @@ class PlayGameLogic extends Component {
 
   onEmitStart = () => {
     this.state.socket.emit('initiate');
-  }
+  };
 
   onStartCountdown = () => {
     if (!this.state.countdown) {
@@ -255,31 +251,32 @@ class PlayGameLogic extends Component {
     }
   };
 
-  onSetQuote = (phrase) => {
+  onSetQuote = phrase => {
     const wordsArray = phrase.split(' ');
 
     if (!this.state.fullPhrase && !this.state.remainingPhrase) {
-      this.setState({fullPhrase: phrase})
-      this.setState({remainingPhrase: phrase})
+      this.setState({ fullPhrase: phrase });
+      this.setState({ remainingPhrase: phrase });
 
       this.setState({
-            words: wordsArray.map((word, index) => {
-              if (index < wordsArray.length - 1) {
-                return word + ' ';
-              }
+        words: wordsArray.map((word, index) => {
+          if (index < wordsArray.length - 1) {
+            return word + ' ';
+          }
 
-              return word;
-            }),
-          });
+          return word;
+        })
+      });
     }
-  }
+  };
 
   onStartTimer = () => {
     if (!this.state.timerStart) {
       this.setState({ timerStart: true });
       this.interval = setInterval(() => {
         this.setState(prevProps => {
-          return { sec: prevProps.sec + 1 };
+          return { sec: prevProps.sec + 1, timer: prevProps.timer + 1 };
+          console.log(this.state.timer);
         });
         this.state.socket.emit('progress-update', {
           progress: this.state.playerProgress
@@ -292,7 +289,8 @@ class PlayGameLogic extends Component {
     clearInterval(this.interval);
     this.calculateProgress();
     this.setState({
-      timerFinished: true
+      timerFinished: true,
+      timer: 0
     });
     this.state.socket.emit('game-finish');
   };
@@ -307,6 +305,8 @@ export default () => {
             playerSocket={values.playerSocket}
             carPositioning={values.carPositioning}
             onFinish={values.timerFinished}
+            onStart={values.timerStart}
+            timer={values.timer}
           />
 
           {!values.loading
