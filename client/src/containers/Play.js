@@ -9,8 +9,9 @@ import DisplayQuoteInput from './../components/GameInput/GameInput';
 import NosGauge from './../components/Guages/NOSGuage';
 import socketIOClient from 'socket.io-client';
 import StartGameButton from './../components/StartGameButton/StartGameButton';
-import RoomDisplay from './../components/RoomDisplay/RoomDisplay'
-import Leaderboard from './../components/Leaderboard/Leaderboard'
+import RoomDisplay from './../components/RoomDisplay/RoomDisplay';
+import Leaderboard from './../components/Leaderboard/Leaderboard';
+import EndGameButton from './../components/Button/EndGameButton';
 
 const renderGame = props => {
   const countdown = props.countdown ? (
@@ -39,7 +40,10 @@ const renderGame = props => {
   );
 
   return props.timerFinished ? (
-    <Leaderboard leaderboard={props.leaderboard} />
+    <Fragment>
+      <Leaderboard leaderboard={props.leaderboard} />
+      <EndGameButton />
+    </Fragment>
   ) : (
     <div className="DisplayQuoteUI-container">
       <CarWPMGauge
@@ -54,9 +58,7 @@ const renderGame = props => {
         {gameStart}
       </div>
       <NosGauge />
-      <RoomDisplay
-        roomNumber={props.roomNumber}
-      />
+      <RoomDisplay roomNumber={props.roomNumber} />
     </div>
   );
 };
@@ -146,7 +148,7 @@ class PlayGameLogic extends Component {
     });
 
     socket.on('user-finish', message => {
-      console.log(message)
+      console.log(message);
       const carPositioning = this.state.carPositioning;
 
       carPositioning[message.socketId] = message.completion;
@@ -159,7 +161,7 @@ class PlayGameLogic extends Component {
 
       this.setState({
         leaderboard
-      })
+      });
     });
 
     socket.on('player-left', message => {
