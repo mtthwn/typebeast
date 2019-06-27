@@ -11,7 +11,7 @@ import socketIOClient from 'socket.io-client';
 import StartGameButton from './../components/StartGameButton/StartGameButton';
 import RoomDisplay from './../components/RoomDisplay/RoomDisplay';
 import Leaderboard from './../components/Leaderboard/Leaderboard';
-import ShowUsernames from './../components/ShowUsernames/ShowUsernames';
+// import ShowUsernames from './../components/ShowUsernames/ShowUsernames';
 
 const renderGame = props => {
   const countdown = props.countdown ? (
@@ -307,7 +307,7 @@ export default () => {
     <PlayGameLogic>
       {values => (
         <div className="PlayGame">
-          <ShowUsernames />
+          {/* <ShowUsernames /> */}
           <Background
             playerSocket={values.playerSocket}
             carPositioning={values.carPositioning}

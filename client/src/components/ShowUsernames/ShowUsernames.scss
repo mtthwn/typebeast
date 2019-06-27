@@ -1,0 +1,14 @@
+@import './../../styles/Variables';
+@import '../../styles/Mixins';
+
+.ShowUsernames-container {
+  position: absolute;
+  top: 36%;
+  left: 0%;
+  width: 14%;
+
+  table {
+    color: #fff;
+    background-color: rgba(0, 0, 0, 0.8);
+  }
+}

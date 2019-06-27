@@ -3,6 +3,7 @@ import Player1Car from './../Car/Player1Car';
 import Player2Car from './../Car/Player2Car';
 import Player3Car from './../Car/Player3Car';
 import Car from './../Car/Car';
+import ShowUsernames from '../ShowUsernames/ShowUsernames';
 
 import gameStartBG from './../../img/forest-bg3.jpg';
 import finishLineBG from './../../img/finish-line.jpg';
@@ -45,6 +46,7 @@ const Background = ({ carPositioning, onFinish, playerSocket, onStart }) => {
     </div>
   ) : (
     <div className="Background-img" style={onStart ? bgStarted : bgStart}>
+      <ShowUsernames />
       {Cars}
     </div>
   );
