@@ -6,7 +6,7 @@ export default props => (
   <Row>
     <Col>
       <Button variant="success">
-        <a href='/'>New Game</a>
+        <a href='/play'>New Game</a>
       </Button>
     </Col>
     <Col>
