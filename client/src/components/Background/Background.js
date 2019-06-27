@@ -27,7 +27,7 @@ const bgFinish = {
 // const { opp1: socketID, opp2: socketID } = opponents;
 
 const Background = ({ carPositioning, onFinish, playerSocket, onStart }) => {
-  console.log(carPositioning);
+  // console.log(carPositioning);
   const carIds = Object.keys(carPositioning);
   const Cars = carIds.map((car, index) => {
     return (
