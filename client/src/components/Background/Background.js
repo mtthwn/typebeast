@@ -27,7 +27,13 @@ const bgFinish = {
 
 // const { opp1: socketID, opp2: socketID } = opponents;
 
-const Background = ({ carPositioning, onFinish, playerSocket, onStart }) => {
+const Background = ({
+  carPositioning,
+  onFinish,
+  playerSocket,
+  onStart,
+  showUsername
+}) => {
   console.log(carPositioning);
   const carIds = Object.keys(carPositioning);
   const Cars = carIds.map((car, index) => {
@@ -46,7 +52,7 @@ const Background = ({ carPositioning, onFinish, playerSocket, onStart }) => {
     </div>
   ) : (
     <div className="Background-img" style={onStart ? bgStarted : bgStart}>
-      <ShowUsernames />
+      <ShowUsernames showUsername={showUsername} />
       {Cars}
     </div>
   );

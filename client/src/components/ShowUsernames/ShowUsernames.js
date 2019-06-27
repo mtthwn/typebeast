@@ -2,7 +2,8 @@ import React from 'react';
 import { Table } from 'react-bootstrap';
 import './ShowUsernames.scss';
 
-const ShowUsernames = () => {
+const ShowUsernames = ({ showUsername }) => {
+  console.log(showUsername);
   return (
     <div className="ShowUsernames-container">
       <Table responsive>
@@ -15,15 +16,15 @@ const ShowUsernames = () => {
         <tbody>
           <tr>
             <td>1</td>
-            <td>Table cell</td>
+            <td>{showUsername[0]}</td>
           </tr>
           <tr>
             <td>2</td>
-            <td>Table cell</td>
+            <td>{showUsername[1]}</td>
           </tr>
           <tr>
             <td>3</td>
-            <td>Table cell</td>
+            <td>{showUsername[2]}</td>
           </tr>
         </tbody>
       </Table>

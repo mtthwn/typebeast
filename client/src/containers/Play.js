@@ -307,13 +307,13 @@ export default () => {
     <PlayGameLogic>
       {values => (
         <div className="PlayGame">
-          {/* <ShowUsernames /> */}
           <Background
             playerSocket={values.playerSocket}
             carPositioning={values.carPositioning}
             onFinish={values.timerFinished}
             onStart={values.timerStart}
             timer={values.timer}
+            showUsername={values.playersInRoom}
           />
 
           {!values.loading
