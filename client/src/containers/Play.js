@@ -218,7 +218,8 @@ class PlayGameLogic extends Component {
       });
 
       const leaderboard = this.state.leaderboard;
-      leaderboard[message.socketId] = message;
+      leaderboard[message.socketId].wpm = message.wpm;
+      leaderboard[message.socketId].completion = message.completion;
 
       this.setState({
         leaderboard
