@@ -1,7 +1,6 @@
 import React from 'react';
 
 export default props => {
-  console.log(props);
 
   const socketIds = Object.keys(props.leaderboard);
   const elements = socketIds.map(socketId => {
@@ -10,9 +9,6 @@ export default props => {
     ) : (
       ''
     );
-    console.log(props.placings);
-    const placing = props.leaderboard[socketId].completion.progress === 1 ? props.placings.indexOf({ player: socketId, progress: 1 }) : 'Still racing'
-    console.log(props.leaderboard);
     return (
       <ul>
         <li> User: {props.leaderboard[socketId].username} </li>
@@ -24,7 +20,6 @@ export default props => {
           )}%`}{' '}
         </li>
         {wpm}
-        {placing}
       </ul>
     );
   });

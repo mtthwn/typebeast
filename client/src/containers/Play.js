@@ -109,12 +109,6 @@ class PlayGameLogic extends Component {
     // Connect to the socket
     const socket = socketIOClient(endpoint);
 
-    // socket.on('connect', () => {
-    //   socket.emit(JSON.stringify({ user: this.state.user }), (data) => {
-    //     console.log(data);
-    //   })
-    // })
-
     this.setState({
       socket
     });
@@ -243,6 +237,11 @@ class PlayGameLogic extends Component {
 
       this.setState({ leaderboard });
     });
+
+    socket.on('disconnect', () => {
+      alert('Please reload your page');
+      this.setState({ leaderboard: {}, placings: [], progress: 0 })
+    })
   }
 
   render() {
