@@ -1,12 +1,12 @@
 import React from 'react';
 import './Minimap.scss';
+import { ProgressBar } from 'react-bootstrap';
 
-const Minimap = () => {
+const Minimap = ({ playerProgress }) => {
+  const now = Math.round(playerProgress * 100);
   return (
     <div className="Minimap-container">
-      <div className="Minimap-bar">
-        <div className="Minimap-dot" />
-      </div>
+      <ProgressBar className="Minimap-bar" now={now} label={`${now}%`} />
     </div>
   );
 };

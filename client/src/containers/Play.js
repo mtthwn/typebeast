@@ -55,7 +55,7 @@ const renderGame = props => {
       />
       <div className="DisplayQuote-container">
         {countdown}
-        <Minimap />
+        <Minimap playerProgress={props.playerProgress} />
         {gameStart}
       </div>
       <NosGauge position={props.position} />
@@ -154,10 +154,13 @@ class PlayGameLogic extends Component {
       this.setState({ leaderboard });
 
       const socketId = this.state.socket.id;
-    
+
       const placings = [];
       for (const player in leaderboard) {
-        placings.push({ player, progress: leaderboard[player].completion.progress });
+        placings.push({
+          player,
+          progress: leaderboard[player].completion.progress
+        });
       }
 
       placings.sort((a, b) => {
@@ -169,7 +172,6 @@ class PlayGameLogic extends Component {
           this.setState({ position: i + 1 });
         }
       }
-
     });
 
     socket.on('user-finish', message => {
