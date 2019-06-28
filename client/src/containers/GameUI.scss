@@ -51,10 +51,10 @@
 .DisplayQuoteUI-container {
   display: flex;
   position: relative;
+  margin: 0 auto;
   top: 10%;
-  align-content: center;
-  width: 100vw;
-  height: 40vh;
+  width: 70%;
+  // height: 40vh;
 }
 
 .PlayGame {

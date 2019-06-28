@@ -59,7 +59,7 @@ const renderGame = props => {
         {gameStart}
       </div>
       <NosGauge position={props.position} />
-      <RoomDisplay roomNumber={props.roomNumber} />
+      {/* <RoomDisplay roomNumber={props.roomNumber} /> */}
     </div>
   );
 };
