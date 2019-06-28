@@ -13,11 +13,10 @@ export default props => {
       <ul>
         <li> User: {props.leaderboard[socketId].username} </li>
         <li>
-          {' '}
-          Completion:{' '}
+          Completion:
           {`${Math.floor(
             props.leaderboard[socketId].completion.progress * 100
-          )}%`}{' '}
+          )}%`}
         </li>
         {wpm}
       </ul>
