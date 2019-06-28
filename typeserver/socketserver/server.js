@@ -21,17 +21,17 @@ let userCount = {
 }
 */
 
-const getQuote = (room) => {
+const getQuote = room => {
   if (!userCount['room-' + roomNum]['quote']) {
     axios
       .get('http://127.0.0.1:8081/api/quotes')
       .then(res => {
         room['quote'] = res.data.data.quote;
-        console.log(userCount)
+        console.log(userCount);
       })
       .catch(e => console.log(e.message));
   }
-}
+};
 
 const formattedClients = {};
 
@@ -45,11 +45,14 @@ io.on('connection', function(socket) {
     userCount['room-' + roomNum] = {
       users: 1,
       quote: ''
-    }
+    };
     getQuote(userCount['room-' + roomNum]);
 
     //If the room is not at max capacity (3), add user to the room
-  } else if (userCount['room-' + roomNum] && userCount['room-' + roomNum]['users'] <= 3) {
+  } else if (
+    userCount['room-' + roomNum] &&
+    userCount['room-' + roomNum]['users'] <= 3
+  ) {
     socket.join('room-' + roomNum);
     userCount['room-' + roomNum]['users']++;
     // console.log(userCount);
@@ -61,8 +64,8 @@ io.on('connection', function(socket) {
     userCount['room-' + roomNum] = {
       users: 1,
       quote: ''
-    }
-    getQuote(userCount['room-' + roomNum])
+    };
+    getQuote(userCount['room-' + roomNum]);
 
     // console.log(userCount);
   }
@@ -87,7 +90,7 @@ io.on('connection', function(socket) {
     // console.log('here!!!', JSON.parse(data));
     const formattedData = JSON.parse(data).user;
     if (!formattedClients[`room-${roomNum}`]) {
-      formattedClients[`room-${roomNum}`] = {}
+      formattedClients[`room-${roomNum}`] = {};
     }
 
     // const formattedData = JSON.parse(data).user;
@@ -95,8 +98,13 @@ io.on('connection', function(socket) {
     // formattedData.socket = socket.id;
     formattedClients[`room-${roomNum}`][socket.id] = formattedData;
 
-    socket.emit('user-update', JSON.stringify(formattedClients[`room-${roomNum}`]));
+    console.log(`===============================`);
+    console.log(formattedClients[`room-${roomNum}`]);
 
+    io.to(`room-${roomNum}`).emit(
+      'user-update',
+      JSON.stringify(formattedClients[`room-${roomNum}`])
+    );
   });
   //Broadcast that a new user joined to everyone ~else~
   socket.broadcast.to('room-' + roomNum).emit('new-user-join', {
@@ -111,13 +119,12 @@ io.on('connection', function(socket) {
 
   //Check if the room is at capacity
   socket.on('initiate', () => {
-    roomNum++ // Stops more people from joining the initiated room.
+    roomNum++; // Stops more people from joining the initiated room.
     io.to(Object.keys(socket.rooms)[1]).emit('game-start', {
       description: '3 players in room. Game starting shortly.',
       quote: userCount[Object.keys(socket.rooms)[1]]['quote']
     });
-  })
-
+  });
 
   //When receiving an update from a user, broadcast to all users in the room
   socket.on('progress-update', completion => {
@@ -125,21 +132,29 @@ io.on('connection', function(socket) {
     io.to(Object.keys(socket.rooms)[1]).emit('progress-broadcast', {
       socketId: socket.id,
       roomId: socket.rooms[1],
-      completion: completion
+      completion: completion,
+      username: formattedClients[`room-${roomNum}`][socket.id]
     });
   });
 
-  socket.on('game-finish', (wpm) => {
+  socket.on('game-finish', wpm => {
     console.log(wpm);
     io.to(Object.keys(socket.rooms)[1]).emit('user-finish', {
       socketId: socket.id,
       roomId: Object.keys(socket.rooms)[1],
       completion: { progress: 1 },
+      username: formattedClients[`room-${roomNum}`][socket.id],
       wpm: wpm.wpm
     });
-  })
+  });
 
   socket.on('disconnecting', function() {
+    console.log(socket.id);
+
+    if (formattedClients[`room-${roomNum}`][socket.id]) {
+      delete formattedClients[`room-${roomNum}`][socket.id];
+    }
+
     const rooms = Object.keys(socket.rooms).slice();
     io.to(rooms[1]).emit('player-left', {
       description: `${socket.id} has left the game.`

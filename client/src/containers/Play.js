@@ -142,6 +142,11 @@ class PlayGameLogic extends Component {
 
     socket.on('user-update', data => {
       const formattedData = JSON.parse(data);
+
+      console.log(this.state.leaderboard);
+
+      console.log(formattedData);
+      // console.log(formattedData);
     });
 
     socket.on('new-user-join', message => {
