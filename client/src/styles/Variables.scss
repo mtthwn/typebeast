@@ -3,7 +3,8 @@ $bg-color: #151515;
 $text-color: #fff;
 $border-color: #383838;
 $text-secondary: #888888;
-$header-font: "Nunito Sans", sans-serif;
+$bg-green: #04ad67;
+$header-font: 'Nunito Sans', sans-serif;
 
 @mixin Main-btn {
   margin-right: 1rem;
@@ -16,4 +17,14 @@ $header-font: "Nunito Sans", sans-serif;
   letter-spacing: 1px;
   font-weight: 700;
   letter-spacing: 2px;
+}
+
+@mixin Box-shadow {
+  box-shadow: inset 0 0 70px rgba(55, 223, 136, 0.4),
+    0px 0px 10px 2px rgba(0, 255, 123, 0.3);
+}
+
+@mixin Box-highlight {
+  box-shadow: inset 0 0 70px rgba(0, 255, 123, 0.578),
+    0px 0px 30px 2px rgba(20, 248, 130, 0.367);
 }

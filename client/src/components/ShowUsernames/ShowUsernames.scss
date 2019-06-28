@@ -2,13 +2,39 @@
 @import '../../styles/Mixins';
 
 .ShowUsernames-container {
-  position: absolute;
-  top: 36%;
-  left: 0%;
+  position: fixed;
+  top: 21%;
+  left: 5%;
   width: 20%;
 
   table {
+    thead {
+      background-repeat: no-repeat;
+      background: linear-gradient(
+        90deg,
+        rgba(212, 13, 46, 1) 35%,
+        rgba(212, 13, 46, 0) 100%
+      );
+    }
+    font-size: 1rem;
+
     color: #fff;
-    background-color: rgba(0, 0, 0, 0.8);
+    tbody {
+      background: linear-gradient(
+        90deg,
+        rgba(7, 10, 29, 1) 35%,
+        rgba(0, 0, 0, 0) 100%
+      );
+    }
+
+    th {
+      padding: 1rem 0rem;
+      border: 1px solid transparent;
+    }
+
+    td {
+      padding: 1.1rem 0rem;
+      border-top: 1px solid $border-color;
+    }
   }
 }

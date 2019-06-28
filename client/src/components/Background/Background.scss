@@ -1,16 +1,17 @@
+@import './../../styles/Variables';
+@import '../../styles/Mixins';
+
 .Background-img {
   position: relative;
   top: 10%;
-  width: 70%;
-  border-radius: 1rem;
+  width: 90%;
+  // border-radius: 1rem;
   margin: 0 auto;
-  height: 45%;
-  margin-bottom: 4rem;
+  height: 46%;
+  margin-bottom: 2rem;
   background-color: #080416;
   background-position: center;
-  box-shadow: inset 0 0 70px rgba(45, 33, 128, 0.8),
-    0px 0px 20px 2px rgba(46, 33, 128, 0.809);
-  border: 2px solid #5effff;
+  border: 1px solid $border-color;
   // animation: move-background 30s linear infinite;
   overflow: hidden;
 }

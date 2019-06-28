@@ -9,7 +9,6 @@ import DisplayQuoteInput from './../components/GameInput/GameInput';
 import NosGauge from './../components/Guages/NOSGuage';
 import socketIOClient from 'socket.io-client';
 import StartGameButton from './../components/StartGameButton/StartGameButton';
-import RoomDisplay from './../components/RoomDisplay/RoomDisplay';
 import Leaderboard from './../components/Leaderboard/Leaderboard';
 // import ShowUsernames from './../components/ShowUsernames/ShowUsernames';
 import EndGameButton from './../components/EndGameButtons/EndGameButtons';
@@ -59,7 +58,6 @@ const renderGame = props => {
         {gameStart}
       </div>
       <NosGauge position={props.position} />
-      <RoomDisplay roomNumber={props.roomNumber} />
     </div>
   );
 };
@@ -402,6 +400,8 @@ export default () => {
             onStart={values.timerStart}
             timer={values.timer}
             showUsername={values.leaderboard}
+            roomNumber={values.roomNumber}
+
           />
 
           {!values.loading

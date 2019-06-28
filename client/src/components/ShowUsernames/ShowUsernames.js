@@ -23,7 +23,7 @@ export default({ showUsername }) => {
 
   return (
     <div className="ShowUsernames-container">
-      <Table responsive>
+      <Table>
         <thead>
           <tr>
             <th>Lanes</th>
