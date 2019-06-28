@@ -1,3 +1,6 @@
+@import './../styles/Variables';
+@import './../styles/Mixins';
+
 .DisplayQuote-previewQuote {
   border-radius: 1rem;
   width: 70%;
@@ -54,7 +57,16 @@
   margin: 0 auto;
   top: 10%;
   width: 70%;
-  // height: 40vh;
+
+  button {
+    @include Main-btn;
+    @include Box-shadow;
+    border-radius: 1rem;
+    background-color: $bg-green;
+    width: 70%;
+    margin: 0 auto;
+    color: #fff;
+  }
 }
 
 .PlayGame {
