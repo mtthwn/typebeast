@@ -6,7 +6,7 @@ const ShowUsernames = ({ showUsername }) => {
   console.log(showUsername);
   return (
     <div className="ShowUsernames-container">
-      <Table responsive>
+      <Table>
         <thead>
           <tr>
             <th>Lanes</th>
@@ -25,6 +25,10 @@ const ShowUsernames = ({ showUsername }) => {
           <tr>
             <td>3</td>
             <td>{showUsername[2]}</td>
+          </tr>
+          <tr>
+            <td>4</td>
+            <td>{showUsername[3]}</td>
           </tr>
         </tbody>
       </Table>
