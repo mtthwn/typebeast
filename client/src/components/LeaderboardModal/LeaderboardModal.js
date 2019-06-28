@@ -9,7 +9,9 @@ const LeaderboardModal = props => {
     const wpm = props.leaderboard[socketId].wpm ? (
       <td>{props.leaderboard[socketId].wpm} </td>
     ) : (
-      <Spinner animation="border" variant="danger" />
+      <td>
+        <Spinner animation="border" variant="danger" />
+      </td>
     );
     return playerProgress === 1 ? (
       <tr>
@@ -23,7 +25,16 @@ const LeaderboardModal = props => {
         {wpm}
       </tr>
     ) : (
-      ''
+      <tr>
+        <td>{index + 1}</td>
+        <td> {props.leaderboard[socketId].username} </td>
+        <td>
+          {`${Math.floor(
+            props.leaderboard[socketId].completion.progress * 100
+          )}%`}
+        </td>
+        {wpm}
+      </tr>
     );
   });
 
