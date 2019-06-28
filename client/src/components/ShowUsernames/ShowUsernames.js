@@ -4,6 +4,13 @@ import './ShowUsernames.scss';
 
 const ShowUsernames = ({ showUsername }) => {
   console.log(showUsername);
+
+  const usernamesTable = showUsername.map((username, index) => (
+    <tr>
+      <td>{index + 1}</td>
+      <td>{username}</td>
+    </tr>
+  ));
   return (
     <div className="ShowUsernames-container">
       <Table responsive>
@@ -14,18 +21,7 @@ const ShowUsernames = ({ showUsername }) => {
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>1</td>
-            <td>{showUsername[0]}</td>
-          </tr>
-          <tr>
-            <td>2</td>
-            <td>{showUsername[1]}</td>
-          </tr>
-          <tr>
-            <td>3</td>
-            <td>{showUsername[2]}</td>
-          </tr>
+          {usernamesTable}
         </tbody>
       </Table>
     </div>
