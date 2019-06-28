@@ -1,5 +1,5 @@
 import React from 'react';
-import { Nav, Navbar, Button, Form, FormControl } from 'react-bootstrap';
+import { Nav, Navbar, Button, Form } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import './Header.scss';
 
