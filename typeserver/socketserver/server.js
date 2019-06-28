@@ -124,7 +124,6 @@ io.on('connection', function(socket) {
 
   socket.on('disconnecting', function() {
     const rooms = Object.keys(socket.rooms).slice();
-    userCount['room-']
     io.to(rooms[1]).emit('player-left', {
       description: `${socket.id} has left the game.`
     });
