@@ -133,8 +133,7 @@ io.on('connection', function(socket) {
     io.to(Object.keys(socket.rooms)[1]).emit('progress-broadcast', {
       socketId: socket.id,
       roomId: socket.rooms[1],
-      completion: completion,
-      username: formattedClients[`room-${roomNum}`][socket.id]
+      completion: completion
     });
   });
 
@@ -144,7 +143,6 @@ io.on('connection', function(socket) {
       socketId: socket.id,
       roomId: Object.keys(socket.rooms)[1],
       completion: { progress: 1 },
-      username: formattedClients[`room-${roomNum}`][socket.id],
       wpm: wpm.wpm
     });
   });

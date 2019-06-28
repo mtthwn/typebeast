@@ -8,6 +8,7 @@ export default (props) => {
 
     const wpm = props.leaderboard[socketId].wpm ? (<li> WPM: {props.leaderboard[socketId].wpm} </li>) : ''
 
+    console.log(props.leaderboard);
     return (
       <ul>
           <li> User: {props.leaderboard[socketId].socketId} </li>

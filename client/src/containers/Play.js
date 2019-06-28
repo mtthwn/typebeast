@@ -182,7 +182,8 @@ class PlayGameLogic extends Component {
       this.setState({ carPositioning });
 
       const leaderboard = this.state.leaderboard;
-      leaderboard[message.socketId] = message;
+      
+      leaderboard[message.socketId].completion = message.completion;
 
       this.setState({ leaderboard });
 
