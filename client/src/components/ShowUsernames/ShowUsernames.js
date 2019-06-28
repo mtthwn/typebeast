@@ -11,6 +11,16 @@ export default({ showUsername }) => {
   //   </tr>
   // ));
   console.log(showUsername);
+
+  const keys = Object.keys(showUsername);
+
+  const players = keys.map((key, index) => (
+    <tr key={key}>
+      <td>{index + 1}</td>
+      <td>{showUsername[key].username}</td>
+    </tr>
+  ))
+
   return (
     <div className="ShowUsernames-container">
       <Table responsive>
@@ -21,7 +31,7 @@ export default({ showUsername }) => {
           </tr>
         </thead>
         <tbody>
-        
+          {players}
         </tbody>
       </Table>
     </div>
