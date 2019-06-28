@@ -120,6 +120,13 @@ class PlayGameLogic extends Component {
       socket
     });
 
+    socket.on('connect', () => {
+      this.state.socket.emit(
+        'user-update',
+        JSON.stringify({ user: this.state.user })
+      );
+    });
+
     socket.on('welcome', message => {
       // console.log(message.description);
       // Display welcome message. Import the player's socket and room-player list from server.
@@ -130,8 +137,11 @@ class PlayGameLogic extends Component {
         roomNumber: message.roomNum
       });
 
-      this.state.socket.emit('user-update', JSON.stringify({ user: this.state.user }));
-      // console.log(`${this.state.playersInRoom} in room now`);
+      // this.state.socket.emit('user-update', JSON.stringify({ user: this.state.user }));
+    });
+
+    socket.on('user-update', data => {
+      const formattedData = JSON.parse(data);
     });
 
     socket.on('new-user-join', message => {
@@ -140,6 +150,8 @@ class PlayGameLogic extends Component {
       this.setState({
         playersInRoom: message.clients
       });
+
+      // console.log(message);
       // console.log(`${this.state.playersInRoom} in room now`);
     });
 

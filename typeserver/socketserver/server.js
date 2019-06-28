@@ -33,6 +33,8 @@ const getQuote = (room) => {
   }
 }
 
+const formattedClients = {};
+
 io.on('connection', function(socket) {
   userCount.totalUsers++;
   console.log('\na user connected, users in server:', userCount.totalUsers);
@@ -68,8 +70,7 @@ io.on('connection', function(socket) {
   //Set up variable to get array of socket IDs in current room
   let clients = io.sockets.adapter.rooms['room-' + roomNum];
   let clientsArray = Object.keys(clients.sockets);
-  console.log('IDs in current room:', clientsArray);
-  const formattedClients = {};
+  // console.log('IDs in current room:', clientsArray);
 
   //Welcome message for new user
   socket.emit('welcome', {
@@ -85,10 +86,18 @@ io.on('connection', function(socket) {
   socket.on('user-update', data => {
     // console.log('here!!!', JSON.parse(data));
     const formattedData = JSON.parse(data).user;
+    if (!formattedClients[`room-${roomNum}`]) {
+      formattedClients[`room-${roomNum}`] = {}
+    }
 
-    formattedClients[socket.id] = formattedData;
+    // const formattedData = JSON.parse(data).user;
 
-  })
+    // formattedData.socket = socket.id;
+    formattedClients[`room-${roomNum}`][socket.id] = formattedData;
+
+    socket.emit('user-update', JSON.stringify(formattedClients[`room-${roomNum}`]));
+
+  });
   //Broadcast that a new user joined to everyone ~else~
   socket.broadcast.to('room-' + roomNum).emit('new-user-join', {
     description: `New user has joined. Current user count: ${
@@ -97,7 +106,7 @@ io.on('connection', function(socket) {
     socket: socket.id,
     clients: clientsArray,
     userCount,
-    formattedClients
+    formattedClients: formattedClients[`room-${roomNum}]`]
   });
 
   //Check if the room is at capacity
