@@ -2,8 +2,25 @@ import React from 'react';
 import { Table } from 'react-bootstrap';
 import './ShowUsernames.scss';
 
-const ShowUsernames = ({ showUsername }) => {
+export default({ showUsername }) => {
+
+  // const usernamesTable = showUsername.map((username, index) => (
+  //   <tr>
+  //     <td>{index + 1}</td>
+  //     <td>{username}</td>
+  //   </tr>
+  // ));
   console.log(showUsername);
+
+  const keys = Object.keys(showUsername);
+
+  const players = keys.map((key, index) => (
+    <tr key={key}>
+      <td>{index + 1}</td>
+      <td>{showUsername[key].username}</td>
+    </tr>
+  ))
+
   return (
     <div className="ShowUsernames-container">
       <Table>
@@ -14,26 +31,9 @@ const ShowUsernames = ({ showUsername }) => {
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>1</td>
-            <td>{showUsername[0]}</td>
-          </tr>
-          <tr>
-            <td>2</td>
-            <td>{showUsername[1]}</td>
-          </tr>
-          <tr>
-            <td>3</td>
-            <td>{showUsername[2]}</td>
-          </tr>
-          <tr>
-            <td>4</td>
-            <td>{showUsername[3]}</td>
-          </tr>
+          {players}
         </tbody>
       </Table>
     </div>
   );
 };
-
-export default ShowUsernames;

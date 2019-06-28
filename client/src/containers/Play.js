@@ -67,6 +67,10 @@ class PlayGameLogic extends Component {
     super();
 
     this.state = {
+      user: {
+        username: 'Guest',
+        car: 'default'
+      },
       countdownCount: 5,
       countdown: false,
       loading: true,
@@ -94,7 +98,7 @@ class PlayGameLogic extends Component {
       socket: '',
       leaderboard: {},
       averageLength: 5,
-      position: 1
+      position: 0
     };
   }
 
@@ -104,8 +108,21 @@ class PlayGameLogic extends Component {
     // Connect to the socket
     const socket = socketIOClient(endpoint);
 
+    // socket.on('connect', () => {
+    //   socket.emit(JSON.stringify({ user: this.state.user }), (data) => {
+    //     console.log(data);
+    //   })
+    // })
+
     this.setState({
       socket
+    });
+
+    socket.on('connect', () => {
+      this.state.socket.emit(
+        'user-update',
+        JSON.stringify({ user: this.state.user })
+      );
     });
 
     socket.on('welcome', message => {
@@ -117,7 +134,23 @@ class PlayGameLogic extends Component {
         loading: false,
         roomNumber: message.roomNum
       });
-      // console.log(`${this.state.playersInRoom} in room now`);
+
+      // this.state.socket.emit('user-update', JSON.stringify({ user: this.state.user }));
+    });
+
+    socket.on('user-update', data => {
+      const formattedData = JSON.parse(data);
+      const leaderboard = this.state.leaderboard;
+
+      // formattedData.forEach(user => {
+      //   leaderboard[user] = formattedData[user];
+      // })
+
+      for (const user in formattedData) {
+        leaderboard[user] = formattedData[user];
+      }
+      this.setState(leaderboard);
+      // console.log(formattedData);
     });
 
     socket.on('new-user-join', message => {
@@ -126,6 +159,8 @@ class PlayGameLogic extends Component {
       this.setState({
         playersInRoom: message.clients
       });
+
+      // console.log(message);
       // console.log(`${this.state.playersInRoom} in room now`);
     });
 
@@ -190,7 +225,17 @@ class PlayGameLogic extends Component {
     });
 
     socket.on('player-left', message => {
-      // console.log(message.description);
+      const formattedClients = message.formattedClients;
+      const leaderboard = this.state.leaderboard;
+      const clients = Object.keys(leaderboard);
+
+      clients.forEach(client => {
+        if (!formattedClients[client]) {
+          delete leaderboard[client];
+        }
+      });
+
+      this.setState({ leaderboard });
     });
   }
 
@@ -354,8 +399,9 @@ export default () => {
             onFinish={values.timerFinished}
             onStart={values.timerStart}
             timer={values.timer}
-            showUsername={values.playersInRoom}
+            showUsername={values.leaderboard}
             roomNumber={values.roomNumber}
+
           />
 
           {!values.loading
