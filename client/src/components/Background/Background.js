@@ -4,6 +4,7 @@ import React from 'react';
 // import Player3Car from './../Car/Player3Car';
 import Car from './../Car/Car';
 import ShowUsernames from '../ShowUsernames/ShowUsernames';
+import RoomDisplay from './../RoomDisplay/RoomDisplay';
 
 import gameStartBG from './../../img/forest-bg3.jpg';
 import finishLineBG from './../../img/finish-line.jpg';
@@ -32,7 +33,8 @@ const Background = ({
   onFinish,
   playerSocket,
   onStart,
-  showUsername
+  showUsername,
+  roomNumber
 }) => {
   console.log(carPositioning);
 
@@ -53,6 +55,7 @@ const Background = ({
     </div>
   ) : (
     <div className="Background-img" style={onStart ? bgStarted : bgStart}>
+      <RoomDisplay roomNumber={roomNumber} />
       <ShowUsernames showUsername={showUsername} />
       {Cars}
     </div>
