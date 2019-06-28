@@ -1,9 +1,12 @@
+@import './../styles/Variables';
+@import './../styles/Mixins';
+
 .DisplayQuote-previewQuote {
   border-radius: 1rem;
-  width: 70%;
+  width: 80%;
   text-align: left;
-  font-size: 1.2vw;
-  line-height: 2.5vw;
+  font-size: 1vw;
+  line-height: 2vw;
   align-self: center;
   border: 2px solid #34fffd;
   background-color: #070b24;
@@ -17,13 +20,13 @@
   display: flex;
   flex-direction: column;
   align-content: center;
-  width: 70%;
+  width: 100%;
   font-size: 1.8rem;
 }
 
 #DisplayQuote-inputWord {
   border-radius: 1rem;
-  border: none;
+  border: 2px solid transparent;
   background-color: #070b24;
   color: #fff;
   margin-top: 2rem;
@@ -37,8 +40,11 @@
 #DisplayQuote-inputWord:focus {
   box-shadow: inset 0 0 70px rgba(45, 33, 128, 0.5),
     0px 0px 20px 2px rgba(46, 33, 128, 0.8);
-  outline-color: #5effff;
-  border-radius: 1rem;
+  outline: none;
+  // box-shadow: 0 0 0 2px #5effff;
+  border: 2px solid #34fffd;
+  box-shadow: inset 0 0 70px rgba(45, 33, 128, 0.5),
+    0px 0px 20px 2px rgba(46, 33, 128, 0.8);
 }
 
 .DisplayQuote-h1 {
@@ -51,10 +57,30 @@
 .DisplayQuoteUI-container {
   display: flex;
   position: relative;
+  margin: 0 auto;
   top: 10%;
-  align-content: center;
-  width: 100vw;
-  height: 40vh;
+  width: 100%;
+
+  button {
+    @include Main-btn;
+    @include Box-shadow;
+    border-radius: 1rem;
+    background-color: $bg-green;
+    width: 80%;
+    margin: 0 auto;
+    color: #fff;
+    transition: all 0.2s ease-in;
+    outline: none;
+
+    &:hover {
+      @include Box-highlight;
+      transform: translateY(-3px);
+    }
+
+    &:active {
+      transform: translateY(-1px);
+    }
+  }
 }
 
 .PlayGame {
