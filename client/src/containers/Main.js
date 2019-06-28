@@ -7,7 +7,7 @@ import { BrowserRouter as Router } from 'react-router-dom';
 
 class MainPage extends Component {
   render() {
-    console.log(SocialMedia);
+    // console.log(SocialMedia);
 
     return (
       <div>
