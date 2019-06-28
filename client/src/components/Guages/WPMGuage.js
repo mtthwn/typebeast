@@ -1,6 +1,6 @@
 import React from 'react';
-import TypingSpeed from '../TypingSpeed/TypingSpeed';
-import socketIOClient from 'socket.io-client';
+// import TypingSpeed from '../TypingSpeed/TypingSpeed';
+// import socketIOClient from 'socket.io-client';
 import './Guages.scss';
 
 const CarGauge = ({ second, char, socket, wpm }) => {

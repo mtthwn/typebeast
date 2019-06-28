@@ -1,7 +1,7 @@
 import React from 'react';
-import Player1Car from './../Car/Player1Car';
-import Player2Car from './../Car/Player2Car';
-import Player3Car from './../Car/Player3Car';
+// import Player1Car from './../Car/Player1Car';
+// import Player2Car from './../Car/Player2Car';
+// import Player3Car from './../Car/Player3Car';
 import Car from './../Car/Car';
 import ShowUsernames from '../ShowUsernames/ShowUsernames';
 

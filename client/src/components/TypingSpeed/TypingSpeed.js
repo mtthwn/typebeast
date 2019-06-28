@@ -1,5 +1,5 @@
 import React from 'react';
-import socketIOClient from "socket.io-client";
+// import socketIOClient from "socket.io-client";
 
 const TypingSpeed = ({ second, char, socket }) => {
   const wpm = char / 5 / (second / 60);
