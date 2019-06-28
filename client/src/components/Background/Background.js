@@ -9,6 +9,7 @@ import RoomDisplay from './../RoomDisplay/RoomDisplay';
 import gameStartBG from './../../img/forest-bg3.jpg';
 import finishLineBG from './../../img/finish-line.jpg';
 import './Background.scss';
+import LeaderboardModal from './../LeaderboardModal/LeaderboardModal';
 
 const bgStart = {
   backgroundImage: `url(${gameStartBG})`
@@ -34,7 +35,9 @@ const Background = ({
   playerSocket,
   onStart,
   showUsername,
-  roomNumber
+  roomNumber,
+  leaderboard,
+  placings
 }) => {
   console.log(carPositioning);
   console.log(showUsername);
@@ -53,6 +56,7 @@ const Background = ({
   return onFinish ? (
     <div className="Background-img" style={onFinish ? bgFinish : bgStart}>
       <Car onFinish={onFinish} positioning={1} />
+      <LeaderboardModal leaderboard={leaderboard} placings={placings} />
     </div>
   ) : (
     <div className="Background-img" style={onStart ? bgStarted : bgStart}>

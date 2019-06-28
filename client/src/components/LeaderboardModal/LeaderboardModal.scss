@@ -1,0 +1,12 @@
+@import './../../styles/Variables';
+@import '../../styles/Mixins';
+
+.modal-dialog {
+  max-width: 80rem;
+}
+
+.modal-content {
+  height: 30rem;
+  background-color: #000;
+  color: #fff;
+}
