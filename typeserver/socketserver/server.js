@@ -51,9 +51,8 @@ io.on('connection', function(socket) {
     //If the room is not at max capacity (4), add user to the room
   } else if (
     userCount['room-' + roomNum] &&
-    userCount['room-' + roomNum]['users'] <= 4
+    userCount['room-' + roomNum]['users'] < 4
   ) {
-
     socket.join('room-' + roomNum);
     userCount['room-' + roomNum]['users']++;
     // console.log(userCount);
@@ -75,7 +74,7 @@ io.on('connection', function(socket) {
   let clients = io.sockets.adapter.rooms['room-' + roomNum];
   let clientsArray = Object.keys(clients.sockets);
   // console.log('IDs in current room:', clientsArray);
-
+  console.log(clientsArray)
   //Welcome message for new user
   socket.emit('welcome', {
     description: `Welcome! You are in room ${roomNum}! Current user count: ${
@@ -133,18 +132,15 @@ io.on('connection', function(socket) {
     io.to(Object.keys(socket.rooms)[1]).emit('progress-broadcast', {
       socketId: socket.id,
       roomId: socket.rooms[1],
-      completion: completion,
-      username: formattedClients[`room-${roomNum}`][socket.id]
+      completion: completion
     });
   });
 
   socket.on('game-finish', wpm => {
-    console.log(wpm);
     io.to(Object.keys(socket.rooms)[1]).emit('user-finish', {
       socketId: socket.id,
       roomId: Object.keys(socket.rooms)[1],
       completion: { progress: 1 },
-      username: formattedClients[`room-${roomNum}`][socket.id],
       wpm: wpm.wpm
     });
   });
@@ -152,9 +148,12 @@ io.on('connection', function(socket) {
   socket.on('disconnecting', function() {
     console.log(socket.id);
 
-    if (formattedClients[`room-${roomNum}`][socket.id]) {
+    if (
+      formattedClients[`room-${roomNum}`] &&
+      formattedClients[`room-${roomNum}`][socket.id]
+    ) {
       delete formattedClients[`room-${roomNum}`][socket.id];
-    } 
+    }
 
     const rooms = Object.keys(socket.rooms).slice();
     io.to(rooms[1]).emit('player-left', {

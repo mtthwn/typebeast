@@ -41,7 +41,7 @@ const renderGame = props => {
 
   return props.timerFinished ? (
     <Fragment>
-      <Leaderboard leaderboard={props.leaderboard} />
+      <Leaderboard leaderboard={props.leaderboard} placings={props.placings} />
       <EndGameButton />
     </Fragment>
   ) : (
@@ -98,7 +98,8 @@ class PlayGameLogic extends Component {
       socket: '',
       leaderboard: {},
       averageLength: 5,
-      position: 0
+      position: 0,
+      placings: []
     };
   }
 
@@ -107,12 +108,6 @@ class PlayGameLogic extends Component {
     const { endpoint } = this.state;
     // Connect to the socket
     const socket = socketIOClient(endpoint);
-
-    // socket.on('connect', () => {
-    //   socket.emit(JSON.stringify({ user: this.state.user }), (data) => {
-    //     console.log(data);
-    //   })
-    // })
 
     this.setState({
       socket
@@ -182,7 +177,9 @@ class PlayGameLogic extends Component {
       this.setState({ carPositioning });
 
       const leaderboard = this.state.leaderboard;
-      leaderboard[message.socketId] = message;
+
+      leaderboard[message.socketId].completion = message.completion;
+      console.log(message);
 
       this.setState({ leaderboard });
 
@@ -192,7 +189,7 @@ class PlayGameLogic extends Component {
       for (const player in leaderboard) {
         placings.push({
           player,
-          progress: leaderboard[player].completion.progress
+          progress: leaderboard[player].completion ? leaderboard[player].completion.progress : 0
         });
       }
 
@@ -205,6 +202,8 @@ class PlayGameLogic extends Component {
           this.setState({ position: i + 1 });
         }
       }
+
+      this.setState({ placings });
     });
 
     socket.on('user-finish', message => {
@@ -217,7 +216,8 @@ class PlayGameLogic extends Component {
       });
 
       const leaderboard = this.state.leaderboard;
-      leaderboard[message.socketId] = message;
+      leaderboard[message.socketId].wpm = message.wpm;
+      leaderboard[message.socketId].completion = message.completion;
 
       this.setState({
         leaderboard
@@ -230,13 +230,18 @@ class PlayGameLogic extends Component {
       const clients = Object.keys(leaderboard);
 
       clients.forEach(client => {
-        if (!formattedClients[client]) {
+        if (!formattedClients[client] && leaderboard[client]) {
           delete leaderboard[client];
         }
       });
 
       this.setState({ leaderboard });
     });
+
+    socket.on('disconnect', () => {
+      alert('Please reload your page');
+      this.setState({ leaderboard: {}, placings: [], progress: 0 })
+    })
   }
 
   render() {
@@ -253,8 +258,13 @@ class PlayGameLogic extends Component {
 
     let value = e.target.value;
 
-    const { index, words, wordsCompleted } = this.state;
+    const { index, words, wordsCompleted, averageLength, sec, userInput } = this.state;
 
+    const char = wordsCompleted.length + userInput.length;
+    const wpm = Math.floor((char / averageLength / sec) * 60);
+    // console.log('WPM: ', wpm);
+
+    this.setState({ wpm });
     // console.log(words[index], value);
 
     if (value.length > words[index].length) {
@@ -347,6 +357,7 @@ class PlayGameLogic extends Component {
   };
 
   onStartTimer = () => {
+    this.setState({ wpm: 0 });
     if (!this.state.timerStart) {
       this.setState({ timerStart: true });
       this.interval = setInterval(() => {
@@ -355,17 +366,17 @@ class PlayGameLogic extends Component {
           return { sec: prevProps.sec + 1, timer: prevProps.timer + 1 };
         });
 
-        // WPM Calculation
-        if (this.state.sec > 0) {
-          const char =
-            this.state.wordsCompleted.length + this.state.userInput.length;
-          const wpm = Math.floor((char / 6 / this.state.sec) * 60);
-          // console.log('WPM: ', wpm);
+        // // WPM Calculation
+        // if (this.state.sec > 0) {
+        //   const char =
+        //     this.state.wordsCompleted.length + this.state.userInput.length;
+        //   const wpm = Math.floor((char / 6 / this.state.sec) * 60);
+        //   // console.log('WPM: ', wpm);
 
-          this.setState({ wpm });
-        } else {
-          this.setState({ wpm: 0 });
-        }
+        //   this.setState({ wpm });
+        // } else {
+        //   this.setState({ wpm: 0 });
+        // }
 
         // Progress update to server
         this.state.socket.emit('progress-update', {
@@ -401,7 +412,6 @@ export default () => {
             timer={values.timer}
             showUsername={values.leaderboard}
             roomNumber={values.roomNumber}
-
           />
 
           {!values.loading
