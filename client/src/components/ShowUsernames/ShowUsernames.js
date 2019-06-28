@@ -4,12 +4,13 @@ import './ShowUsernames.scss';
 
 export default({ showUsername }) => {
 
-  const usernamesTable = showUsername.map((username, index) => (
-    <tr>
-      <td>{index + 1}</td>
-      <td>{username}</td>
-    </tr>
-  ));
+  // const usernamesTable = showUsername.map((username, index) => (
+  //   <tr>
+  //     <td>{index + 1}</td>
+  //     <td>{username}</td>
+  //   </tr>
+  // ));
+  console.log(showUsername);
   return (
     <div className="ShowUsernames-container">
       <Table responsive>
@@ -20,7 +21,7 @@ export default({ showUsername }) => {
           </tr>
         </thead>
         <tbody>
-          {usernamesTable}
+        
         </tbody>
       </Table>
     </div>

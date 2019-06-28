@@ -142,10 +142,16 @@ class PlayGameLogic extends Component {
 
     socket.on('user-update', data => {
       const formattedData = JSON.parse(data);
+      const leaderboard = this.state.leaderboard;
 
-      console.log(this.state.leaderboard);
+      // formattedData.forEach(user => {
+      //   leaderboard[user] = formattedData[user];
+      // })
 
-      console.log(formattedData);
+      for (const user in formattedData) {
+        leaderboard[user] = formattedData[user];
+      }
+      this.setState(leaderboard);
       // console.log(formattedData);
     });
 
@@ -385,7 +391,7 @@ export default () => {
             onFinish={values.timerFinished}
             onStart={values.timerStart}
             timer={values.timer}
-            showUsername={values.playersInRoom}
+            showUsername={values.leaderboard}
           />
 
           {!values.loading
