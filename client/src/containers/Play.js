@@ -41,7 +41,7 @@ const renderGame = props => {
 
   return props.timerFinished ? (
     <Fragment>
-      <Leaderboard leaderboard={props.leaderboard} />
+      <Leaderboard leaderboard={props.leaderboard} placings={props.placings} />
       <EndGameButton />
     </Fragment>
   ) : (

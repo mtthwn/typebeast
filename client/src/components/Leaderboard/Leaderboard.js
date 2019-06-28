@@ -1,21 +1,32 @@
 import React from 'react';
 
-export default (props) => {
-  console.log(props)
+export default props => {
+  console.log(props);
 
   const socketIds = Object.keys(props.leaderboard);
-  const elements = socketIds.map( (socketId) => {
-
-    const wpm = props.leaderboard[socketId].wpm ? (<li> WPM: {props.leaderboard[socketId].wpm} </li>) : ''
-
+  const elements = socketIds.map(socketId => {
+    const wpm = props.leaderboard[socketId].wpm ? (
+      <li> WPM: {props.leaderboard[socketId].wpm} </li>
+    ) : (
+      ''
+    );
+    console.log(props.placings);
+    const placing = props.leaderboard[socketId].completion.progress === 1 ? props.placings.indexOf({ player: socketId, progress: 1 }) : 'Still racing'
     console.log(props.leaderboard);
     return (
       <ul>
-          <li> User: {props.leaderboard[socketId].username} </li>
-          <li> Completion: {`${Math.floor(props.leaderboard[socketId].completion.progress * 100)}%`} </li>
-          {wpm}
+        <li> User: {props.leaderboard[socketId].username} </li>
+        <li>
+          {' '}
+          Completion:{' '}
+          {`${Math.floor(
+            props.leaderboard[socketId].completion.progress * 100
+          )}%`}{' '}
+        </li>
+        {wpm}
+        {placing}
       </ul>
-    )
+    );
   });
 
   return (
@@ -25,6 +36,5 @@ export default (props) => {
         {elements}
       </div>
     </div>
-  )
-}
-
+  );
+};
