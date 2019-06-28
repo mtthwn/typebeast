@@ -153,11 +153,12 @@ io.on('connection', function(socket) {
 
     if (formattedClients[`room-${roomNum}`][socket.id]) {
       delete formattedClients[`room-${roomNum}`][socket.id];
-    }
+    } 
 
     const rooms = Object.keys(socket.rooms).slice();
     io.to(rooms[1]).emit('player-left', {
-      description: `${socket.id} has left the game.`
+      description: `${socket.id} has left the game.`,
+      formattedClients: formattedClients[`room-${roomNum}`]
     });
   });
 

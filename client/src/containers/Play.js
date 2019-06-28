@@ -227,7 +227,17 @@ class PlayGameLogic extends Component {
     });
 
     socket.on('player-left', message => {
-      // console.log(message.description);
+      const formattedClients = message.formattedClients;
+      const leaderboard = this.state.leaderboard;
+      const clients = Object.keys(leaderboard);
+
+      clients.forEach(client => {
+        if (!formattedClients[client]) {
+          delete leaderboard[client];
+        }
+      });
+
+      this.setState({ leaderboard });
     });
   }
 
