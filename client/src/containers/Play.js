@@ -423,6 +423,8 @@ export default () => {
             timer={values.timer}
             showUsername={values.leaderboard}
             roomNumber={values.roomNumber}
+            leaderboard={values.leaderboard}
+            placings={values.placings}
           />
 
           {!values.loading
