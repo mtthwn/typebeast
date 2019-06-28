@@ -36,7 +36,6 @@ const getQuote = (room) => {
 io.on('connection', function(socket) {
   userCount.totalUsers++;
   console.log('\na user connected, users in server:', userCount.totalUsers);
-
   //If it's the first user, the room doesn't exist - make the room.
   if (!userCount['room-' + roomNum]) {
     socket.join('room-' + roomNum);
@@ -51,7 +50,7 @@ io.on('connection', function(socket) {
   } else if (userCount['room-' + roomNum] && userCount['room-' + roomNum]['users'] <= 3) {
     socket.join('room-' + roomNum);
     userCount['room-' + roomNum]['users']++;
-    console.log(userCount);
+    // console.log(userCount);
 
     //If the room exists and is at capacity, increase the room number, join the new room, set count to 1
   } else {
@@ -63,13 +62,14 @@ io.on('connection', function(socket) {
     }
     getQuote(userCount['room-' + roomNum])
 
-    console.log(userCount);
+    // console.log(userCount);
   }
 
   //Set up variable to get array of socket IDs in current room
   let clients = io.sockets.adapter.rooms['room-' + roomNum];
   let clientsArray = Object.keys(clients.sockets);
   console.log('IDs in current room:', clientsArray);
+  const formattedClients = {};
 
   //Welcome message for new user
   socket.emit('welcome', {
@@ -82,6 +82,13 @@ io.on('connection', function(socket) {
     roomNum
   });
 
+  socket.on('user-update', data => {
+    // console.log('here!!!', JSON.parse(data));
+    const formattedData = JSON.parse(data).user;
+
+    formattedClients[socket.id] = formattedData;
+
+  })
   //Broadcast that a new user joined to everyone ~else~
   socket.broadcast.to('room-' + roomNum).emit('new-user-join', {
     description: `New user has joined. Current user count: ${
@@ -89,7 +96,8 @@ io.on('connection', function(socket) {
     }`,
     socket: socket.id,
     clients: clientsArray,
-    userCount
+    userCount,
+    formattedClients
   });
 
   //Check if the room is at capacity

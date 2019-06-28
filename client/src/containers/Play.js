@@ -69,6 +69,10 @@ class PlayGameLogic extends Component {
     super();
 
     this.state = {
+      user: {
+        username: 'Guest',
+        car: 'default'
+      },
       countdownCount: 5,
       countdown: false,
       loading: true,
@@ -96,7 +100,7 @@ class PlayGameLogic extends Component {
       socket: '',
       leaderboard: {},
       averageLength: 5,
-      position: 1
+      position: 0
     };
   }
 
@@ -105,6 +109,12 @@ class PlayGameLogic extends Component {
     const { endpoint } = this.state;
     // Connect to the socket
     const socket = socketIOClient(endpoint);
+
+    // socket.on('connect', () => {
+    //   socket.emit(JSON.stringify({ user: this.state.user }), (data) => {
+    //     console.log(data);
+    //   })
+    // })
 
     this.setState({
       socket
@@ -119,6 +129,8 @@ class PlayGameLogic extends Component {
         loading: false,
         roomNumber: message.roomNum
       });
+
+      this.state.socket.emit('user-update', JSON.stringify({ user: this.state.user }));
       // console.log(`${this.state.playersInRoom} in room now`);
     });
 
