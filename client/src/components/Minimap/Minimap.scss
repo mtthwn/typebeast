@@ -7,8 +7,9 @@
 .Minimap-bar {
   height: 2rem;
   font-size: 1.5rem;
-  border-radius: 1rem;
-  background-color: rgba(45, 33, 128, 0.8);
+  border-radius: 0.6rem;
+  background-color: #080808;
+  border: 1px solid $border-color;
   width: 80%;
   margin: 0 auto;
 
