@@ -8,7 +8,6 @@ router.get('/', (req, res) => {
     .then(quotes => {
       const index = Math.floor(Math.random() * quotes.length);
 
-      console.log(index);
       res.status(200).json({ data: quotes[index] });
     })
     .catch(e => res.status(400).json({ success: false, message: e.message }));

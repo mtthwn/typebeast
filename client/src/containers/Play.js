@@ -111,7 +111,7 @@ class PlayGameLogic extends Component {
     });
 
     socket.on('welcome', message => {
-      console.log(message.description);
+      // console.log(message.description);
       // Display welcome message. Import the player's socket and room-player list from server.
       this.setState({
         playersInRoom: message.clients,
@@ -119,21 +119,21 @@ class PlayGameLogic extends Component {
         loading: false,
         roomNumber: message.roomNum
       });
-      console.log(`${this.state.playersInRoom} in room now`);
+      // console.log(`${this.state.playersInRoom} in room now`);
     });
 
     socket.on('new-user-join', message => {
-      console.log(message.description);
+      // console.log(message.description);
       // Display message when new player joins. Import updated room-player list from server.
       this.setState({
         playersInRoom: message.clients
       });
-      console.log(`${this.state.playersInRoom} in room now`);
+      // console.log(`${this.state.playersInRoom} in room now`);
     });
 
     socket.on('game-start', message => {
-      console.log(message.description);
-      console.log(message.quote);
+      // console.log(message.description);
+      // console.log(message.quote);
 
       this.onStartCountdown();
       this.onSetQuote(message.quote);
@@ -173,7 +173,7 @@ class PlayGameLogic extends Component {
     });
 
     socket.on('user-finish', message => {
-      console.log(message);
+      // console.log(message);
       const carPositioning = this.state.carPositioning;
 
       carPositioning[message.socketId] = message.completion;
@@ -190,7 +190,7 @@ class PlayGameLogic extends Component {
     });
 
     socket.on('player-left', message => {
-      console.log(message.description);
+      // console.log(message.description);
     });
   }
 
@@ -223,7 +223,7 @@ class PlayGameLogic extends Component {
     }
 
     if (index === words.length - 1 && value === words[index]) {
-      console.log(index + 1, words.length, 'here');
+      // console.log(index + 1, words.length, 'here');
       this.onFinishTimer();
       return;
     }
@@ -315,7 +315,7 @@ class PlayGameLogic extends Component {
           const char =
             this.state.wordsCompleted.length + this.state.userInput.length;
           const wpm = Math.floor((char / 6 / this.state.sec) * 60);
-          console.log('WPM: ', wpm);
+          // console.log('WPM: ', wpm);
 
           this.setState({ wpm });
         } else {
