@@ -153,30 +153,22 @@ class PlayGameLogic extends Component {
       this.setState({ leaderboard });
 
       const socketId = this.state.socket.id;
-      const currentUserProgress = leaderboard[socketId]
-        ? leaderboard[socketId]
-        : { completion: { progress: 0 } };
-
-      let position = 1;
-
+    
+      const placings = [];
       for (const player in leaderboard) {
-        console.log(player === socketId);
-        if (
-          (player !==
-          socketId) && leaderboard[player].completion.progress >
-            currentUserProgress.completion.progress
-        ) {
-          position++;
-        }
+        placings.push({ player, progress: leaderboard[player].completion.progress });
+      }
 
-        if ((player !== socketId) && leaderboard[player].completion.progress < currentUserProgress.completion.progress && (position > 1)) {
-          position--;
+      placings.sort((a, b) => {
+        return b.progress - a.progress;
+      });
+
+      for (let i = 0; i < placings.length; i++) {
+        if (placings[i].player === socketId) {
+          this.setState({ position: i + 1 });
         }
       }
 
-      console.log(position);
-
-      this.setState({ position });
     });
 
     socket.on('user-finish', message => {

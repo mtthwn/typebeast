@@ -48,7 +48,7 @@ io.on('connection', function(socket) {
     getQuote(userCount['room-' + roomNum]);
 
     //If the room is not at max capacity (3), add user to the room
-  } else if (userCount['room-' + roomNum] && userCount['room-' + roomNum]['users'] < 3) {
+  } else if (userCount['room-' + roomNum] && userCount['room-' + roomNum]['users'] <= 3) {
     socket.join('room-' + roomNum);
     userCount['room-' + roomNum]['users']++;
     console.log(userCount);
