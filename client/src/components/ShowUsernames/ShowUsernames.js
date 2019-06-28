@@ -2,8 +2,7 @@ import React from 'react';
 import { Table } from 'react-bootstrap';
 import './ShowUsernames.scss';
 
-const ShowUsernames = ({ showUsername }) => {
-  console.log(showUsername);
+export default({ showUsername }) => {
 
   const usernamesTable = showUsername.map((username, index) => (
     <tr>
@@ -27,5 +26,3 @@ const ShowUsernames = ({ showUsername }) => {
     </div>
   );
 };
-
-export default ShowUsernames;
