@@ -149,7 +149,7 @@ io.on('connection', function(socket) {
   socket.on('disconnecting', function() {
     console.log(socket.id);
 
-    if (formattedClients[`room-${roomNum}`][socket.id]) {
+    if (formattedClients[`room-${roomNum}`] && formattedClients[`room-${roomNum}`][socket.id]) {
       delete formattedClients[`room-${roomNum}`][socket.id];
     } 
 

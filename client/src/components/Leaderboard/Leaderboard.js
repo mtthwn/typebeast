@@ -11,8 +11,7 @@ export default (props) => {
     console.log(props.leaderboard);
     return (
       <ul>
-          <li> User: {props.leaderboard[socketId].socketId} </li>
-          <li> Room: {props.leaderboard[socketId].roomId} </li>
+          <li> User: {props.leaderboard[socketId].username} </li>
           <li> Completion: {`${Math.floor(props.leaderboard[socketId].completion.progress * 100)}%`} </li>
           {wpm}
       </ul>
