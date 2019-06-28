@@ -1,17 +1,13 @@
 import React from 'react';
 import './Guages.scss';
 
-const NosGauge = () => {
-  return (
-    <div className="NosGauge-border">
-      <div className="NosGauge">
-        <div className="NosGauge-wpm">
-          <div className="NosGauge-num">2</div>
-          <div className="NosGauge-num-sm">Position</div>
-        </div>
+export default props => (
+  <div className="NosGauge-border">
+    <div className="NosGauge">
+      <div className="NosGauge-wpm">
+        <div className="NosGauge-num">{props.position}</div>
+        <div className="NosGauge-num-sm">Position</div>
       </div>
     </div>
-  );
-};
-
-export default NosGauge;
+  </div>
+);

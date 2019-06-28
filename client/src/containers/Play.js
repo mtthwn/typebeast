@@ -58,7 +58,7 @@ const renderGame = props => {
         <Minimap />
         {gameStart}
       </div>
-      <NosGauge />
+      <NosGauge position={props.position} />
       <RoomDisplay roomNumber={props.roomNumber} />
     </div>
   );
@@ -95,7 +95,8 @@ class PlayGameLogic extends Component {
       wordsCompleted: '',
       socket: '',
       leaderboard: {},
-      averageLength: 5
+      averageLength: 5,
+      position: 1
     };
   }
 
@@ -146,12 +147,28 @@ class PlayGameLogic extends Component {
       carPositioning[message.socketId] = message.completion;
 
       this.setState({ carPositioning });
-      console.log(this.state.carPositioning);
 
       const leaderboard = this.state.leaderboard;
       leaderboard[message.socketId] = message;
 
       this.setState({ leaderboard });
+
+      const socketId = this.state.socket.id;
+    
+      const placings = [];
+      for (const player in leaderboard) {
+        placings.push({ player, progress: leaderboard[player].completion.progress });
+      }
+
+      placings.sort((a, b) => {
+        return b.progress - a.progress;
+      });
+
+      for (let i = 0; i < placings.length; i++) {
+        if (placings[i].player === socketId) {
+          this.setState({ position: i + 1 });
+        }
+      }
 
     });
 
@@ -261,8 +278,6 @@ class PlayGameLogic extends Component {
   onSetQuote = phrase => {
     const wordsArray = phrase.split(' ');
 
-
-
     if (!this.state.fullPhrase && !this.state.remainingPhrase) {
       this.setState({ fullPhrase: phrase });
       this.setState({ remainingPhrase: phrase });
@@ -275,15 +290,14 @@ class PlayGameLogic extends Component {
 
           return word;
         })
-
-
       });
 
-      const averageLength = Math.floor((this.state.words.reduce((acc, curr) => {
-        return acc + curr.length
-      }, 0)) / this.state.words.length);
-      this.setState({averageLength});
-
+      const averageLength = Math.floor(
+        this.state.words.reduce((acc, curr) => {
+          return acc + curr.length;
+        }, 0) / this.state.words.length
+      );
+      this.setState({ averageLength });
     }
   };
 
@@ -298,9 +312,10 @@ class PlayGameLogic extends Component {
 
         // WPM Calculation
         if (this.state.sec > 0) {
-          const char = this.state.wordsCompleted.length + this.state.userInput.length
-          const wpm = Math.floor(((char/6) / this.state.sec) * 60);
-          console.log('WPM: ', wpm)
+          const char =
+            this.state.wordsCompleted.length + this.state.userInput.length;
+          const wpm = Math.floor((char / 6 / this.state.sec) * 60);
+          console.log('WPM: ', wpm);
 
           this.setState({ wpm });
         } else {
