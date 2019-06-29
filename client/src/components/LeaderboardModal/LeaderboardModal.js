@@ -15,21 +15,22 @@ const LeaderboardModal = ({ leaderboard }) => {
       </td>
     );
 
-    const completion = leaderboard[socketId] ? (
+    const completed = leaderboard[socketId].completed ? (
       <td>
-        {`${Math.floor(leaderboard[socketId].completion.progress * 100)}%`}
+        Yep!
       </td>
     ) : (
       <td>
-        {`${Math.floor(leaderboard[socketId].completion.progress * 100)}%`}
-        [Disconnected]
+        Nope!
       </td>
     )
+
     return (
       <tr>
         <td>{index + 1}</td>
         <td> {leaderboard[socketId].username} </td>
-        {completion}
+        <td> {`${Math.floor(leaderboard[socketId].completion.progress * 100)}%`} </td>
+        {completed}
         {wpm}
       </tr>
     );
@@ -47,6 +48,7 @@ const LeaderboardModal = ({ leaderboard }) => {
               <tr>
                 <th>Ranking</th>
                 <th>Username</th>
+                <th>Completed</th>
                 <th>Completion</th>
                 <th>WPM</th>
               </tr>

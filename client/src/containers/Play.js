@@ -142,7 +142,14 @@ class PlayGameLogic extends Component {
       // })
 
       for (const user in formattedData) {
-        leaderboard[user] = formattedData[user];
+        // leaderboard[user] = formattedData[user];
+        // leaderboard[user].completion = 0
+        // leaderboard[user].completed = false
+        leaderboard[user] = {
+          ...formattedData[user],
+          completion: 0,
+          completed: false
+        }
       }
       this.setState(leaderboard);
       // console.log(formattedData);
