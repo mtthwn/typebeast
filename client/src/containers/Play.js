@@ -9,9 +9,7 @@ import DisplayQuoteInput from './../components/GameInput/GameInput';
 import NosGauge from './../components/Guages/NOSGuage';
 import socketIOClient from 'socket.io-client';
 import StartGameButton from './../components/StartGameButton/StartGameButton';
-import Leaderboard from './../components/Leaderboard/Leaderboard';
-// import ShowUsernames from './../components/ShowUsernames/ShowUsernames';
-import EndGameButton from './../components/EndGameButtons/EndGameButtons';
+import LeaderboardModal from './../components/LeaderboardModal/LeaderboardModal';
 
 const renderGame = props => {
   const countdown = props.countdown ? (
@@ -41,8 +39,10 @@ const renderGame = props => {
 
   return props.timerFinished ? (
     <Fragment>
-      <Leaderboard leaderboard={props.leaderboard} placings={props.placings} />
-      <EndGameButton />
+      <LeaderboardModal
+        leaderboard={props.leaderboard}
+        placings={props.placings}
+      />
     </Fragment>
   ) : (
     <div className="DisplayQuoteUI-container">
@@ -189,7 +189,9 @@ class PlayGameLogic extends Component {
       for (const player in leaderboard) {
         placings.push({
           player,
-          progress: leaderboard[player].completion ? leaderboard[player].completion.progress : 0
+          progress: leaderboard[player].completion
+            ? leaderboard[player].completion.progress
+            : 0
         });
       }
 
@@ -229,19 +231,21 @@ class PlayGameLogic extends Component {
       const leaderboard = this.state.leaderboard;
       const clients = Object.keys(leaderboard);
 
-      clients.forEach(client => {
-        if (!formattedClients[client] && leaderboard[client]) {
-          delete leaderboard[client];
-        }
-      });
+      if (formattedClients) {
+        clients.forEach(client => {
+          if (!formattedClients[client] && leaderboard[client]) {
+            delete leaderboard[client];
+          }
+        });
 
-      this.setState({ leaderboard });
+        this.setState({ leaderboard });
+      }
     });
 
     socket.on('disconnect', () => {
       alert('Please reload your page');
-      this.setState({ leaderboard: {}, placings: [], progress: 0 })
-    })
+      this.setState({ leaderboard: {}, placings: [], progress: 0 });
+    });
   }
 
   render() {
@@ -258,7 +262,14 @@ class PlayGameLogic extends Component {
 
     let value = e.target.value;
 
-    const { index, words, wordsCompleted, averageLength, sec, userInput } = this.state;
+    const {
+      index,
+      words,
+      wordsCompleted,
+      averageLength,
+      sec,
+      userInput
+    } = this.state;
 
     const char = wordsCompleted.length + userInput.length;
     const wpm = Math.floor((char / averageLength / sec) * 60);
@@ -412,6 +423,8 @@ export default () => {
             timer={values.timer}
             showUsername={values.leaderboard}
             roomNumber={values.roomNumber}
+            leaderboard={values.leaderboard}
+            placings={values.placings}
           />
 
           {!values.loading
