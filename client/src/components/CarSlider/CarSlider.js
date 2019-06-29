@@ -2,6 +2,8 @@ import React from 'react';
 import { Carousel } from 'react-bootstrap';
 
 import CarSliderLogic from './CarSliderLogic';
+import ImageSlider from './ImageSlider';
+import ImageSliderContent from './ImageSliderContent';
 
 import './CarSlider.scss';
 import carSlide1 from './../../img/car_slider1.jpg';
@@ -24,44 +26,19 @@ export default () => {
             interval="3000"
           >
             <Carousel.Item>
-              <img
-                className="d-block w-100"
-                src={carSlide1}
-                alt="First slide"
-              />
+              <ImageSlider src={carSlide1} />
             </Carousel.Item>
             <Carousel.Item>
-              <img
-                className="d-block w-100"
-                src={carSlide2}
-                alt="Second slide"
-              />
+              <ImageSlider src={carSlide2} />
             </Carousel.Item>
             <Carousel.Item>
-              <img
-                className="d-block w-100"
-                src={carSlide3}
-                alt="Third slide"
-              />
+              <ImageSlider src={carSlide3} />
             </Carousel.Item>
             <Carousel.Item>
-              <img
-                className="d-block w-100"
-                src={carSlide4}
-                alt="Fourth slide"
-              />
+              <ImageSlider src={carSlide4} />
             </Carousel.Item>
           </Carousel>
-          <div className="CarSlider-content">
-            <h5>Realtime Competitive Typing</h5>
-            <h1>Type Faster</h1>
-            <p>
-              Improve your typing skills while competing in fast-paced races
-              with up to 5 typers from around the world. Compete against your
-              friends, earn new cars, track your scores, and so much more... all
-              for free!
-            </p>
-          </div>
+          <ImageSliderContent />
         </div>
       )}
     </CarSliderLogic>
