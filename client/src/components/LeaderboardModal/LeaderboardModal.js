@@ -17,11 +17,11 @@ const LeaderboardModal = ({ leaderboard }) => {
 
     const completed = leaderboard[socketId].completed ? (
       <td>
-        Yep!
+        Completed
       </td>
     ) : (
       <td>
-        Nope!
+        In Progress
       </td>
     )
 
