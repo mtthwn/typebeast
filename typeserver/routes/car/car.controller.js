@@ -6,7 +6,7 @@ const Car = require('./../../db/model/Car');
 const getCars = (req, res) => {
   Car.find()
     .then(cars => {
-      res.status(200).json({ cars });
+      res.status(200).json({ success: true, cars });
     })
     .catch(e => res.status(400).json({ success: false, message: e.message }));
 };

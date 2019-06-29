@@ -14,7 +14,10 @@ const generateToken = (user) => {
 const getCleanUser = (user) => {
     return {
         username: user.username,
-        email: user.email
+        email: user.email,
+        _id: user._id,
+        cars: user.cars,
+        games: user.games
     }
 }
 

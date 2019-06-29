@@ -16,49 +16,47 @@ const register = (req, res, next) => {
   const password = bcrypt.hashSync(req.body.password.trim(), 10);
 
   User({ username, email, password })
-    .save((err, savedUser) => {
-      if (err) {
-        return res.status(401).json({ success: false, message: err.message });
-      }
-
+    .save()
+    .then(savedUser => {
       const token = generateToken(savedUser);
       const user = getCleanUser(savedUser);
 
       res.status(200).json({ success: true, user, token });
     })
     .catch(e => {
-      res.status(401).json({ success: false, error: e.message });
+      res.status(401).json({ success: false, message: e.message });
     });
 };
 
 const login = (req, res, next) => {
   const { email, password } = req.body;
 
-  User.findOne({ email }).exec((err, foundUser) => {
-    if (err) {
-      return res.status(401).json({ success: false, message: err.message });
-    }
-
-    if (!foundUser) {
-      return res
-        .status(404)
-        .json({ success: false, message: 'Incorrect username or password' });
-    }
-
-    bcrypt.compare(password, foundUser.password, (err, valid) => {
-      if (!valid) {
-        return res.status(404).json({
-          success: false,
-          message: 'Incorrect username or password'
-        });
+  User.findOne({ email })
+    .exec()
+    .then(foundUser => {
+      if (!foundUser) {
+        return res
+          .status(404)
+          .json({ success: false, message: 'Incorrect username or password' });
       }
 
-      const token = generateToken(foundUser);
-      const user = getCleanUser(foundUser);
+      bcrypt.compare(password, foundUser.password, (err, valid) => {
+        if (!valid) {
+          return res.status(404).json({
+            success: false,
+            message: 'Incorrect username or password'
+          });
+        }
 
-      res.status(200).json({ success: true, token, user });
+        const token = generateToken(foundUser);
+        const user = getCleanUser(foundUser);
+
+        res.status(200).json({ success: true, token, user });
+      });
+    })
+    .catch(e => {
+      res.status(401).json({ success: false, message: e.message });
     });
-  });
 };
 
 const checkToken = (req, res, next) => {
