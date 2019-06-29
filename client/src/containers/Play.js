@@ -136,7 +136,9 @@ class PlayGameLogic extends Component {
     socket.on('user-update', data => {
       const formattedData = JSON.parse(data);
       const leaderboard = this.state.leaderboard;
+      const carPositioning = this.state.carPositioning;
 
+      // console.log(formattedData)
       // formattedData.forEach(user => {
       //   leaderboard[user] = formattedData[user];
       // })
@@ -150,9 +152,12 @@ class PlayGameLogic extends Component {
           completion: 0,
           completed: false
         }
+        carPositioning[user] = {progress: 0}
+
       }
+      this.setState(carPositioning);
       this.setState(leaderboard);
-      // console.log(formattedData);
+
     });
 
     socket.on('new-user-join', message => {
