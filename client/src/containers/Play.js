@@ -380,7 +380,7 @@ class PlayGameLogic extends Component {
           return acc + curr.length;
         }, 0) / this.state.words.length
       );
-      console.log(averageLength)
+
       if (!Number.isNaN(averageLength) && (averageLength !== 0)) {
         this.setState({ averageLength });
       }
