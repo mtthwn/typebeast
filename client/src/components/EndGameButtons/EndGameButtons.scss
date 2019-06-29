@@ -1,0 +1,23 @@
+@import './../../styles/Variables';
+@import '../../styles/Mixins';
+
+.btn btn-success {
+  @include Main-btn;
+  @include Box-shadow;
+  border-radius: 1rem;
+  background-color: $bg-green;
+  width: 80%;
+  margin: 0 auto;
+  color: #fff;
+  transition: all 0.2s ease-in;
+  outline: none;
+
+  &:hover {
+    @include Box-highlight;
+    transform: translateY(-3px);
+  }
+
+  &:active {
+    transform: translateY(-1px);
+  }
+}

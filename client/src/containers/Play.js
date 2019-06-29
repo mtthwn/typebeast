@@ -9,7 +9,7 @@ import DisplayQuoteInput from './../components/GameInput/GameInput';
 import NosGauge from './../components/Guages/NOSGuage';
 import socketIOClient from 'socket.io-client';
 import StartGameButton from './../components/StartGameButton/StartGameButton';
-import Leaderboard from './../components/Leaderboard/Leaderboard';
+import LeaderboardModal from './../components/LeaderboardModal/LeaderboardModal';
 
 // import ShowUsernames from './../components/ShowUsernames/ShowUsernames';
 import EndGameButton from './../components/EndGameButtons/EndGameButtons';
@@ -42,8 +42,10 @@ const renderGame = props => {
 
   return props.timerFinished ? (
     <Fragment>
-      {' '}
-      */}
+      <LeaderboardModal
+        leaderboard={props.leaderboard}
+        placings={props.placings}
+      />
       <EndGameButton />
     </Fragment>
   ) : (
