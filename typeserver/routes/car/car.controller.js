@@ -27,14 +27,12 @@ const getUserCars = (req, res) => {
 
   User.findOne({ email })
     .populate('cars')
-    .exec((err, user) => {
-      if (err) {
-        return res
-          .status(400)
-          .json({ success: false, message: 'No user found' });
-      }
-
+    .exec()
+    .then(user => {
       res.status(200).json({ success: true, cars: user.cars });
+    })
+    .catch(e => {
+      res.status(400).json({ success: false, message: 'No user found' });
     });
 };
 
@@ -45,13 +43,16 @@ const addUserCar = (req, res) => {
   User.findOneAndUpdate(
     { email },
     { $push: { cars: mongoose.Types.ObjectId(car) } }
-  ).exec((err, user) => {
-    if (err) {
-      return res.status(400).json({ success: false, message: err.message });
-    }
-
-    res.status(200).json({ success: true, message: 'Car successfully added!' });
-  });
+  )
+    .exec()
+    .then(user => {
+      res
+        .status(200)
+        .json({ success: true, message: 'Car successfully added!' });
+    })
+    .catch(e => {
+      res.status(400).json({ success: false, message: e.message });
+    });
 };
 
 module.exports = {
