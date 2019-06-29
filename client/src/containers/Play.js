@@ -45,6 +45,7 @@ const renderGame = props => {
       <LeaderboardModal
         leaderboard={props.leaderboard}
         placings={props.placings}
+        modalShow={props.modalShow}
       />
       <EndGameButton />
     </Fragment>
@@ -90,6 +91,7 @@ class PlayGameLogic extends Component {
       timerStart: false,
       timerFinished: false,
       finishLine: false,
+      modalShow: true,
       // Socket related properties:
       endpoint: 'http://127.0.0.1:8080',
       gameStart: false,

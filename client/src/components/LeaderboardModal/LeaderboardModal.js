@@ -4,10 +4,14 @@ import { Button, Spinner, Modal, Table } from 'react-bootstrap';
 // import EndGameButton from './../EndGameButtons/EndGameButtons';
 import './LeaderboardModal.scss';
 
+const handleHide = e => {
+  e.preventDefault();
+  return `show={false}`;
+};
+
 const LeaderboardModal = props => {
   const socketIds = Object.keys(props.leaderboard);
   const playerStats = socketIds.map((socketId, index) => {
-    const playerProgress = props.leaderboard[socketId].completion.progress;
     const wpm = props.leaderboard[socketId].wpm ? (
       <td>{props.leaderboard[socketId].wpm} </td>
     ) : (
@@ -31,7 +35,12 @@ const LeaderboardModal = props => {
 
   return (
     <div>
-      <Modal show={true} dialogClassName="modal-100w" centered>
+      <Modal
+        show={true}
+        onHide={handleHide}
+        dialogClassName="modal-100w"
+        centered
+      >
         <Modal.Header>
           <Modal.Title id="RaceResults">Race Results</Modal.Title>
         </Modal.Header>
@@ -47,12 +56,14 @@ const LeaderboardModal = props => {
             </thead>
             <tbody>{playerStats}</tbody>
           </Table>
-          <Button className="PlayAgain-btn">
-            <Link to="/play">Play Again</Link>
-          </Button>
-          <Button className="Home-btn">
-            <Link to="/">Home</Link>
-          </Button>
+          <Link to="/play">
+            <Button onClick={handleHide} className="PlayAgain-btn">
+              Play Again
+            </Button>
+          </Link>
+          <Link to={'/'}>
+            <Button className="Home-btn">Home</Button>
+          </Link>
         </Modal.Body>
       </Modal>
     </div>
