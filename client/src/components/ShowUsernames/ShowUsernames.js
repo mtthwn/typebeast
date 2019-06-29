@@ -10,7 +10,7 @@ export default({ showUsername }) => {
   //     <td>{username}</td>
   //   </tr>
   // ));
-  console.log(showUsername);
+  // console.log(showUsername);
 
   const keys = Object.keys(showUsername);
 
