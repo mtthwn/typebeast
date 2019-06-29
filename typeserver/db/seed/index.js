@@ -12,14 +12,14 @@ const collections = ['games', 'quotes', 'cars', 'users'];
 
 const users = [
   {
-    name: 'Justin',
+    username: 'Justin',
     email: 'jskwok@gmail.com',
     games: [],
     password: bcrypt.hashSync('hello', 10),
     cars: []
   },
   {
-    name: 'Daniel',
+    username: 'Daniel',
     email: 'dtran23@gmail.com',
     games: [],
     password: bcrypt.hashSync('goodbye', 10),
