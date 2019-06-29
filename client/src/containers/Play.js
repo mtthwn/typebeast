@@ -271,13 +271,11 @@ class PlayGameLogic extends Component {
       userInput
     } = this.state;
 
-    if (sec >= 1) {
-      const char = wordsCompleted.length + userInput.length;
-      const wpm = Math.floor((char / averageLength / sec) * 60);
-      // console.log('WPM: ', wpm);
-      this.setState({ wpm });
-    }
-    // console.log(words[index], value);
+    // if (sec >= 1) {
+    //   const char = wordsCompleted.length + userInput.length;
+    //   const wpm = Math.floor((char / averageLength / sec) * 60);
+    //   this.setState({ wpm });
+    // }
 
     if (value.length > words[index].length) {
       e.target.value = value.slice(0, words[index].length);
@@ -378,17 +376,16 @@ class PlayGameLogic extends Component {
           return { sec: prevProps.sec + 1, timer: prevProps.timer + 1 };
         });
 
-        // // WPM Calculation
-        // if (this.state.sec > 0) {
-        //   const char =
-        //     this.state.wordsCompleted.length + this.state.userInput.length;
-        //   const wpm = Math.floor((char / 6 / this.state.sec) * 60);
-        //   // console.log('WPM: ', wpm);
+        // WPM Calculation
+        if (this.state.sec > 0) {
+          const char =
+            this.state.wordsCompleted.length + this.state.userInput.length;
+          const wpm = Math.floor((char / this.state.averageLength / this.state.sec) * 60);
 
-        //   this.setState({ wpm });
-        // } else {
-        //   this.setState({ wpm: 0 });
-        // }
+          this.setState({ wpm });
+        } else {
+          this.setState({ wpm: 0 });
+        }
 
         // Progress update to server
         this.state.socket.emit('progress-update', {
@@ -400,6 +397,14 @@ class PlayGameLogic extends Component {
 
   onFinishTimer = () => {
     clearInterval(this.interval);
+    // WPM Calculation
+    if (this.state.sec > 0) {
+      const char =
+        this.state.wordsCompleted.length + this.state.userInput.length;
+      const wpm = Math.floor((char / this.state.averageLength / this.state.sec) * 60);
+
+      this.setState({ wpm });
+    }
     this.calculateProgress();
     this.setState({
       timerFinished: true,
