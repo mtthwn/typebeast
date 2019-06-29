@@ -8,7 +8,7 @@ const CarSchema = new Schema({
         default: 'default',
         required: true
     },
-    filepath: {
+    filename: {
         type: String,
         required: true
     },
@@ -21,4 +21,4 @@ const CarSchema = new Schema({
 
 const Car = mongoose.model('Car', CarSchema);
 
-mondule.exports = Car;
+module.exports = Car;
