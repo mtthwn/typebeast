@@ -14,13 +14,22 @@ const LeaderboardModal = ({ leaderboard }) => {
         <Spinner animation="border" variant="success" />
       </td>
     );
+
+    const completion = leaderboard[socketId] ? (
+      <td>
+        {`${Math.floor(leaderboard[socketId].completion.progress * 100)}%`}
+      </td>
+    ) : (
+      <td>
+        {`${Math.floor(leaderboard[socketId].completion.progress * 100)}%`}
+        [Disconnected]
+      </td>
+    )
     return (
       <tr>
         <td>{index + 1}</td>
         <td> {leaderboard[socketId].username} </td>
-        <td>
-          {`${Math.floor(leaderboard[socketId].completion.progress * 100)}%`}
-        </td>
+        {completion}
         {wpm}
       </tr>
     );

@@ -179,7 +179,13 @@ class PlayGameLogic extends Component {
       const leaderboard = this.state.leaderboard;
 
       leaderboard[message.socketId].completion = message.completion;
-      console.log(message);
+      // console.log('Here', message.completion.progress);
+
+      if (leaderboard[message.socketId].completion === true) {
+        leaderboard[message.socketId].completed = true
+      } else {
+        leaderboard[message.socketId].completed = false
+      }
 
       this.setState({ leaderboard });
 
@@ -220,6 +226,7 @@ class PlayGameLogic extends Component {
       const leaderboard = this.state.leaderboard;
       leaderboard[message.socketId].wpm = message.wpm;
       leaderboard[message.socketId].completion = message.completion;
+      leaderboard[message.socketId].completed = true;
 
       this.setState({
         leaderboard
