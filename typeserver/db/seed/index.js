@@ -1,11 +1,31 @@
+const bcrypt = require('bcrypt');
+
 const { mongoose, db } = require('./../config');
 const Quote = require('./../model/Quote');
 const Car = require('./../model/Car');
 const Game = require('./../model/Game');
+const User = require('./../model/User');
 
 let counter = 0;
 
-const collections = ['games', 'quotes', 'cars'];
+const collections = ['games', 'quotes', 'cars', 'users'];
+
+const users = [
+  {
+    name: 'Justin',
+    email: 'jskwok@gmail.com',
+    games: [],
+    password: bcrypt.hashSync('hello', 10),
+    cars: []
+  },
+  {
+    name: 'Daniel',
+    email: 'dtran23@gmail.com',
+    games: [],
+    password: bcrypt.hashSync('goodbye', 10),
+    cars: []
+  }
+];
 
 const seed = [
   {
@@ -55,6 +75,8 @@ const cars = [
   }
 ];
 
+// const savedCars = [];
+
 const seedQuotes = async quotes => {
   collections.forEach(collection => {
     db.dropCollection(collection, (err, result) => {
@@ -87,6 +109,14 @@ const seedQuotes = async quotes => {
       return new Car(car)
         .save()
         .catch(e => console.log(`Car not saved: ${e.message}`));
+    })
+  );
+
+  await Promise.all(
+    users.map(user => {
+      return new User(user)
+        .save()
+        .catch(e => console.log(`User not saved: ${e.message}`));
     })
   );
 
