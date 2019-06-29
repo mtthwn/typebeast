@@ -142,7 +142,14 @@ class PlayGameLogic extends Component {
       // })
 
       for (const user in formattedData) {
-        leaderboard[user] = formattedData[user];
+        // leaderboard[user] = formattedData[user];
+        // leaderboard[user].completion = 0
+        // leaderboard[user].completed = false
+        leaderboard[user] = {
+          ...formattedData[user],
+          completion: 0,
+          completed: false
+        }
       }
       this.setState(leaderboard);
       // console.log(formattedData);
@@ -179,7 +186,13 @@ class PlayGameLogic extends Component {
       const leaderboard = this.state.leaderboard;
 
       leaderboard[message.socketId].completion = message.completion;
-      console.log(message);
+      // console.log('Here', message.completion.progress);
+
+      if (leaderboard[message.socketId].completion === true) {
+        leaderboard[message.socketId].completed = true
+      } else {
+        leaderboard[message.socketId].completed = false
+      }
 
       this.setState({ leaderboard });
 
@@ -220,6 +233,7 @@ class PlayGameLogic extends Component {
       const leaderboard = this.state.leaderboard;
       leaderboard[message.socketId].wpm = message.wpm;
       leaderboard[message.socketId].completion = message.completion;
+      leaderboard[message.socketId].completed = true;
 
       this.setState({
         leaderboard

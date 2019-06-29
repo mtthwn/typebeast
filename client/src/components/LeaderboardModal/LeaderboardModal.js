@@ -14,13 +14,23 @@ const LeaderboardModal = ({ leaderboard }) => {
         <Spinner animation="border" variant="success" />
       </td>
     );
+
+    const completed = leaderboard[socketId].completed ? (
+      <td>
+        Yep!
+      </td>
+    ) : (
+      <td>
+        Nope!
+      </td>
+    )
+
     return (
       <tr>
         <td>{index + 1}</td>
         <td> {leaderboard[socketId].username} </td>
-        <td>
-          {`${Math.floor(leaderboard[socketId].completion.progress * 100)}%`}
-        </td>
+        <td> {`${Math.floor(leaderboard[socketId].completion.progress * 100)}%`} </td>
+        {completed}
         {wpm}
       </tr>
     );
@@ -38,6 +48,7 @@ const LeaderboardModal = ({ leaderboard }) => {
               <tr>
                 <th>Ranking</th>
                 <th>Username</th>
+                <th>Completed</th>
                 <th>Completion</th>
                 <th>WPM</th>
               </tr>
