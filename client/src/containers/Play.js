@@ -231,13 +231,15 @@ class PlayGameLogic extends Component {
       const leaderboard = this.state.leaderboard;
       const clients = Object.keys(leaderboard);
 
-      clients.forEach(client => {
-        if (!formattedClients[client] && leaderboard[client]) {
-          delete leaderboard[client];
-        }
-      });
+      if (formattedClients) {
+        clients.forEach(client => {
+          if (!formattedClients[client] && leaderboard[client]) {
+            delete leaderboard[client];
+          }
+        });
 
-      this.setState({ leaderboard });
+        this.setState({ leaderboard });
+      }
     });
 
     socket.on('disconnect', () => {
