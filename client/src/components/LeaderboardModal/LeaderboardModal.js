@@ -29,14 +29,11 @@ const LeaderboardModal = props => {
     );
   });
 
-  console.log('Placing is', props.placings);
   return (
     <div>
       <Modal show={true} dialogClassName="modal-100w" centered>
-        <Modal.Header closeButton>
-          <Modal.Title id="example-custom-modal-styling-title">
-            Race Results
-          </Modal.Title>
+        <Modal.Header>
+          <Modal.Title id="RaceResults">Race Results</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Table striped bordered hover variant="dark">
@@ -50,8 +47,11 @@ const LeaderboardModal = props => {
             </thead>
             <tbody>{playerStats}</tbody>
           </Table>
-          <Button className="PlayAgain-btn" variant="primary">
+          <Button className="PlayAgain-btn">
             <Link to="/play">Play Again</Link>
+          </Button>
+          <Button className="Home-btn">
+            <Link to="/">Home</Link>
           </Button>
         </Modal.Body>
       </Modal>
