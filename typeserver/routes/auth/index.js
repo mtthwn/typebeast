@@ -22,10 +22,7 @@ router.post('/register', (req, res, next) => {
       }
 
       const token = generateToken(savedUser);
-      const user = {
-        username: savedUser.username,
-        email: savedUser.email
-      };
+      const user = getCleanUser(savedUser);
 
       res.status(200).json({ success: true, user, token });
     })
@@ -37,18 +34,18 @@ router.post('/register', (req, res, next) => {
 router.post('/login', (req, res, next) => {
   const { email, password } = req.body;
 
-  User.findOne({ email }).exec((err, user) => {
+  User.findOne({ email }).exec((err, foundUser) => {
     if (err) {
       return res.status(401).json({ success: false, message: err.message });
     }
 
-    if (!user) {
+    if (!foundUser) {
       return res
         .status(404)
         .json({ success: false, message: 'Incorrect username or password' });
     }
 
-    bcrypt.compare(password, user.password, (err, valid) => {
+    bcrypt.compare(password, foundUser.password, (err, valid) => {
       if (!valid) {
         return res.status(404).json({
           success: false,
@@ -56,13 +53,10 @@ router.post('/login', (req, res, next) => {
         });
       }
 
-      const token = generateToken(user);
-      const formattedUser = {
-        username: user.username,
-        email: user.email
-      };
+      const token = generateToken(foundUser);
+      const user = getCleanUser(foundUser);
 
-      res.status(200).json({ success: true, token, user: formattedUser });
+      res.status(200).json({ success: true, token, user });
     });
   });
 });
@@ -76,15 +70,17 @@ router.get('/me/from/token', (req, res, next) => {
       .json({ success: false, message: 'No token was sent' });
   }
 
-  jwt.verify(token, process.env.JWT_SECRET, (err, user) => {
+  jwt.verify(token, process.env.JWT_SECRET, (err, foundUser) => {
     if (err) {
       return res.status(401).json({ success: false, message: err.message });
     }
 
-    User.findById({ _id: user._id }, (err, user) => {
+    User.findById({ _id: user._id }, (err, foundUser) => {
       if (err) {
         return res.status(401).json({ success: false, message: err.message });
       }
+
+      const user = getCleanUser(foundUser);
 
       res.status(200).json({
         success: true,
