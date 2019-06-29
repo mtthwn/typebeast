@@ -12,7 +12,7 @@ const cors = require('cors');
 const { mongoose } = require('./db/config');
 
 const indexRouter = require('./routes/index');
-const usersRouter = require('./routes/user/');
+// const usersRouter = require('./routes/user/');
 const authRoutes = require('./routes/auth/');
 const quoteRoutes = require('./routes/quote');
 const carRoutes = require('./routes/car');
@@ -26,7 +26,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cors());
 app.use(cookieParser());
 
-app.use('/api/users', usersRouter);
+// app.use('/api/users', usersRouter);
 app.use('/api/auth', authRoutes);
 app.use('/api/quotes', quoteRoutes);
 app.use('/api/cars', carRoutes);
