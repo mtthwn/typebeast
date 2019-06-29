@@ -11,9 +11,6 @@ import socketIOClient from 'socket.io-client';
 import StartGameButton from './../components/StartGameButton/StartGameButton';
 import LeaderboardModal from './../components/LeaderboardModal/LeaderboardModal';
 
-// import ShowUsernames from './../components/ShowUsernames/ShowUsernames';
-import EndGameButton from './../components/EndGameButtons/EndGameButtons';
-
 const renderGame = props => {
   const countdown = props.countdown ? (
     <h1>{props.countdownCount}</h1>
@@ -45,9 +42,7 @@ const renderGame = props => {
       <LeaderboardModal
         leaderboard={props.leaderboard}
         placings={props.placings}
-        modalShow={props.modalShow}
       />
-      <EndGameButton />
     </Fragment>
   ) : (
     <div className="DisplayQuoteUI-container">
@@ -91,7 +86,6 @@ class PlayGameLogic extends Component {
       timerStart: false,
       timerFinished: false,
       finishLine: false,
-      modalShow: true,
       // Socket related properties:
       endpoint: 'http://127.0.0.1:8080',
       gameStart: false,
