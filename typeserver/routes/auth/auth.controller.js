@@ -10,7 +10,7 @@ const index = (req, res) => {
   });
 };
 
-const register = (req, res, next) => {
+const register = (req, res) => {
   const username = req.body.username.trim();
   const email = req.body.email.trim();
   const password = bcrypt.hashSync(req.body.password.trim(), 10);
@@ -28,7 +28,7 @@ const register = (req, res, next) => {
     });
 };
 
-const login = (req, res, next) => {
+const login = (req, res) => {
   const { email, password } = req.body;
 
   User.findOne({ email })
