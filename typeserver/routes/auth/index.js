@@ -10,26 +10,7 @@ const User = require('./../../db/model/User');
 
 router.get('/', controller.index);
 
-router.post('/register', (req, res, next) => {
-  const username = req.body.username.trim();
-  const email = req.body.email.trim();
-  const password = bcrypt.hashSync(req.body.password.trim(), 10);
-
-  User({ username, email, password })
-    .save((err, savedUser) => {
-      if (err) {
-        return res.status(401).json({ success: false, message: err.message });
-      }
-
-      const token = generateToken(savedUser);
-      const user = getCleanUser(savedUser);
-
-      res.status(200).json({ success: true, user, token });
-    })
-    .catch(e => {
-      res.status(401).json({ success: false, error: e.message });
-    });
-});
+router.post('/register', controller.register);
 
 router.post('/login', (req, res, next) => {
   const { email, password } = req.body;
