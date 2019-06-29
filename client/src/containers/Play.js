@@ -152,7 +152,7 @@ class PlayGameLogic extends Component {
           completion: 0,
           completed: false
         }
-        carPositioning[user] = {progress: 0}
+        carPositioning[user] = { progress: 0 }
 
       }
       this.setState(carPositioning);
@@ -191,7 +191,6 @@ class PlayGameLogic extends Component {
       const leaderboard = this.state.leaderboard;
 
       leaderboard[message.socketId].completion = message.completion;
-      // console.log('Here', message.completion.progress);
 
       if (leaderboard[message.socketId].completion === true) {
         leaderboard[message.socketId].completed = true
@@ -263,7 +262,7 @@ class PlayGameLogic extends Component {
 
     socket.on('disconnect', () => {
       alert('Please reload your page');
-      this.setState({ leaderboard: {}, placings: [], progress: 0 });
+      this.setState({ leaderboard: {}, placings: [], progress: 0, carPositioning: {} });
     });
   }
 
@@ -381,7 +380,10 @@ class PlayGameLogic extends Component {
           return acc + curr.length;
         }, 0) / this.state.words.length
       );
-      this.setState({ averageLength });
+
+      if (Number.isNaN(averageLength)) {
+        this.setState({ averageLength });
+      }
     }
   };
 

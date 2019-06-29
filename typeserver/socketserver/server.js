@@ -87,7 +87,6 @@ io.on('connection', function(socket) {
   });
 
   socket.on('user-update', data => {
-    // console.log('here!!!', JSON.parse(data));
     const formattedData = JSON.parse(data).user;
     if (!formattedClients[`room-${roomNum}`]) {
       formattedClients[`room-${roomNum}`] = {};
