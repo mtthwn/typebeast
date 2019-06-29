@@ -10,23 +10,31 @@ const Car = require('./../../db/model/Car');
 // });
 
 router.post('/', (req, res, next) => {
-    const { name, filename, price } = req.body;
+  const { name, filename, price } = req.body;
 
-    Car({ name, filename, price }).save().then(car => {
-        res.status(200).json({ car });
-    }).catch(e => res.status(400).json({ success: false, message: e.message }));
+  Car({ name, filename, price })
+    .save()
+    .then(car => {
+      res.status(200).json({ car });
+    })
+    .catch(e => res.status(400).json({ success: false, message: e.message }));
 });
 
 router.get('/:email', (req, res, next) => {
+
   const { email } = req.params;
 
-  User.findOne({ email }).then((err, user) => {
-    if (err) {
-      return res.status(400).json({ success: false, message: 'No user found' });
-    }
+  User.findOne({ email })
+    .populate('cars')
+    .exec((err, user) => {
+      if (err) {
+        return res
+          .status(400)
+          .json({ success: false, message: 'No user found' });
+      }
 
-    res.status(200).json({ success: true, car: user.cars });
-  });
+      res.status(200).json({ success: true, cars: user.cars });
+    });
 });
 
 module.exports = router;
