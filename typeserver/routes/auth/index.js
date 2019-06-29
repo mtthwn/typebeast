@@ -1,9 +1,10 @@
 const express = require('express');
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 
 const router = express.Router();
 const controller = require('./auth.controller');
-const { generateToken } = require('./../../utils/auth');
+const { generateToken, getCleanUser } = require('./../../utils/auth');
 
 const User = require('./../../db/model/User');
 
@@ -62,6 +63,34 @@ router.post('/login', (req, res, next) => {
       };
 
       res.status(200).json({ success: true, token, user: formattedUser });
+    });
+  });
+});
+
+router.get('/me/from/token', (req, res, next) => {
+  const { token } = req.body || req.query;
+
+  if (!token) {
+    return res
+      .status(401)
+      .json({ success: false, message: 'No token was sent' });
+  }
+
+  jwt.verify(token, process.env.JWT_SECRET, (err, user) => {
+    if (err) {
+      return res.status(401).json({ success: false, message: err.message });
+    }
+
+    User.findById({ _id: user._id }, (err, user) => {
+      if (err) {
+        return res.status(401).json({ success: false, message: err.message });
+      }
+
+      res.status(200).json({
+        success: true,
+        user,
+        token
+      });
     });
   });
 });

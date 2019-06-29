@@ -11,6 +11,14 @@ const generateToken = (user) => {
     });
 };
 
+const getCleanUser = (user) => {
+    return {
+        username: user.username,
+        email: user.email
+    }
+}
+
 module.exports = {
-    generateToken
+    generateToken, 
+    getCleanUser
 }
