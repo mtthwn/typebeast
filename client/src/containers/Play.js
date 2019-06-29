@@ -138,7 +138,7 @@ class PlayGameLogic extends Component {
       const leaderboard = this.state.leaderboard;
       const carPositioning = this.state.carPositioning;
 
-      console.log(formattedData)
+      // console.log(formattedData)
       // formattedData.forEach(user => {
       //   leaderboard[user] = formattedData[user];
       // })
