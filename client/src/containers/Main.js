@@ -7,8 +7,6 @@ import PlayNow from './../components/PlayNow/PlayNow';
 import { BrowserRouter as Router } from 'react-router-dom';
 import tokenValidationHelper from '../lib/tokenValidationHelper';
 
-import tokenValidation from './../lib/tokenValidationHelper';
-
 class MainPage extends Component {
   constructor() {
     super();
