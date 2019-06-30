@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 
 export default class ModalLogic extends Component {
   constructor(props, context) {
@@ -16,11 +17,30 @@ export default class ModalLogic extends Component {
     this.setState({ show: true });
   };
 
+  handleLogin = (email, password) => (e) => {
+    // e.preventDefault();
+    axios.post('http://127.0.0.1:8081/api/auth/login', {
+      email,
+      password
+    })
+    .then((res) => {
+      console.log('Before saving to storage', res.data.token)
+      const token = res.data.token
+      localStorage.setItem('token', JSON.stringify(token));
+      // console.log('Retrieve from storage', localStorage.getItem('token'))
+    })
+    .catch(e => {
+      console.log(e.message)
+    })
+  }
+
+
   render() {
     return this.props.children({
       ...this.state,
       handleClose: this.handleClose,
-      handleShow: this.handleShow
+      handleShow: this.handleShow,
+      handleLogin: this.handleLogin
     });
   }
 }
