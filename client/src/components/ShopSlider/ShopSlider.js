@@ -2,8 +2,8 @@ import React from 'react';
 import CarSliderLogic from '../CarSlider/CarSliderLogic';
 import { Carousel, Button, ProgressBar } from 'react-bootstrap';
 
-import carSlide1 from './../../img/car_slider2.jpg';
-import car_sprite1 from './../../img/gtx.png';
+import silvia from './../../img/nissan_silvia_slide.png';
+import car_sprite1 from './../../img/gtx_md.png';
 import './ShopSlider.scss';
 
 export default () => {
@@ -31,11 +31,11 @@ export default () => {
                 <h3>Civic</h3>
                 <h6>Max Speed</h6>
                 {progressInstance}
-
-                <h6>Acceleration 0-60</h6>
+                <h6>Acceleration 0-60 seconds</h6>
                 {progressInstance}
+                <img src={car_sprite1} alt="car sprite" />
               </Carousel.Caption>
-              <img src={carSlide1} alt="car sprite" />
+              <img src={silvia} alt="car sprite" />
             </Carousel.Item>
             {/* <Carousel.Item>
               <img src={carSlide1} alt="car sprite" />
