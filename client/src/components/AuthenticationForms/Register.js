@@ -1,7 +1,7 @@
 import React from 'react';
 import { Modal, Button } from 'react-bootstrap';
 import ModalLogic from './ModalLogic';
-import LoginForm from './LoginForm';
+import RegisterForm from './RegisterForm';
 
 export default ({ className }) => {
   return (
@@ -25,7 +25,7 @@ export default ({ className }) => {
               <Modal.Title>Register</Modal.Title>
             </Modal.Header>
             <Modal.Body>
-              <LoginForm />
+              <RegisterForm />
             </Modal.Body>
           </Modal>
         </>
