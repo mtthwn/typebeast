@@ -7,6 +7,14 @@ const LeaderboardModal = ({ leaderboard }) => {
   const socketIds = Object.keys(leaderboard);
 
   const playerStats = socketIds.map((socketId, index) => {
+    const position = leaderboard[socketId].position ? (
+      <td>{leaderboard[socketId].position}</td>
+    ) : (
+      <td>
+        <Spinner animation="border" variant="success" />
+      </td>
+    )
+
     const wpm = leaderboard[socketId].wpm ? (
       <td>{leaderboard[socketId].wpm} </td>
     ) : (
@@ -27,7 +35,7 @@ const LeaderboardModal = ({ leaderboard }) => {
 
     return (
       <tr>
-        <td>{index + 1}</td>
+        {position}
         <td> {leaderboard[socketId].username} </td>
         <td> {`${Math.floor(leaderboard[socketId].completion.progress * 100)}%`} </td>
         {completed}

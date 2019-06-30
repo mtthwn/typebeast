@@ -146,11 +146,10 @@ class PlayGameLogic extends Component {
 
         leaderboard[user] = {
           ...formattedData[user],
-          completion: 0,
+          completion: { progress: 0 },
           completed: false
         }
         carPositioning[user] = { progress: 0 }
-        console.log(carPositioning)
       }
       this.setState(carPositioning);
       this.setState(leaderboard);
@@ -181,13 +180,17 @@ class PlayGameLogic extends Component {
     socket.on('progress-broadcast', message => {
       const carPositioning = this.state.carPositioning;
 
-      carPositioning[message.socketId] = message.completion;
+      if (carPositioning[message.socketId]) {
+        carPositioning[message.socketId] = message.completion;
+      }
 
       this.setState({ carPositioning });
 
       const leaderboard = this.state.leaderboard;
 
-      leaderboard[message.socketId].completion = message.completion;
+      if (leaderboard[message.socketId]) {
+        leaderboard[message.socketId].completion = message.completion;
+      }
 
       if (leaderboard[message.socketId].completion === true) {
         leaderboard[message.socketId].completed = true
@@ -235,6 +238,7 @@ class PlayGameLogic extends Component {
       leaderboard[message.socketId].wpm = message.wpm;
       leaderboard[message.socketId].completion = message.completion;
       leaderboard[message.socketId].completed = true;
+      leaderboard[message.socketId].position = message.position;
 
       this.setState({
         leaderboard
@@ -436,7 +440,8 @@ class PlayGameLogic extends Component {
       timer: 0
     });
     this.state.socket.emit('game-finish', {
-      wpm: this.state.wpm
+      wpm: this.state.wpm,
+      position: this.state.position
     });
   };
 }
