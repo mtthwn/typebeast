@@ -123,7 +123,7 @@ class PlayGameLogic extends Component {
     socket.on('welcome', message => {
       this.setState({
         playersInRoom: message.clients,
-        playerSocket: message.socket,
+        playerSocket: message.socketId,
         loading: false,
         roomNumber: message.roomNum
       });

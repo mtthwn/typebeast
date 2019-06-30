@@ -77,7 +77,7 @@ io.on('connection', function(socket) {
   console.log(clientsArray)
   //Welcome message for new user
   socket.emit('welcome', {
-    socket: socket.id,
+    socketId: socket.id,
     clients: clientsArray,
     roomNum
   });
