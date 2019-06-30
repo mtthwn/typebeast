@@ -138,15 +138,12 @@ class PlayGameLogic extends Component {
       const leaderboard = this.state.leaderboard;
       const carPositioning = this.state.carPositioning;
 
-      // console.log(formattedData)
       // formattedData.forEach(user => {
       //   leaderboard[user] = formattedData[user];
       // })
 
       for (const user in formattedData) {
-        // leaderboard[user] = formattedData[user];
-        // leaderboard[user].completion = 0
-        // leaderboard[user].completed = false
+
         leaderboard[user] = {
           ...formattedData[user],
           completion: 0,
@@ -392,7 +389,7 @@ class PlayGameLogic extends Component {
     if (!this.state.timerStart) {
       this.setState({ timerStart: true });
       this.interval = setInterval(() => {
-        // timer
+        // Timer
         this.setState(prevProps => {
           return { sec: prevProps.sec + 1, timer: prevProps.timer + 1 };
         });
