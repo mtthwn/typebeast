@@ -32,11 +32,16 @@ export default () => {
       </div>
 
       <div className="center_x" id="car-sprites-wrapper">
-        <div className="car-sprite 1">
+        <div className="car-sprite-nav ">
           <img src={car_sprite1} alt="car sprite" />
         </div>
-        <div className="car-sprite 1"></div>
-        <div className="car-sprite 1"></div>
+        <div className="car-sprite-nav">
+          <img src={car_sprite1} alt="car sprite" />
+        </div>
+
+        <div className="car-sprite-nav">
+          <img src={car_sprite1} alt="car sprite" />
+        </div>
       </div>
     </div>
   );

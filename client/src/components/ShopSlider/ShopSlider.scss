@@ -37,7 +37,7 @@
   justify-content: space-between;
   top: 80%;
   left: 10%;
-  width: 40rem;
+  width: 65rem;
 }
 
 .slider-arrow {
@@ -47,10 +47,41 @@
   width: 7rem;
   padding: 2rem 0rem;
   display: flex;
-
   justify-content: center;
   align-content: center;
-  // text-align: center;
   font-size: 3rem;
   cursor: pointer;
+}
+
+#car-sprites-wrapper {
+  display: flex;
+  position: relative;
+  top: 60%;
+  left: 30%;
+  width: 40rem;
+
+  .car-sprite-nav {
+    margin-left: 2rem;
+    border: 1px solid $border-color;
+    border-radius: 50rem;
+    padding: 4.5rem 2rem;
+
+    @include respond(big-desktop) {
+      padding: 4.5rem 2.5rem;
+    }
+  }
+}
+
+.car_fade {
+  animation-name: fade;
+  animation-duration: 0.5s;
+}
+
+@keyframes fade {
+  from {
+    opacity: 0.4;
+  }
+  to {
+    opacity: 1;
+  }
 }
