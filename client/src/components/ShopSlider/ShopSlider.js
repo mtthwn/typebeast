@@ -27,9 +27,11 @@ export default () => {
               <Carousel.Caption className="CarSlider-content">
                 <h5>Nissan</h5>
                 <h3>Silvia S15</h3>
-                <div className="CarSprite-container">
-                  <img src={car_sprite1} alt="car sprite" />
-                </div>
+                <img
+                  className="Car-Sprite"
+                  src={car_sprite1}
+                  alt="car sprite"
+                />
                 <h6>Max Speed</h6>
                 <ProgressBar
                   now={maxspeed}
@@ -48,7 +50,7 @@ export default () => {
                   <span className="coins">Coins</span>
                 </div>
               </Carousel.Caption>
-              <img src={silvia} alt="car sprite" />
+              <img className="CarSlide" src={silvia} alt="slide" />
             </Carousel.Item>
             {/* <Carousel.Item>
               <img src={carSlide1} alt="car sprite" />

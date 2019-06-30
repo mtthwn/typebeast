@@ -8,7 +8,6 @@
   width: 40%;
   font-weight: 600;
   font-size: 2rem;
-  // right: 50%;
   margin: 0 auto;
   top: 80%;
   left: 30%;
@@ -27,12 +26,18 @@
     width: 100%;
   }
 }
+
+.carousel {
+  overflow: hidden;
+}
+
 .carousel-item {
-  img {
-    position: relative;
-    left: 10%;
+  position: fixed;
+  .CarSlide {
+    left: 30%;
   }
 }
+
 .carousel-control-prev,
 .carousel-control-next {
   border: 3px solid $main-color;
@@ -54,13 +59,13 @@
 }
 
 .carousel-caption {
-  position: fixed;
+  padding-top: 15rem;
+  position: relative;
   text-align: left;
-  height: 30rem;
+  width: 35%;
+  height: 100vh;
   color: #fff;
   left: 7%;
-  right: 50%;
-  top: 20%;
 
   h3 {
     color: #fff;
@@ -84,10 +89,7 @@
     font-size: 1.2rem;
     margin: 2rem 0rem 1rem 0rem;
   }
-  img {
-    margin-top: 5rem;
-    margin-left: -5rem;
-  }
+
   .progress {
     width: 70%;
     height: 1.2rem;
@@ -115,16 +117,7 @@
     color: $main-color;
   }
 }
-
-.CarSprite-container {
-  display: flex;
-  // justify-content: flex-start;
-  // align-content: center;
-  // border: 3px solid $main-color;
-  // padding: 2rem 15rem;
-
-  img {
-    padding: 0 0;
-    margin: 2rem 0rem 5rem -5rem;
-  }
+img.Car-Sprite {
+  position: relative;
+  margin: 2rem 0rem;
 }
