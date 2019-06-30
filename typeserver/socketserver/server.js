@@ -76,7 +76,7 @@ io.on('connection', function(socket) {
   // console.log('IDs in current room:', clientsArray);
   console.log(clientsArray)
   //Welcome message for new user
-  socket.emit('welcome', {
+  socket.emit('save-socket', {
     socketId: socket.id,
     clients: clientsArray,
     roomNum

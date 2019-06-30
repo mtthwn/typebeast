@@ -120,7 +120,7 @@ class PlayGameLogic extends Component {
       );
     });
 
-    socket.on('welcome', message => {
+    socket.on('save-socket', message => {
       this.setState({
         playersInRoom: message.clients,
         playerSocket: message.socketId,
