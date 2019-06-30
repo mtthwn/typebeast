@@ -23,18 +23,18 @@ export default () => {
             direction={props.direction}
             onSelect={props.handleSelect}
             indicators={false}
-            fade={false}
+            fade={true}
             controls={true}
             interval="3000"
           >
             <Carousel.Item>
-              <div className="CarSpecs">
+              <Carousel.Caption>
                 <h3>Second slide label</h3>
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-              </div>
+              </Carousel.Caption>
               <img src={carSlide1} alt="car sprite" />
             </Carousel.Item>
-            {/* <Carousel.Item>
+            <Carousel.Item>
               <img src={carSlide1} alt="car sprite" />
               <Carousel.Caption>
                 <h3>Second slide label</h3>
@@ -47,7 +47,7 @@ export default () => {
                 <h3>Second slide label</h3>
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
               </Carousel.Caption>
-            </Carousel.Item> */}
+            </Carousel.Item>
           </Carousel>
           <Button className="ShopSlider-BuyBtn" variant="outline-light">
             Buy Now
