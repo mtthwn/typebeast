@@ -77,12 +77,8 @@ io.on('connection', function(socket) {
   console.log(clientsArray)
   //Welcome message for new user
   socket.emit('welcome', {
-    description: `Welcome! You are in room ${roomNum}! Current user count: ${
-      userCount['room-' + roomNum]['users']
-    }`,
     socket: socket.id,
     clients: clientsArray,
-    userCount,
     roomNum
   });
 
