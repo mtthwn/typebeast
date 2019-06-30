@@ -67,7 +67,7 @@ io.on('connection', function(socket) {
     getQuote(roomTracker['room-' + roomNum]);
 
   }
-  console.log(roomTracker)
+
   //Set up variable to get array of socket IDs in current room
   let clients = io.sockets.adapter.rooms['room-' + roomNum];
   let clientsArray = Object.keys(clients.sockets);
