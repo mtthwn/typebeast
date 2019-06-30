@@ -27,6 +27,9 @@ export default () => {
               <Carousel.Caption className="CarSlider-content">
                 <h5>Nissan</h5>
                 <h3>Silvia S15</h3>
+                <div className="CarSprite-container">
+                  <img src={car_sprite1} alt="car sprite" />
+                </div>
                 <h6>Max Speed</h6>
                 <ProgressBar
                   now={maxspeed}
@@ -39,7 +42,11 @@ export default () => {
                   max="300"
                   label={`${accerlation} seconds`}
                 />
-                <img src={car_sprite1} alt="car sprite" />
+                <h6>Price</h6>
+                <div className="CarPrice">
+                  <h2>$5000</h2>
+                  <span className="coins">Coins</span>
+                </div>
               </Carousel.Caption>
               <img src={silvia} alt="car sprite" />
             </Carousel.Item>

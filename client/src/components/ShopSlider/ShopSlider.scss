@@ -73,6 +73,10 @@
     font-weight: 900;
     margin-bottom: 2rem;
   }
+  h2 {
+    font-size: 5rem;
+  }
+
   h5 {
     font-size: 2rem;
   }
@@ -90,10 +94,37 @@
     border-radius: 2rem;
     font-weight: 700;
     letter-spacing: 1px;
-    font-size: 1rem;
+    font-size: 0.9rem;
 
     &-bar {
       background-color: $main-color;
     }
+  }
+}
+
+.CarPrice {
+  display: flex;
+  align-content: flex-start;
+
+  .coins {
+    letter-spacing: 1px;
+    margin-top: 0.5rem;
+    margin-left: 0.5rem;
+    font-size: 2rem;
+    font-weight: 700;
+    color: $main-color;
+  }
+}
+
+.CarSprite-container {
+  display: flex;
+  // justify-content: flex-start;
+  // align-content: center;
+  // border: 3px solid $main-color;
+  // padding: 2rem 15rem;
+
+  img {
+    padding: 0 0;
+    margin: 2rem 0rem 5rem -5rem;
   }
 }
