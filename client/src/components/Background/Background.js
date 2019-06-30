@@ -43,7 +43,6 @@ const Background = ({
 
   const carIds = Object.keys(carPositioning);
   const Cars = carIds.map((car, index) => {
-    const percentageComplete = carPositioning[car].progress
     return (
       <Car
         percentageComplete={`${Number(carPositioning[car].progress) * 100}%`}
