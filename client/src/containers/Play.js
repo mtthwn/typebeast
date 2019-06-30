@@ -288,12 +288,6 @@ class PlayGameLogic extends Component {
       userInput
     } = this.state;
 
-    // if (sec >= 1) {
-    //   const char = wordsCompleted.length + userInput.length;
-    //   const wpm = Math.floor((char / averageLength / sec) * 60);
-    //   this.setState({ wpm });
-    // }
-
     if (value.length > words[index].length) {
       e.target.value = value.slice(0, words[index].length);
     }
