@@ -35,10 +35,9 @@ export default class RegisterForm extends Component {
     const username = this.state.username;
     const email = this.state.email;
     const password = this.state.password;
-    // if (username.length > 0 && email.length > 0 && password.length > 0) {
-    console.log(username, email, password)
-    this.props.handleRegister(username, email, password)();
-    // }
+    if (username.length > 0 && email.length > 0 && password.length > 0) {
+      this.props.handleRegister(username, email, password)();
+    }
   }
 
   render() {
