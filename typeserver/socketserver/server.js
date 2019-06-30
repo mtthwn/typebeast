@@ -8,11 +8,11 @@ const port = process.env.PORT || 8080;
 
 let roomNum = 1; // Var tracks the room new users will be directed to.
 
-let userCount = {
+let roomTracker = {
   totalUsers: 0
 };
 
-/* User Count object: {
+/* roomTracker object: {
   total: 12,
   room-1: 3,
   room-2: 3,
@@ -22,12 +22,12 @@ let userCount = {
 */
 
 const getQuote = room => {
-  if (!userCount['room-' + roomNum]['quote']) {
+  if (!roomTracker['room-' + roomNum]['quote']) {
     axios
       .get('http://127.0.0.1:8081/api/quotes')
       .then(res => {
         room['quote'] = res.data.data.quote;
-        console.log(userCount);
+        console.log(roomTracker);
       })
       .catch(e => console.log(e.message));
   }
@@ -36,53 +36,45 @@ const getQuote = room => {
 const formattedClients = {};
 
 io.on('connection', function(socket) {
-  userCount.totalUsers++;
-  console.log('\na user connected, users in server:', userCount.totalUsers);
+  roomTracker.totalUsers++;
+  console.log('\na user connected, users in server:', roomTracker.totalUsers);
   //If it's the first user, the room doesn't exist - make the room.
-  if (!userCount['room-' + roomNum]) {
+  if (!roomTracker['room-' + roomNum]) {
     socket.join('room-' + roomNum);
     // Create an object to track the users and quote in a room
-    userCount['room-' + roomNum] = {
+    roomTracker['room-' + roomNum] = {
       users: 1,
       quote: ''
     };
-    getQuote(userCount['room-' + roomNum]);
+    getQuote(roomTracker['room-' + roomNum]);
 
     //If the room is not at max capacity (4), add user to the room
   } else if (
-    userCount['room-' + roomNum] &&
-    userCount['room-' + roomNum]['users'] < 4
+    roomTracker['room-' + roomNum] &&
+    roomTracker['room-' + roomNum]['users'] < 4
   ) {
     socket.join('room-' + roomNum);
-    userCount['room-' + roomNum]['users']++;
-    // console.log(userCount);
+    roomTracker['room-' + roomNum]['users']++;
 
     //If the room exists and is at capacity, increase the room number, join the new room, set count to 1
   } else {
     roomNum++;
     socket.join('room-' + roomNum);
-    userCount['room-' + roomNum] = {
+    roomTracker['room-' + roomNum] = {
       users: 1,
       quote: ''
     };
-    getQuote(userCount['room-' + roomNum]);
+    getQuote(roomTracker['room-' + roomNum]);
 
-    // console.log(userCount);
   }
 
   //Set up variable to get array of socket IDs in current room
   let clients = io.sockets.adapter.rooms['room-' + roomNum];
   let clientsArray = Object.keys(clients.sockets);
-  // console.log('IDs in current room:', clientsArray);
-  console.log(clientsArray)
-  //Welcome message for new user
-  socket.emit('welcome', {
-    description: `Welcome! You are in room ${roomNum}! Current user count: ${
-      userCount['room-' + roomNum]['users']
-    }`,
-    socket: socket.id,
+
+  socket.emit('save-socket', {
+    socketId: socket.id,
     clients: clientsArray,
-    userCount,
     roomNum
   });
 
@@ -107,12 +99,8 @@ io.on('connection', function(socket) {
   });
   //Broadcast that a new user joined to everyone ~else~
   socket.broadcast.to('room-' + roomNum).emit('new-user-join', {
-    description: `New user has joined. Current user count: ${
-      userCount['room-' + roomNum]['users']
-    }`,
-    socket: socket.id,
+    socketId: socket.id,
     clients: clientsArray,
-    userCount,
     formattedClients: formattedClients[`room-${roomNum}]`]
   });
 
@@ -121,7 +109,7 @@ io.on('connection', function(socket) {
     roomNum++; // Stops more people from joining the initiated room.
     io.to(Object.keys(socket.rooms)[1]).emit('game-start', {
       description: '3 players in room. Game starting shortly.',
-      quote: userCount[Object.keys(socket.rooms)[1]]['quote']
+      quote: roomTracker[Object.keys(socket.rooms)[1]]['quote']
     });
   });
 
@@ -165,7 +153,7 @@ io.on('connection', function(socket) {
   socket.on('disconnect', function() {
     console.log('A user disconnected', socket.id);
     // Remove user from total users list when they leave
-    userCount.totalUsers--;
+    roomTracker.totalUsers--;
     //If someone disconnects, total user count changes, but room count remains the same
   });
 });
