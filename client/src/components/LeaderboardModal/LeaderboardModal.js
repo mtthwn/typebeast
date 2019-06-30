@@ -27,7 +27,7 @@ const LeaderboardModal = ({ leaderboard }) => {
 
     return (
       <tr>
-        <td>{index + 1}</td>
+        <td>{leaderboard[socketId].position}</td>
         <td> {leaderboard[socketId].username} </td>
         <td> {`${Math.floor(leaderboard[socketId].completion.progress * 100)}%`} </td>
         {completed}

@@ -235,6 +235,7 @@ class PlayGameLogic extends Component {
       leaderboard[message.socketId].wpm = message.wpm;
       leaderboard[message.socketId].completion = message.completion;
       leaderboard[message.socketId].completed = true;
+      leaderboard[message.socketId].position = message.position;
 
       this.setState({
         leaderboard
@@ -436,7 +437,8 @@ class PlayGameLogic extends Component {
       timer: 0
     });
     this.state.socket.emit('game-finish', {
-      wpm: this.state.wpm
+      wpm: this.state.wpm,
+      position: this.state.position
     });
   };
 }
