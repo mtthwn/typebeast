@@ -103,12 +103,8 @@ io.on('connection', function(socket) {
   });
   //Broadcast that a new user joined to everyone ~else~
   socket.broadcast.to('room-' + roomNum).emit('new-user-join', {
-    description: `New user has joined. Current user count: ${
-      userCount['room-' + roomNum]['users']
-    }`,
     socketId: socket.id,
     clients: clientsArray,
-    userCount,
     formattedClients: formattedClients[`room-${roomNum}]`]
   });
 
