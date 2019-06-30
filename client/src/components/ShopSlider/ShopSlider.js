@@ -28,17 +28,26 @@ export default () => {
             interval="3000"
           >
             <Carousel.Item>
+              <div className="CarSpecs">
+                <h3>Second slide label</h3>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+              </div>
               <img src={carSlide1} alt="car sprite" />
+            </Carousel.Item>
+            {/* <Carousel.Item>
+              <img src={carSlide1} alt="car sprite" />
+              <Carousel.Caption>
+                <h3>Second slide label</h3>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+              </Carousel.Caption>
             </Carousel.Item>
             <Carousel.Item>
               <img src={carSlide1} alt="car sprite" />
-            </Carousel.Item>
-            <Carousel.Item>
-              <img src={carSlide1} alt="car sprite" />
-            </Carousel.Item>
-            <Carousel.Item>
-              <img src={carSlide1} alt="car sprite" />
-            </Carousel.Item>
+              <Carousel.Caption>
+                <h3>Second slide label</h3>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+              </Carousel.Caption>
+            </Carousel.Item> */}
           </Carousel>
           <Button className="ShopSlider-BuyBtn" variant="outline-light">
             Buy Now
