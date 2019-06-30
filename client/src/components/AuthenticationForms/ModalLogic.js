@@ -54,7 +54,8 @@ export default class ModalLogic extends Component {
       ...this.state,
       handleClose: this.handleClose,
       handleShow: this.handleShow,
-      handleLogin: this.handleLogin
+      handleLogin: this.handleLogin,
+      handleRegister: this.handleRegister
     });
   }
 }
