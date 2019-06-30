@@ -1,0 +1,56 @@
+@import './../../styles/Variables';
+@import './../../styles/Mixins';
+
+.center_y {
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.center_x {
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.ShopSlider-container {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.car_slide {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+.controls-wrapper {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  top: 80%;
+  left: 10%;
+  width: 40rem;
+}
+
+.slider-arrow {
+  color: #fff;
+  z-index: 1000;
+  background-color: $main-color;
+  width: 7rem;
+  padding: 2rem 0rem;
+  display: flex;
+
+  justify-content: center;
+  align-content: center;
+  // text-align: center;
+  font-size: 3rem;
+  cursor: pointer;
+}
