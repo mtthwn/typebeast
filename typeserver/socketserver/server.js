@@ -12,7 +12,7 @@ let roomTracker = {
   totalUsers: 0
 };
 
-/* User Count object: {
+/* roomTracker object: {
   total: 12,
   room-1: 3,
   room-2: 3,
@@ -71,9 +71,7 @@ io.on('connection', function(socket) {
   //Set up variable to get array of socket IDs in current room
   let clients = io.sockets.adapter.rooms['room-' + roomNum];
   let clientsArray = Object.keys(clients.sockets);
-  // console.log('IDs in current room:', clientsArray);
-  console.log(clientsArray)
-  //Welcome message for new user
+
   socket.emit('save-socket', {
     socketId: socket.id,
     clients: clientsArray,
