@@ -42,7 +42,7 @@ module.exports = {
 
         bcrypt.compare(password, foundUser.password, (err, valid) => {
           if (!valid) {
-            return res.status(404).json({
+            return res.status(401).json({
               success: false,
               message: 'Incorrect username or password'
             });
