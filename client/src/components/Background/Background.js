@@ -66,8 +66,4 @@ const Background = ({
   );
 };
 
-// <Player1Car onFinish={onFinish} carPositioning={carPositioning} />
-//      <Player2Car onFinish={onFinish} carPositioning={carPositioning} />
-//      <Player3Car onFinish={onFinish} carPositioning={carPositioning} />
-
 export default Background;
