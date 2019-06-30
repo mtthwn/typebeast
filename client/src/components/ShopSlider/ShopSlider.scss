@@ -1,87 +1,36 @@
 @import './../../styles/Variables';
 @import './../../styles/Mixins';
 
-.center_y {
-  position: relative;
-  top: 50%;
-  transform: translateY(-50%);
-}
-.center_x {
-  position: relative;
-  left: 50%;
-  transform: translateX(-50%);
-}
-
-.ShopSlider-container {
-  position: fixed;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-}
-
-.car_slide {
+.ShopSlider-BuyBtn {
   position: absolute;
-  height: 100%;
-  width: 100%;
+  @include Main-btn;
+  width: 40%;
+  font-weight: 600;
+  font-size: 2rem;
+  // right: 50%;
+  margin: 0 auto;
+  top: 70%;
+  height: 15rem;
+  padding: 0 0;
 
-  img {
+  @include respond(tab-landscape) {
+    padding: 0 2rem;
+  }
+
+  @include respond(tab-portrait) {
     width: 100%;
-    height: 100%;
-    object-fit: cover;
+  }
+
+  @include respond(phone) {
+    width: 100%;
   }
 }
 
-.controls-wrapper {
-  position: relative;
-  display: flex;
-  justify-content: space-between;
-  top: 80%;
-  left: 10%;
-  width: 65rem;
-}
-
-.slider-arrow {
-  color: #fff;
-  z-index: 1000;
+.carousel-control-prev,
+.carousel-control-next {
   background-color: $main-color;
-  width: 7rem;
-  padding: 2rem 0rem;
-  display: flex;
-  justify-content: center;
-  align-content: center;
-  font-size: 3rem;
-  cursor: pointer;
-}
-
-#car-sprites-wrapper {
-  display: flex;
-  position: relative;
-  top: 60%;
-  left: 30%;
-  width: 40rem;
-
-  .car-sprite-nav {
-    margin-left: 2rem;
-    border: 1px solid $border-color;
-    border-radius: 50rem;
-    padding: 4.5rem 2rem;
-
-    @include respond(big-desktop) {
-      padding: 4.5rem 2.5rem;
-    }
-  }
-}
-
-.car_fade {
-  animation-name: fade;
-  animation-duration: 0.5s;
-}
-
-@keyframes fade {
-  from {
-    opacity: 0.4;
-  }
-  to {
-    opacity: 1;
-  }
+  height: 15rem;
+  width: 10rem;
+  opacity: 1;
+  top: 70%;
 }
