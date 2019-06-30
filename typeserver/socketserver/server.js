@@ -106,7 +106,7 @@ io.on('connection', function(socket) {
     description: `New user has joined. Current user count: ${
       userCount['room-' + roomNum]['users']
     }`,
-    socket: socket.id,
+    socketId: socket.id,
     clients: clientsArray,
     userCount,
     formattedClients: formattedClients[`room-${roomNum}]`]
