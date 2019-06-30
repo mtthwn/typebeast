@@ -59,7 +59,9 @@ module.exports = {
       });
   },
   checkToken: (req, res) => {
-    const { token } = req.body || req.query;
+    const { token } = req.query;
+
+    console.log(token);
 
     if (!token) {
       return res
@@ -67,12 +69,13 @@ module.exports = {
         .json({ success: false, message: 'No token was sent' });
     }
 
-    jwt.verify(token, process.env.JWT_SECRET, (err, foundUser) => {
+    jwt.verify(token, process.env.JWT_SECRET, (err, tokenUser) => {
       if (err) {
+        console.log(err.message);
         return res.status(401).json({ success: false, message: err.message });
       }
 
-      User.findById({ _id: user._id }, (err, foundUser) => {
+      User.findById({ _id: tokenUser._id }, (err, foundUser) => {
         if (err) {
           return res.status(401).json({ success: false, message: err.message });
         }

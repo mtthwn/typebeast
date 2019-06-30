@@ -5,7 +5,14 @@ import PlayNow from './../components/PlayNow/PlayNow';
 
 import { BrowserRouter as Router } from 'react-router-dom';
 
+import tokenValidation from './../lib/tokenValidationHelper';
+
 class MainPage extends Component {
+
+  componentDidMount() {
+    this.setState({ user: tokenValidation() });
+  }
+
   render() {
     // console.log(SocialMedia);
 
