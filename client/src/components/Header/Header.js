@@ -3,6 +3,7 @@ import { Nav, Navbar, Button, Form } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import './Header.scss';
 import Register from '../AuthenticationForms/Register';
+import Login from '../AuthenticationForms/Login';
 
 const Header = () => {
   return (
@@ -31,7 +32,7 @@ const Header = () => {
           </Nav>
           <div inline className="Header-signup">
             <Register className="sign-up" />
-            <Register className="login" />
+            <Login className="login" />
           </div>
         </Navbar.Collapse>
       </Navbar>

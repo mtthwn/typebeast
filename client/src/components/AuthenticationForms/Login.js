@@ -13,16 +13,16 @@ export default ({ className }) => {
             variant="primary"
             onClick={props.handleShow}
           >
-            Register
+            Login
           </Button>
           <Modal
-            className="Register-Content"
+            className="Login-Content"
             show={props.show}
             onHide={props.handleClose}
             centered
           >
             <Modal.Header closeButton>
-              <Modal.Title>Register</Modal.Title>
+              <Modal.Title>Login</Modal.Title>
             </Modal.Header>
             <Modal.Body>
               <LoginForm />
