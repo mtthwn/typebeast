@@ -34,6 +34,20 @@ export default class ModalLogic extends Component {
     })
   }
 
+  handleRegister = (username, email, password) => (e) => {
+    axios.post('http://127.0.0.1:8081/api/auth/register', {
+      username,
+      email,
+      password
+    })
+    .then((res) => {
+      const token = res.data.token
+      localStorage.setItem('token', JSON.stringify(token));
+    })
+    .catch(e => {
+      console.log(e.message)
+    })
+  }
 
   render() {
     return this.props.children({
