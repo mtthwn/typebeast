@@ -150,7 +150,7 @@ class PlayGameLogic extends Component {
           completed: false
         }
         carPositioning[user] = { progress: 0 }
-
+        console.log(carPositioning)
       }
       this.setState(carPositioning);
       this.setState(leaderboard);
@@ -245,16 +245,23 @@ class PlayGameLogic extends Component {
       const formattedClients = message.formattedClients;
       const leaderboard = this.state.leaderboard;
       const clients = Object.keys(leaderboard);
+      const carPositioning = this.state.carPositioning;
 
       if (formattedClients) {
         clients.forEach(client => {
           if (!formattedClients[client] && leaderboard[client]) {
             delete leaderboard[client];
           }
+
+          // Deleting car positioning removes cars from render prior to countdown, but not during game.
+          if (!formattedClients[client] && carPositioning[client]) {
+            delete carPositioning[client];
+          }
         });
 
-        this.setState({ leaderboard });
+        this.setState({ leaderboard, carPositioning });
       }
+
     });
 
     socket.on('disconnect', () => {
