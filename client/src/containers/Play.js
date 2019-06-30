@@ -155,14 +155,10 @@ class PlayGameLogic extends Component {
     });
 
     socket.on('new-user-join', message => {
-      // console.log(message.description);
       // Display message when new player joins. Import updated room-player list from server.
       this.setState({
         playersInRoom: message.clients
       });
-
-      // console.log(message);
-      // console.log(`${this.state.playersInRoom} in room now`);
     });
 
     socket.on('game-start', message => {
