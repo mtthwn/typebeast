@@ -1,25 +1,22 @@
 import React from 'react';
 import { Modal, Button, Form } from 'react-bootstrap';
-import RegisterForm from './RegisterForm';
+// import RegisterForm from './RegisterForm';
 import ModalLogic from './ModalLogic';
+import FormModal from './FormModal';
 
-export default () => {
+export default ({ className }) => {
   return (
     <ModalLogic>
       {props => (
         <>
-          <Button variant="primary" onClick={props.handleShow}>
+          <Button
+            className={className}
+            variant="primary"
+            onClick={props.handleShow}
+          >
             Register
           </Button>
-
-          <Modal show={props.show} onHide={props.handleClose}>
-            <Modal.Header closeButton>
-              <Modal.Title>Register</Modal.Title>
-            </Modal.Header>
-            <Modal.Body>
-              <RegisterForm />
-            </Modal.Body>
-          </Modal>
+          <FormModal show={props.show} onHide={props.handleClose} />
         </>
       )}
     </ModalLogic>

@@ -29,15 +29,10 @@ const Header = () => {
               Play Now
             </Link>
           </Nav>
-          {/* <Form inline className="Header-signup">
-            <Button className="sign-up" variant="outline-light">
-              Signup
-            </Button>
-            <Button className="login" variant="outline-light">
-              Login
-            </Button>
-          </Form> */}
-          <Register />
+          <div inline className="Header-signup">
+            <Register className="sign-up" />
+            <Register className="login" />
+          </div>
         </Navbar.Collapse>
       </Navbar>
     </div>
