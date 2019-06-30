@@ -10,9 +10,9 @@
   font-size: 2rem;
   // right: 50%;
   margin: 0 auto;
-  top: 70%;
+  top: 80%;
   left: 30%;
-  height: 15rem;
+  height: 10rem;
   padding: 0 0;
 
   @include respond(tab-landscape) {
@@ -36,10 +36,10 @@
 .carousel-control-prev,
 .carousel-control-next {
   border: 3px solid $main-color;
-  height: 15rem;
+  height: 10rem;
   width: 10rem;
   opacity: 1;
-  top: 70%;
+  top: 80%;
   &:hover {
     background-color: $main-color;
   }
@@ -81,7 +81,7 @@
     margin: 2rem 0rem 1rem 0rem;
   }
   img {
-    margin-top: 3rem;
+    margin-top: 5rem;
     margin-left: -5rem;
   }
   .progress {

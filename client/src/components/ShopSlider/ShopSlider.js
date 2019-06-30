@@ -8,10 +8,8 @@ import './ShopSlider.scss';
 
 export default () => {
   const maxspeed = 170;
-  const now = maxspeed;
-  const progressInstance = (
-    <ProgressBar now={maxspeed} max="300" label={`${now}mph`} />
-  );
+  const accerlation = 5.5;
+
   return (
     <CarSliderLogic>
       {props => (
@@ -27,12 +25,20 @@ export default () => {
           >
             <Carousel.Item>
               <Carousel.Caption className="CarSlider-content">
-                <h5>Honda</h5>
-                <h3>Civic</h3>
+                <h5>Nissan</h5>
+                <h3>Silvia S15</h3>
                 <h6>Max Speed</h6>
-                {progressInstance}
-                <h6>Acceleration 0-60 seconds</h6>
-                {progressInstance}
+                <ProgressBar
+                  now={maxspeed}
+                  max="300"
+                  label={`${maxspeed}mph`}
+                />
+                <h6>Acceleration 0-100 kph</h6>
+                <ProgressBar
+                  now={maxspeed}
+                  max="300"
+                  label={`${accerlation} seconds`}
+                />
                 <img src={car_sprite1} alt="car sprite" />
               </Carousel.Caption>
               <img src={silvia} alt="car sprite" />
