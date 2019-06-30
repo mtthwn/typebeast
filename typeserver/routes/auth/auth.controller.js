@@ -71,7 +71,6 @@ module.exports = {
 
     jwt.verify(token, process.env.JWT_SECRET, (err, tokenUser) => {
       if (err) {
-        console.log(err.message);
         return res.status(401).json({ success: false, message: err.message });
       }
 
