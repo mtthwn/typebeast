@@ -1,6 +1,7 @@
 import React from 'react';
 import { Nav, Navbar, Button, Form } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+
 import './Header.scss';
 import Register from '../AuthenticationForms/Register';
 import Login from '../AuthenticationForms/Login';
@@ -23,7 +24,7 @@ const Header = () => {
             <Link to="/" className="nav-link">
               Garage
             </Link>
-            <Link to="/" className="nav-link">
+            <Link to="/shop" className="nav-link">
               Shop
             </Link>
             <Link to="/play" className="nav-link">

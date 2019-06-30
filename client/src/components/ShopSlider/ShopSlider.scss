@@ -1,0 +1,122 @@
+@import './../../styles/Variables';
+@import './../../styles/Mixins';
+
+.ShopSlider-BuyBtn {
+  position: absolute;
+  z-index: 30;
+  @include Main-btn;
+  width: 40%;
+  font-weight: 600;
+  font-size: 3rem;
+  margin: 0 auto;
+  top: 80%;
+  left: 30%;
+  height: 10rem;
+  padding: 0 0;
+
+  @include respond(tab-landscape) {
+    padding: 0 2rem;
+  }
+
+  @include respond(tab-portrait) {
+    width: 100%;
+  }
+
+  @include respond(phone) {
+    width: 100%;
+  }
+}
+
+.carousel {
+  overflow: hidden;
+}
+
+.carousel-item {
+  position: fixed;
+  .CarSlide {
+    left: 30%;
+  }
+}
+
+.carousel-control-prev,
+.carousel-control-next {
+  border: 3px solid $main-color;
+  height: 10rem;
+  width: 10rem;
+  opacity: 1;
+  top: 80%;
+  &:hover {
+    background-color: $main-color;
+  }
+}
+
+.carousel-control-next {
+  margin-right: 10rem;
+}
+
+.carousel-control-prev {
+  margin-left: 10rem;
+}
+
+.carousel-caption {
+  padding-top: 15rem;
+  position: relative;
+  text-align: left;
+  width: 35%;
+  height: 100vh;
+  color: #fff;
+  left: 7%;
+
+  h3 {
+    color: #fff;
+    font-family: $header-font;
+    font-style: italic;
+    font-size: 8rem;
+    letter-spacing: 2px;
+    line-height: 7rem;
+    text-transform: uppercase;
+    font-weight: 900;
+    margin-bottom: 2rem;
+  }
+  h2 {
+    font-size: 5rem;
+  }
+
+  h5 {
+    font-size: 2rem;
+  }
+  h6 {
+    font-size: 1.2rem;
+    font-weight: 500;
+    letter-spacing: 1px;
+    margin: 2rem 0rem 1rem 0rem;
+  }
+
+  .progress {
+    background-color: transparent;
+    border: 1px solid $border-color;
+    width: 70%;
+    height: 2rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    font-size: 0.9rem;
+
+    &-bar {
+      background-color: $main-color;
+    }
+  }
+}
+
+.coins {
+  letter-spacing: 1px;
+  margin-top: 0.5rem;
+  margin-left: 0.5rem;
+  font-size: 2rem;
+  font-weight: 700;
+  color: #fff;
+}
+
+img.Car-Sprite {
+  position: relative;
+  margin: 2rem 0rem;
+}
