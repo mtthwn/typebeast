@@ -18,7 +18,7 @@ export default class ModalLogic extends Component {
   };
 
   handleLogin = (email, password) => (e) => {
-    e.preventDefault();
+    // e.preventDefault();
     axios.post('http://127.0.0.1:8081/api/auth/login', {
       email,
       password
@@ -26,8 +26,9 @@ export default class ModalLogic extends Component {
     .then((res) => {
       console.log(res)
     })
-
-
+    .catch(e => {
+      console.log(e.message)
+    })
   }
 
 
