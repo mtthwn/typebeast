@@ -13,6 +13,21 @@ export default () => {
       <div class="slide fade" id="slide-3">
         <img src={carSlide1} alt="slide" />
       </div>
+
+      <div id="controls-wrapper">
+        <p class="slider-arrow center_y" id="arrow-prev">
+          &#1094;
+        </p>
+        <p class="slider-arrow center_y" id="arrow-prev">
+          &#1095;
+        </p>
+      </div>
+
+      <div className="car-sprites" id="car-sprites-wrapper">
+        <div class="car-sprite 1"></div>
+        <div class="car-sprite 1"></div>
+        <div class="car-sprite 1"></div>
+      </div>
     </div>
   );
 };
