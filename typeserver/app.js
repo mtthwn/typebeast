@@ -11,6 +11,8 @@ const cors = require('cors');
 
 const { mongoose } = require('./db/config');
 
+const middleware = require('./middleware');
+
 const indexRouter = require('./routes/index');
 // const usersRouter = require('./routes/user/');
 const authRoutes = require('./routes/auth/');
@@ -20,12 +22,13 @@ const carRoutes = require('./routes/car');
 
 const app = express();
 
+app.use(middleware);
+
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cors());
 app.use(cookieParser());
-
 // app.use('/api/users', usersRouter);
 app.use('/api/auth', authRoutes);
 app.use('/api/quotes', quoteRoutes);
