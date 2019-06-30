@@ -162,13 +162,10 @@ class PlayGameLogic extends Component {
     });
 
     socket.on('game-start', message => {
-      // console.log(message.description);
-      // console.log(message.quote);
 
       this.onStartCountdown();
       this.onSetQuote(message.quote);
 
-      // Display message saying game will start soon
     });
 
     socket.on('progress-broadcast', message => {
