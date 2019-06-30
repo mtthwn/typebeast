@@ -7,7 +7,7 @@
   @include Main-btn;
   width: 40%;
   font-weight: 600;
-  font-size: 2rem;
+  font-size: 3rem;
   margin: 0 auto;
   top: 80%;
   left: 30%;
@@ -87,13 +87,16 @@
   }
   h6 {
     font-size: 1.2rem;
+    font-weight: 500;
+    letter-spacing: 1px;
     margin: 2rem 0rem 1rem 0rem;
   }
 
   .progress {
+    background-color: transparent;
+    border: 1px solid $border-color;
     width: 70%;
-    height: 1.2rem;
-    border-radius: 2rem;
+    height: 2rem;
     font-weight: 700;
     letter-spacing: 1px;
     font-size: 0.9rem;
@@ -104,19 +107,15 @@
   }
 }
 
-.CarPrice {
-  display: flex;
-  align-content: flex-start;
-
-  .coins {
-    letter-spacing: 1px;
-    margin-top: 0.5rem;
-    margin-left: 0.5rem;
-    font-size: 2rem;
-    font-weight: 700;
-    color: $main-color;
-  }
+.coins {
+  letter-spacing: 1px;
+  margin-top: 0.5rem;
+  margin-left: 0.5rem;
+  font-size: 2rem;
+  font-weight: 700;
+  color: #fff;
 }
+
 img.Car-Sprite {
   position: relative;
   margin: 2rem 0rem;

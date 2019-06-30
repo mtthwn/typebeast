@@ -35,34 +35,21 @@ export default () => {
                 <h6>Max Speed</h6>
                 <ProgressBar
                   now={maxspeed}
-                  max="300"
+                  max="250"
                   label={`${maxspeed}mph`}
                 />
                 <h6>Acceleration 0-100 kph</h6>
                 <ProgressBar
-                  now={maxspeed}
-                  max="300"
+                  now={accerlation}
+                  max="10"
                   label={`${accerlation} seconds`}
                 />
-                <h6>Price</h6>
-                <div className="CarPrice">
-                  <h2>$5000</h2>
-                  <span className="coins">Coins</span>
-                </div>
               </Carousel.Caption>
               <img className="CarSlide" src={silvia} alt="slide" />
             </Carousel.Item>
-            {/* <Carousel.Item>
-              <img src={carSlide1} alt="car sprite" />
-              <Carousel.Caption className="CarSlider-content">
-                <h5>Nissan</h5>
-                <h3>Skyline GTR</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-              </Carousel.Caption>
-            </Carousel.Item> */}
           </Carousel>
           <Button className="ShopSlider-BuyBtn" variant="outline-light">
-            Buy Now
+            Buy Now <span className="CarPrice">$5000 Coins</span>
           </Button>
         </div>
       )}
