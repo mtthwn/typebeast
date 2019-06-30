@@ -56,4 +56,31 @@
   left: 7%;
   right: 50%;
   top: 30%;
+
+  h3 {
+    color: #fff;
+    font-family: $header-font;
+    font-style: italic;
+    font-size: 8rem;
+    letter-spacing: 2px;
+    line-height: 7rem;
+    text-transform: uppercase;
+    font-weight: 900;
+    margin-bottom: 2rem;
+  }
+  h5 {
+    font-size: 2rem;
+  }
+  h6 {
+    font-size: 1.5rem;
+    margin: 2rem 0rem 1.5rem 0rem;
+  }
+  .progress {
+    height: 2rem;
+    font-size: 1.5rem;
+
+    &-bar {
+      background-color: $main-color;
+    }
+  }
 }
