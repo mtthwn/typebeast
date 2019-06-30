@@ -11,6 +11,8 @@ function Root() {
     <Router>
       <Header />
       <Route path="/" exact component={Main} />
+      <Route path="/shop" component={Game} />
+
       <Route path="/play" component={Game} />
     </Router>
   );
