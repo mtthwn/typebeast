@@ -55,7 +55,6 @@ io.on('connection', function(socket) {
   ) {
     socket.join('room-' + roomNum);
     userCount['room-' + roomNum]['users']++;
-    // console.log(userCount);
 
     //If the room exists and is at capacity, increase the room number, join the new room, set count to 1
   } else {
@@ -67,7 +66,6 @@ io.on('connection', function(socket) {
     };
     getQuote(userCount['room-' + roomNum]);
 
-    // console.log(userCount);
   }
 
   //Set up variable to get array of socket IDs in current room
