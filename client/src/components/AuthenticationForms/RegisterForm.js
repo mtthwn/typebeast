@@ -12,6 +12,34 @@ export default class RegisterForm extends Component {
     }
   }
 
+  onChange = inputType => event => {
+    event.preventDefault();
+
+    if (inputType === 'username') {
+      this.setState({
+        username: event.target.value
+      })
+    } else if (inputType === 'email') {
+      this.setState({
+        email: event.target.value
+      })
+    } else {
+      this.setState({
+        password: event.target.value
+      })
+    }
+  }
+
+  onSubmit = event => {
+    event.preventDefault();
+    const username = this.state.username;
+    const email = this.state.email;
+    const password = this.state.password;
+    if (this.state.username > 0 && this.state.email.length > 0 && this.state.password.length > 0) {
+      this.props.handleRegister(username, email, password)();
+    }
+  }
+
   render() {
     return (
       <Form>
