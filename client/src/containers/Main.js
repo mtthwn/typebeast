@@ -25,22 +25,6 @@ class MainPage extends Component {
   }
 
   async componentDidMount () {
-    // const token = localStorage.getItem('token');
-
-    // axios
-    //   .get(`http://127.0.0.1:8081/api/auth/me/from/token`, {
-    //     params: {
-    //       token: JSON.parse(token)
-    //     }
-    //   })
-    //   .then(response => {
-    //     if (response.data.success) {
-    //       this.setState({ user: response.data.user });
-    //     }
-    //   })
-    //   .catch(e => {
-    //     console.log(e);
-    //   });
 
     const user = await tokenValidationHelper();
 
