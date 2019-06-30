@@ -2,6 +2,8 @@ import React from 'react';
 import { Nav, Navbar, Button, Form } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import './Header.scss';
+import Register from '../AuthenticationForms/Register';
+import Login from '../AuthenticationForms/Login';
 
 const Header = () => {
   return (
@@ -28,14 +30,10 @@ const Header = () => {
               Play Now
             </Link>
           </Nav>
-          <Form inline className="Header-signup">
-            <Button className="sign-up" variant="outline-light">
-              Signup
-            </Button>
-            <Button className="login" variant="outline-light">
-              Login
-            </Button>
-          </Form>
+          <div inline className="Header-signup">
+            <Register className="sign-up" />
+            <Login className="login" />
+          </div>
         </Navbar.Collapse>
       </Navbar>
     </div>
