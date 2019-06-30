@@ -121,8 +121,6 @@ class PlayGameLogic extends Component {
     });
 
     socket.on('welcome', message => {
-      // console.log(message.description);
-      // Display welcome message. Import the player's socket and room-player list from server.
       this.setState({
         playersInRoom: message.clients,
         playerSocket: message.socket,
