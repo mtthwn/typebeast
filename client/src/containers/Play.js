@@ -181,13 +181,17 @@ class PlayGameLogic extends Component {
     socket.on('progress-broadcast', message => {
       const carPositioning = this.state.carPositioning;
 
-      carPositioning[message.socketId] = message.completion;
+      if (carPositioning[message.socketId]) {
+        carPositioning[message.socketId] = message.completion;
+      }
 
       this.setState({ carPositioning });
 
       const leaderboard = this.state.leaderboard;
 
-      leaderboard[message.socketId].completion = message.completion;
+      if (leaderboard[message.socketId]) {
+        leaderboard[message.socketId].completion = message.completion;
+      }
 
       if (leaderboard[message.socketId].completion === true) {
         leaderboard[message.socketId].completed = true
