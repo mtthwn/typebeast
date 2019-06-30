@@ -146,11 +146,10 @@ class PlayGameLogic extends Component {
 
         leaderboard[user] = {
           ...formattedData[user],
-          completion: 0,
+          completion: { progress: 0 },
           completed: false
         }
         carPositioning[user] = { progress: 0 }
-        console.log(carPositioning)
       }
       this.setState(carPositioning);
       this.setState(leaderboard);
