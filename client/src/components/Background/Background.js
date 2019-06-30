@@ -43,7 +43,6 @@ const Background = ({
 
   const carIds = Object.keys(carPositioning);
   const Cars = carIds.map((car, index) => {
-    const percentageComplete = carPositioning[car].progress
     return (
       <Car
         percentageComplete={`${Number(carPositioning[car].progress) * 100}%`}
@@ -66,9 +65,5 @@ const Background = ({
     </div>
   );
 };
-
-// <Player1Car onFinish={onFinish} carPositioning={carPositioning} />
-//      <Player2Car onFinish={onFinish} carPositioning={carPositioning} />
-//      <Player3Car onFinish={onFinish} carPositioning={carPositioning} />
 
 export default Background;

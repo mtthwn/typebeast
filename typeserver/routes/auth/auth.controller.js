@@ -4,94 +4,87 @@ const jwt = require('jsonwebtoken');
 const User = require('./../../db/model/User');
 const { generateToken, getCleanUser } = require('./../../utils/auth');
 
-const index = (req, res) => {
-  res.status(200).json({
-    message: 'welcome to the auth routes'
-  });
-};
-
-const register = (req, res) => {
-  const username = req.body.username.trim();
-  const email = req.body.email.trim();
-  const password = bcrypt.hashSync(req.body.password.trim(), 10);
-
-  User({ username, email, password })
-    .save()
-    .then(savedUser => {
-      const token = generateToken(savedUser);
-      const user = getCleanUser(savedUser);
-
-      res.status(200).json({ success: true, user, token });
-    })
-    .catch(e => {
-      res.status(401).json({ success: false, message: e.message });
+module.exports = {
+  index: (req, res) => {
+    res.status(200).json({
+      message: 'welcome to the auth routes'
     });
-};
+  },
+  register: (req, res) => {
+    const username = req.body.username.trim();
+    const email = req.body.email.trim();
+    const password = bcrypt.hashSync(req.body.password.trim(), 10);
 
-const login = (req, res) => {
-  const { email, password } = req.body;
+    User({ username, email, password })
+      .save()
+      .then(savedUser => {
+        const token = generateToken(savedUser);
+        const user = getCleanUser(savedUser);
 
-  User.findOne({ email })
-    .exec()
-    .then(foundUser => {
-      if (!foundUser) {
-        return res
-          .status(404)
-          .json({ success: false, message: 'Incorrect username or password' });
-      }
+        res.status(200).json({ success: true, user, token });
+      })
+      .catch(e => {
+        res.status(401).json({ success: false, message: e.message });
+      });
+  },
+  login: (req, res) => {
+    const { email, password } = req.body;
 
-      bcrypt.compare(password, foundUser.password, (err, valid) => {
-        if (!valid) {
+    User.findOne({ email })
+      .exec()
+      .then(foundUser => {
+        if (!foundUser) {
           return res.status(404).json({
             success: false,
             message: 'Incorrect username or password'
           });
         }
 
-        const token = generateToken(foundUser);
-        const user = getCleanUser(foundUser);
+        bcrypt.compare(password, foundUser.password, (err, valid) => {
+          if (!valid) {
+            return res.status(404).json({
+              success: false,
+              message: 'Incorrect username or password'
+            });
+          }
 
-        res.status(200).json({ success: true, token, user });
+          const token = generateToken(foundUser);
+          const user = getCleanUser(foundUser);
+
+          res.status(200).json({ success: true, token, user });
+        });
+      })
+      .catch(e => {
+        res.status(401).json({ success: false, message: e.message });
       });
-    })
-    .catch(e => {
-      res.status(401).json({ success: false, message: e.message });
-    });
-};
+  },
+  checkToken: (req, res) => {
+    const { token } = req.body || req.query;
 
-const checkToken = (req, res, next) => {
-  const { token } = req.body || req.query;
-
-  if (!token) {
-    return res
-      .status(401)
-      .json({ success: false, message: 'No token was sent' });
-  }
-
-  jwt.verify(token, process.env.JWT_SECRET, (err, foundUser) => {
-    if (err) {
-      return res.status(401).json({ success: false, message: err.message });
+    if (!token) {
+      return res
+        .status(401)
+        .json({ success: false, message: 'No token was sent' });
     }
 
-    User.findById({ _id: user._id }, (err, foundUser) => {
+    jwt.verify(token, process.env.JWT_SECRET, (err, foundUser) => {
       if (err) {
         return res.status(401).json({ success: false, message: err.message });
       }
 
-      const user = getCleanUser(foundUser);
+      User.findById({ _id: user._id }, (err, foundUser) => {
+        if (err) {
+          return res.status(401).json({ success: false, message: err.message });
+        }
 
-      res.status(200).json({
-        success: true,
-        user,
-        token
+        const user = getCleanUser(foundUser);
+
+        res.status(200).json({
+          success: true,
+          user,
+          token
+        });
       });
     });
-  });
-};
-
-module.exports = {
-  index,
-  register,
-  login,
-  checkToken
+  }
 };
