@@ -25,7 +25,7 @@ export default ({ className }) => {
               <Modal.Title>Register</Modal.Title>
             </Modal.Header>
             <Modal.Body>
-              <RegisterForm />
+              <RegisterForm handleRegister={props.handleRegister} />
             </Modal.Body>
           </Modal>
         </>

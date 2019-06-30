@@ -29,7 +29,7 @@ export default class LoginForm extends Component {
     event.preventDefault();
     const email = this.state.email;
     const password = this.state.password;
-    if (this.state.email.length > 0 && this.state.password.length > 0) {
+    if (email.length > 0 && password.length > 0) {
       this.props.handleLogin(email, password)();
     }
   }
