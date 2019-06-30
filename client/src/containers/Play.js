@@ -138,22 +138,19 @@ class PlayGameLogic extends Component {
       const leaderboard = this.state.leaderboard;
       const carPositioning = this.state.carPositioning;
 
-      // console.log(formattedData)
       // formattedData.forEach(user => {
       //   leaderboard[user] = formattedData[user];
       // })
 
       for (const user in formattedData) {
-        // leaderboard[user] = formattedData[user];
-        // leaderboard[user].completion = 0
-        // leaderboard[user].completed = false
+
         leaderboard[user] = {
           ...formattedData[user],
           completion: 0,
           completed: false
         }
-        carPositioning[user] = {progress: 0}
-
+        carPositioning[user] = { progress: 0 }
+        console.log(carPositioning)
       }
       this.setState(carPositioning);
       this.setState(leaderboard);
@@ -191,7 +188,6 @@ class PlayGameLogic extends Component {
       const leaderboard = this.state.leaderboard;
 
       leaderboard[message.socketId].completion = message.completion;
-      // console.log('Here', message.completion.progress);
 
       if (leaderboard[message.socketId].completion === true) {
         leaderboard[message.socketId].completed = true
@@ -249,21 +245,28 @@ class PlayGameLogic extends Component {
       const formattedClients = message.formattedClients;
       const leaderboard = this.state.leaderboard;
       const clients = Object.keys(leaderboard);
+      const carPositioning = this.state.carPositioning;
 
       if (formattedClients) {
         clients.forEach(client => {
           if (!formattedClients[client] && leaderboard[client]) {
             delete leaderboard[client];
           }
+
+          // Deleting car positioning removes cars from render prior to countdown, but not during game.
+          if (!formattedClients[client] && carPositioning[client]) {
+            delete carPositioning[client];
+          }
         });
 
-        this.setState({ leaderboard });
+        this.setState({ leaderboard, carPositioning });
       }
+
     });
 
     socket.on('disconnect', () => {
       alert('Please reload your page');
-      this.setState({ leaderboard: {}, placings: [], progress: 0 });
+      this.setState({ leaderboard: {}, placings: [], progress: 0, carPositioning: {} });
     });
   }
 
@@ -381,7 +384,10 @@ class PlayGameLogic extends Component {
           return acc + curr.length;
         }, 0) / this.state.words.length
       );
-      this.setState({ averageLength });
+
+      if (!Number.isNaN(averageLength) && (averageLength !== 0)) {
+        this.setState({ averageLength });
+      }
     }
   };
 
@@ -390,7 +396,7 @@ class PlayGameLogic extends Component {
     if (!this.state.timerStart) {
       this.setState({ timerStart: true });
       this.interval = setInterval(() => {
-        // timer
+        // Timer
         this.setState(prevProps => {
           return { sec: prevProps.sec + 1, timer: prevProps.timer + 1 };
         });
