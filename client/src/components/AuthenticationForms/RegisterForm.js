@@ -35,9 +35,10 @@ export default class RegisterForm extends Component {
     const username = this.state.username;
     const email = this.state.email;
     const password = this.state.password;
-    if (this.state.username > 0 && this.state.email.length > 0 && this.state.password.length > 0) {
-      this.props.handleRegister(username, email, password)();
-    }
+    // if (username.length > 0 && email.length > 0 && password.length > 0) {
+    console.log(username, email, password)
+    this.props.handleRegister(username, email, password)();
+    // }
   }
 
   render() {
@@ -45,19 +46,19 @@ export default class RegisterForm extends Component {
       <Form>
         <Form.Group controlId="formBasicEmail">
           <Form.Label>Username</Form.Label>
-          <Form.Control type="text" placeholder="Enter Username" />
+          <Form.Control type="text" placeholder="Enter Username" onChange={this.onChange('username')}/>
         </Form.Group>
 
         <Form.Group controlId="formBasicEmail">
           <Form.Label>Email address</Form.Label>
-          <Form.Control type="email" placeholder="Enter email" />
+          <Form.Control type="email" placeholder="Enter email" onChange={this.onChange('email')}/>
         </Form.Group>
 
         <Form.Group controlId="formBasicPassword">
           <Form.Label>Password</Form.Label>
-          <Form.Control type="password" placeholder="Password" />
+          <Form.Control type="password" placeholder="Password" onChange={this.onChange('password')}/>
         </Form.Group>
-        <Button className="register" variant="primary" type="submit">
+        <Button className="register" variant="primary" type="submit" onClick={this.onSubmit}>
           Register
         </Button>
       </Form>

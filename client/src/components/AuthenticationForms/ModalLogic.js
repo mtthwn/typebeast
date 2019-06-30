@@ -24,7 +24,7 @@ export default class ModalLogic extends Component {
       password
     })
     .then((res) => {
-      console.log('Before saving to storage', res.data.token)
+      // console.log('Before saving to storage', res.data.token)
       const token = res.data.token
       localStorage.setItem('token', JSON.stringify(token));
       // console.log('Retrieve from storage', localStorage.getItem('token'))
@@ -41,6 +41,7 @@ export default class ModalLogic extends Component {
       password
     })
     .then((res) => {
+      console.log(res)
       const token = res.data.token
       localStorage.setItem('token', JSON.stringify(token));
     })
