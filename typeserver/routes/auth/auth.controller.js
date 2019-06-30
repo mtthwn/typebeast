@@ -58,7 +58,7 @@ module.exports = {
         res.status(401).json({ success: false, message: e.message });
       });
   },
-  checkToken: (req, res, next) => {
+  checkToken: (req, res) => {
     const { token } = req.body || req.query;
 
     if (!token) {
