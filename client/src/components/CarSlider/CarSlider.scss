@@ -6,7 +6,7 @@
   width: 100vw;
 }
 
-.d-block.w-100 {
+.d-block .w-100 {
   @include respond(tab-landscape) {
     position: relative;
     left: -50%;
