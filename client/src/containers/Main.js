@@ -7,6 +7,8 @@ import PlayNow from './../components/PlayNow/PlayNow';
 import { BrowserRouter as Router } from 'react-router-dom';
 import tokenValidationHelper from '../lib/tokenValidationHelper';
 
+import Header from './../components/Header/Header'
+
 class MainPage extends Component {
   constructor() {
     super();
@@ -34,13 +36,12 @@ class MainPage extends Component {
 
     return (
       <div>
-        <Router>
+        <Header />
           <div>
             <SocialMedia />
             <CarSlider />
             <PlayNow />
           </div>
-        </Router>
       </div>
     );
   }

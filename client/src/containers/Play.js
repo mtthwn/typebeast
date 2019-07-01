@@ -10,6 +10,7 @@ import NosGauge from './../components/Guages/NOSGuage';
 import socketIOClient from 'socket.io-client';
 import StartGameButton from './../components/StartGameButton/StartGameButton';
 import LeaderboardModal from './../components/LeaderboardModal/LeaderboardModal';
+import Header from './../components/Header/Header';
 
 const renderGame = props => {
   const countdown = props.countdown ? (
@@ -141,17 +142,15 @@ class PlayGameLogic extends Component {
       // })
 
       for (const user in formattedData) {
-
         leaderboard[user] = {
           ...formattedData[user],
           completion: { progress: 0 },
           completed: false
-        }
-        carPositioning[user] = { progress: 0 }
+        };
+        carPositioning[user] = { progress: 0 };
       }
       this.setState(carPositioning);
       this.setState(leaderboard);
-
     });
 
     socket.on('new-user-join', message => {
@@ -162,10 +161,8 @@ class PlayGameLogic extends Component {
     });
 
     socket.on('game-start', message => {
-
       this.onStartCountdown();
       this.onSetQuote(message.quote);
-
     });
 
     socket.on('progress-broadcast', message => {
@@ -184,9 +181,9 @@ class PlayGameLogic extends Component {
       }
 
       if (leaderboard[message.socketId].completion === true) {
-        leaderboard[message.socketId].completed = true
+        leaderboard[message.socketId].completed = true;
       } else {
-        leaderboard[message.socketId].completed = false
+        leaderboard[message.socketId].completed = false;
       }
 
       this.setState({ leaderboard });
@@ -256,12 +253,16 @@ class PlayGameLogic extends Component {
 
         this.setState({ leaderboard, carPositioning });
       }
-
     });
 
     socket.on('disconnect', () => {
       alert('Please reload your page');
-      this.setState({ leaderboard: {}, placings: [], progress: 0, carPositioning: {} });
+      this.setState({
+        leaderboard: {},
+        placings: [],
+        progress: 0,
+        carPositioning: {}
+      });
     });
   }
 
@@ -374,7 +375,7 @@ class PlayGameLogic extends Component {
         }, 0) / this.state.words.length
       );
 
-      if (!Number.isNaN(averageLength) && (averageLength !== 0)) {
+      if (!Number.isNaN(averageLength) && averageLength !== 0) {
         this.setState({ averageLength });
       }
     }
@@ -394,7 +395,9 @@ class PlayGameLogic extends Component {
         if (this.state.sec > 0) {
           const char =
             this.state.wordsCompleted.length + this.state.userInput.length;
-          const wpm = Math.floor((char / this.state.averageLength / this.state.sec) * 60);
+          const wpm = Math.floor(
+            (char / this.state.averageLength / this.state.sec) * 60
+          );
 
           this.setState({ wpm });
         } else {
@@ -415,7 +418,9 @@ class PlayGameLogic extends Component {
     if (this.state.sec > 0) {
       const char =
         this.state.wordsCompleted.length + this.state.userInput.length;
-      const wpm = Math.floor((char / this.state.averageLength / this.state.sec) * 60);
+      const wpm = Math.floor(
+        (char / this.state.averageLength / this.state.sec) * 60
+      );
 
       this.setState({ wpm });
     }
@@ -435,24 +440,27 @@ export default () => {
   return (
     <PlayGameLogic>
       {values => (
-        <div className="PlayGame">
-          <Background
-            playerSocket={values.playerSocket}
-            carPositioning={values.carPositioning}
-            onFinish={values.timerFinished}
-            onStart={values.timerStart}
-            timer={values.timer}
-            showUsername={values.leaderboard}
-            roomNumber={values.roomNumber}
-            leaderboard={values.leaderboard}
-            placings={values.placings}
-          />
+        <div>
+          <Header />
+          <div className="PlayGame">
+            <Background
+              playerSocket={values.playerSocket}
+              carPositioning={values.carPositioning}
+              onFinish={values.timerFinished}
+              onStart={values.timerStart}
+              timer={values.timer}
+              showUsername={values.leaderboard}
+              roomNumber={values.roomNumber}
+              leaderboard={values.leaderboard}
+              placings={values.placings}
+            />
 
-          {!values.loading
-            ? renderGame({
-                ...values
-              })
-            : 'loading'}
+            {!values.loading
+              ? renderGame({
+                  ...values
+                })
+              : 'loading'}
+          </div>
         </div>
       )}
     </PlayGameLogic>

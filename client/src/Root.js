@@ -10,7 +10,6 @@ import Game from './containers/Play';
 function Root() {
   return (
     <Router>
-      <Header />
       <Route path="/" exact component={Main} />
       <Route path="/garage" component={Garage} />
       <Route path="/play" component={Game} />
