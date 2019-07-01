@@ -1,7 +1,8 @@
 import React from 'react';
 import { Nav, Navbar } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import { Button } from 'react-bootstrap';
+
+import HeaderButton from './../Button/HeaderButton'
 
 import './Header.scss';
 import Register from '../AuthenticationForms/Register';
@@ -16,12 +17,8 @@ const Header = ({ user }) => {
       </div>
     ) : (
       <div inline="true" className="Header-signup">
-        <Button className="sign-up" variant="primary">
-          Welcome, {user.username}
-        </Button>
-        <Button className="login" variant="primary">
-          Logout
-        </Button>
+        <HeaderButton className={'sign-up'} buttonText={`Welcome ${user.username}`} />
+        <HeaderButton className={'login'} buttonText={'Logout'} />
       </div>
     );
 
