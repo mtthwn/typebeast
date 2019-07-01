@@ -9,12 +9,14 @@ export default () => {
   return (
     <div className="Shop-container">
       <div className="CarSlider-content UserInfo">
+        <h1> Shop</h1>
+        <div className="border-bottom"></div>
         <img className="Car-Sprite" src={nissan_sprite} alt="car sprite" />
         <ul>
           <li>
             <h5>
               <FontAwesomeIcon icon={faUser} />
-              User
+              Username
             </h5>
             <h2>Big Kwok</h2>
           </li>
