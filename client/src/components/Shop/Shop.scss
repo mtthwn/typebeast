@@ -19,9 +19,10 @@
 .card-columns {
   display: flex;
   margin-right: 0;
+  margin-left: 10rem;
   margin-bottom: 2rem;
   width: 80%;
-  justify-content: space-between;
+  // justify-content: space-between;
 }
 .card {
   margin-right: 3rem;
