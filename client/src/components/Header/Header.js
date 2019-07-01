@@ -37,22 +37,9 @@ const renderButtons = username => {
 };
 
 const Header = ({ user }) => {
-  const renderButtons =
-    user.username === 'Guest' ? (
-      <div inline="true" className="Header-signup">
-        <Register className="sign-up" />
-        <Login className="login" />
-      </div>
-    ) : (
-      <div inline="true" className="Header-signup">
-        <HeaderButton
-          className={'sign-up'}
-          buttonText={`Welcome ${user.username}`}
-        />
-        <HeaderButton className={'login'} buttonText={'Logout'} />
-      </div>
-    );
+  const renderedButtons = renderButtons(user.username);
 
+  console.log(renderedButtons);
   return (
     <div>
       <Navbar collapseOnSelect expand="lg" className="Navbar" variant="dark">
@@ -77,7 +64,7 @@ const Header = ({ user }) => {
               Play Now
             </Link>
           </Nav>
-          {renderButtons}
+          {renderedButtons}
         </Navbar.Collapse>
       </Navbar>
     </div>
