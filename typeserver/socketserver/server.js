@@ -64,26 +64,26 @@ io.on('connection', function(socket) {
     }
 
     // Check if username already in room and set value.
-    function userInRoom () {
-      for (let socket in formattedClients[`room-${roomNum}`]) {
-        const existing = formattedClients[`room-${roomNum}`][socket].username
-        const newUser = formattedData.username
-        console.log(newUser, existing)
-        if (newUser === existing) {
-          return true;
-        }
-      }
-      return false;
-    }
-    alreadyInRoom = userInRoom();
-    console.log('Is the user in room formatted clients', alreadyInRoom)
+    // function userInRoom () {
+    //   for (let socket in formattedClients[`room-${roomNum}`]) {
+    //     const existing = formattedClients[`room-${roomNum}`][socket].username
+    //     const newUser = formattedData.username
+    //     console.log(newUser, existing)
+    //     if (newUser === existing) {
+    //       return true;
+    //     }
+    //   }
+    //   return false;
+    // }
+    // alreadyInRoom = userInRoom();
+    // console.log('Is the user in room formatted clients', )
     // If username not in room, proceed. Else, put user data in newer room.
-    if (!alreadyInRoom) {
+    // if (!alreadyInRoom) {
       formattedClients[`room-${roomNum}`][socket.id] = formattedData;
-    } else {
-      formattedClients[`room-${roomNum + 1}`] = {};
-      formattedClients[`room-${roomNum + 1}`][socket.id] = formattedData;
-    }
+    // } else {
+    //   formattedClients[`room-${roomNum + 1}`] = {};
+    //   formattedClients[`room-${roomNum + 1}`][socket.id] = formattedData;
+    // }
 
     console.log(`===============================`);
     console.log(formattedClients)
@@ -109,8 +109,8 @@ io.on('connection', function(socket) {
     //If the room is not at max capacity (4), add user to the room
   } else if (
     roomTracker['room-' + roomNum] &&
-    roomTracker['room-' + roomNum]['users'] < 4 &&
-    !alreadyInRoom
+    roomTracker['room-' + roomNum]['users'] < 4
+    // !alreadyInRoom
   ) {
     socket.join('room-' + roomNum);
     roomTracker['room-' + roomNum]['users']++;
@@ -173,9 +173,11 @@ io.on('connection', function(socket) {
     });
   });
 
-  socket.on('disconnecting', function() {
-    console.log(socket.id);
+  socket.on('navigate-away', () => {
+    socket.disconnect();
+  })
 
+  socket.on('disconnecting', function() {
     if (
       formattedClients[`room-${roomNum}`] &&
       formattedClients[`room-${roomNum}`][socket.id]

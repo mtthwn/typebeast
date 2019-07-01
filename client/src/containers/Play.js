@@ -261,13 +261,19 @@ class PlayGameLogic extends Component {
     });
 
     socket.on('disconnect', () => {
-      alert('Please reload your page');
+      // alert('Please reload your page');
       this.setState({ leaderboard: {}, placings: [], progress: 0, carPositioning: {} });
     });
   }
 
-  componentDidUpdate() {
+  // componentDidUpdate(prevProps) {
+  //   if (this.props.location.pathname !== prevProps.location.pathname) {
+  //     console.log("Route change!", this.props.location.pathname);
+  //   }
+  // }
 
+  componentWillUnmount() {
+    this.state.socket.emit('navigate-away');
   }
 
   render() {
