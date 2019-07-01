@@ -1,20 +1,38 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router } from 'react-router-dom';
 
 import GarageSlider from '../components/GarageSlider/GarageSlider';
+import Header from './../components/Header/Header';
 
-class MainPage extends Component {
+import tokenValidationHelper from './../lib/tokenValidationHelper'
+
+export default class Garage extends Component {
+  constructor() {
+    super();
+
+    this.state = {
+      user: {
+        username: 'Guest',
+        cars: [],
+        email: null,
+        games: []
+      }
+    }
+  }
+
+  async componentDidMount () {
+    const user = await tokenValidationHelper();
+
+    this.setState({ user });
+  }
+
   render() {
     return (
       <div>
-        <Router>
+        <Header user={this.state.user} />
           <div>
             <GarageSlider />
           </div>
-        </Router>
       </div>
     );
   }
 }
-
-export default MainPage;

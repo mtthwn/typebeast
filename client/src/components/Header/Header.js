@@ -1,12 +1,27 @@
 import React from 'react';
-import { Nav, Navbar, Button, Form } from 'react-bootstrap';
+import { Nav, Navbar } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+
+import HeaderButton from './../Button/HeaderButton'
 
 import './Header.scss';
 import Register from '../AuthenticationForms/Register';
 import Login from '../AuthenticationForms/Login';
 
-const Header = () => {
+const Header = ({ user }) => {
+  const renderButtons =
+    user.username === 'Guest' ? (
+      <div inline="true" className="Header-signup">
+        <Register className="sign-up" />
+        <Login className="login" />
+      </div>
+    ) : (
+      <div inline="true" className="Header-signup">
+        <HeaderButton className={'sign-up'} buttonText={`Welcome ${user.username}`} />
+        <HeaderButton className={'login'} buttonText={'Logout'} />
+      </div>
+    );
+
   return (
     <div>
       <Navbar collapseOnSelect expand="lg" className="Navbar" variant="dark">
@@ -31,10 +46,7 @@ const Header = () => {
               Play Now
             </Link>
           </Nav>
-          <div inline className="Header-signup">
-            <Register className="sign-up" />
-            <Login className="login" />
-          </div>
+          {renderButtons}
         </Navbar.Collapse>
       </Navbar>
     </div>
