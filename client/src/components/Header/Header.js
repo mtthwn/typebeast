@@ -8,16 +8,10 @@ import HeaderButton from './../Button/HeaderButton';
 import './Header.scss';
 import Register from '../AuthenticationForms/Register';
 import Login from '../AuthenticationForms/Login';
-import Axios from 'axios';
 
 const logoutHandler = () => {
-  axios.post('http://127.0.0.1/api/auth/logout')
-  .then(response => {
-
-    window.location.reload();
-  }).catch(e => {
-    console.log(e);
-  })
+  localStorage.removeItem('token');
+  window.location.reload();
 }
 
 const renderButtons = username => {
@@ -43,7 +37,7 @@ const renderButtons = username => {
         className={'sign-up'}
         buttonText={`Welcome ${username}`}
       />
-      <HeaderButton className='login' buttonText='Logout' />
+      <HeaderButton cb={logoutHandler} className='login' buttonText='Logout' />
     </div>
   );
 };
