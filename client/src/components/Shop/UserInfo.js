@@ -1,12 +1,12 @@
 import React from 'react';
-import { CardColumns, Card, Button } from 'react-bootstrap';
+import { CardColumns, Card, Button, ProgressBar } from 'react-bootstrap';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser, faCoins } from '@fortawesome/free-solid-svg-icons';
 
 import './Shop.scss';
 import nissan_sprite from './../../img/gtx_md.png';
-import porsche_sprite from './../../img/porsche.png';
+import porsche_sprite from './../../img/porsche_md.png';
 
 export default () => {
   return (
@@ -38,10 +38,12 @@ export default () => {
           <Card>
             <Card.Img variant="top" src={porsche_sprite} />
             <Card.Body>
-              <Card.Title>Card title</Card.Title>
+              <Card.Title>Nissan SILVIA S15</Card.Title>
               <Card.Text>
-                This card has supporting text below as a natural lead-in to
-                additional content.{' '}
+                <h6>Max Speed</h6>
+                <ProgressBar now="177" max="250" label={`177 mph`} />
+                <h6>Acceleration 0-100 kph</h6>
+                <ProgressBar now="5.5" max="10" label={`5.5 seconds`} />
               </Card.Text>
             </Card.Body>
             <Card.Footer>

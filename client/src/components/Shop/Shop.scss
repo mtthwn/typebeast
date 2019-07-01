@@ -9,29 +9,58 @@
   width: 70%;
   padding-top: 10rem;
   padding-left: 6rem;
+}
 
-  .card {
+.card {
+  background-color: $bg-color;
+  border: 1px solid $border-color;
+
+  .card-img-top {
+    width: 100%;
+    padding: 2rem 6rem;
+    height: auto;
+    margin: 0 auto;
+  }
+
+  .card-title {
+    text-transform: uppercase;
+    font-size: 1.8rem;
+  }
+
+  .card-text {
+    h5 {
+      font-size: 2rem;
+    }
+
+    h1 {
+      font-size: 3rem;
+    }
+  }
+  .card-body {
+    padding: 2rem 4rem;
+    border-top: 1px solid $border-color;
+    color: #fff;
     background-color: $bg-color;
-    border: 1px solid $border-color;
 
-    .card-body {
-      border-top: 1px solid $border-color;
-      color: #fff;
-      background-color: $bg-color;
-    }
-    .card-footer {
-      padding: 0 0;
-    }
-    .Buy-Btn {
-      // font-size: 2rem;
-      // background-color: $main-color;
-      // border: none;
-      // padding: 2rem 0rem;
-      @include Main-btn;
+    .progress {
+      @include Progress-bar;
       width: 100%;
     }
   }
+  .card-footer {
+    padding: 0 0;
+  }
+  .Buy-Btn {
+    @include Main-btn;
+    width: 100%;
+
+    &:hover {
+      background-color: #fff;
+      color: #000;
+    }
+  }
 }
+
 .UserInfo {
   display: flex;
   flex-direction: column;
@@ -88,5 +117,6 @@
     height: 5px;
     width: 20%;
     margin-bottom: 15rem;
+    border-bottom: 0 !important;
   }
 }
