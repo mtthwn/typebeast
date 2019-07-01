@@ -11,19 +11,18 @@ module.exports = {
       message: 'welcome to the auth routes'
     });
   },
-  register: (req, res) => {
+  register: async (req, res) => {
     const username = req.body.username.trim();
     const email = req.body.email.trim();
     const password = bcrypt.hashSync(req.body.password.trim(), 10);
 
-    User({ username, email, password })
+    const defaultCar = await Car.findOne({ name: 'Civic' });
+
+    await User({ username, email, password, cars: [defaultCar._id], currentCar: defaultCar._id })
       .save()
       .then(async savedUser => {
-        const defaultCar = await Car.findOne({ name: 'Civic' });
         const token = generateToken(savedUser);
         const user = getCleanUser(savedUser);
-
-        user.car = defaultCar._id;
 
         res.status(200).json({ success: true, user, token });
       })
