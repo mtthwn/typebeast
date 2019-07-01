@@ -2,10 +2,10 @@ import React from 'react';
 import { Carousel, Button } from 'react-bootstrap';
 
 import CarSliderLogic from '../CarSlider/CarSliderLogic';
-import SliderCaption from '../ShopSlider/SliderCaption';
+import SliderCaption from '../GarageSlider/SliderCaption';
 import ImageSlider from '../CarSlider/ImageSlider';
 
-import './ShopSlider.scss';
+import './GarageSlider.scss';
 
 import nissan from './../../img/nissan_silvia_slide.png';
 import porsche from './../../img/porsche.png';

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
 
-import ShopSlider from './../components/ShopSlider/ShopSlider';
+import GarageSlider from '../components/GarageSlider/GarageSlider';
 
 class MainPage extends Component {
   render() {
@@ -9,7 +9,7 @@ class MainPage extends Component {
       <div>
         <Router>
           <div>
-            <ShopSlider />
+            <GarageSlider />
           </div>
         </Router>
       </div>
