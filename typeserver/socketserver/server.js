@@ -8,18 +8,38 @@ const port = process.env.PORT || 8080;
 
 let roomNum = 1; // Var tracks the room new users will be directed to.
 
-let roomTracker = {
+const roomTracker = {
   totalUsers: 0
 };
 
-/* roomTracker object: {
+const formattedClients = {};
+
+/*
+
+roomTracker object: {
   total: 12,
-  room-1: 3,
-  room-2: 3,
-  room-3: 3,
-  room-4: 3
+  room-1: {
+    users: 3,
+    quote: ''
+  }
 }
+
+  formattedClients = {
+    room-1 :
+      socket-1 : {
+        username:
+        car:
+      }
+  }
+
+  for socket in formattedClients[room-1] {
+    if socket.username ===
+  }
+
+
 */
+
+
 
 const getQuote = room => {
   if (!roomTracker['room-' + roomNum]['quote']) {
@@ -27,19 +47,18 @@ const getQuote = room => {
       .get('http://127.0.0.1:8081/api/quotes')
       .then(res => {
         room['quote'] = res.data.data.quote;
-        console.log(roomTracker);
+        // console.log(roomTracker);
       })
       .catch(e => console.log(e.message));
   }
 };
 
-const formattedClients = {};
 
 io.on('connection', function(socket) {
   roomTracker.totalUsers++;
   console.log('\na user connected, users in server:', roomTracker.totalUsers);
 
-  // Handler to receive user
+  // Handler to receive username and vehicle. Must happen first.
   socket.on('user-update', data => {
     const formattedData = JSON.parse(data).user;
     if (!formattedClients[`room-${roomNum}`]) {
@@ -96,21 +115,6 @@ io.on('connection', function(socket) {
     clients: clientsArray,
     roomNum
   });
-
-  /*
-  formattedClients = {
-    room-1 :
-      socket-1 : {
-        username:
-        car:
-      }
-  }
-
-  for socket in formattedClients[room-1] {
-    if socket.username ===
-  }
-
-  */
 
   //Broadcast that a new user joined to everyone ~else~
   socket.broadcast.to('room-' + roomNum).emit('new-user-join', {
