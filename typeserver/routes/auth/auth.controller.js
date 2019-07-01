@@ -42,7 +42,7 @@ module.exports = {
 
         bcrypt.compare(password, foundUser.password, (err, valid) => {
           if (!valid) {
-            return res.status(404).json({
+            return res.status(401).json({
               success: false,
               message: 'Incorrect username or password'
             });
@@ -59,7 +59,7 @@ module.exports = {
       });
   },
   checkToken: (req, res) => {
-    const { token } = req.body || req.query;
+    const { token } = req.query;
 
     if (!token) {
       return res
@@ -67,12 +67,12 @@ module.exports = {
         .json({ success: false, message: 'No token was sent' });
     }
 
-    jwt.verify(token, process.env.JWT_SECRET, (err, foundUser) => {
+    jwt.verify(token, process.env.JWT_SECRET, (err, tokenUser) => {
       if (err) {
         return res.status(401).json({ success: false, message: err.message });
       }
 
-      User.findById({ _id: user._id }, (err, foundUser) => {
+      User.findById({ _id: tokenUser._id }, (err, foundUser) => {
         if (err) {
           return res.status(401).json({ success: false, message: err.message });
         }
