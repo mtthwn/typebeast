@@ -5,7 +5,9 @@ import BuyCard from './BuyCard';
 import nissan_sprite from './../../img/gtx_md.png';
 import porsche_sprite from './../../img/porsche_md.png';
 
-export default () => {
+export default props => {
+  console.log(props);
+  // const renderCars = cars.map(car => <BuyCard car={car} />);
   return (
     <CardColumns>
       <BuyCard src={nissan_sprite} />

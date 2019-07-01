@@ -29,9 +29,12 @@ class MainPage extends Component {
 
       this.setState({ user });
 
-      const cars = await axios.get('http://127.0.0.1:8081/api/cars');
+      await axios.get('http://127.0.0.1:8081/api/cars').then(data => {
+        const { cars } = data.data;
 
-      this.setState({ cars });
+        this.setState({ cars });
+
+      })
     } catch (e) {
       console.log(e);
     }
@@ -43,7 +46,7 @@ class MainPage extends Component {
         <Header user={this.state.user} />
         <div className="Shop-container">
           <ShopUserInfo />
-          <CarList />
+          <CarList cars={this.state.cars} />
         </div>
       </div>
     );
