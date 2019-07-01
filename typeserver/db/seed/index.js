@@ -70,6 +70,14 @@ const cars = [
     mediumImg: 'https://i.imgur.com/nJYJFty.png',
     largeImg: 'https://i.imgur.com/Evae8Vc.png',
     price: 5000
+  },
+  {
+    model: 'Tran Mobile',
+    make: 'Porsche',
+    spriteFile: 'https://i.imgur.com/UBAaAZq.png',
+    mediumImg: 'https://i.imgur.com/8k3z73p.png',
+    largeImg: 'https://i.imgur.com/9CkPCCn.png',
+    price: 5000
   }
 ];
 
