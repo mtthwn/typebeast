@@ -33,12 +33,17 @@ class MainPage extends Component {
         const { cars } = data.data;
 
         this.setState({ cars });
-
-      })
+      });
     } catch (e) {
       console.log(e);
     }
   }
+
+  buyCarFunction = _id => e => {
+    e.preventDefault();
+
+    console.log(_id);
+  };
 
   render() {
     return (
@@ -46,7 +51,7 @@ class MainPage extends Component {
         <Header user={this.state.user} />
         <div className="Shop-container">
           <ShopUserInfo />
-          <CarList cars={this.state.cars} />
+          <CarList buyCarFunction={this.buyCarFunction} cars={this.state.cars} />
         </div>
       </div>
     );

@@ -23,13 +23,14 @@ import { Card, Button, ProgressBar } from 'react-bootstrap';
 //   );
 // };
 
-export default ({ car }) => {
-  
+export default ({ car, buyCarFunction }) => {
   return (
     <Card>
       <Card.Img variant="top" src={car.mediumImg} />
       <Card.Body>
-        <Card.Title>{car.make} {car.model}</Card.Title>
+        <Card.Title>
+          {car.make} {car.model}
+        </Card.Title>
         <Card.Text>
           <h6>Max Speed</h6>
           <ProgressBar now="177" max="250" label={`177 mph`} />
@@ -38,7 +39,11 @@ export default ({ car }) => {
         </Card.Text>
       </Card.Body>
       <Card.Footer>
-        <Button className="Buy-Btn" variant="outline-light">
+        <Button
+          onClick={buyCarFunction(car._id)}
+          className="Buy-Btn"
+          variant="outline-light"
+        >
           ${car.price}
         </Button>
       </Card.Footer>

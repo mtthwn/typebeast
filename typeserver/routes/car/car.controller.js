@@ -36,12 +36,15 @@ module.exports = {
         res.status(400).json({ success: false, message: 'No user found' });
       });
   },
-  addUserCar: (req, res) => {
-    const { email } = req.params;
-    const { car } = req.body;
+  addUserCar: async (req, res) => {
+    try {
 
+       const { car, _id } = req.body;
+
+    const user = User.findOne({ _id }).exec();
+    // const car = Car.findOne({ _id: car });
     User.findOneAndUpdate(
-      { email },
+      { _id },
       { $push: { cars: mongoose.Types.ObjectId(car) } }
     )
       .exec()
@@ -53,5 +56,10 @@ module.exports = {
       .catch(e => {
         res.status(400).json({ success: false, message: e.message });
       });
+
+    } catch (e) {
+    
+    }
   }
+   
 };
