@@ -4,11 +4,14 @@ export default () => {
   return new Promise((res, rej) => {
     const token = localStorage.getItem('token');
 
+    console.log(token);
     if (!token) {
-      return {
+      res({
         username: 'Guest',
-        email: null
-      };
+        email: null,
+        cars: [],
+        games: []
+      });
     }
 
     axios

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Form } from 'react-bootstrap';
+import { Button, Form, Alert } from 'react-bootstrap';
 import './Form.scss';
 
 export default class LoginForm extends Component {
@@ -37,6 +37,7 @@ export default class LoginForm extends Component {
   render() {
     return (
       <Form>
+        <Alert hidden id='login-alert' variant='danger'></Alert>
         <Form.Group controlId="formBasicEmail">
           <Form.Label>Email address</Form.Label>
           <Form.Control type="email" placeholder="Enter email" onChange={this.onChange('email')} />
