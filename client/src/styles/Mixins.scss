@@ -77,3 +77,28 @@
     transform: translateY(-1px);
   }
 }
+
+@mixin onHover-transform {
+  &:hover {
+    transform: scale(1.1);
+    // transform: translateY(-20px);
+  }
+
+  &:active {
+    transform: translateY(-1px);
+  }
+}
+
+@mixin Progress-bar {
+  background-color: transparent;
+  border: 1px solid $border-color;
+  width: 70%;
+  height: 2rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  font-size: 0.9rem;
+
+  &-bar {
+    background-color: $main-color;
+  }
+}
