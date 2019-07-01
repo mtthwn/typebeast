@@ -3,28 +3,42 @@
 
 .Shop-container {
   display: flex;
+  justify-content: space-between;
 }
 
 .Shop-Carlist-container {
-  width: 70%;
-  padding-top: 10rem;
-  padding-left: 6rem;
+  box-sizing: border-box;
+  width: 80%;
+  padding: 10rem 6rem 0rem 6rem;
 }
 
+.Shop-CarPrice {
+  display: flex;
+  align-content: flex-start;
+}
+.card-columns {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
 .card {
+  margin-right: 4rem;
   background-color: $bg-color;
   border: 1px solid $border-color;
+  text-transform: uppercase;
 
   .card-img-top {
     width: 100%;
-    padding: 2rem 6rem;
+    padding: 2rem 10rem 0rem 3rem;
     height: auto;
     margin: 0 auto;
   }
 
   .card-title {
     text-transform: uppercase;
-    font-size: 1.8rem;
+    font-size: 2rem;
+    font-weight: 700;
+    letter-spacing: 1px;
   }
 
   .card-text {
@@ -34,17 +48,24 @@
 
     h1 {
       font-size: 3rem;
+      margin-bottom: 0;
     }
   }
   .card-body {
-    padding: 2rem 4rem;
-    border-top: 1px solid $border-color;
+    padding: 2rem 4rem 1rem 4rem;
     color: #fff;
     background-color: $bg-color;
 
     .progress {
       @include Progress-bar;
       width: 100%;
+      margin-bottom: 1rem;
+    }
+
+    .coins {
+      font-size: 1.5rem;
+      color: $main-color;
+      margin-bottom: 2rem;
     }
   }
   .card-footer {
@@ -52,6 +73,7 @@
   }
   .Buy-Btn {
     @include Main-btn;
+    padding: 2rem 0rem;
     width: 100%;
 
     &:hover {
