@@ -6,7 +6,7 @@ import './Header.scss';
 import Register from '../AuthenticationForms/Register';
 import Login from '../AuthenticationForms/Login';
 
-const Header = () => {
+const Header = props => {
   return (
     <div>
       <Navbar collapseOnSelect expand="lg" className="Navbar" variant="dark">
