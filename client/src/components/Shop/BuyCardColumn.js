@@ -1,5 +1,5 @@
 import React from 'react';
-import { CardColumns, Card, Button, ProgressBar } from 'react-bootstrap';
+import { CardColumns } from 'react-bootstrap';
 
 import BuyCard from './BuyCard';
 import nissan_sprite from './../../img/gtx_md.png';

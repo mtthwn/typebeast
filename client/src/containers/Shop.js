@@ -1,17 +1,15 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router } from 'react-router-dom';
+import ShopUserInfo from '../components/Shop/ShopUserInfo';
+import CarList from '../components/Shop/CarList';
 
-import UserInfo from '../components/Shop/UserInfo';
+import './../components/Shop/Shop.scss';
 
 class MainPage extends Component {
   render() {
     return (
-      <div>
-        <Router>
-          <div>
-            <UserInfo />
-          </div>
-        </Router>
+      <div className="Shop-container">
+        <ShopUserInfo />
+        <CarList />
       </div>
     );
   }
