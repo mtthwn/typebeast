@@ -17,7 +17,7 @@ export default () => {
   return (
     <CarSliderLogic>
       {props => (
-        <div className="ShopSlider-container">
+        <div className="GarageSlider-container">
           <Carousel
             activeIndex={props.index}
             direction={props.direction}
@@ -36,8 +36,8 @@ export default () => {
               <ImageSlider className="CarSlide" src={porsche} />
             </Carousel.Item>
           </Carousel>
-          <Button className="ShopSlider-BuyBtn" variant="outline-light">
-            Buy Now <span className="CarPrice">$5000 Coins</span>
+          <Button className="GarageSlider-BuyBtn" variant="outline-light">
+            Select Car
           </Button>
         </div>
       )}
