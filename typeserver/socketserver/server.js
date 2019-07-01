@@ -38,6 +38,25 @@ const formattedClients = {};
 io.on('connection', function(socket) {
   roomTracker.totalUsers++;
   console.log('\na user connected, users in server:', roomTracker.totalUsers);
+
+  // Handler to receive user
+  socket.on('user-update', data => {
+    const formattedData = JSON.parse(data).user;
+    if (!formattedClients[`room-${roomNum}`]) {
+      formattedClients[`room-${roomNum}`] = {};
+    }
+
+    formattedClients[`room-${roomNum}`][socket.id] = formattedData;
+
+    console.log(`===============================`);
+    console.log(formattedClients[`room-${roomNum}`]);
+
+    io.to(`room-${roomNum}`).emit(
+      'user-update',
+      JSON.stringify(formattedClients[`room-${roomNum}`])
+    );
+  });
+
   //If it's the first user, the room doesn't exist - make the room.
   if (!roomTracker['room-' + roomNum]) {
     socket.join('room-' + roomNum);
@@ -78,25 +97,21 @@ io.on('connection', function(socket) {
     roomNum
   });
 
-  socket.on('user-update', data => {
-    const formattedData = JSON.parse(data).user;
-    if (!formattedClients[`room-${roomNum}`]) {
-      formattedClients[`room-${roomNum}`] = {};
-    }
+  /*
+  formattedClients = {
+    room-1 :
+      socket-1 : {
+        username:
+        car:
+      }
+  }
 
-    // const formattedData = JSON.parse(data).user;
+  for socket in formattedClients[room-1] {
+    if socket.username ===
+  }
 
-    // formattedData.socket = socket.id;
-    formattedClients[`room-${roomNum}`][socket.id] = formattedData;
+  */
 
-    console.log(`===============================`);
-    console.log(formattedClients[`room-${roomNum}`]);
-
-    io.to(`room-${roomNum}`).emit(
-      'user-update',
-      JSON.stringify(formattedClients[`room-${roomNum}`])
-    );
-  });
   //Broadcast that a new user joined to everyone ~else~
   socket.broadcast.to('room-' + roomNum).emit('new-user-join', {
     socketId: socket.id,
