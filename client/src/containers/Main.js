@@ -7,7 +7,7 @@ import PlayNow from './../components/PlayNow/PlayNow';
 import { BrowserRouter as Router } from 'react-router-dom';
 import tokenValidationHelper from '../lib/tokenValidationHelper';
 
-import Header from './../components/Header/Header'
+import Header from './../components/Header/Header';
 
 class MainPage extends Component {
   constructor() {
@@ -24,8 +24,7 @@ class MainPage extends Component {
     };
   }
 
-  async componentDidMount () {
-
+  async componentDidMount() {
     const user = await tokenValidationHelper();
 
     this.setState({ user });
@@ -37,11 +36,11 @@ class MainPage extends Component {
     return (
       <div>
         <Header />
-          <div>
-            <SocialMedia />
-            <CarSlider />
-            <PlayNow />
-          </div>
+        <div>
+          <SocialMedia />
+          <CarSlider />
+          <PlayNow />
+        </div>
       </div>
     );
   }

@@ -4,19 +4,15 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import GarageSlider from '../components/GarageSlider/GarageSlider';
 import Header from './../components/Header/Header';
 
-class MainPage extends Component {
+export default class Garage extends Component {
   render() {
     return (
       <div>
         <Header />
-        <Router>
           <div>
             <GarageSlider />
           </div>
-        </Router>
       </div>
     );
   }
 }
-
-export default MainPage;
