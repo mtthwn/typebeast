@@ -2,11 +2,10 @@ import React from 'react';
 
 import BuyCardColumn from './BuyCardColumn';
 
-export default () => {
+export default ({ cars }) => {
   return (
     <div className="Shop-Carlist-container">
-      <BuyCardColumn />
-      <BuyCardColumn />
+      <BuyCardColumn cars={cars} />
     </div>
   );
 };
