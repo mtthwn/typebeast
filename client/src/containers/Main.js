@@ -14,7 +14,7 @@ export default class MainPage extends Component {
 
     this.state = {
       user: {
-        username: 'Guest',
+        username: '',
         email: null,
         _id: null,
         cars: [],

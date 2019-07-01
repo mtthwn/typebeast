@@ -2,11 +2,39 @@ import React from 'react';
 import { Nav, Navbar } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
-import HeaderButton from './../Button/HeaderButton'
+import HeaderButton from './../Button/HeaderButton';
 
 import './Header.scss';
 import Register from '../AuthenticationForms/Register';
 import Login from '../AuthenticationForms/Login';
+
+const renderButtons = username => {
+  if (!username) {
+    return (
+      <div inline="true" className="Header-signup">
+        <HeaderButton className="sign-up" buttonText="" />
+        <HeaderButton className="login" buttonText="" />
+      </div>
+    );
+  } else if (username === 'Guest') {
+    return (
+      <div inline="true" className="Header-signup">
+        <Register className="sign-up" />
+        <Login className="login" />
+      </div>
+    );
+  }
+
+  return (
+    <div inline="true" className="Header-signup">
+      <HeaderButton
+        className={'sign-up'}
+        buttonText={`Welcome ${username}`}
+      />
+      <HeaderButton className='login' buttonText='Logout' />
+    </div>
+  );
+};
 
 const Header = ({ user }) => {
   const renderButtons =
@@ -17,7 +45,10 @@ const Header = ({ user }) => {
       </div>
     ) : (
       <div inline="true" className="Header-signup">
-        <HeaderButton className={'sign-up'} buttonText={`Welcome ${user.username}`} />
+        <HeaderButton
+          className={'sign-up'}
+          buttonText={`Welcome ${user.username}`}
+        />
         <HeaderButton className={'login'} buttonText={'Logout'} />
       </div>
     );
