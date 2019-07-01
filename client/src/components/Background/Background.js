@@ -61,7 +61,9 @@ const Background = ({
     <div className="Background-img" style={onStart ? bgStarted : bgStart}>
       <RoomDisplay roomNumber={roomNumber} />
       <ShowUsernames showUsername={showUsername} />
-      {Cars}
+      <div className="road">
+        {Cars}
+      </div>
     </div>
   );
 };

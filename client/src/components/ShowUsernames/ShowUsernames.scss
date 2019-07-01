@@ -38,3 +38,25 @@
     }
   }
 }
+
+@media (max-height: 800px) {
+  .ShowUsernames-container {
+    position: fixed;
+    top: 19%;
+    left: 5%;
+    width: 20%;
+    table {
+      th {
+        padding: 1rem 0rem;
+        border: 1px solid transparent;
+      }
+
+      td {
+        padding: 1.6rem 0rem;
+        border-top: 1px solid $border-color;
+      }
+
+    }
+  }
+
+}
