@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import axios from 'axios';
+
 import ShopUserInfo from '../components/Shop/ShopUserInfo';
 import CarList from '../components/Shop/CarList';
 import Header from './../components/Header/Header';
@@ -12,17 +14,27 @@ class MainPage extends Component {
     super();
 
     this.state = {
-      user: '',
-      cars: [],
-      username: null,
-      games: []
+      user: {
+        username: '',
+        cars: [],
+        games: []
+      },
+      cars: []
     };
   }
 
   async componentDidMount() {
-    const user = await tokenValidationHelper();
+    try {
+      const user = await tokenValidationHelper();
 
-    this.setState({ user });
+      this.setState({ user });
+
+      const cars = await axios.get('http://127.0.0.1:8081/api/cars');
+
+      this.setState({ cars });
+    } catch (e) {
+      console.log(e);
+    }
   }
 
   render() {

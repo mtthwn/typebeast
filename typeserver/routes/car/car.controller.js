@@ -6,7 +6,7 @@ const Car = require('./../../db/model/Car');
 module.exports = {
   getCars: (req, res) => {
 
-    const user = req.user ? req.user : 'guest'
+    // const user = req.user ? req.user : 'guest'
     Car.find()
       .then(cars => {
         res.status(200).json({ success: true, cars });
