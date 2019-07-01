@@ -1,7 +1,5 @@
 import React from 'react';
 import { Card, Button, ProgressBar } from 'react-bootstrap';
-import nissan_sprite from './../../img/gtx_md.png';
-import porsche_sprite from './../../img/porsche_md.png';
 
 // export default ({ src }) => {
 //   return (
@@ -25,20 +23,11 @@ import porsche_sprite from './../../img/porsche_md.png';
 //   );
 // };
 
-const getSprite = (make, model) => {
-  if (make === 'Nissan') {
-    return nissan_sprite;
-  } else if (make === 'Porsche') {
-    return porsche_sprite;
-  }
-}
-
 export default ({ car }) => {
-  const imageImport = getSprite(car.make, car.model);
   
   return (
     <Card>
-      <Card.Img variant="top" src={imageImport} />
+      <Card.Img variant="top" src={car.mediumImg} />
       <Card.Body>
         <Card.Title>{car.make} {car.model}</Card.Title>
         <Card.Text>

@@ -63,14 +63,14 @@ const seed = [
 ];
 
 const cars = [
-  { model: 'Silvia S15',
+  {
+    model: 'Silvia S15',
     make: 'Nissan',
-    spriteFile: 'gtx.png',
-    mediumImg: 'gtx_md.png',
-    largeImg: 'nissan_silvia_slide.png',
+    spriteFile: 'https://i.imgur.com/a4hVyfy.png',
+    mediumImg: 'https://i.imgur.com/nJYJFty.png',
+    largeImg: 'https://i.imgur.com/Evae8Vc.png',
     price: 5000
   }
-  
 ];
 
 // const savedCars = [];
