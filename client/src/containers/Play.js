@@ -1,4 +1,5 @@
 import React, { Component, Fragment } from 'react';
+import { withRouter } from 'react-router-dom';
 import './GameUI.scss';
 // import DisplayQuote from './GameUI/GameUI';
 import Background from './../components/Background/Background';
@@ -263,6 +264,10 @@ class PlayGameLogic extends Component {
       alert('Please reload your page');
       this.setState({ leaderboard: {}, placings: [], progress: 0, carPositioning: {} });
     });
+  }
+
+  componentDidUpdate() {
+
   }
 
   render() {

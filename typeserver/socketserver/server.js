@@ -76,8 +76,7 @@ io.on('connection', function(socket) {
       return false;
     }
     alreadyInRoom = userInRoom();
-    console.log('Is the user in room?', alreadyInRoom)
-
+    console.log('Is the user in room formatted clients', alreadyInRoom)
     // If username not in room, proceed. Else, put user data in newer room.
     if (!alreadyInRoom) {
       formattedClients[`room-${roomNum}`][socket.id] = formattedData;
@@ -94,6 +93,8 @@ io.on('connection', function(socket) {
       JSON.stringify(formattedClients[`room-${roomNum}`])
     );
   });
+
+  console.log('Is the user in room?', alreadyInRoom)
 
   //If it's the first user, the room doesn't exist - make the room.
   if (!roomTracker['room-' + roomNum]) {
