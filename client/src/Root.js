@@ -14,7 +14,7 @@ function Root() {
       <Header />
       <Route path="/" exact component={Main} />
       <Route path="/garage" component={Garage} />
-      <Route path="/shop" component={Game} />
+      <Route path="/shop" component={Shop} />
       <Route path="/play" component={Game} />
     </Router>
   );

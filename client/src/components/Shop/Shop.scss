@@ -1,0 +1,21 @@
+.UserInfo {
+  display: flex;
+  flex-direction: column;
+  z-index: 100;
+  position: relative;
+  margin-top: 30rem;
+  height: 100vh;
+  width: 30%;
+  color: #fff;
+
+  h2,
+  h3 {
+    font-size: 5rem;
+    font-weight: 700;
+    margin-top: -1rem;
+  }
+
+  h3 {
+    font-size: 4rem;
+  }
+}
