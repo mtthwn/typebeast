@@ -30,11 +30,12 @@ export default class MainPage extends Component {
   }
 
   render() {
-    // console.log(SocialMedia);
+
+    const { user } = this.state;
 
     return (
       <div>
-        <Header />
+        <Header user={user}  />
         <div>
           <SocialMedia />
           <CarSlider />
