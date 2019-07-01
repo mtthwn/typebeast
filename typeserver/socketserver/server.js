@@ -79,7 +79,7 @@ io.on('connection', function(socket) {
     // console.log('Is the user in room formatted clients', )
     // If username not in room, proceed. Else, put user data in newer room.
     // if (!alreadyInRoom) {
-      formattedClients[`room-${roomNum}`][socket.id] = formattedData;
+    formattedClients[`room-${roomNum}`][socket.id] = formattedData;
     // } else {
     //   formattedClients[`room-${roomNum + 1}`] = {};
     //   formattedClients[`room-${roomNum + 1}`][socket.id] = formattedData;
@@ -173,10 +173,6 @@ io.on('connection', function(socket) {
     });
   });
 
-  socket.on('navigate-away', () => {
-    socket.disconnect();
-  })
-
   socket.on('disconnecting', function() {
     if (
       formattedClients[`room-${roomNum}`] &&
@@ -186,6 +182,11 @@ io.on('connection', function(socket) {
     }
 
     const rooms = Object.keys(socket.rooms).slice();
+
+    roomTracker[rooms[1]]['users']--;
+    roomTracker.totalUsers--;
+    console.log(roomTracker)
+
     io.to(rooms[1]).emit('player-left', {
       description: `${socket.id} has left the game.`,
       formattedClients: formattedClients[`room-${roomNum}`]
@@ -194,9 +195,6 @@ io.on('connection', function(socket) {
 
   socket.on('disconnect', function() {
     console.log('A user disconnected', socket.id);
-    // Remove user from total users list when they leave
-    roomTracker.totalUsers--;
-    //If someone disconnects, total user count changes, but room count remains the same
   });
 });
 

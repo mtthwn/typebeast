@@ -110,15 +110,15 @@ class PlayGameLogic extends Component {
     // Connect to the socket
     const socket = socketIOClient(endpoint);
 
-    this.setState({
-      socket
-    });
-
     socket.on('connect', () => {
-      this.state.socket.emit(
+      socket.emit(
         'user-update',
         JSON.stringify({ user: this.state.user })
       );
+
+      this.setState({
+        socket
+      });
     });
 
     socket.on('save-socket', message => {
@@ -128,7 +128,6 @@ class PlayGameLogic extends Component {
         loading: false,
         roomNumber: message.roomNum
       });
-
       // this.state.socket.emit('user-update', JSON.stringify({ user: this.state.user }));
     });
 
@@ -163,15 +162,12 @@ class PlayGameLogic extends Component {
     });
 
     socket.on('game-start', message => {
-
       this.onStartCountdown();
       this.onSetQuote(message.quote);
-
     });
 
     socket.on('progress-broadcast', message => {
       const carPositioning = this.state.carPositioning;
-
       if (carPositioning[message.socketId]) {
         carPositioning[message.socketId] = message.completion;
       }
@@ -182,13 +178,15 @@ class PlayGameLogic extends Component {
 
       if (leaderboard[message.socketId]) {
         leaderboard[message.socketId].completion = message.completion;
+
+        // Set completed boolean for the leaderboard.
+        if (leaderboard[message.socketId].completion === true) {
+          leaderboard[message.socketId].completed = true
+        } else {
+          leaderboard[message.socketId].completed = false
+        }
       }
 
-      if (leaderboard[message.socketId].completion === true) {
-        leaderboard[message.socketId].completed = true
-      } else {
-        leaderboard[message.socketId].completed = false
-      }
 
       this.setState({ leaderboard });
 
@@ -273,7 +271,7 @@ class PlayGameLogic extends Component {
   // }
 
   componentWillUnmount() {
-    this.state.socket.emit('navigate-away');
+    this.state.socket.disconnect();
   }
 
   render() {
