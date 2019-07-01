@@ -11,7 +11,7 @@ export default class Garage extends Component {
 
     this.state = {
       user: {
-        username: 'Guest',
+        username: '',
         cars: [],
         email: null,
         games: []
