@@ -1,7 +1,7 @@
 @import './../../styles/Variables';
 @import './../../styles/Mixins';
 
-.ShopSlider-BuyBtn {
+.GarageSlider-BuyBtn {
   position: absolute;
   z-index: 30;
   @include Main-btn;

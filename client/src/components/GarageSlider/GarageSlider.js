@@ -2,10 +2,10 @@ import React from 'react';
 import { Carousel, Button } from 'react-bootstrap';
 
 import CarSliderLogic from '../CarSlider/CarSliderLogic';
-import SliderCaption from '../ShopSlider/SliderCaption';
+import SliderCaption from '../GarageSlider/SliderCaption';
 import ImageSlider from '../CarSlider/ImageSlider';
 
-import './ShopSlider.scss';
+import './GarageSlider.scss';
 
 import nissan from './../../img/nissan_silvia_slide.png';
 import porsche from './../../img/porsche.png';
@@ -17,7 +17,7 @@ export default () => {
   return (
     <CarSliderLogic>
       {props => (
-        <div className="ShopSlider-container">
+        <div className="GarageSlider-container">
           <Carousel
             activeIndex={props.index}
             direction={props.direction}
@@ -36,8 +36,8 @@ export default () => {
               <ImageSlider className="CarSlide" src={porsche} />
             </Carousel.Item>
           </Carousel>
-          <Button className="ShopSlider-BuyBtn" variant="outline-light">
-            Buy Now <span className="CarPrice">$5000 Coins</span>
+          <Button className="GarageSlider-BuyBtn" variant="outline-light">
+            Select Car
           </Button>
         </div>
       )}
