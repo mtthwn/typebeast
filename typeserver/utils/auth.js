@@ -17,7 +17,8 @@ const getCleanUser = (user) => {
         email: user.email,
         _id: user._id,
         cars: user.cars,
-        games: user.games
+        games: user.games,
+        currentCar: user.currentCar
     }
 }
 

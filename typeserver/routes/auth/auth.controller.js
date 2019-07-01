@@ -2,6 +2,7 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
 const User = require('./../../db/model/User');
+const Car = require('./../../db/model/Car');
 const { generateToken, getCleanUser } = require('./../../utils/auth');
 
 module.exports = {
@@ -10,14 +11,16 @@ module.exports = {
       message: 'welcome to the auth routes'
     });
   },
-  register: (req, res) => {
+  register: async (req, res) => {
     const username = req.body.username.trim();
     const email = req.body.email.trim();
     const password = bcrypt.hashSync(req.body.password.trim(), 10);
 
-    User({ username, email, password })
+    const defaultCar = await Car.findOne({ name: 'Civic' });
+
+    await User({ username, email, password, cars: [defaultCar._id], currentCar: defaultCar._id })
       .save()
-      .then(savedUser => {
+      .then(async savedUser => {
         const token = generateToken(savedUser);
         const user = getCleanUser(savedUser);
 
@@ -86,5 +89,5 @@ module.exports = {
         });
       });
     });
-  }
+  },
 };

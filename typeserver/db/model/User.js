@@ -23,7 +23,16 @@ const UserSchema = new Schema({
   cars: [{
     type: Schema.Types.ObjectId, 
     ref: 'Car'
-  }]
+  }],
+  currentCar: {
+    type: Schema.Types.ObjectId,
+    ref: 'Car'
+  },
+  cash: {
+    type: Number,
+    required: true,
+    default: 100000
+  }
 });
 
 const User = mongoose.model('User', UserSchema);

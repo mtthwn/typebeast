@@ -1,6 +1,12 @@
+.road {
+  position: relative;
+  height: 41%;
+  top: 36%;
+}
+
 .Car1-img {
   position: absolute;
-  bottom: 225px;
+  top: 0%;
   left: 0%;
   transition: all 1s linear;
 }
@@ -8,28 +14,70 @@
 .Car2-img {
   position: absolute;
   left: 0%;
-  bottom: 180px;
+  top: 25%;
   // animation: car2 50s linear infinite;
 }
 
 .Car3-img {
   position: absolute;
   left: 0%;
-  bottom: 135px;
+  top: 50%;
   // animation: car3 55s linear infinite;
 }
 
 .Car4-img {
   position: absolute;
-  left: 0%;
-  bottom: 90px;
+  top: 75%;
+  bottom: 0%;
 }
 
 .Car-finish {
   position: absolute;
-  bottom: 225px;
+  top: 35%;
   transition: all 1s linear;
   animation: carfinish 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+@media (max-height: 800px) {
+  .road {
+    position: relative;
+    height: 52%;
+    top: 32%;
+  }
+
+  .Car1-img {
+    position: absolute;
+    top: 0%;
+    left: 0%;
+    transition: all 1s linear;
+  }
+
+  .Car2-img {
+    position: absolute;
+    left: 0%;
+    top: 25%;
+    // animation: car2 50s linear infinite;
+  }
+
+  .Car3-img {
+    position: absolute;
+    left: 0%;
+    top: 50%;
+    // animation: car3 55s linear infinite;
+  }
+
+  .Car4-img {
+    position: absolute;
+    top: 75%;
+    bottom: 0%;
+  }
+
+  .Car-finish {
+    position: absolute;
+    top: 32%;
+    transition: all 1s linear;
+    animation: carfinish 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+  }
 }
 
 @keyframes carfinish {

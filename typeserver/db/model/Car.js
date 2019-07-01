@@ -3,12 +3,24 @@ const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
 const CarSchema = new Schema({
-    name: {
+    model: {
         type: String,
         default: 'default',
         required: true
     },
-    filename: {
+    make: {
+        type: String, 
+        required: true
+    },
+    spriteFile: {
+        type: String,
+        required: true
+    },
+    mediumImg: {
+        type: String,
+        required: true
+    },
+    largeImg: {
         type: String,
         required: true
     },
