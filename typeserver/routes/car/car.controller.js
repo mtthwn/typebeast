@@ -69,22 +69,10 @@ module.exports = {
 
       const updatedUser = await User.findOne({ _id });
 
-      res.status(200).json({ user: updatedUser, success: true });
+      res.status(200).json({ user: getCleanUser(updatedUser), success: true });
 
-      // const car = Car.findOne({ _id: car });
-      // User.findOneAndUpdate(
-      //   { _id },
-      //   { $push: { cars: mongoose.Types.ObjectId(car) } }
-      // )
-      //   .exec()
-      //   .then(user => {
-      //     res
-      //       .status(200)
-      //       .json({ success: true, message: 'Car successfully added!' });
-      //   })
-      //   .catch(e => {
-      //     res.status(400).json({ success: false, message: e.message });
-      //   });
-    } catch (e) {}
+    } catch (e) {
+      res.status(400).json({ success: false, message: 'An error occurred while buying a car.' });
+    }
   }
 };
