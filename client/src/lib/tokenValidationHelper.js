@@ -11,8 +11,6 @@ export default () => {
       };
     }
 
-    console.log(token);
-
     axios
       .get(`http://127.0.0.1:8081/api/auth/me/from/token`, {
         params: {

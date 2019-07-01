@@ -1,5 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import './GameUI.scss';
+
+import tokenValidationHelper from './../lib/tokenValidationHelper';
 // import DisplayQuote from './GameUI/GameUI';
 import Background from './../components/Background/Background';
 import DisplayQuoteArea from './../components/Quote/Quote';
@@ -104,7 +106,13 @@ class PlayGameLogic extends Component {
     };
   }
 
-  componentDidMount() {
+  async componentDidMount() {
+
+    // Set user in state via localStorage
+    const user = await tokenValidationHelper();
+
+    this.setState({ user });
+
     // Deconstruct this.state.endpoint
     const { endpoint } = this.state;
     // Connect to the socket
@@ -441,7 +449,7 @@ export default () => {
     <PlayGameLogic>
       {values => (
         <div>
-          <Header />
+          <Header user={values.user} />
           <div className="PlayGame">
             <Background
               playerSocket={values.playerSocket}
