@@ -71,6 +71,13 @@
     top: 75%;
     bottom: 0%;
   }
+
+  .Car-finish {
+    position: absolute;
+    top: 32%;
+    transition: all 1s linear;
+    animation: carfinish 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+  }
 }
 
 @keyframes carfinish {
