@@ -49,13 +49,6 @@ const getQuote = room => {
 };
 
 let alreadyInRoom = false;
-function userInRoom () {
-  for socket in formattedClients[room-1] {
-    if (socket.username === formattedData.username) {
-      return true
-    }
-  }
-}
 
 io.on('connection', function(socket) {
   roomTracker.totalUsers++;
@@ -65,16 +58,36 @@ io.on('connection', function(socket) {
   socket.on('user-update', data => {
     const formattedData = JSON.parse(data).user;
 
-    //If room doesn't exist, create it.
+    // If room doesn't exist, create it.
     if (!formattedClients[`room-${roomNum}`]) {
       formattedClients[`room-${roomNum}`] = {};
     }
 
-    alreadyInRoom = userInRoom()
-    formattedClients[`room-${roomNum}`][socket.id] = formattedData;
+    // Check if username already in room and set value.
+    function userInRoom () {
+      for (let socket in formattedClients[`room-${roomNum}`]) {
+        const existing = formattedClients[`room-${roomNum}`][socket].username
+        const newUser = formattedData.username
+        console.log(newUser, existing)
+        if (newUser === existing) {
+          return true;
+        }
+      }
+      return false;
+    }
+    alreadyInRoom = userInRoom();
+    console.log('Is the user in room?', alreadyInRoom)
+
+    // If username not in room, proceed. Else, put user data in newer room.
+    if (!alreadyInRoom) {
+      formattedClients[`room-${roomNum}`][socket.id] = formattedData;
+    } else {
+      formattedClients[`room-${roomNum + 1}`] = {};
+      formattedClients[`room-${roomNum + 1}`][socket.id] = formattedData;
+    }
 
     console.log(`===============================`);
-    console.log(formattedClients[`room-${roomNum}`]);
+    console.log(formattedClients)
 
     io.to(`room-${roomNum}`).emit(
       'user-update',
@@ -95,11 +108,11 @@ io.on('connection', function(socket) {
     //If the room is not at max capacity (4), add user to the room
   } else if (
     roomTracker['room-' + roomNum] &&
-    roomTracker['room-' + roomNum]['users'] < 4
+    roomTracker['room-' + roomNum]['users'] < 4 &&
+    !alreadyInRoom
   ) {
     socket.join('room-' + roomNum);
     roomTracker['room-' + roomNum]['users']++;
-
     //If the room exists and is at capacity, increase the room number, join the new room, set count to 1
   } else {
     roomNum++;
@@ -109,8 +122,9 @@ io.on('connection', function(socket) {
       quote: ''
     };
     getQuote(roomTracker['room-' + roomNum]);
-
   }
+
+  console.log(roomTracker)
 
   //Set up variable to get array of socket IDs in current room
   let clients = io.sockets.adapter.rooms['room-' + roomNum];
