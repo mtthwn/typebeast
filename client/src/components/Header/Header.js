@@ -1,6 +1,7 @@
 import React from 'react';
 import { Nav, Navbar } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import { Button } from 'react-bootstrap';
 
 import './Header.scss';
 import Register from '../AuthenticationForms/Register';
@@ -15,7 +16,12 @@ const Header = ({ user }) => {
       </div>
     ) : (
       <div inline="true" className="Header-signup">
-      <button>{user.username}</button>
+        <Button className="sign-up" variant="primary">
+          Welcome, {user.username}
+        </Button>
+        <Button className="login" variant="primary">
+          Logout
+        </Button>
       </div>
     );
 
