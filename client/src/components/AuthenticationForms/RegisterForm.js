@@ -15,7 +15,7 @@ export default class RegisterForm extends Component {
   onChange = inputType => event => {
     event.preventDefault();
 
-    document.getElementById('register-alert').style.visibility = 'hidden';
+    // document.getElementById('register-alert').style.visibility = 'hidden';
 
     if (inputType === 'username') {
       this.setState({
