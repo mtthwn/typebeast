@@ -2,6 +2,7 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
 const User = require('./../../db/model/User');
+const Car = require('./../../db/model/Car');
 const { generateToken, getCleanUser } = require('./../../utils/auth');
 
 module.exports = {
@@ -17,9 +18,12 @@ module.exports = {
 
     User({ username, email, password })
       .save()
-      .then(savedUser => {
+      .then(async savedUser => {
+        const defaultCar = await Car.findOne({ name: 'Civic' });
         const token = generateToken(savedUser);
         const user = getCleanUser(savedUser);
+
+        user.car = defaultCar._id;
 
         res.status(200).json({ success: true, user, token });
       })
