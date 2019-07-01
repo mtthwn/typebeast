@@ -71,8 +71,8 @@ class PlayGameLogic extends Component {
 
     this.state = {
       user: {
-        username: 'Guest',
-        car: 'default'
+        username: '',
+        car: '',
       },
       countdownCount: 5,
       countdown: false,
