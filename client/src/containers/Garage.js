@@ -30,7 +30,7 @@ export default class Garage extends Component {
       <div>
         <Header user={this.state.user} />
           <div>
-            <GarageSlider />
+            <GarageSlider user={this.state.user} />
           </div>
       </div>
     );

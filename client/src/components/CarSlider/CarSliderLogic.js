@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 
 export default class CarSliderLogic extends Component {
   constructor(props, context) {
@@ -8,6 +9,17 @@ export default class CarSliderLogic extends Component {
       index: 0,
       direction: null
     };
+  }
+
+  async componentDidMount() {
+    
+  }
+
+  selectCurrentCar = _id => e => {
+    e.preventDefault();
+
+    console.log('here!!', this.props);
+    
   }
 
   handleSelect = (selectedIndex, e) => {
@@ -20,7 +32,8 @@ export default class CarSliderLogic extends Component {
   render() {
     return this.props.children({
       ...this.state,
-      handleSelect: this.handleSelect
+      handleSelect: this.handleSelect,
+      selectCurrentCar: this.selectCurrentCar
     });
   }
 }

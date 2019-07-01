@@ -1,7 +1,7 @@
 import React from 'react';
-import { Carousel, ProgressBar } from 'react-bootstrap';
+import { Carousel, ProgressBar, Button } from 'react-bootstrap';
 
-export default ({ imgSrc }) => {
+export default ({ imgSrc, selectCurrentCar }) => {
   const maxspeed = 170;
   const accerlation = 5.5;
 
@@ -18,6 +18,7 @@ export default ({ imgSrc }) => {
         max="10"
         label={`${accerlation} seconds`}
       />
+      <Button onClick={selectCurrentCar('test')}>Test</Button>
     </Carousel.Caption>
   );
 };
