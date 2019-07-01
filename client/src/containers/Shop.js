@@ -42,7 +42,12 @@ class MainPage extends Component {
   buyCarFunction = _id => e => {
     e.preventDefault();
 
-    console.log(_id);
+    axios.post('http://127.0.0.1:8081/api/cars/add', {
+      _id: this.state.user._id,
+      car: _id
+    }).then(response => {
+      alert('Car successfully bought!');
+    }).catch(e => console.log(e.message));
   };
 
   render() {
