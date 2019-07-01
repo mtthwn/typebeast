@@ -27,6 +27,11 @@ const UserSchema = new Schema({
   currentCar: {
     type: Schema.Types.ObjectId,
     ref: 'Car'
+  },
+  cash: {
+    type: Number,
+    required: true,
+    default: 100000
   }
 });
 

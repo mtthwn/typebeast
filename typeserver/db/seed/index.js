@@ -64,14 +64,20 @@ const seed = [
 
 const cars = [
   {
-    name: 'Civic',
-    filename: 'civic.png',
-    price: 0
+    model: 'Silvia S15',
+    make: 'Nissan',
+    spriteFile: 'https://i.imgur.com/a4hVyfy.png',
+    mediumImg: 'https://i.imgur.com/nJYJFty.png',
+    largeImg: 'https://i.imgur.com/Evae8Vc.png',
+    price: 5000
   },
   {
-    name: 'Corvette',
-    filename: 'corvette.png',
-    price: 30000
+    model: 'Tran Mobile',
+    make: 'Porsche',
+    spriteFile: 'https://i.imgur.com/UBAaAZq.png',
+    mediumImg: 'https://i.imgur.com/8k3z73p.png',
+    largeImg: 'https://i.imgur.com/9CkPCCn.png',
+    price: 5000
   }
 ];
 
