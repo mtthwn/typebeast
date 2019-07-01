@@ -24,18 +24,13 @@ roomTracker object: {
   }
 }
 
-  formattedClients = {
-    room-1 :
-      socket-1 : {
-        username:
-        car:
-      }
-  }
-
-  for socket in formattedClients[room-1] {
-    if socket.username ===
-  }
-
+formattedClients = {
+  room-1 :
+    socket-1 : {
+      username:
+      car:
+    }
+}
 
 */
 
@@ -53,6 +48,14 @@ const getQuote = room => {
   }
 };
 
+let alreadyInRoom = false;
+function userInRoom () {
+  for socket in formattedClients[room-1] {
+    if (socket.username === formattedData.username) {
+      return true
+    }
+  }
+}
 
 io.on('connection', function(socket) {
   roomTracker.totalUsers++;
@@ -61,10 +64,13 @@ io.on('connection', function(socket) {
   // Handler to receive username and vehicle. Must happen first.
   socket.on('user-update', data => {
     const formattedData = JSON.parse(data).user;
+
+    //If room doesn't exist, create it.
     if (!formattedClients[`room-${roomNum}`]) {
       formattedClients[`room-${roomNum}`] = {};
     }
 
+    alreadyInRoom = userInRoom()
     formattedClients[`room-${roomNum}`][socket.id] = formattedData;
 
     console.log(`===============================`);
