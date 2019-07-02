@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 
+import instance from './../lib/axios';
+
 import ShopUserInfo from '../components/Shop/ShopUserInfo';
 import CarList from '../components/Shop/CarList';
 import Header from './../components/Header/Header';
@@ -48,6 +50,12 @@ class MainPage extends Component {
     }).then(response => {
       alert('Car successfully bought!');
     }).catch(e => console.log(e.message));
+
+    instance.post('/cars/add', {
+      car: _id
+    }).then(response => {
+      alert('Successfully purchased!')
+    }).catch(e => console.log(e));
   };
 
   render() {

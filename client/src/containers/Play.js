@@ -111,6 +111,7 @@ class PlayGameLogic extends Component {
     // Set user in state via localStorage
     const user = await tokenValidationHelper();
 
+    console.log('here', user);
     this.setState({ user });
 
     // Deconstruct this.state.endpoint
