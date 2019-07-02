@@ -39,7 +39,8 @@
   color: $bg-color;
 
   &:hover {
-    background-color: #90061d;
+    background-color: $main-color;
+    box-shadow: inset -3px 0 15px rgba(131, 12, 32, 0.8);
     color: #fff;
   }
 }
