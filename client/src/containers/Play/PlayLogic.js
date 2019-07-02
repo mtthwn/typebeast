@@ -1,79 +1,17 @@
-import React, { Component, Fragment } from 'react';
-import { withRouter } from 'react-router-dom';
-import './GameUI.scss';
+import React, { Component } from 'react';
 
-import tokenValidationHelper from './../lib/tokenValidationHelper';
-// import DisplayQuote from './GameUI/GameUI';
-import Background from './../components/Background/Background';
-import DisplayQuoteArea from './../components/Quote/Quote';
-import CarWPMGauge from './../components/Guages/WPMGuage';
-import Minimap from './../components/Minimap/Minimap';
-import DisplayQuoteInput from './../components/GameInput/GameInput';
-import NosGauge from './../components/Guages/NOSGuage';
 import socketIOClient from 'socket.io-client';
-import StartGameButton from './../components/StartGameButton/StartGameButton';
-import LeaderboardModal from './../components/LeaderboardModal/LeaderboardModal';
-import Header from './../components/Header/Header';
 
-const renderGame = props => {
-  const countdown = props.countdown ? (
-    <h1>{props.countdownCount}</h1>
-  ) : (
-    <StartGameButton emitStart={props.onEmitStart} />
-  );
+import tokenValidationHelper from './../../lib/tokenValidationHelper';
 
-  const gameStart = props.timerStart ? (
-    <Fragment>
-      <DisplayQuoteArea
-        completed={props.wordsCompleted}
-        input={props.userInput}
-        currentWord={props.words[props.index]}
-        remaining={props.remainingPhrase}
-      />
-      <DisplayQuoteInput onUserInputChange={props.onUserInputChange} />
-    </Fragment>
-  ) : (
-    <DisplayQuoteArea
-      completed={''}
-      input={''}
-      currentWord={''}
-      remaining={'Please wait for the game to start'}
-    />
-  );
-
-  return props.timerFinished ? (
-    <Fragment>
-      <LeaderboardModal
-        leaderboard={props.leaderboard}
-        placings={props.placings}
-      />
-    </Fragment>
-  ) : (
-    <div className="DisplayQuoteUI-container">
-      <CarWPMGauge
-        wpm={props.wpm}
-        second={props.sec}
-        char={props.char}
-        socket={props.socket}
-      />
-      <div className="DisplayQuote-container">
-        {countdown}
-        <Minimap playerProgress={props.playerProgress} />
-        {gameStart}
-      </div>
-      <NosGauge position={props.position} />
-    </div>
-  );
-};
-
-class PlayGameLogic extends Component {
+export default class PlayGameLogic extends Component {
   constructor() {
     super();
 
     this.state = {
       user: {
         username: '',
-        car: '',
+        car: ''
       },
       countdownCount: 5,
       countdown: false,
@@ -108,7 +46,6 @@ class PlayGameLogic extends Component {
   }
 
   async componentDidMount() {
-
     // Set user in state via localStorage
     const user = await tokenValidationHelper();
 
@@ -120,10 +57,7 @@ class PlayGameLogic extends Component {
     const socket = socketIOClient(endpoint);
 
     socket.on('connect', () => {
-      socket.emit(
-        'user-update',
-        JSON.stringify({ user: this.state.user })
-      );
+      socket.emit('user-update', JSON.stringify({ user: this.state.user }));
 
       this.setState({
         socket
@@ -188,12 +122,11 @@ class PlayGameLogic extends Component {
 
         // Set completed boolean for the leaderboard.
         if (leaderboard[message.socketId].completion === true) {
-          leaderboard[message.socketId].completed = true
+          leaderboard[message.socketId].completed = true;
         } else {
-          leaderboard[message.socketId].completed = false
+          leaderboard[message.socketId].completed = false;
         }
       }
-
 
       this.setState({ leaderboard });
 
@@ -266,7 +199,12 @@ class PlayGameLogic extends Component {
 
     socket.on('disconnect', () => {
       alert('Please reload your page');
-      this.setState({ leaderboard: {}, placings: [], progress: 0, carPositioning: {} });
+      this.setState({
+        leaderboard: {},
+        placings: [],
+        progress: 0,
+        carPositioning: {}
+      });
     });
   }
 
@@ -297,10 +235,7 @@ class PlayGameLogic extends Component {
     const {
       index,
       words,
-      wordsCompleted,
-      averageLength,
-      sec,
-      userInput
+      wordsCompleted
     } = this.state;
 
     if (value.length > words[index].length) {
@@ -449,34 +384,3 @@ class PlayGameLogic extends Component {
     });
   };
 }
-
-export default () => {
-  return (
-    <PlayGameLogic>
-      {values => (
-        <div>
-          <Header user={values.user} />
-          <div className="PlayGame">
-            <Background
-              playerSocket={values.playerSocket}
-              carPositioning={values.carPositioning}
-              onFinish={values.timerFinished}
-              onStart={values.timerStart}
-              timer={values.timer}
-              showUsername={values.leaderboard}
-              roomNumber={values.roomNumber}
-              leaderboard={values.leaderboard}
-              placings={values.placings}
-            />
-
-            {!values.loading
-              ? renderGame({
-                  ...values
-                })
-              : 'loading'}
-          </div>
-        </div>
-      )}
-    </PlayGameLogic>
-  );
-};
