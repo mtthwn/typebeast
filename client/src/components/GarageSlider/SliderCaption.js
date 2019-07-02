@@ -6,7 +6,7 @@ export default ({ imgSrc, selectCurrentCar, car }) => {
   const accerlation = 5.5;
 
   return (
-    <Carousel.Caption className="CarSlider-content">
+    <Carousel.Caption className="GarageSlider-content">
       <h5>Nissan</h5>
       <h3>Silvia S15</h3>
       <img className="Car-Sprite" src={imgSrc} alt="car sprite" />
@@ -18,7 +18,12 @@ export default ({ imgSrc, selectCurrentCar, car }) => {
         max="10"
         label={`${accerlation} seconds`}
       />
-      <Button onClick={selectCurrentCar(car._id)}>Select</Button>
+      <Button
+        className="GarageSlider-BuyBtn"
+        onClick={selectCurrentCar(car._id)}
+      >
+        Select
+      </Button>
     </Carousel.Caption>
   );
 };
