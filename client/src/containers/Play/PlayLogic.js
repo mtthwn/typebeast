@@ -32,7 +32,6 @@ export default class PlayGameLogic extends Component {
       endpoint: 'http://127.0.0.1:8080',
       gameStart: false,
       roomNumber: 0,
-      playersInRoom: [],
       playerProgress: 0,
       wpm: 0,
       wordsCompleted: '',
@@ -59,26 +58,21 @@ export default class PlayGameLogic extends Component {
       socket.emit('user-update', JSON.stringify({ user: this.state.user }));
 
       this.setState({
-        socket
+        socket,
+        loading: false
       });
     });
 
     socket.on('save-socket', message => {
       this.setState({
-        playersInRoom: message.clients,
-        loading: false,
         roomNumber: message.roomNum
       });
-      // this.state.socket.emit('user-update', JSON.stringify({ user: this.state.user }));
     });
 
     socket.on('user-update', data => {
       const formattedData = JSON.parse(data);
       const leaderboard = this.state.leaderboard;
       const carPositioning = this.state.carPositioning;
-      // formattedData.forEach(user => {
-      //   leaderboard[user] = formattedData[user];
-      // })
 
       for (const user in formattedData) {
         leaderboard[user] = {
@@ -92,12 +86,11 @@ export default class PlayGameLogic extends Component {
       this.setState(leaderboard);
     });
 
-    socket.on('new-user-join', message => {
-      // Display message when new player joins. Import updated room-player list from server.
-      this.setState({
-        playersInRoom: message.clients
-      });
-    });
+    // socket.on('new-user-join', message => {
+    //   this.setState({
+    //     playersInRoom: message.clients
+    //   });
+    // });
 
     socket.on('game-start', message => {
       this.onStartCountdown();

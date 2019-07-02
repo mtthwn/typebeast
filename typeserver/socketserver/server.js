@@ -69,7 +69,6 @@ io.on('connection', function(socket) {
       for (let socket in formattedClients[`room-${roomNum}`]) {
         const existing = formattedClients[`room-${roomNum}`][socket].username
         const newUser = formattedData.username
-        console.log(newUser, existing)
         if (newUser === existing) {
           return true;
         }
@@ -79,7 +78,7 @@ io.on('connection', function(socket) {
     alreadyInRoom = userInRoom();
 
     // If username not in room, proceed. Else, put user data in newer room.
-    if (!alreadyInRoom) {
+    if (!alreadyInRoom || formattedData.username === 'Guest') {
       formattedClients[`room-${roomNum}`][socket.id] = formattedData;
     } else {
       formattedClients[`room-${roomNum + 1}`] = {};
@@ -100,7 +99,9 @@ io.on('connection', function(socket) {
     } else if (
       roomTracker['room-' + roomNum] &&
       roomTracker['room-' + roomNum]['users'] < 4 &&
-      !alreadyInRoom
+      (
+        !alreadyInRoom || formattedData.username === 'Guest'
+      )
     ) {
       socket.join('room-' + roomNum);
       roomTracker['room-' + roomNum]['users']++;
@@ -115,13 +116,14 @@ io.on('connection', function(socket) {
       getQuote(roomTracker['room-' + roomNum]);
     }
 
+
     io.to(`room-${roomNum}`).emit(
       'user-update',
       JSON.stringify(formattedClients[`room-${roomNum}`])
     );
 
     console.log(roomTracker)
-
+    console.log(formattedClients)
     // Set up variable to get array of socket IDs in current room
     let clients = io.sockets.adapter.rooms['room-' + roomNum];
     let clientsArray = Object.keys(clients.sockets);
@@ -131,12 +133,11 @@ io.on('connection', function(socket) {
       roomNum
     });
 
-    //Broadcast that a new user joined to everyone ~else~
-    socket.broadcast.to('room-' + roomNum).emit('new-user-join', {
-      socketId: socket.id,
-      clients: clientsArray,
-      formattedClients: formattedClients[`room-${roomNum}]`]
-    });
+    // //Broadcast that a new user joined to everyone ~else~
+    // socket.broadcast.to('room-' + roomNum).emit('new-user-join', {
+    //   clients: clientsArray,
+    //   // formattedClients: formattedClients[`room-${roomNum}]`]
+    // });
   });
 
 
