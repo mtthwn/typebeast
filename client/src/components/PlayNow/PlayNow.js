@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button } from 'react-bootstrap';
-// import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import './PlayNow.scss';
 import ferarriSideView from './../../img/ferarri-side.png';
 
@@ -18,9 +18,11 @@ const PlayNow = () => {
         </div>
         <img src={ferarriSideView} alt="ferrari side view" />
       </div>
-      <Button className="PlayNow-btn" variant="outline-light">
-        Race as Guest
-      </Button>
+      <Link to="/play" className="PlayNow-btn">
+        <Button className="PlayNow-btn" variant="outline-light">
+          Race as Guest
+        </Button>
+      </Link>
     </div>
   );
 };
