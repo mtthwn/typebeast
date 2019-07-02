@@ -15,15 +15,13 @@ const users = [
     username: 'Justin',
     email: 'jskwok@gmail.com',
     games: [],
-    password: bcrypt.hashSync('hello', 10),
-    cars: []
+    password: bcrypt.hashSync('hello', 10)
   },
   {
     username: 'Daniel',
     email: 'dtran23@gmail.com',
     games: [],
-    password: bcrypt.hashSync('goodbye', 10),
-    cars: []
+    password: bcrypt.hashSync('goodbye', 10)
   }
 ];
 
