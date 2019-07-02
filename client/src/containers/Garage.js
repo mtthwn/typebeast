@@ -23,12 +23,14 @@ export default class Garage extends Component {
   async componentDidMount() {
     const user = await tokenValidationHelper();
 
-    await instance.get('/cars/user').then(response => {
-      const { cars } = response.data;
+    if (user.username !== 'Guest') {
+      await instance.get('/cars/user').then(response => {
+        const { cars } = response.data;
 
-      user.cars = cars;
-      this.setState({ user });
-    });
+        user.cars = cars;
+        this.setState({ user });
+      });
+    } 
   }
 
   render() {
@@ -36,8 +38,7 @@ export default class Garage extends Component {
       <div>
         <Header user={this.state.user} />
         <div>
-          <GarageSlider user={this.state.user}
-          />
+          <GarageSlider user={this.state.user} />
         </div>
       </div>
     );

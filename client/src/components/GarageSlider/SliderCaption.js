@@ -18,7 +18,7 @@ export default ({ imgSrc, selectCurrentCar, car }) => {
         max="10"
         label={`${accerlation} seconds`}
       />
-      <Button onClick={selectCurrentCar(car._id)}>Test</Button>
+      <Button onClick={selectCurrentCar(car._id)}>Select</Button>
     </Carousel.Caption>
   );
 };

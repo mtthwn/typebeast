@@ -67,7 +67,6 @@ class GarageSliderLogic extends Component {
     });
   };
 
- 
   render() {
     return this.props.children({
       ...this.state,
@@ -77,14 +76,11 @@ class GarageSliderLogic extends Component {
 }
 
 const selectCurrentCar = _id => e => {
-
-    console.log('here!!', _id);
-  };
-
+  e.preventDefault();
+  console.log('here!!', _id);
+};
 
 export default ({ user }) => {
-  console.log(user);
-
   const renderCars = user.cars.map(car => {
     return (
       <Carousel.Item>
@@ -110,7 +106,7 @@ export default ({ user }) => {
             controls={true}
             interval="3000"
           >
-           {renderCars}
+            {renderCars}
           </Carousel>
           <Button className="GarageSlider-BuyBtn" variant="outline-light">
             Select Car
