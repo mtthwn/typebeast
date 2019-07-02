@@ -32,8 +32,6 @@ export default class PlayGameLogic extends Component {
       endpoint: 'http://127.0.0.1:8080',
       gameStart: false,
       roomNumber: 0,
-      playersInRoom: [],
-      playerSocket: '',
       playerProgress: 0,
       wpm: 0,
       wordsCompleted: '',
@@ -57,31 +55,24 @@ export default class PlayGameLogic extends Component {
     const socket = socketIOClient(endpoint);
 
     socket.on('connect', () => {
-      socket.emit('user-update', JSON.stringify({ user: this.state.user }));
+      socket.emit('user-info', JSON.stringify({ user: this.state.user }));
 
       this.setState({
-        socket
+        socket,
+        loading: false
       });
     });
 
-    socket.on('save-socket', message => {
+    socket.on('room-number', message => {
       this.setState({
-        playersInRoom: message.clients,
-        playerSocket: message.socketId,
-        loading: false,
         roomNumber: message.roomNum
       });
-      // this.state.socket.emit('user-update', JSON.stringify({ user: this.state.user }));
     });
 
-    socket.on('user-update', data => {
+    socket.on('user-broadcast', data => {
       const formattedData = JSON.parse(data);
       const leaderboard = this.state.leaderboard;
       const carPositioning = this.state.carPositioning;
-
-      // formattedData.forEach(user => {
-      //   leaderboard[user] = formattedData[user];
-      // })
 
       for (const user in formattedData) {
         leaderboard[user] = {
@@ -93,13 +84,6 @@ export default class PlayGameLogic extends Component {
       }
       this.setState(carPositioning);
       this.setState(leaderboard);
-    });
-
-    socket.on('new-user-join', message => {
-      // Display message when new player joins. Import updated room-player list from server.
-      this.setState({
-        playersInRoom: message.clients
-      });
     });
 
     socket.on('game-start', message => {
