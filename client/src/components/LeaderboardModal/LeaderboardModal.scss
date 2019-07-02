@@ -25,6 +25,8 @@
 
   table {
     margin: 2rem 0;
+    border-left: 1px solid $border-color;
+    border-right: 1px solid $border-color;
   }
 
   th {
@@ -35,10 +37,11 @@
 
   td {
     text-transform: none;
+    text-align: center;
     vertical-align: middle;
     border: none;
     padding: 1.5rem 2rem;
-    border-bottom: 1px solid #ff8231;
+    border-bottom: 1px solid $border-color;
     background-color: $bg-color;
   }
 }
@@ -79,6 +82,7 @@
   border-radius: 0;
   box-shadow: none;
   width: 48%;
+  margin-top: 2rem;
   padding: 1rem 0rem;
 
   &:hover {

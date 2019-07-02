@@ -29,9 +29,7 @@ const LeaderboardModal = ({ leaderboard }) => {
     const wpm = leaderboard[socketId].wpm ? (
       <td>{leaderboard[socketId].wpm} </td>
     ) : (
-      <td>
-        <Spinner animation="border" variant="success" />
-      </td>
+      <td>In Progress</td>
     );
 
     const completed = leaderboard[socketId].completed ? (
