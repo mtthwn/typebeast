@@ -2,59 +2,10 @@ import React from 'react';
 import { Nav, Navbar } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
-import HeaderButton from './../Button/HeaderButton';
+import { logoutHandler, renderButtons, renderLinks } from './../../lib/headerHelpers'
 
 import './Header.scss';
 
-import Register from '../AuthenticationForms/Register';
-import Login from '../AuthenticationForms/Login';
-
-const logoutHandler = () => {
-  localStorage.removeItem('token');
-  window.location.reload();
-};
-
-const renderButtons = username => {
-  if (!username) {
-    return (
-      <div inline="true" className="Header-signup">
-        <HeaderButton className="sign-up" buttonText="" />
-        <HeaderButton className="login" buttonText="" />
-      </div>
-    );
-  } else if (username === 'Guest') {
-    return (
-      <div inline="true" className="Header-signup">
-        <Register className="sign-up" />
-        <Login className="login" />
-      </div>
-    );
-  }
-
-  return (
-    <div inline="true" className="Header-signup">
-      <HeaderButton className={'sign-up'} buttonText={`Welcome ${username}`} />
-      <HeaderButton cb={logoutHandler} className="login" buttonText="Logout" />
-    </div>
-  );
-};
-
-const renderLinks = username => {
-  if (username === 'Guest' || !username) {
-    return;
-  }
-
-  return (
-    <>
-      <Link to="/garage" className="nav-link">
-        Garage
-      </Link>
-      <Link to="/shop" className="nav-link">
-        Shop
-      </Link>
-    </>
-  );
-};
 export default ({ user }) => {
   const renderedButtons = renderButtons(user.username);
   const authLinks = renderLinks(user.username);
