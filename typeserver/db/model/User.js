@@ -2,6 +2,8 @@ const mongoose = require('mongoose');
 
 const { Schema } = mongoose;
 
+const Car = require('./Car');
+
 const UserSchema = new Schema({
   username: {
     type: String,
@@ -20,10 +22,12 @@ const UserSchema = new Schema({
     type: String,
     required: true
   },
-  cars: [{
-    type: Schema.Types.ObjectId, 
-    ref: 'Car'
-  }],
+  cars: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'Car'
+    }
+  ],
   currentCar: {
     type: Schema.Types.ObjectId,
     ref: 'Car'
@@ -33,6 +37,22 @@ const UserSchema = new Schema({
     required: true,
     default: 100000
   }
+});
+
+UserSchema.pre('save', function(next) {
+  let user = this;
+
+  Car.findOne({ model: 'Silvia S15' })
+    .then(car => {
+      user.currentCar = car._id;
+      user.cars = [car._id];
+      console.log(user);
+
+      next();
+    })
+    .catch(e => {
+      console.log(e);
+    });
 });
 
 const User = mongoose.model('User', UserSchema);
