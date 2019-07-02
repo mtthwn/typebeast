@@ -43,7 +43,11 @@ export default class LoginForm extends Component {
   render() {
     return (
       <Form>
-        <Alert style={{visibility: 'hidden'}} id="login-alert" variant="danger"></Alert>
+        <Alert
+          style={{ visibility: 'hidden' }}
+          id="login-alert"
+          variant="danger"
+        ></Alert>
         <Form.Group controlId="formBasicEmail">
           <Form.Label>Email address</Form.Label>
           <Form.Control

@@ -1,7 +1,11 @@
 import React from 'react';
 import { Modal, Button } from 'react-bootstrap';
+
 import ModalLogic from './ModalLogic';
 import LoginForm from './LoginForm';
+
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faUser } from '@fortawesome/free-solid-svg-icons';
 
 export default ({ className }) => {
   return (
@@ -21,8 +25,12 @@ export default ({ className }) => {
             onHide={props.handleClose}
             centered
           >
-            <Modal.Header closeButton>
-              <Modal.Title>Login</Modal.Title>
+            <Modal.Header className="Modal-Login" closeButton>
+              <Modal.Title>
+                {' '}
+                <FontAwesomeIcon icon={faUser} />
+                Login
+              </Modal.Title>
             </Modal.Header>
             <Modal.Body>
               <LoginForm handleLogin={props.handleLogin} />
