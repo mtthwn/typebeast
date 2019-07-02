@@ -11,7 +11,7 @@ import Login from '../AuthenticationForms/Login';
 const logoutHandler = () => {
   localStorage.removeItem('token');
   window.location.reload();
-}
+};
 
 const renderButtons = username => {
   if (!username) {
@@ -32,17 +32,31 @@ const renderButtons = username => {
 
   return (
     <div inline="true" className="Header-signup">
-      <HeaderButton
-        className={'sign-up'}
-        buttonText={`Welcome ${username}`}
-      />
-      <HeaderButton cb={logoutHandler} className='login' buttonText='Logout' />
+      <HeaderButton className={'sign-up'} buttonText={`Welcome ${username}`} />
+      <HeaderButton cb={logoutHandler} className="login" buttonText="Logout" />
     </div>
   );
 };
 
+const renderLinks = username => {
+  if (username === 'Guest' || !username) {
+    return;
+  }
+
+  return (
+    <>
+      <Link to="/garage" className="nav-link">
+        Garage
+      </Link>
+      <Link to="/shop" className="nav-link">
+        Shop
+      </Link>
+    </>
+  );
+};
 export default ({ user }) => {
   const renderedButtons = renderButtons(user.username);
+  const authLinks = renderLinks(user.username);
 
   return (
     <div>
@@ -58,12 +72,7 @@ export default ({ user }) => {
             <Link to="/" className="nav-link">
               Home
             </Link>
-            <Link to="/garage" className="nav-link">
-              Garage
-            </Link>
-            <Link to="/shop" className="nav-link">
-              Shop
-            </Link>
+            {authLinks}
             <Link to="/play" className="nav-link">
               Play Now
             </Link>
@@ -74,4 +83,3 @@ export default ({ user }) => {
     </div>
   );
 };
-

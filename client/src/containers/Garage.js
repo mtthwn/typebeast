@@ -23,14 +23,12 @@ export default class Garage extends Component {
   async componentDidMount() {
     const user = await tokenValidationHelper();
 
-    if (user.username !== 'Guest') {
-      await instance.get('/cars/user').then(response => {
-        const { cars } = response.data;
+    await instance.get('/cars/user').then(response => {
+      const { cars } = response.data;
 
-        user.cars = cars;
-        this.setState({ user });
-      });
-    } 
+      user.cars = cars;
+      this.setState({ user });
+    });
   }
 
   render() {

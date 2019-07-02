@@ -28,6 +28,12 @@ module.exports = {
 
     const { _id } = req.user;
 
+    if (!req.user) {
+      Car.findOne({ model: 'Silvia S15'}).then(car => {
+        console.log(car);
+      })
+    }
+
     User.findOne({ _id })
       .populate('cars')
       .exec()

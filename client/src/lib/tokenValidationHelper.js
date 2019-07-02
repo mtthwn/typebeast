@@ -33,13 +33,13 @@ export default () => {
         }
       })
       .catch(e => {
-        return {
+        rej({
           username: 'Guest',
           email: null,
           _id: null,
           cars: [],
           games: []
-        };
+        });
       });
   });
 };

@@ -32,7 +32,7 @@ export default class LoginForm extends Component {
     const email = this.state.email;
     const password = this.state.password;
     if (email.length > 0 && password.length > 0) {
-      this.props.handleLogin(email, password)();
+      this.props.handleLogin(email, password);
     } else if (email.length === 0 || password.length === 0) {
       document.getElementById('login-alert').innerHTML =
         'Incorrect login credentials. Please try again.';
