@@ -1,10 +1,7 @@
 import React, { Component } from 'react';
 
-import GarageSlider from '../components/GarageSlider/GarageSlider';
-import Header from './../components/Header/Header';
-
-import tokenValidationHelper from './../lib/tokenValidationHelper';
-import instance from './../lib/axios';
+import tokenValidationHelper from '../../lib/tokenValidationHelper';
+import instance from '../../lib/axios';
 
 export default class Garage extends Component {
   constructor() {
@@ -32,13 +29,8 @@ export default class Garage extends Component {
   }
 
   render() {
-    return (
-      <div>
-        <Header user={this.state.user} />
-        <div>
-          <GarageSlider user={this.state.user} />
-        </div>
-      </div>
-    );
+    return this.props.children({
+        ...this.state
+    })
   }
 }
