@@ -9,8 +9,8 @@
   font-weight: 600;
   font-size: 3rem;
   margin: 0 auto;
-  top: 75%;
-  left: 70%;
+  top: 83.5%;
+  left: 80%;
   height: 10rem;
   padding: 0 0;
 
@@ -32,9 +32,17 @@
 }
 
 .carousel-item {
-  position: fixed;
+  position: relative;
   .CarSlide {
-    left: 30%;
+    padding: 10rem 20rem;
+    margin-left: 20rem;
+
+    @include respond(tab-landscape) {
+      margin-top: -30rem;
+    }
+  }
+  @include respond(tab-landscape) {
+    padding: 0rem 0rem;
   }
 }
 
@@ -59,10 +67,11 @@
 }
 
 .carousel-caption {
-  padding-top: 15rem;
-  position: fixed;
+  padding: 20rem 0rem;
+  position: relative;
   text-align: left;
   width: 100%;
+  margin-left: -4.5rem;
   height: 100vh;
   color: #fff;
 
@@ -118,4 +127,13 @@
 img.Car-Sprite {
   position: relative;
   margin: 2rem 0rem;
+}
+
+.GarageSlider-content {
+  @include respond(tab-landscape) {
+    width: 35% !important;
+    bottom: -10% !important;
+    z-index: 1;
+    left: 12% !important;
+  }
 }

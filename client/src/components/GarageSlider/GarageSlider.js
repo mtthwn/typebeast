@@ -59,7 +59,7 @@ export default ({ user }) => {
             indicators={false}
             fade={false}
             controls={true}
-            interval="3000"
+            interval="5000"
           >
             {renderCars}
           </Carousel>

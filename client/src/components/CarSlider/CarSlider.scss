@@ -33,7 +33,6 @@
 .carousel-item {
   position: relative;
   img {
-    // position: fixed;
     top: 0;
     bottom: 0;
     left: 0;
@@ -60,7 +59,8 @@
   display: flex;
 }
 
-.CarSlider-content {
+.CarSlider-content,
+.GarageSlider-content {
   position: absolute;
   align-self: center;
   z-index: 50;
