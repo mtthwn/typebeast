@@ -59,10 +59,6 @@ io.on('connection', function(socket) {
   socket.on('user-info', data => {
     const formattedData = JSON.parse(data).user;
 
-    // If room doesn't exist, create it.
-    if (!formattedClients[`room-${roomNum}`]) {
-      formattedClients[`room-${roomNum}`] = {};
-    }
 
     //Check if username already in room and set value.
     function userInRoom () {
@@ -77,14 +73,6 @@ io.on('connection', function(socket) {
     }
     alreadyInRoom = userInRoom();
 
-    // If username not in room, proceed. Else, put user data in newer room.
-    if (!alreadyInRoom || formattedData.username === 'Guest') {
-      formattedClients[`room-${roomNum}`][socket.id] = formattedData;
-    } else {
-      formattedClients[`room-${roomNum + 1}`] = {};
-      formattedClients[`room-${roomNum + 1}`][socket.id] = formattedData;
-    }
-
     //If it's the first user, the room doesn't exist - make the room.
     if (!roomTracker['room-' + roomNum]) {
       socket.join('room-' + roomNum);
@@ -94,6 +82,11 @@ io.on('connection', function(socket) {
         quote: ''
       };
       getQuote(roomTracker['room-' + roomNum]);
+
+      if (!formattedClients[`room-${roomNum}`]) {
+        formattedClients[`room-${roomNum}`] = {};
+        formattedClients[`room-${roomNum}`][socket.id] = formattedData;
+      }
 
       //If the room is not at max capacity (4), add user to the room
     } else if (
@@ -105,6 +98,7 @@ io.on('connection', function(socket) {
     ) {
       socket.join('room-' + roomNum);
       roomTracker['room-' + roomNum]['users']++;
+      formattedClients[`room-${roomNum}`][socket.id] = formattedData;
       //If the room exists and is at capacity, increase the room number, join the new room, set count to 1
     } else {
       roomNum++;
@@ -113,6 +107,8 @@ io.on('connection', function(socket) {
         users: 1,
         quote: ''
       };
+      formattedClients[`room-${roomNum}`] = {};
+      formattedClients[`room-${roomNum}`][socket.id] = formattedData;
       getQuote(roomTracker['room-' + roomNum]);
     }
 
@@ -166,27 +162,29 @@ io.on('connection', function(socket) {
 
   socket.on('disconnecting', function() {
     if (
-      formattedClients[`room-${roomNum}`] &&
-      formattedClients[`room-${roomNum}`][socket.id]
+      formattedClients[Object.keys(socket.rooms)[1]] &&
+      formattedClients[Object.keys(socket.rooms)[1]][socket.id]
     ) {
-      delete formattedClients[`room-${roomNum}`][socket.id];
+      delete formattedClients[Object.keys(socket.rooms)[1]][socket.id];
     }
 
     const rooms = Object.keys(socket.rooms).slice();
 
     roomTracker[rooms[1]]['users']--;
     roomTracker.totalUsers--;
-    console.log(roomTracker)
 
     io.to(rooms[1]).emit('player-left', {
       description: `${socket.id} has left the game.`,
-      formattedClients: formattedClients[`room-${roomNum}`]
+      formattedClients: formattedClients[Object.keys(socket.rooms)[1]]
     });
+
+    console.log(`===============================`);
+    console.log('A user disconnected', socket.id);
+    console.log(roomTracker)
+    console.log(formattedClients)
   });
 
   socket.on('disconnect', function() {
-    console.log(`===============================`);
-    console.log('A user disconnected', socket.id);
   });
 });
 
