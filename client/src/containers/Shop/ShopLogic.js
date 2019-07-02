@@ -3,8 +3,6 @@ import axios from 'axios';
 
 import instance from '../../lib/axios';
 
-import './../components/Shop/Shop.scss';
-
 import tokenValidationHelper from '../../lib/tokenValidationHelper';
 
 export default class Shop extends Component {
