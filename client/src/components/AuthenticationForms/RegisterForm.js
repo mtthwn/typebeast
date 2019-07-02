@@ -15,7 +15,7 @@ export default class RegisterForm extends Component {
   onChange = inputType => event => {
     event.preventDefault();
 
-    document.getElementById('register-alert').style.visibility = 'hidden';
+    // document.getElementById('register-alert').style.visibility = 'hidden';
 
     if (inputType === 'username') {
       this.setState({
@@ -38,10 +38,8 @@ export default class RegisterForm extends Component {
     const email = this.state.email;
     const password = this.state.password;
     if (username.length > 0 && email.length > 0 && password.length > 0) {
-      this.props.handleRegister(username, email, password)();
+      this.props.handleRegister(username, email, password);
     } else if (username.length === 0 || password.length === 0) {
-      // document.getElementById('register-alert').innerHTML = 'Please enter valid credentials';
-      // document.getElementById('register-alert').style.visiblity = 'visible';
       alert('Please enter valid credentials before continuing');
     }
   };

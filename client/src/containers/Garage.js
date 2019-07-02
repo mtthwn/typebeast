@@ -3,7 +3,8 @@ import React, { Component } from 'react';
 import GarageSlider from '../components/GarageSlider/GarageSlider';
 import Header from './../components/Header/Header';
 
-import tokenValidationHelper from './../lib/tokenValidationHelper'
+import tokenValidationHelper from './../lib/tokenValidationHelper';
+import instance from './../lib/axios';
 
 export default class Garage extends Component {
   constructor() {
@@ -16,22 +17,27 @@ export default class Garage extends Component {
         email: null,
         games: []
       }
-    }
+    };
   }
 
-  async componentDidMount () {
+  async componentDidMount() {
     const user = await tokenValidationHelper();
 
-    this.setState({ user });
+    await instance.get('/cars/user').then(response => {
+      const { cars } = response.data;
+
+      user.cars = cars;
+      this.setState({ user });
+    });
   }
 
   render() {
     return (
       <div>
         <Header user={this.state.user} />
-          <div>
-            <GarageSlider />
-          </div>
+        <div>
+          <GarageSlider user={this.state.user} />
+        </div>
       </div>
     );
   }

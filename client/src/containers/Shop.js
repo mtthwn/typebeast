@@ -1,4 +1,8 @@
 import React, { Component } from 'react';
+import axios from 'axios';
+
+import instance from './../lib/axios';
+
 import ShopUserInfo from '../components/Shop/ShopUserInfo';
 import CarList from '../components/Shop/CarList';
 import Header from './../components/Header/Header';
@@ -12,18 +16,47 @@ class MainPage extends Component {
     super();
 
     this.state = {
-      user: '',
-      cars: [],
-      username: null,
-      games: []
+      user: {
+        username: '',
+        cars: [],
+        games: []
+      },
+      cars: []
     };
   }
 
   async componentDidMount() {
-    const user = await tokenValidationHelper();
+    try {
+      const user = await tokenValidationHelper();
 
-    this.setState({ user });
+      this.setState({ user });
+
+      await axios.get('http://127.0.0.1:8081/api/cars').then(data => {
+        const { cars } = data.data;
+
+        this.setState({ cars });
+      });
+    } catch (e) {
+      console.log(e);
+    }
   }
+
+  buyCarFunction = _id => e => {
+    e.preventDefault();
+
+    axios.post('http://127.0.0.1:8081/api/cars/add', {
+      _id: this.state.user._id,
+      car: _id
+    }).then(response => {
+      alert('Car successfully bought!');
+    }).catch(e => console.log(e.message));
+
+    instance.post('/cars/add', {
+      car: _id
+    }).then(response => {
+      alert('Successfully purchased!')
+    }).catch(e => console.log(e));
+  };
 
   render() {
     return (
@@ -31,7 +64,7 @@ class MainPage extends Component {
         <Header user={this.state.user} />
         <div className="Shop-container">
           <ShopUserInfo />
-          <CarList />
+          <CarList buyCarFunction={this.buyCarFunction} cars={this.state.cars} />
         </div>
       </div>
     );

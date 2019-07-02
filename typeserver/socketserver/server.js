@@ -8,18 +8,33 @@ const port = process.env.PORT || 8080;
 
 let roomNum = 1; // Var tracks the room new users will be directed to.
 
-let roomTracker = {
+const roomTracker = {
   totalUsers: 0
 };
 
-/* roomTracker object: {
+const formattedClients = {};
+
+/*
+
+roomTracker object: {
   total: 12,
-  room-1: 3,
-  room-2: 3,
-  room-3: 3,
-  room-4: 3
+  room-1: {
+    users: 3,
+    quote: ''
+  }
 }
+
+formattedClients = {
+  room-1 :
+    socket-1 : {
+      username:
+      car:
+    }
+}
+
 */
+
+
 
 const getQuote = room => {
   if (!roomTracker['room-' + roomNum]['quote']) {
@@ -27,17 +42,60 @@ const getQuote = room => {
       .get('http://127.0.0.1:8081/api/quotes')
       .then(res => {
         room['quote'] = res.data.data.quote;
-        console.log(roomTracker);
+        // console.log(roomTracker);
       })
       .catch(e => console.log(e.message));
   }
 };
 
-const formattedClients = {};
+let alreadyInRoom = false;
 
 io.on('connection', function(socket) {
   roomTracker.totalUsers++;
   console.log('\na user connected, users in server:', roomTracker.totalUsers);
+
+  // Handler to receive username and vehicle. Must happen first.
+  socket.on('user-update', data => {
+    const formattedData = JSON.parse(data).user;
+
+    // If room doesn't exist, create it.
+    if (!formattedClients[`room-${roomNum}`]) {
+      formattedClients[`room-${roomNum}`] = {};
+    }
+
+    // Check if username already in room and set value.
+    // function userInRoom () {
+    //   for (let socket in formattedClients[`room-${roomNum}`]) {
+    //     const existing = formattedClients[`room-${roomNum}`][socket].username
+    //     const newUser = formattedData.username
+    //     console.log(newUser, existing)
+    //     if (newUser === existing) {
+    //       return true;
+    //     }
+    //   }
+    //   return false;
+    // }
+    // alreadyInRoom = userInRoom();
+    // console.log('Is the user in room formatted clients', )
+    // If username not in room, proceed. Else, put user data in newer room.
+    // if (!alreadyInRoom) {
+    formattedClients[`room-${roomNum}`][socket.id] = formattedData;
+    // } else {
+    //   formattedClients[`room-${roomNum + 1}`] = {};
+    //   formattedClients[`room-${roomNum + 1}`][socket.id] = formattedData;
+    // }
+
+    console.log(`===============================`);
+    console.log(formattedClients)
+
+    io.to(`room-${roomNum}`).emit(
+      'user-update',
+      JSON.stringify(formattedClients[`room-${roomNum}`])
+    );
+  });
+
+  console.log('Is the user in room?', alreadyInRoom)
+
   //If it's the first user, the room doesn't exist - make the room.
   if (!roomTracker['room-' + roomNum]) {
     socket.join('room-' + roomNum);
@@ -52,10 +110,10 @@ io.on('connection', function(socket) {
   } else if (
     roomTracker['room-' + roomNum] &&
     roomTracker['room-' + roomNum]['users'] < 4
+    // !alreadyInRoom
   ) {
     socket.join('room-' + roomNum);
     roomTracker['room-' + roomNum]['users']++;
-
     //If the room exists and is at capacity, increase the room number, join the new room, set count to 1
   } else {
     roomNum++;
@@ -65,8 +123,9 @@ io.on('connection', function(socket) {
       quote: ''
     };
     getQuote(roomTracker['room-' + roomNum]);
-
   }
+
+  console.log(roomTracker)
 
   //Set up variable to get array of socket IDs in current room
   let clients = io.sockets.adapter.rooms['room-' + roomNum];
@@ -78,25 +137,6 @@ io.on('connection', function(socket) {
     roomNum
   });
 
-  socket.on('user-update', data => {
-    const formattedData = JSON.parse(data).user;
-    if (!formattedClients[`room-${roomNum}`]) {
-      formattedClients[`room-${roomNum}`] = {};
-    }
-
-    // const formattedData = JSON.parse(data).user;
-
-    // formattedData.socket = socket.id;
-    formattedClients[`room-${roomNum}`][socket.id] = formattedData;
-
-    console.log(`===============================`);
-    console.log(formattedClients[`room-${roomNum}`]);
-
-    io.to(`room-${roomNum}`).emit(
-      'user-update',
-      JSON.stringify(formattedClients[`room-${roomNum}`])
-    );
-  });
   //Broadcast that a new user joined to everyone ~else~
   socket.broadcast.to('room-' + roomNum).emit('new-user-join', {
     socketId: socket.id,
@@ -134,8 +174,6 @@ io.on('connection', function(socket) {
   });
 
   socket.on('disconnecting', function() {
-    console.log(socket.id);
-
     if (
       formattedClients[`room-${roomNum}`] &&
       formattedClients[`room-${roomNum}`][socket.id]
@@ -144,6 +182,11 @@ io.on('connection', function(socket) {
     }
 
     const rooms = Object.keys(socket.rooms).slice();
+
+    roomTracker[rooms[1]]['users']--;
+    roomTracker.totalUsers--;
+    console.log(roomTracker)
+
     io.to(rooms[1]).emit('player-left', {
       description: `${socket.id} has left the game.`,
       formattedClients: formattedClients[`room-${roomNum}`]
@@ -152,9 +195,6 @@ io.on('connection', function(socket) {
 
   socket.on('disconnect', function() {
     console.log('A user disconnected', socket.id);
-    // Remove user from total users list when they leave
-    roomTracker.totalUsers--;
-    //If someone disconnects, total user count changes, but room count remains the same
   });
 });
 

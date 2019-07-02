@@ -39,10 +39,26 @@ const renderButtons = username => {
   );
 };
 
-const Header = ({ user }) => {
-  const renderedButtons = renderButtons(user.username);
+const renderLinks = username => {
+  if (username === 'Guest' || !username) {
+    return;
+  }
 
-  console.log(renderedButtons);
+  return (
+    <>
+      <Link to="/garage" className="nav-link">
+        Garage
+      </Link>
+      <Link to="/shop" className="nav-link">
+        Shop
+      </Link>
+    </>
+  );
+};
+export default ({ user }) => {
+  const renderedButtons = renderButtons(user.username);
+  const authLinks = renderLinks(user.username);
+
   return (
     <div>
       <Navbar collapseOnSelect expand="lg" className="Navbar" variant="dark">
@@ -57,12 +73,7 @@ const Header = ({ user }) => {
             <Link to="/" className="nav-link">
               Home
             </Link>
-            <Link to="/garage" className="nav-link">
-              Garage
-            </Link>
-            <Link to="/shop" className="nav-link">
-              Shop
-            </Link>
+            {authLinks}
             <Link to="/play" className="nav-link">
               Play Now
             </Link>
@@ -73,5 +84,3 @@ const Header = ({ user }) => {
     </div>
   );
 };
-
-export default Header;

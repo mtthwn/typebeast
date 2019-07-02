@@ -1,4 +1,5 @@
 import React, { Component, Fragment } from 'react';
+import { withRouter } from 'react-router-dom';
 import './GameUI.scss';
 
 import tokenValidationHelper from './../lib/tokenValidationHelper';
@@ -118,15 +119,15 @@ class PlayGameLogic extends Component {
     // Connect to the socket
     const socket = socketIOClient(endpoint);
 
-    this.setState({
-      socket
-    });
-
     socket.on('connect', () => {
-      this.state.socket.emit(
+      socket.emit(
         'user-update',
         JSON.stringify({ user: this.state.user })
       );
+
+      this.setState({
+        socket
+      });
     });
 
     socket.on('save-socket', message => {
@@ -136,7 +137,6 @@ class PlayGameLogic extends Component {
         loading: false,
         roomNumber: message.roomNum
       });
-
       // this.state.socket.emit('user-update', JSON.stringify({ user: this.state.user }));
     });
 
@@ -175,7 +175,6 @@ class PlayGameLogic extends Component {
 
     socket.on('progress-broadcast', message => {
       const carPositioning = this.state.carPositioning;
-
       if (carPositioning[message.socketId]) {
         carPositioning[message.socketId] = message.completion;
       }
@@ -186,13 +185,15 @@ class PlayGameLogic extends Component {
 
       if (leaderboard[message.socketId]) {
         leaderboard[message.socketId].completion = message.completion;
+
+        // Set completed boolean for the leaderboard.
+        if (leaderboard[message.socketId].completion === true) {
+          leaderboard[message.socketId].completed = true
+        } else {
+          leaderboard[message.socketId].completed = false
+        }
       }
 
-      if (leaderboard[message.socketId].completion === true) {
-        leaderboard[message.socketId].completed = true;
-      } else {
-        leaderboard[message.socketId].completed = false;
-      }
 
       this.setState({ leaderboard });
 
@@ -265,13 +266,18 @@ class PlayGameLogic extends Component {
 
     socket.on('disconnect', () => {
       alert('Please reload your page');
-      this.setState({
-        leaderboard: {},
-        placings: [],
-        progress: 0,
-        carPositioning: {}
-      });
+      this.setState({ leaderboard: {}, placings: [], progress: 0, carPositioning: {} });
     });
+  }
+
+  // componentDidUpdate(prevProps) {
+  //   if (this.props.location.pathname !== prevProps.location.pathname) {
+  //     console.log("Route change!", this.props.location.pathname);
+  //   }
+  // }
+
+  componentWillUnmount() {
+    this.state.socket.disconnect();
   }
 
   render() {
