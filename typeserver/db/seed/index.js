@@ -83,8 +83,6 @@ const cars = [
   }
 ];
 
-// const savedCars = [];
-
 const seedQuotes = async quotes => {
   collections.forEach(collection => {
     db.dropCollection(collection, (err, result) => {
