@@ -1,50 +1,23 @@
-import React, { Component } from 'react';
-// import axios from 'axios';
+import React from 'react';
 
 import MainLogic from './MainLogic';
 import CarSlider from './../../components/CarSlider/CarSlider';
 import SocialMedia from './../../components/SocialMedia/SocialMedia';
 import PlayNow from './../../components/PlayNow/PlayNow';
 
-import tokenValidationHelper from './../../lib/tokenValidationHelper';
-
 import Header from './../../components/Header/Header';
 
-export default class MainPage extends Component {
-  constructor() {
-    super();
-
-    this.state = {
-      user: {
-        username: '',
-        email: null,
-        _id: null,
-        cars: [],
-        games: []
-      }
-    };
-  }
-
-  async componentDidMount() {
-    const user = await tokenValidationHelper();
-
-    this.setState({ user });
-  }
-
-  render() {
-
-    const { user } = this.state;
-
-    return (
+export default () => (
+  <MainLogic>
+    {props => (
       <div>
-        <Header user={user}  />
+        <Header user={props.user} />
         <div>
           <SocialMedia />
           <CarSlider />
           <PlayNow />
         </div>
       </div>
-    );
-  }
-}
-
+    )}
+  </MainLogic>
+);
