@@ -1,8 +1,16 @@
 @import './../../styles/Variables';
 @import '../../styles/Mixins';
 
+#RaceResults {
+  svg {
+    color: #000;
+    font-size: 3rem;
+    margin-left: 2rem;
+  }
+}
 .modal-dialog {
-  max-width: 60rem;
+  max-width: 80rem;
+  height: 50%;
 }
 
 .modal-content {
@@ -12,29 +20,35 @@
 }
 .modal-body {
   padding: 0 0;
+  margin: 4rem 0;
   height: auto;
   font-size: 1.2rem;
 
   table {
-    margin: 0 0;
+    margin: 2rem 0;
+    border-left: 1px solid $border-color;
+    border-right: 1px solid $border-color;
   }
 
   th {
-    background-color: #000;
+    background-color: #fb9e14;
+    color: #3c1200;
     padding: 1.5rem 2rem;
-    border: none;
   }
 
   td {
     text-transform: none;
+    text-align: center;
+    vertical-align: middle;
     border: none;
     padding: 1.5rem 2rem;
-    border-bottom: 1px solid rgb(15, 15, 15);
-    background-color: rgb(5, 5, 5);
+    border-bottom: 1px solid $border-color;
+    background-color: $bg-color;
   }
 }
 
 .modal-header {
+  justify-content: center;
   background-color: $bg-green;
   border-bottom: 1px solid rgb(15, 15, 15);
 
@@ -53,10 +67,10 @@
 }
 
 .modal-title {
-  font-size: 2rem;
+  font-size: 2.5rem;
   letter-spacing: 1px;
   margin-left: 1rem;
-  font-weight: 500;
+  font-weight: 700;
 }
 
 .table-bordered thead td {
@@ -68,12 +82,14 @@
   @include Green-btn;
   border-radius: 0;
   box-shadow: none;
-  width: 50%;
+  width: 48%;
+  margin-top: 2rem;
   padding: 1rem 0rem;
 
   &:hover {
     transform: translateY(-2px);
     background-color: $bg-green;
+    color: #fff;
   }
 
   &:active {
@@ -90,12 +106,22 @@
 }
 
 .Home-btn {
-  background-color: $main-color;
+  background-color: #000;
+  border: 1px solid $border-color;
   box-shadow: none;
+  margin-left: 2rem;
 
   &:hover {
-    background-color: #eb2344;
-    box-shadow: inset 0 0 5px rgba(212, 13, 46, 0.3),
-      0px 0px 20px 2px rgba(212, 13, 46, 0.3);
+    background-color: #fff;
+    color: #000;
+    box-shadow: none;
+  }
+}
+
+.Result-wrapper {
+  display: flex;
+  justify-content: center;
+  img {
+    justify-self: center;
   }
 }
