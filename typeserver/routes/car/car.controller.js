@@ -25,13 +25,12 @@ module.exports = {
       .catch(e => res.status(400).json({ success: false, message: e.message }));
   },
   getUserCars: (req, res) => {
-
     const { _id } = req.user;
 
     if (!req.user) {
-      Car.findOne({ model: 'Silvia S15'}).then(car => {
+      Car.findOne({ model: 'Silvia S15' }).then(car => {
         console.log(car);
-      })
+      });
     }
 
     User.findOne({ _id })
@@ -77,9 +76,18 @@ module.exports = {
       const updatedUser = await User.findOne({ _id });
 
       res.status(200).json({ user: getCleanUser(updatedUser), success: true });
-
     } catch (e) {
-      res.status(400).json({ success: false, message: 'An error occurred while buying a car.' });
+      res.status(400).json({
+        success: false,
+        message: 'An error occurred while buying a car.'
+      });
     }
+  },
+  setUserCar: (req, res) => {
+    const { car, _id } = req.body;
+
+    User.findOneAndUpdate({ _id }, { currentCar: car }).then(user => {
+      console.log(user);
+    });
   }
 };
