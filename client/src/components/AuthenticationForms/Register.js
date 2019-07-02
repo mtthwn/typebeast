@@ -1,5 +1,8 @@
 import React from 'react';
 import { Modal, Button } from 'react-bootstrap';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faUserPlus } from '@fortawesome/free-solid-svg-icons';
+
 import ModalLogic from './ModalLogic';
 import RegisterForm from './RegisterForm';
 
@@ -21,8 +24,12 @@ export default ({ className }) => {
             onHide={props.handleClose}
             centered
           >
-            <Modal.Header closeButton>
-              <Modal.Title>Register</Modal.Title>
+            <Modal.Header className="Modal-Register" closeButton>
+              <Modal.Title>
+                {' '}
+                <FontAwesomeIcon icon={faUserPlus} />
+                Register
+              </Modal.Title>
             </Modal.Header>
             <Modal.Body>
               <RegisterForm handleRegister={props.handleRegister} />

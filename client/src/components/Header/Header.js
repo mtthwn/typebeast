@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import HeaderButton from './../Button/HeaderButton';
 
 import './Header.scss';
+
 import Register from '../AuthenticationForms/Register';
 import Login from '../AuthenticationForms/Login';
 
