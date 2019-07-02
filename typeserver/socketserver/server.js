@@ -56,7 +56,7 @@ io.on('connection', function(socket) {
   console.log('\nA user connected: ', socket.id, '/Users in server:', roomTracker.totalUsers);
 
   // Handler to receive username and vehicle. Must happen first.
-  socket.on('user-update', data => {
+  socket.on('user-info', data => {
     const formattedData = JSON.parse(data).user;
 
     // If room doesn't exist, create it.
@@ -116,28 +116,22 @@ io.on('connection', function(socket) {
       getQuote(roomTracker['room-' + roomNum]);
     }
 
-
     io.to(`room-${roomNum}`).emit(
-      'user-update',
+      'user-broadcast',
       JSON.stringify(formattedClients[`room-${roomNum}`])
     );
 
     console.log(roomTracker)
     console.log(formattedClients)
+
     // Set up variable to get array of socket IDs in current room
     let clients = io.sockets.adapter.rooms['room-' + roomNum];
     let clientsArray = Object.keys(clients.sockets);
 
-    socket.emit('save-socket', {
-      clients: clientsArray,
+    socket.emit('room-number', {
       roomNum
     });
 
-    // //Broadcast that a new user joined to everyone ~else~
-    // socket.broadcast.to('room-' + roomNum).emit('new-user-join', {
-    //   clients: clientsArray,
-    //   // formattedClients: formattedClients[`room-${roomNum}]`]
-    // });
   });
 
 

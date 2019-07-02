@@ -55,7 +55,7 @@ export default class PlayGameLogic extends Component {
     const socket = socketIOClient(endpoint);
 
     socket.on('connect', () => {
-      socket.emit('user-update', JSON.stringify({ user: this.state.user }));
+      socket.emit('user-info', JSON.stringify({ user: this.state.user }));
 
       this.setState({
         socket,
@@ -63,13 +63,13 @@ export default class PlayGameLogic extends Component {
       });
     });
 
-    socket.on('save-socket', message => {
+    socket.on('room-number', message => {
       this.setState({
         roomNumber: message.roomNum
       });
     });
 
-    socket.on('user-update', data => {
+    socket.on('user-broadcast', data => {
       const formattedData = JSON.parse(data);
       const leaderboard = this.state.leaderboard;
       const carPositioning = this.state.carPositioning;
@@ -85,12 +85,6 @@ export default class PlayGameLogic extends Component {
       this.setState(carPositioning);
       this.setState(leaderboard);
     });
-
-    // socket.on('new-user-join', message => {
-    //   this.setState({
-    //     playersInRoom: message.clients
-    //   });
-    // });
 
     socket.on('game-start', message => {
       this.onStartCountdown();
