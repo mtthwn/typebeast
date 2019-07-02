@@ -2,7 +2,7 @@ import React from 'react';
 import { Nav, Navbar } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
-import { logoutHandler, renderButtons, renderLinks } from './../../lib/headerHelpers'
+import { renderButtons, renderLinks } from './../../lib/headerHelpers'
 
 import './Header.scss';
 

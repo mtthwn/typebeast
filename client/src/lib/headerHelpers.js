@@ -5,7 +5,7 @@ import Register from './../components/AuthenticationForms/Register';
 import Login from './../components/AuthenticationForms/Login';
 import HeaderButton from './../components/Button/HeaderButton';
 
-export const logoutHandler = () => {
+const logoutHandler = () => {
   localStorage.removeItem('token');
   window.location.reload();
 };
