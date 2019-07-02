@@ -4,9 +4,7 @@
 .Header-signup {
   width: 40%;
   height: 100%;
-
   justify-content: space-between;
-
   @include respond(tab-portrait) {
     font-size: 1.8rem;
     width: 100%;
@@ -39,6 +37,30 @@
   background-color: #000 !important;
   color: #fff !important;
 }
+
+.login:before {
+  content: '' !important;
+  position: absolute;
+  right: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  z-index: -1;
+  transform: translateX(100%);
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+.login:hover:before {
+  color: #fff !important;
+  background-color: $main-color;
+  transform: translateX(-0%);
+}
+
+.login:active:before {
+  transform: translateY(-0%);
+  background-color: #fff !important;
+  color: #000 !important;
+}
+
 .sign-up {
   background-color: #fff;
   color: $bg-color;
