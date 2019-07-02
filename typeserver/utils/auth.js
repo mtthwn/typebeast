@@ -18,7 +18,8 @@ const getCleanUser = (user) => {
         _id: user._id,
         cars: user.cars,
         games: user.games,
-        currentCar: user.currentCar
+        currentCar: user.currentCar,
+        cash: user.cash
     }
 }
 

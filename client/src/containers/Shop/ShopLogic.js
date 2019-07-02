@@ -13,7 +13,7 @@ export default class Shop extends Component {
       user: {
         username: '',
         cars: [],
-        games: []
+        games: [],
       },
       cars: []
     };

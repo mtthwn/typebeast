@@ -14,7 +14,7 @@ export default () => (
       <div>
         <Header user={props.user} />
         <div className="Shop-container">
-          <ShopUserInfo />
+          <ShopUserInfo user={props.user} />
           <CarList buyCarFunction={props.buyCarFunction} cars={props.cars} />
         </div>
       </div>

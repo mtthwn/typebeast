@@ -28,7 +28,8 @@ export default () => {
             email: null,
             _id: null,
             cars: [],
-            games: []
+            games: [],
+            cash: 0
           });
         }
       })
@@ -38,7 +39,8 @@ export default () => {
           email: null,
           _id: null,
           cars: [],
-          games: []
+          games: [],
+          cash: 0
         });
       });
   });
