@@ -38,7 +38,7 @@ const LeaderboardModal = ({ leaderboard }) => {
     );
 
     return (
-      <tr>
+      <tr style={position ? { backgroundColor: '#04ad67' } : ''}>
         {position}
         <td> {leaderboard[socketId].username} </td>
         <td>
