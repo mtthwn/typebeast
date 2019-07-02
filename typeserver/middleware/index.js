@@ -8,7 +8,7 @@ module.exports = (req, res, next) => {
     return next();
   }
 
-  token = token.replace('Bearer', '');
+  token = token.replace('Bearer ', '');
 
   jwt.verify(token, process.env.JWT_SECRET, (err, user) => {
     if (err) {

@@ -18,7 +18,13 @@ module.exports = {
 
     const defaultCar = await Car.findOne({ name: 'Civic' });
 
-    await User({ username, email, password, cars: [defaultCar._id], currentCar: defaultCar._id })
+    await User({
+      username,
+      email,
+      password,
+      cars: [defaultCar._id],
+      currentCar: defaultCar._id
+    })
       .save()
       .then(async savedUser => {
         const token = generateToken(savedUser);
@@ -61,18 +67,19 @@ module.exports = {
         res.status(401).json({ success: false, message: e.message });
       });
   },
-  checkToken: (req, res) => {
+  checkToken: async (req, res) => {
     const { token } = req.query;
 
     if (!token) {
-      return res
-        .status(401)
-        .json({ success: false, message: 'No token was sent' });
+      return res.json({
+        success: false,
+        message: 'No token was sent'
+      });
     }
 
     jwt.verify(token, process.env.JWT_SECRET, (err, tokenUser) => {
       if (err) {
-        return res.status(401).json({ success: false, message: err.message });
+        return res.json({ success: false, message: err.message });
       }
 
       User.findById({ _id: tokenUser._id }, (err, foundUser) => {
@@ -89,5 +96,5 @@ module.exports = {
         });
       });
     });
-  },
+  }
 };

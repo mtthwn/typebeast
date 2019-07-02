@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 
+// import instance from './../../lib/axios';
+
 export default class CarSliderLogic extends Component {
   constructor(props, context) {
     super(props, context);

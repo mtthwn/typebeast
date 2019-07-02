@@ -28,6 +28,7 @@ export default ({ className }) => {
               <LoginForm handleLogin={props.handleLogin} />
             </Modal.Body>
           </Modal>
+          
         </>
       )}
     </ModalLogic>

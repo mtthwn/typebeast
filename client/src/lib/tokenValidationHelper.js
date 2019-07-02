@@ -4,7 +4,6 @@ export default () => {
   return new Promise((res, rej) => {
     const token = localStorage.getItem('token');
 
-    console.log(token);
     if (!token) {
       res({
         username: 'Guest',
@@ -23,8 +22,17 @@ export default () => {
       .then(response => {
         if (response.data.success) {
           res(response.data.user);
+        } else {
+          rej({
+            username: 'Guest',
+            email: null,
+            _id: null,
+            cars: [],
+            games: []
+          });
         }
-
+      })
+      .catch(e => {
         rej({
           username: 'Guest',
           email: null,
@@ -32,9 +40,6 @@ export default () => {
           cars: [],
           games: []
         });
-      })
-      .catch(e => {
-        console.log(e.message);
       });
   });
 };
