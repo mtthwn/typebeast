@@ -41,10 +41,9 @@ const renderButtons = username => {
   );
 };
 
-const Header = ({ user }) => {
+export default ({ user }) => {
   const renderedButtons = renderButtons(user.username);
 
-  console.log(renderedButtons);
   return (
     <div>
       <Navbar collapseOnSelect expand="lg" className="Navbar" variant="dark">
@@ -76,4 +75,3 @@ const Header = ({ user }) => {
   );
 };
 
-export default Header;
