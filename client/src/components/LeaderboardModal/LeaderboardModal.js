@@ -28,13 +28,13 @@ const LeaderboardModal = ({ leaderboard }) => {
     const wpm = leaderboard[socketId].wpm ? (
       <td>{leaderboard[socketId].wpm} </td>
     ) : (
-      <td>In Progress</td>
+      <td style={{ color: '#04ad67' }}>In Progress</td>
     );
 
     const completed = leaderboard[socketId].completed ? (
       <td>Completed</td>
     ) : (
-      <td>In Progress</td>
+      <td style={{ color: '#04ad67' }}>In Progress</td>
     );
 
     return (
