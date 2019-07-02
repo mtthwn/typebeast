@@ -2,11 +2,6 @@ import React from 'react';
 import './Root.scss';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 
-// import Main from './containers/Main/Main';
-// import Garage from './containers/Garage/Garage';
-// import Game from './containers/Play/Play';
-// import Shop from './containers/Shop/Shop';
-
 import { Garage, Game, Main , Shop } from './containers';
 
 function Root() {
