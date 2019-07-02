@@ -34,8 +34,6 @@ formattedClients = {
 
 */
 
-
-
 const getQuote = room => {
   if (!roomTracker['room-' + roomNum]['quote']) {
     axios
@@ -58,7 +56,6 @@ io.on('connection', function(socket) {
   // Handler to receive username and vehicle. Must happen first.
   socket.on('user-info', data => {
     const formattedData = JSON.parse(data).user;
-
 
     //Check if username already in room and set value.
     function userInRoom () {
@@ -92,9 +89,7 @@ io.on('connection', function(socket) {
     } else if (
       roomTracker['room-' + roomNum] &&
       roomTracker['room-' + roomNum]['users'] < 4 &&
-      (
-        !alreadyInRoom || formattedData.username === 'Guest'
-      )
+      (!alreadyInRoom || formattedData.username === 'Guest')
     ) {
       socket.join('room-' + roomNum);
       roomTracker['room-' + roomNum]['users']++;
@@ -121,8 +116,8 @@ io.on('connection', function(socket) {
     console.log(formattedClients)
 
     // Set up variable to get array of socket IDs in current room
-    let clients = io.sockets.adapter.rooms['room-' + roomNum];
-    let clientsArray = Object.keys(clients.sockets);
+    // let clients = io.sockets.adapter.rooms['room-' + roomNum];
+    // let clientsArray = Object.keys(clients.sockets);
 
     socket.emit('room-number', {
       roomNum
