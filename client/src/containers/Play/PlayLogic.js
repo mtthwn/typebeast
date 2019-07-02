@@ -33,7 +33,6 @@ export default class PlayGameLogic extends Component {
       gameStart: false,
       roomNumber: 0,
       playersInRoom: [],
-      playerSocket: '',
       playerProgress: 0,
       wpm: 0,
       wordsCompleted: '',
@@ -67,7 +66,6 @@ export default class PlayGameLogic extends Component {
     socket.on('save-socket', message => {
       this.setState({
         playersInRoom: message.clients,
-        playerSocket: message.socketId,
         loading: false,
         roomNumber: message.roomNum
       });

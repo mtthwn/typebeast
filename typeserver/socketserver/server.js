@@ -100,7 +100,7 @@ io.on('connection', function(socket) {
     } else if (
       roomTracker['room-' + roomNum] &&
       roomTracker['room-' + roomNum]['users'] < 4 &&
-      !alreadyInRoom &&
+      !alreadyInRoom
     ) {
       socket.join('room-' + roomNum);
       roomTracker['room-' + roomNum]['users']++;
@@ -122,12 +122,11 @@ io.on('connection', function(socket) {
 
     console.log(roomTracker)
 
-    //Set up variable to get array of socket IDs in current room
+    // Set up variable to get array of socket IDs in current room
     let clients = io.sockets.adapter.rooms['room-' + roomNum];
     let clientsArray = Object.keys(clients.sockets);
 
     socket.emit('save-socket', {
-      socketId: socket.id,
       clients: clientsArray,
       roomNum
     });
