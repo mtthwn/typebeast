@@ -2,10 +2,12 @@ import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser, faCoins } from '@fortawesome/free-solid-svg-icons';
 
-import nissan_sprite from './../../img/gtx_md.png';
+// import nissan_sprite from './../../img/gtx_md.png';
 
 export default ({ user }) => {
-  console.log(user);
+
+  let currentCarImage = 'https://i.imgur.com/8k3z73p.png'
+
   return (
     <div className="CarSlider-content UserInfo">
       <div className="Shop-header-title">
@@ -14,7 +16,7 @@ export default ({ user }) => {
       </div>
       <ul>
         <li>
-          <img className="Car-Sprite" src={nissan_sprite} alt="car sprite" />
+          <img className="Car-Sprite" src={currentCarImage} alt="car sprite" />
         </li>
         <li>
           <h5>

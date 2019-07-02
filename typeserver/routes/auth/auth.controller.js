@@ -82,19 +82,18 @@ module.exports = {
         return res.json({ success: false, message: err.message });
       }
 
-      User.findById({ _id: tokenUser._id }, (err, foundUser) => {
-        if (err) {
-          return res.status(401).json({ success: false, message: err.message });
-        }
+      User.findById({ _id: tokenUser._id })
+        .populate('currentCar')
+        .then(foundUser => {
+          const user = getCleanUser(foundUser);
 
-        const user = getCleanUser(foundUser);
-
-        res.status(200).json({
-          success: true,
-          user,
-          token
-        });
-      });
+          res.status(200).json({
+            success: true,
+            user,
+            token
+          });
+        })
+        .catch(e => console.log(e));
     });
   }
 };
