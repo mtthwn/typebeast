@@ -2,7 +2,7 @@ import React from 'react';
 
 import GarageSlider from '../../components/GarageSlider/GarageSlider';
 import Header from '../../components/Header/Header';
-import GarageLogic from './GarageLogic'
+import GarageLogic from './GarageLogic';
 
 export default () => (
   <GarageLogic>
@@ -15,4 +15,4 @@ export default () => (
       </div>
     )}
   </GarageLogic>
-)
+);

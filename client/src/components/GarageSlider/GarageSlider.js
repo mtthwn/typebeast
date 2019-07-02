@@ -1,17 +1,13 @@
 import React, { Component } from 'react';
 import { Carousel, Button } from 'react-bootstrap';
 
-// import CarSliderLogic from '../CarSlider/CarSliderLogic';
 import SliderCaption from '../GarageSlider/SliderCaption';
 import ImageSlider from '../CarSlider/ImageSlider';
 
 import './GarageSlider.scss';
+import './../CarSlider/CarSlider.scss';
 
 import nissan from './../../img/nissan_silvia_slide.png';
-import porsche from './../../img/porsche.png';
-
-import nissan_sprite from './../../img/gtx_md.png';
-import porsche_sprite from './../../img/porsche_md.png';
 
 // export default ({ user }) => {
 //   return (
