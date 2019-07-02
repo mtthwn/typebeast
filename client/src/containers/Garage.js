@@ -27,25 +27,16 @@ export default class Garage extends Component {
       const { cars } = response.data;
 
       user.cars = cars;
-
       this.setState({ user });
     });
   }
-
-  selectCurrentCar = _id => e => {
-    e.preventDefault();
-
-    console.log('here!!', _id);
-  };
 
   render() {
     return (
       <div>
         <Header user={this.state.user} />
         <div>
-          <GarageSlider
-            user={this.state.user}
-            selectCurrentCar={this.selectCurrentCar}
+          <GarageSlider user={this.state.user}
           />
         </div>
       </div>

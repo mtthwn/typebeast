@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-// import instance from './../../lib/axios'; 
+// import instance from './../../lib/axios';
 
 export default class CarSliderLogic extends Component {
   constructor(props, context) {
@@ -8,7 +8,7 @@ export default class CarSliderLogic extends Component {
 
     this.state = {
       index: 0,
-      direction: null,
+      direction: null
     };
   }
 
