@@ -198,7 +198,7 @@ export default class PlayGameLogic extends Component {
     });
 
     socket.on('disconnect', () => {
-      alert('Please reload your page');
+      // alert('Please reload your page');
       this.setState({
         leaderboard: {},
         placings: [],
@@ -215,7 +215,9 @@ export default class PlayGameLogic extends Component {
   // }
 
   componentWillUnmount() {
-    this.state.socket.disconnect();
+    if (this.state.socket) {
+      this.state.socket.disconnect();
+    }
   }
 
   render() {

@@ -70,13 +70,45 @@ const cars = [
     price: 5000
   },
   {
-    model: 'Tran Mobile',
+    model: 'Cayenne',
     make: 'Porsche',
     spriteFile: 'https://i.imgur.com/UBAaAZq.png',
     mediumImg: 'https://i.imgur.com/8k3z73p.png',
     largeImg: 'https://i.imgur.com/9CkPCCn.png',
     price: 5000
-  }
+  },
+  {
+    model: 'Chillvia',
+    make: 'Nissan',
+    spriteFile: 'https://i.imgur.com/a4hVyfy.png',
+    mediumImg: 'https://i.imgur.com/nJYJFty.png',
+    largeImg: 'https://i.imgur.com/Evae8Vc.png',
+    price: 5000
+  },
+  {
+    model: 'Horse',
+    make: 'Lil Nas X',
+    spriteFile: 'https://i.imgur.com/UBAaAZq.png',
+    mediumImg: 'https://i.imgur.com/8k3z73p.png',
+    largeImg: 'https://i.imgur.com/9CkPCCn.png',
+    price: 5000
+  },
+  {
+    model: 'Not-Civic',
+    make: 'Honda',
+    spriteFile: 'https://i.imgur.com/a4hVyfy.png',
+    mediumImg: 'https://i.imgur.com/nJYJFty.png',
+    largeImg: 'https://i.imgur.com/Evae8Vc.png',
+    price: 5000
+  },
+  {
+    model: 'Vehicle',
+    make: 'Tesla',
+    spriteFile: 'https://i.imgur.com/UBAaAZq.png',
+    mediumImg: 'https://i.imgur.com/8k3z73p.png',
+    largeImg: 'https://i.imgur.com/9CkPCCn.png',
+    price: 5000
+  },
 ];
 
 // const savedCars = [];
