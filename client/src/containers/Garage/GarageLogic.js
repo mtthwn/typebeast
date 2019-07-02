@@ -1,8 +1,5 @@
 import React, { Component } from 'react';
 
-import GarageSlider from '../../components/GarageSlider/GarageSlider';
-import Header from '../../components/Header/Header';
-
 import tokenValidationHelper from '../../lib/tokenValidationHelper';
 import instance from '../../lib/axios';
 

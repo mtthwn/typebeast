@@ -1,44 +1,55 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-import GarageSlider from '../components/GarageSlider/GarageSlider';
-import Header from './../components/Header/Header';
+import GarageSlider from '../../components/GarageSlider/GarageSlider';
+import Header from '../../components/Header/Header';
+import GarageLogic from './GarageLogic'
 
-import tokenValidationHelper from './../lib/tokenValidationHelper';
-import instance from './../lib/axios';
+// export default class Garage extends Component {
+//   constructor() {
+//     super();
 
-export default class Garage extends Component {
-  constructor() {
-    super();
+//     this.state = {
+//       user: {
+//         username: '',
+//         cars: [],
+//         email: null,
+//         games: []
+//       }
+//     };
+//   }
 
-    this.state = {
-      user: {
-        username: '',
-        cars: [],
-        email: null,
-        games: []
-      }
-    };
-  }
+//   async componentDidMount() {
+//     const user = await tokenValidationHelper();
 
-  async componentDidMount() {
-    const user = await tokenValidationHelper();
+//     await instance.get('/cars/user').then(response => {
+//       const { cars } = response.data;
 
-    await instance.get('/cars/user').then(response => {
-      const { cars } = response.data;
+//       user.cars = cars;
+//       this.setState({ user });
+//     });
+//   }
 
-      user.cars = cars;
-      this.setState({ user });
-    });
-  }
+//   render() {
+//     return (
+//       <div>
+//         <Header user={this.state.user} />
+//         <div>
+//           <GarageSlider user={this.state.user} />
+//         </div>
+//       </div>
+//     );
+//   }
+// }
 
-  render() {
-    return (
+export default () => (
+  <GarageLogic>
+    {props => (
       <div>
-        <Header user={this.state.user} />
+        <Header user={props.user} />
         <div>
-          <GarageSlider user={this.state.user} />
+          <GarageSlider user={props.user} />
         </div>
       </div>
-    );
-  }
-}
+    )}
+  </GarageLogic>
+)
