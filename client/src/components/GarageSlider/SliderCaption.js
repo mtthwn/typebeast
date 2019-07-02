@@ -3,7 +3,7 @@ import { Carousel, ProgressBar, Button } from 'react-bootstrap';
 
 export default ({ imgSrc, selectCurrentCar, car }) => {
   const maxspeed = car.maxSpeed;
-  const accerlation = car.acceleration;
+  const acceleration = car.acceleration;
 
   return (
     <Carousel.Caption className="GarageSlider-content">
@@ -14,9 +14,9 @@ export default ({ imgSrc, selectCurrentCar, car }) => {
       <ProgressBar now={maxspeed} max="250" label={`${maxspeed}mph`} />
       <h6>Acceleration 0-100 kph</h6>
       <ProgressBar
-        now={accerlation}
+        now={acceleration}
         max="10"
-        label={`${accerlation} seconds`}
+        label={`${acceleration} seconds`}
       />
       <Button
         className="GarageSlider-BuyBtn"
