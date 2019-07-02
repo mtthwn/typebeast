@@ -25,9 +25,10 @@ module.exports = {
       .catch(e => res.status(400).json({ success: false, message: e.message }));
   },
   getUserCars: (req, res) => {
-    const { email } = req.params;
 
-    User.findOne({ email })
+    const { _id } = req.user;
+
+    User.findOne({ _id })
       .populate('cars')
       .exec()
       .then(user => {
