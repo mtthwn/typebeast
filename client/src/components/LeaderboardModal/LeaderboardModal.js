@@ -51,14 +51,14 @@ const LeaderboardModal = ({ leaderboard }) => {
   return (
     <div className="Leaderboard-Modal">
       <Modal show={true} dialogClassName="modal-100w" centered>
-        <Modal.Header>
+        {/* <Modal.Header>
           <Modal.Title id="RaceResults">Race Results</Modal.Title>
-        </Modal.Header>
+        </Modal.Header> */}
         <Modal.Body>
           <div className="Result-wrapper">
             <img src={raceResultsIcon} />
           </div>
-          <Table striped bordered hover variant="dark">
+          <Table variant="dark">
             <thead>
               <tr>
                 <th>Ranking</th>
