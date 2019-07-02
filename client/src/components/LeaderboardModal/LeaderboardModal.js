@@ -3,15 +3,23 @@ import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Button, Spinner, Modal, Table } from 'react-bootstrap';
 import './LeaderboardModal.scss';
-import { faFlagCheckered } from '@fortawesome/free-solid-svg-icons';
 import raceResultsIcon from './../../img/result-icon.png';
+import firstPlace from './../../img/first.png';
+import secondPlace from './../../img/second.png';
+import thirdPlace from './../../img/third.png';
+import fourthPlace from './../../img/parti.png';
 
 const LeaderboardModal = ({ leaderboard }) => {
   const socketIds = Object.keys(leaderboard);
 
   const playerStats = socketIds.map((socketId, index) => {
     const position = leaderboard[socketId].position ? (
-      <td>{leaderboard[socketId].position}</td>
+      <td>
+        {leaderboard[socketId].position === 1 && <img src={firstPlace} />}
+        {leaderboard[socketId].position === 2 && <img src={secondPlace} />}
+        {leaderboard[socketId].position === 3 && <img src={thirdPlace} />}
+        {leaderboard[socketId].position > 3 && <img src={fourthPlace} />}
+      </td>
     ) : (
       <td>
         <Spinner animation="border" variant="success" />
