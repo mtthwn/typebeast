@@ -13,7 +13,7 @@ import porsche from './../../img/porsche.png';
 import nissan_sprite from './../../img/gtx_md.png';
 import porsche_sprite from './../../img/porsche_md.png';
 
-export default ({ user }) => {
+export default ({ user, selectCurrentCar }) => {
   return (
     <CarSliderLogic user={user}>
       {props => (
@@ -29,14 +29,14 @@ export default ({ user }) => {
           >
             <Carousel.Item>
               <SliderCaption
-                selectCurrentCar={props.selectCurrentCar}
+                selectCurrentCar={selectCurrentCar}
                 imgSrc={nissan_sprite}
               />
               <ImageSlider className="CarSlide" src={nissan} />
             </Carousel.Item>
             <Carousel.Item>
               <SliderCaption
-                selectCurrentCar={props.selectCurrentCar}
+                selectCurrentCar={selectCurrentCar}
                 imgSrc={porsche_sprite}
               />
               <ImageSlider className="CarSlide" src={porsche} />
