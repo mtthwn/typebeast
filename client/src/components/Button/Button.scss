@@ -1,0 +1,54 @@
+@import './../../styles/Variables';
+@import '../../styles/Mixins';
+
+.btn-primary:active,
+.btn-primary:visited,
+.btn-primary:focus {
+  background-color: black !important;
+  color: white !important;
+}
+
+.btn-primary {
+  position: relative;
+  color: #000 !important;
+  border: 2px solid #fff;
+  position: relative;
+  z-index: 1;
+  background-color: #fff !important;
+  // background-color: transparent !important;
+  transition: all 0.3s ease-in;
+  overflow: hidden;
+
+  &:hover {
+    color: #fff !important;
+  }
+
+  &:active {
+    color: #000 !important;
+  }
+}
+
+.btn-primary:before {
+  content: '' !important;
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  // border: 2px solid $main-color;
+  // background-color: $main-color;
+  z-index: -1;
+  transform: translateX(-100%);
+  transition: all 0.3s ease-in;
+}
+.btn-primary:hover:before {
+  color: #fff !important;
+  background-color: $main-color;
+  transform: translateX(-0%);
+}
+
+.btn-primary:active:before {
+  // box-shadow: inset -3px 0 15px rgb(71, 4, 15) !important;
+  background-color: #fff !important;
+  color: #000 !important;
+}

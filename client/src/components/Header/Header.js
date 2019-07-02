@@ -5,13 +5,14 @@ import { Link } from 'react-router-dom';
 import HeaderButton from './../Button/HeaderButton';
 
 import './Header.scss';
+
 import Register from '../AuthenticationForms/Register';
 import Login from '../AuthenticationForms/Login';
 
 const logoutHandler = () => {
   localStorage.removeItem('token');
   window.location.reload();
-}
+};
 
 const renderButtons = username => {
   if (!username) {
@@ -32,11 +33,8 @@ const renderButtons = username => {
 
   return (
     <div inline="true" className="Header-signup">
-      <HeaderButton
-        className={'sign-up'}
-        buttonText={`Welcome ${username}`}
-      />
-      <HeaderButton cb={logoutHandler} className='login' buttonText='Logout' />
+      <HeaderButton className={'sign-up'} buttonText={`Welcome ${username}`} />
+      <HeaderButton cb={logoutHandler} className="login" buttonText="Logout" />
     </div>
   );
 };

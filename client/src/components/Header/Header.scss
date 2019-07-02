@@ -4,6 +4,7 @@
 .Header-signup {
   width: 40%;
   height: 100%;
+
   justify-content: space-between;
 
   @include respond(tab-portrait) {
@@ -21,7 +22,6 @@
   width: 50%;
   height: 100%;
   font-size: 1.6rem;
-  background-color: $main-color;
   border: none;
   border-radius: 0;
   text-transform: uppercase;
@@ -34,19 +34,16 @@
     height: 8rem;
   }
 }
-.btn-primary.sign-up {
+
+.login {
+  background-color: #000 !important;
+  color: #fff !important;
+}
+.sign-up {
   background-color: #fff;
   color: $bg-color;
-
-  &:hover {
-    background-color: #ff012b;
-    color: #fff;
-  }
-  &:active,
-  &:focus {
-    box-shadow: inset -3px 0 15px rgba(131, 12, 32, 0.8);
-  }
 }
+
 .Navbar {
   position: fixed;
   top: 0;
