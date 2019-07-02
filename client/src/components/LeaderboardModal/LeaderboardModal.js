@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Button, Spinner, Modal, Table } from 'react-bootstrap';
 import './LeaderboardModal.scss';
 import { faFlagCheckered } from '@fortawesome/free-solid-svg-icons';
+import raceResultsIcon from './../../img/result-icon.png';
 
 const LeaderboardModal = ({ leaderboard }) => {
   const socketIds = Object.keys(leaderboard);
@@ -51,12 +52,12 @@ const LeaderboardModal = ({ leaderboard }) => {
     <div className="Leaderboard-Modal">
       <Modal show={true} dialogClassName="modal-100w" centered>
         <Modal.Header>
-          <Modal.Title id="RaceResults">
-            <FontAwesomeIcon icon={faFlagCheckered} />
-            Race Results
-          </Modal.Title>
+          <Modal.Title id="RaceResults">Race Results</Modal.Title>
         </Modal.Header>
         <Modal.Body>
+          <div className="Result-wrapper">
+            <img src={raceResultsIcon} />
+          </div>
           <Table striped bordered hover variant="dark">
             <thead>
               <tr>
