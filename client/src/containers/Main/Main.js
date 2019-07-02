@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 // import axios from 'axios';
+
+import MainLogic from './MainLogic';
 import CarSlider from './../../components/CarSlider/CarSlider';
 import SocialMedia from './../../components/SocialMedia/SocialMedia';
 import PlayNow from './../../components/PlayNow/PlayNow';
