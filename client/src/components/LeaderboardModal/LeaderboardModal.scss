@@ -1,8 +1,15 @@
 @import './../../styles/Variables';
 @import '../../styles/Mixins';
 
+#RaceResults {
+  svg {
+    color: #000;
+    font-size: 3rem;
+    margin-left: 2rem;
+  }
+}
 .modal-dialog {
-  max-width: 60rem;
+  max-width: 80rem;
 }
 
 .modal-content {
@@ -12,6 +19,7 @@
 }
 .modal-body {
   padding: 0 0;
+  margin: 4rem 0;
   height: auto;
   font-size: 1.2rem;
 
@@ -74,6 +82,7 @@
   &:hover {
     transform: translateY(-2px);
     background-color: $bg-green;
+    color: #fff;
   }
 
   &:active {
