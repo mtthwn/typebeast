@@ -34,14 +34,17 @@
     height: 8rem;
   }
 }
-.sign-up {
+.btn-primary.sign-up {
   background-color: #fff;
   color: $bg-color;
 
   &:hover {
-    background-color: $main-color;
-    box-shadow: inset -3px 0 15px rgba(131, 12, 32, 0.8);
+    background-color: #ff012b;
     color: #fff;
+  }
+  &:active,
+  &:focus {
+    box-shadow: inset -3px 0 15px rgba(131, 12, 32, 0.8);
   }
 }
 .Navbar {
