@@ -5,47 +5,8 @@ import SliderCaption from '../GarageSlider/SliderCaption';
 import ImageSlider from '../CarSlider/ImageSlider';
 
 import './GarageSlider.scss';
-import './../CarSlider/CarSlider.scss';
 
 import nissan from './../../img/nissan_silvia_slide.png';
-
-// export default ({ user }) => {
-//   return (
-//     <CarSliderLogic user={user}>
-//       {props => (
-//         <div className="GarageSlider-container">
-//           <Carousel
-//             activeIndex={props.index}
-//             direction={props.direction}
-//             onSelect={props.handleSelect}
-//             indicators={false}
-//             fade={false}
-//             controls={true}
-//             interval="3000"
-//           >
-//             <Carousel.Item>
-//               <SliderCaption
-//                 selectCurrentCar={props.selectCurrentCar}
-//                 imgSrc={nissan_sprite}
-//               />
-//               <ImageSlider className="CarSlide" src={nissan} />
-//             </Carousel.Item>
-//             <Carousel.Item>
-//               <SliderCaption
-//                 selectCurrentCar={props.selectCurrentCar}
-//                 imgSrc={porsche_sprite}
-//               />
-//               <ImageSlider className="CarSlide" src={porsche} />
-//             </Carousel.Item>
-//           </Carousel>
-//           <Button className="GarageSlider-BuyBtn" variant="outline-light">
-//             Select Car
-//           </Button>
-//         </div>
-//       )}
-//     </CarSliderLogic>
-//   );
-// };
 
 class GarageSliderLogic extends Component {
   constructor(props, context) {
@@ -85,7 +46,7 @@ export default ({ user }) => {
           imgSrc={car.mediumImg}
           car={car}
         />
-        <ImageSlider className="CarSlide" src={nissan} />
+        <ImageSlider className="CarSlide" src={car.largeImg} />
       </Carousel.Item>
     );
   });
