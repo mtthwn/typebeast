@@ -33,7 +33,7 @@ const CarSchema = new Schema({
     type: String,
     required: true
   },
-  accerlation: {
+  acceleration: {
     type: String,
     required: true
   }

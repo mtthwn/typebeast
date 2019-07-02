@@ -67,15 +67,19 @@ const cars = [
     spriteFile: 'https://i.imgur.com/a4hVyfy.png',
     mediumImg: 'https://i.imgur.com/nJYJFty.png',
     largeImg: 'https://i.imgur.com/Evae8Vc.png',
-    price: 5000
+    price: 5000,
+    maxSpeed: 170,
+    acceleration: 5.5
   },
   {
-    model: 'Tran Mobile',
+    model: '935',
     make: 'Porsche',
     spriteFile: 'https://i.imgur.com/UBAaAZq.png',
     mediumImg: 'https://i.imgur.com/8k3z73p.png',
     largeImg: 'https://i.imgur.com/9CkPCCn.png',
-    price: 5000
+    price: 5000,
+    maxSpeed: 183,
+    acceleration: 5
   }
 ];
 
