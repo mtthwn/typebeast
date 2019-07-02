@@ -18,7 +18,12 @@ export default ({ imgSrc, selectCurrentCar, car }) => {
         max="10"
         label={`${accerlation} seconds`}
       />
-      <Button onClick={selectCurrentCar(car._id)}>Select</Button>
+      <Button
+        className="GarageSlider-BuyBtn"
+        onClick={selectCurrentCar(car._id)}
+      >
+        Select
+      </Button>
     </Carousel.Caption>
   );
 };

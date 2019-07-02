@@ -6,8 +6,6 @@ import ImageSlider from '../CarSlider/ImageSlider';
 
 import './GarageSlider.scss';
 
-import nissan from './../../img/nissan_silvia_slide.png';
-
 class GarageSliderLogic extends Component {
   constructor(props, context) {
     super(props, context);
@@ -65,26 +63,8 @@ export default ({ user }) => {
           >
             {renderCars}
           </Carousel>
-          <Button className="GarageSlider-BuyBtn" variant="outline-light">
-            Select Car
-          </Button>
         </div>
       )}
     </GarageSliderLogic>
   );
 };
-
-//  <Carousel.Item>
-//               <SliderCaption
-//                 selectCurrentCar={props.selectCurrentCar}
-//                 imgSrc={nissan_sprite}
-//               />
-//               <ImageSlider className="CarSlide" src={nissan} />
-//             </Carousel.Item>
-//             <Carousel.Item>
-//               <SliderCaption
-//                 selectCurrentCar={props.selectCurrentCar}
-//                 imgSrc={porsche_sprite}
-//               />
-//               <ImageSlider className="CarSlide" src={porsche} />
-//             </Carousel.Item>
