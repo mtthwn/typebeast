@@ -78,7 +78,6 @@ export default class PlayGameLogic extends Component {
       const formattedData = JSON.parse(data);
       const leaderboard = this.state.leaderboard;
       const carPositioning = this.state.carPositioning;
-
       // formattedData.forEach(user => {
       //   leaderboard[user] = formattedData[user];
       // })
