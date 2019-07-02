@@ -67,15 +67,19 @@ const cars = [
     spriteFile: 'https://i.imgur.com/a4hVyfy.png',
     mediumImg: 'https://i.imgur.com/nJYJFty.png',
     largeImg: 'https://i.imgur.com/Evae8Vc.png',
-    price: 5000
+    price: 5000,
+    maxSpeed: 170,
+    acceleration: 5.5
   },
   {
-    model: 'Cayenne',
+    model: '935',
     make: 'Porsche',
     spriteFile: 'https://i.imgur.com/UBAaAZq.png',
     mediumImg: 'https://i.imgur.com/8k3z73p.png',
     largeImg: 'https://i.imgur.com/9CkPCCn.png',
-    price: 5000
+    price: 5000,
+    maxSpeed: 183,
+    acceleration: 5
   },
   {
     model: 'Chillvia',
@@ -83,7 +87,9 @@ const cars = [
     spriteFile: 'https://i.imgur.com/a4hVyfy.png',
     mediumImg: 'https://i.imgur.com/nJYJFty.png',
     largeImg: 'https://i.imgur.com/Evae8Vc.png',
-    price: 5000
+    price: 5000,
+    maxSpeed: 150,
+    acceleration: 7
   },
   {
     model: 'Horse',
@@ -91,7 +97,9 @@ const cars = [
     spriteFile: 'https://i.imgur.com/UBAaAZq.png',
     mediumImg: 'https://i.imgur.com/8k3z73p.png',
     largeImg: 'https://i.imgur.com/9CkPCCn.png',
-    price: 5000
+    price: 5000,
+    maxSpeed: 50,
+    acceleration: 3
   },
   {
     model: 'Not-Civic',
@@ -99,19 +107,21 @@ const cars = [
     spriteFile: 'https://i.imgur.com/a4hVyfy.png',
     mediumImg: 'https://i.imgur.com/nJYJFty.png',
     largeImg: 'https://i.imgur.com/Evae8Vc.png',
-    price: 5000
+    price: 5000,
+    maxSpeed: 170,
+    acceleration: 6.9
   },
   {
-    model: 'Vehicle',
+    model: 'Model S',
     make: 'Tesla',
     spriteFile: 'https://i.imgur.com/UBAaAZq.png',
     mediumImg: 'https://i.imgur.com/8k3z73p.png',
     largeImg: 'https://i.imgur.com/9CkPCCn.png',
-    price: 5000
+    price: 5000,
+    maxSpeed: 250,
+    acceleration: 3.2
   },
 ];
-
-// const savedCars = [];
 
 const seedQuotes = async quotes => {
   collections.forEach(collection => {
