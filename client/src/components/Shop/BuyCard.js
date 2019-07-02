@@ -33,9 +33,9 @@ export default ({ car, buyCarFunction }) => {
         </Card.Title>
         <Card.Text>
           <h6>Max Speed</h6>
-          <ProgressBar now="177" max="250" label={`177 mph`} />
+          <ProgressBar now={car.maxSpeed} max="250" label={`${car.maxSpeed} mph`} srOnly />
           <h6>Acceleration 0-100 kph</h6>
-          <ProgressBar now="5.5" max="10" label={`5.5 seconds`} />
+          <ProgressBar now={car.acceleration} max="10" label={`${car.acceleration} seconds`} srOnly />
         </Card.Text>
       </Card.Body>
       <Card.Footer>
