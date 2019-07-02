@@ -46,7 +46,6 @@ UserSchema.pre('save', function(next) {
     .then(car => {
       user.currentCar = car._id;
       user.cars = [car._id];
-      console.log(user);
 
       next();
     })
