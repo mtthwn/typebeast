@@ -1,6 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Modal, Button, Badge } from 'react-bootstrap';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCheckSquare } from '@fortawesome/free-solid-svg-icons';
 
 import purchaseSuccessful from './../../img/success.png';
 
@@ -14,14 +16,13 @@ export default ({ show }) => {
         centered
       >
         <Modal.Title className="ShopModal-title">
+          <FontAwesomeIcon icon={faCheckSquare} />
           Purchase Successful
         </Modal.Title>
         <Modal.Body>
           <div className="Result-wrapper">
             <img src={purchaseSuccessful} />
-            {/* <Badge variant="success">Purchase Successful!</Badge> */}
           </div>
-
           <Link to="/">
             <Button variant="none" className="Home-btn">
               Home

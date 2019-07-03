@@ -156,12 +156,17 @@
 }
 
 .ShopModal-title {
-  text-align: center;
-  background-color: $bg-green;
-  padding: 1.2rem 0rem;
-  margin-left: 0rem;
-}
+  text-align: left;
+  // background-color: $bg-green;
+  border-bottom: 1px solid $border-color;
+  padding: 0.5rem 0rem;
+  margin-left: 0;
+  padding-left: 4rem;
+  font-size: 2rem;
 
-// .ShopModal {
-//   width: 50%;
-// }
+  svg {
+    margin-right: 1rem;
+    font-size: 2rem;
+    color: $bg-green;
+  }
+}
