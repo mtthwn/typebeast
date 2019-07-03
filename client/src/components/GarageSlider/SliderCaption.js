@@ -20,7 +20,7 @@ export default ({ imgSrc, selectCurrentCar, car, user }) => {
       />
       <Button
         className="GarageSlider-BuyBtn"
-        onClick={selectCurrentCar(user._id, car._id)}
+        onClick={selectCurrentCar(car._id)}
       >
         Select
       </Button>
