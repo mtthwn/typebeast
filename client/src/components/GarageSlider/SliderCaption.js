@@ -22,7 +22,7 @@ export default ({ imgSrc, selectCurrentCar, car, user }) => {
         className="GarageSlider-BuyBtn"
         onClick={selectCurrentCar(car._id)}
       >
-        Select
+        Select Car
       </Button>
     </Carousel.Caption>
   );

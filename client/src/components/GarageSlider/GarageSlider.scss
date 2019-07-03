@@ -1,6 +1,22 @@
 @import './../../styles/Variables';
 @import './../../styles/Mixins';
+@import './../../styles/Typography';
 
+.GarageSlider-container {
+  position: relative;
+
+  .carousel {
+    position: relative;
+
+    .CarSlide {
+      position: absolute;
+      height: 100vh;
+
+      top: 0;
+      right: -10%;
+    }
+  }
+}
 .GarageSlider-BuyBtn {
   position: absolute;
   z-index: 30;
@@ -33,19 +49,15 @@
   }
 }
 
-.carousel {
-  overflow: hidden;
-}
-
 .GarageSlider-container .carousel-item {
   position: relative;
   height: 100vh;
   .CarSlide {
-    position: relative;
-    padding: 10rem 25rem;
-    margin-left: 20rem;
-    height: auto;
-    width: 100%;
+    // position: relative;
+    // padding: 10rem 25rem;
+    // margin-left: 20rem;
+    // height: auto;
+    // width: 100%;
 
     @include respond(tab-landscape) {
       margin-top: 15rem;
