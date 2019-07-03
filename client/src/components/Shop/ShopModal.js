@@ -6,8 +6,13 @@ import purchaseSuccessful from './../../img/success.png';
 
 export default ({ show }) => {
   return (
-    <div className="Shop-Modal">
-      <Modal show={show} dialogClassName="modal-100w" centered>
+    <div className="ShopModal-Container">
+      <Modal
+        className="ShopModal"
+        show={show}
+        dialogClassName="modal-100w"
+        centered
+      >
         <Modal.Title className="ShopModal-title">
           Purchase Successful
         </Modal.Title>
@@ -17,14 +22,14 @@ export default ({ show }) => {
             {/* <Badge variant="success">Purchase Successful!</Badge> */}
           </div>
 
-          <Button variant="none" href="/" className="PlayAgain-btn">
-            Home
-          </Button>
-          <Link to={'/shop'}>
+          <Link to="/">
             <Button variant="none" className="Home-btn">
-              Keep Shopping
+              Home
             </Button>
           </Link>
+          <Button variant="none" href="/shop" className="PlayAgain-btn">
+            Continue Shopping
+          </Button>
         </Modal.Body>
       </Modal>
     </div>
