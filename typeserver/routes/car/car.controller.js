@@ -45,7 +45,8 @@ module.exports = {
   },
   addUserCar: async (req, res) => {
     try {
-      const { car, _id } = req.body;
+      const { _id } = req.user;
+      const { car } = req.body;
 
       const user = await User.findOne({ _id }).exec();
 

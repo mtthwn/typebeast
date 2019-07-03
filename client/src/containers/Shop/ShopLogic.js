@@ -25,10 +25,14 @@ export default class Shop extends Component {
 
       this.setState({ user });
 
-      await axios.get('http://127.0.0.1:8081/api/cars').then(data => {
+      await instance.get('/cars').then(data => {
         const { cars } = data.data;
+        const userCars = this.state.user.cars
 
-        this.setState({ cars });
+        const displayCars = cars.filter(car => {
+          return userCars.indexOf(car._id) < 0;
+        });
+        this.setState({ cars: displayCars });
       });
     } catch (e) {
       console.log(e);
@@ -38,22 +42,13 @@ export default class Shop extends Component {
   buyCarFunction = _id => e => {
     e.preventDefault();
 
-    axios
-      .post('http://127.0.0.1:8081/api/cars/add', {
-        _id: this.state.user._id,
-        car: _id
-      })
-      .then(response => {
-        alert('Car successfully bought!');
-      })
-      .catch(e => console.log(e.message));
-
     instance
       .post('/cars/add', {
         car: _id
       })
       .then(response => {
         alert('Successfully purchased!');
+        window.location.reload();
       })
       .catch(e => console.log(e));
   };
