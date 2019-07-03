@@ -165,8 +165,10 @@ io.on('connection', function(socket) {
 
     const rooms = Object.keys(socket.rooms).slice();
 
-    roomTracker[rooms[1]]['users']--;
-    roomTracker.totalUsers--;
+    if (roomTracker[rooms[1]]) {
+      roomTracker[rooms[1]]['users']--;
+      roomTracker.totalUsers--;
+    }
 
     io.to(rooms[1]).emit('player-left', {
       description: `${socket.id} has left the game.`,
