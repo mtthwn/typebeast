@@ -32,7 +32,7 @@ const bgFinish = {
 const Background = ({
   carPositioning,
   onFinish,
-  playerSocket,
+  socket,
   onStart,
   showUsername,
   roomNumber,
@@ -48,6 +48,7 @@ const Background = ({
         percentageComplete={`${Number(carPositioning[car].progress) * 100}%`}
         onFinish={onFinish}
         positioning={index + 1}
+        user={leaderboard[car]}
       />
     );
   });
