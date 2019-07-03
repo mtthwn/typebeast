@@ -1,8 +1,8 @@
 import React from 'react';
-import { Button, ProgressBar } from 'react-bootstrap';
+import { ProgressBar } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import './PlayNow.scss';
-import nissan from './../../img/gtx.png';
+import nissan from './../../img/gtx_md.png';
 
 const PlayNow = () => {
   return (
@@ -10,7 +10,7 @@ const PlayNow = () => {
       <div className="PlayNow-content">
         <div className="PlayNow-current">
           <h5>Car</h5>
-          <p>Lamborghini Aventador</p>
+          <p>Nissan Silvia S15</p>
         </div>
         <div className="PlayNow-specs">
           <h5>Specs</h5>

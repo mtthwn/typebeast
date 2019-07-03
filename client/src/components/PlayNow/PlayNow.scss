@@ -40,6 +40,9 @@
 
 .PlayNow-current,
 .PlayNow-specs {
+  display: flex;
+  margin-right: 2rem;
+  flex-direction: column;
   align-self: baseline;
   margin: 2rem 2rem;
   z-index: 15;
@@ -49,7 +52,9 @@
 
   p {
     font-size: 1.3rem;
+    line-height: 2rem;
     margin-bottom: 0;
+    text-transform: uppercase;
   }
 
   h5 {
@@ -61,22 +66,27 @@
     display: none;
   }
 }
+.PlayNow-current {
+  width: 30%;
+}
 
+.PlayNow-specs {
+  width: 30%;
+}
 .PlayNow-content {
   display: flex;
   justify-content: space-between;
-  margin-right: 4rem;
-
+  width: 70%;
+  margin-right: 2rem;
   @include respond(tab-portrait) {
     margin-right: 1rem;
   }
 
   img {
     align-self: center;
-    max-width: 300px;
-    max-height: 75px;
-    width: auto;
-    height: auto;
+    height: 50%;
+    margin: 0rem 3rem;
+
     @include respond(tab-landscape) {
       max-width: 200px;
       max-height: auto;
@@ -87,6 +97,10 @@
     @include respond(phone) {
       display: none;
     }
+  }
+
+  .progress {
+    margin-bottom: 2rem;
   }
 }
 .PlayNow-btn {
