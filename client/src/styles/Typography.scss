@@ -1,14 +1,18 @@
 @import './../../styles/Variables';
 @import '../../styles/Mixins';
 
+h1,
+h3,
+h5 {
+  text-transform: uppercase;
+}
+
 h1 {
-  color: #fff;
   font-family: $header-font;
   font-style: italic;
   font-size: 9rem;
   letter-spacing: 8px;
   line-height: 8rem;
-  text-transform: uppercase;
   font-weight: 900;
   margin-bottom: 2rem;
 
@@ -24,10 +28,9 @@ h1 {
 }
 
 h5 {
-  text-transform: uppercase;
   color: $main-color;
-  font-weight: 600;
-  font-size: 1.5rem;
+  font-weight: 500;
+  font-size: 1.8rem;
   letter-spacing: 1px;
 
   @include respond(tab-landscape) {
@@ -43,10 +46,9 @@ h5 {
 
 p {
   text-transform: none;
-  font-size: 2rem;
+  font-size: 1.8rem;
   line-height: 3rem;
   font-weight: 300;
-  color: rgb(226, 226, 226);
 
   @include respond(tab-landscape) {
     font-size: 2.6rem;
