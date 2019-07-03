@@ -1,9 +1,23 @@
 @import './../../styles/Variables';
 @import '../../styles/Mixins';
+@import '../../styles/Typography';
 
-.carousel {
-  height: 100vh;
-  width: 100vw;
+.CarSlider-container {
+  position: relative;
+
+  .carousel {
+    height: 100vh;
+    position: relative;
+  }
+
+  .CarSlider-content {
+    position: absolute;
+    top: 50%;
+    left: 10%;
+    transform: translateY(-50%);
+    z-index: 50;
+    width: 35%;
+  }
 }
 
 .CarSlideImg .d-block .w-100 {
@@ -61,7 +75,6 @@
   display: flex;
 }
 
-.CarSlider-content,
 .GarageSlider-content {
   position: absolute;
   align-self: center;
@@ -85,58 +98,5 @@
 
   @include respond(phone) {
     bottom: 0%;
-  }
-
-  h1 {
-    color: #fff;
-    font-family: $header-font;
-    font-style: italic;
-    font-size: 9rem;
-    letter-spacing: 8px;
-    line-height: 8rem;
-    text-transform: uppercase;
-    font-weight: 900;
-    margin-bottom: 2rem;
-
-    @include respond(tab-landscape) {
-      font-size: 8rem;
-      line-height: 7rem;
-    }
-
-    @include respond(tab-portrait) {
-      font-size: 7rem;
-      line-height: 6rem;
-    }
-  }
-
-  h5 {
-    color: $main-color;
-    font-weight: 600;
-    font-size: 1.5rem;
-
-    letter-spacing: 1px;
-
-    @include respond(tab-landscape) {
-      font-size: 2.2rem;
-    }
-
-    @include respond(tab-portrait) {
-      font-size: 2.8rem;
-      font-weight: 500;
-      line-height: 3.3rem;
-    }
-  }
-
-  p {
-    text-transform: none;
-    font-size: 2rem;
-    line-height: 3rem;
-    font-weight: 300;
-    color: rgb(226, 226, 226);
-
-    @include respond(tab-landscape) {
-      font-size: 2.6rem;
-      line-height: 4rem;
-    }
   }
 }
