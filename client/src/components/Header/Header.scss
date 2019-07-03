@@ -1,10 +1,10 @@
 @import './../../styles/Variables';
 @import '../../styles/Mixins';
+@import '../../styles/Typography';
 
 .Header-signup {
   width: 40%;
   height: 100%;
-  justify-content: space-between;
   @include respond(tab-portrait) {
     font-size: 1.8rem;
     width: 100%;
