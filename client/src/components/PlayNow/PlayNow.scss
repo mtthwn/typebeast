@@ -1,5 +1,6 @@
 @import './../../styles/Variables';
 @import '../../styles/Mixins';
+@import '../../styles/Typography';
 
 .PlayNow-container {
   position: fixed;
@@ -90,12 +91,14 @@
 }
 .PlayNow-btn {
   @include Main-btn;
-  width: 100%;
+  width: 45%;
   font-weight: 600;
   font-size: 2rem;
   height: 100%;
   padding: 0 0;
   margin: 0 0;
+  text-align: center;
+  vertical-align: middle;
 
   @include respond(tab-landscape) {
     padding: 0 2rem;
@@ -107,5 +110,16 @@
 
   @include respond(phone) {
     width: 100%;
+  }
+}
+
+a.PlayNow-btn {
+  text-decoration: none;
+  color: #fff;
+  padding: 5rem 0;
+  transition: all 0.3s $cubic;
+
+  &:hover {
+    background-color: $bg-green;
   }
 }

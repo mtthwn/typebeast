@@ -1,8 +1,8 @@
 import React from 'react';
-import { Button } from 'react-bootstrap';
+import { Button, ProgressBar } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import './PlayNow.scss';
-import ferarriSideView from './../../img/ferarri-side.png';
+import nissan from './../../img/gtx.png';
 
 const PlayNow = () => {
   return (
@@ -14,14 +14,13 @@ const PlayNow = () => {
         </div>
         <div className="PlayNow-specs">
           <h5>Specs</h5>
-          <p>Max Speed: 300km/h Accerelation: 100km/s</p>
+          <ProgressBar now="177" max="250" label="177 mph" srOnly />
+          <ProgressBar now="5.5" max="10" label="5.5 seconds" srOnly />
         </div>
-        <img src={ferarriSideView} alt="ferrari side view" />
+        <img src={nissan} alt="ferrari side view" />
       </div>
       <Link to="/play" className="PlayNow-btn">
-        <Button className="PlayNow-btn" variant="outline-light">
-          Race as Guest
-        </Button>
+        Play Now
       </Link>
     </div>
   );
