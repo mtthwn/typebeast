@@ -44,6 +44,13 @@ module.exports = {
       });
   },
   addUserCar: async (req, res) => {
+    if (!req.user) {
+      return res.status(400).json({
+        success: false,
+        message: 'Please login or register before continuing'
+      });
+    }
+
     try {
       const { _id } = req.user;
       const { car } = req.body;
@@ -85,16 +92,24 @@ module.exports = {
     }
   },
   setUserCar: (req, res) => {
+    if (!req.user) {
+      return res.status(400).json({
+        success: false,
+        message: 'Please login or register before continuing'
+      });
+    }
     const { car } = req.body;
 
     const { _id } = req.user;
 
     User.findOneAndUpdate({ _id }, { currentCar: car })
       .then(user => {
-        res.status(200).json({ success: true, user })
+        res.status(200).json({ success: true, user });
       })
       .catch(e => {
-        res.status(400).json({ success: false, message: 'Car selection unsuccessful!'})
-      })
+        res
+          .status(400)
+          .json({ success: false, message: 'Car selection unsuccessful!' });
+      });
   }
 };
