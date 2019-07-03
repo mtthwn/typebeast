@@ -2,39 +2,14 @@
 @import './Mixins';
 
 .btn-primary {
-  position: relative;
-  color: #000 !important;
-  border: 2px solid #fff;
-  position: relative;
-  z-index: 1;
-  background-color: #fff !important;
-  transition: all 0.1s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  overflow: hidden;
-
   &:hover {
     color: #fff !important;
+    background-color: #fff !important;
   }
 
   &:active {
     color: #000 !important;
   }
-}
-
-.btn-primary:before {
-  content: '' !important;
-  position: absolute;
-  left: 0;
-  top: 0;
-  height: 100%;
-  width: 100%;
-  z-index: -1;
-  transform: translateX(-100%);
-  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-}
-.btn-primary:hover:before {
-  color: #fff !important;
-  background-color: $main-color;
-  transform: translateX(-0%);
 }
 
 .btn-primary:active:before {

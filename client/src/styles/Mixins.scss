@@ -35,6 +35,42 @@
   }
 }
 
+@mixin Btn-md {
+  width: 50%;
+  height: 100%;
+  font-size: 1.6rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  border: none;
+  border-radius: 0;
+  letter-spacing: 2px;
+}
+
+@mixin Btn-RedHover {
+  z-index: 1;
+  transition: all 0.1s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  background-color: #fff;
+  overflow: hidden;
+  position: relative;
+
+  &:before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    z-index: -1;
+    transform: translateX(-100%);
+    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  &:hover:before {
+    color: #fff;
+    background-color: $main-color;
+    transform: translateX(0%);
+  }
+}
 // BUTTONS
 @mixin Main-btn {
   margin-right: 1rem;
