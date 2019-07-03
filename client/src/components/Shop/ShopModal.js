@@ -1,11 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { Modal, Button } from 'react-bootstrap';
+
 import purchaseSuccessful from './../../img/success.png';
 
-export default () => {
+export default ({ show }) => {
   return (
     <div className="Shop-Modal">
-      <Modal show={true} dialogClassName="modal-100w" centered>
+      <Modal show={show} dialogClassName="modal-100w" centered>
         <Modal.Body>
           <div className="Result-wrapper">
             <img src={purchaseSuccessful} />
