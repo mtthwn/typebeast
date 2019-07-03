@@ -10,18 +10,59 @@
   top: 0;
   padding: 0 0;
 
-  .slide {
-    position: relative;
-  }
   .carousel {
     position: relative;
+
     .CarSlide {
       position: absolute;
-      height: 100vh;
+      height: 70vh;
+      top: 50%;
+      transform: translateY(-50%);
+      right: 0%;
 
-      top: 0;
-      right: -10%;
+      @include respond(big-desktop) {
+        height: 80vh;
+        top: 50%;
+        right: -0%;
+      }
+
+      @media (max-width: 1350px) {
+        height: 70vh;
+        right: -5%;
+      }
+
+      @include respond(tab-landscape) {
+        height: 65vh;
+        top: 30%;
+        right: -4%;
+      }
+
+      @media (max-width: 1080px) {
+        height: 55vh;
+        right: 0%;
+      }
+
+      @include respond(tab-portrait) {
+        height: 55vh;
+        right: 0%;
+      }
+
+      @media (max-width: 910px) {
+        height: 45vh;
+        right: 10%;
+      }
+
+      @media (max-width: 800px) {
+        height: 35vh;
+        right: 5%;
+      }
+
+      @include respond(phone) {
+        height: 30vh;
+        top: 25%;
+      }
     }
+
     &-control-prev,
     &-control-next {
       position: absolute;
@@ -50,22 +91,61 @@
   position: absolute;
   left: 5%;
   width: 30%;
-  top: 50%;
-  transform: translateY(-50%);
+  top: 40%;
+  transform: translateY(-40%);
   text-align: left;
+
+  @include respond(big-desktop) {
+    top: 40%;
+  }
+
+  @include respond(tab-landscape) {
+    width: 100%;
+    top: 55%;
+    transform: translateY(-40%);
+  }
+
+  @include respond(phone) {
+    width: 100%;
+    top: 50%;
+    transform: translateY(-40%);
+  }
 
   h1 {
     color: #fff;
     font-family: $header-font;
     font-style: italic;
-    font-size: 8rem;
+    font-size: 7rem;
+    line-height: 6rem;
     letter-spacing: 2px;
     font-weight: 900;
     margin-bottom: 2rem;
+
+    @include respond(tab-landscape) {
+      line-height: 7rem;
+    }
+
+    @include respond(tab-portrait) {
+      line-height: 5rem;
+      font-size: 5rem;
+      margin-top: -1rem;
+      margin-bottom: 0rem;
+    }
+  }
+
+  h5 {
+    @include respond(tab-portrait) {
+      font-size: 2rem;
+    }
   }
 
   img {
     margin: 2rem 0rem;
+    height: 8rem;
+
+    @include respond(tab-portrait) {
+      height: 6rem;
+    }
   }
   .progress {
     @include Progress-bar;
@@ -79,28 +159,21 @@
   width: 40%;
   left: 50%;
   bottom: 5%;
-  transform: translateX(-50%);
+  transform: translate(-50%, -5%);
   font-weight: 600;
   font-size: 3rem;
+
+  @include respond(tab-landscape) {
+    bottom: 6%;
+  }
+
+  @include respond(tab-portrait) {
+    bottom: 7.5%;
+    font-size: 2.5rem;
+  }
+
+  @include respond(phone) {
+    bottom: 7.5%;
+    font-size: 2rem;
+  }
 }
-
-@include respond(tab-landscape) {
-  padding: 0rem 0rem;
-  margin-top: 10;
-}
-
-// .carousel-control-next {
-//   margin-right: 10rem;
-
-//   @include respond(phone) {
-//     margin-right: 5rem;
-//   }
-// }
-
-// .carousel-control-prev {
-//   margin-left: 10rem;
-
-//   @include respond(phone) {
-//     margin-left: 5rem;
-//   }
-// }
