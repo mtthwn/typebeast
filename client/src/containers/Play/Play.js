@@ -15,7 +15,7 @@ export default () => {
           <Header user={values.user} />
           <div className="PlayGame">
             <Background
-              playerSocket={values.playerSocket}
+              socket={values.socket}
               carPositioning={values.carPositioning}
               onFinish={values.timerFinished}
               onStart={values.timerStart}

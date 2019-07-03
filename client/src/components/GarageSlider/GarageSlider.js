@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { Carousel, Button } from 'react-bootstrap';
+import { Carousel } from 'react-bootstrap';
 
+import instance from './../../lib/axios'
 import SliderCaption from '../GarageSlider/SliderCaption';
 import ImageSlider from '../CarSlider/ImageSlider';
 
@@ -30,9 +31,15 @@ class GarageSliderLogic extends Component {
   }
 }
 
-const selectCurrentCar = _id => e => {
+const selectCurrentCar = car => e => {
   e.preventDefault();
-  console.log('here!!', _id);
+ 
+  instance.post('/cars/update', {
+    car
+  }).then(res => {
+    console.log(res);
+    alert('Current car updated!');
+  }).catch(e => console.log(e));
 };
 
 export default ({ user }) => {

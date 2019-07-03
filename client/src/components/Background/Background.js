@@ -32,7 +32,7 @@ const bgFinish = {
 const Background = ({
   carPositioning,
   onFinish,
-  playerSocket,
+  socket,
   onStart,
   showUsername,
   roomNumber,
@@ -48,13 +48,14 @@ const Background = ({
         percentageComplete={`${Number(carPositioning[car].progress) * 100}%`}
         onFinish={onFinish}
         positioning={index + 1}
+        user={leaderboard[car]}
       />
     );
   });
 
   return onFinish ? (
     <div className="Background-img" style={onFinish ? bgFinish : bgStart}>
-      <Car onFinish={onFinish} positioning={1} />
+      <Car onFinish={onFinish} positioning={1} user={leaderboard[socket.id]} />
       <LeaderboardModal leaderboard={leaderboard} placings={placings} />
     </div>
   ) : (

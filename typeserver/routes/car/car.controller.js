@@ -84,10 +84,16 @@ module.exports = {
     }
   },
   setUserCar: (req, res) => {
-    const { car, _id } = req.body;
+    const { car } = req.body;
 
-    User.findOneAndUpdate({ _id }, { currentCar: car }).then(user => {
-      console.log(user);
-    });
+    const { _id } = req.user;
+
+    User.findOneAndUpdate({ _id }, { currentCar: car })
+      .then(user => {
+        res.status(200).json({ success: true, user })
+      })
+      .catch(e => {
+        res.status(400).json({ success: false, message: 'Car selection unsuccessful!'})
+      })
   }
 };
