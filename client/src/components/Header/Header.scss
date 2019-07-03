@@ -1,10 +1,38 @@
 @import './../../styles/Variables';
 @import '../../styles/Mixins';
+@import '../../styles/Typography';
 
 .Header-signup {
   width: 40%;
   height: 100%;
-  justify-content: space-between;
+
+  .sign-up {
+    @include Btn-md;
+    @include Btn-RedHover;
+    color: #000;
+
+    @include respond(tab-portrait) {
+      font-size: 1.8rem;
+      height: 8rem;
+    }
+  }
+
+  .login {
+    position: relative;
+    @include Btn-md;
+    @include Btn-RedHover;
+    background-color: #000;
+    color: #fff;
+
+    &:before {
+      transform: translateX(100%);
+    }
+
+    &:hover {
+      color: #fff;
+    }
+  }
+
   @include respond(tab-portrait) {
     font-size: 1.8rem;
     width: 100%;
@@ -13,57 +41,6 @@
 
 .Login-Header.modal-header {
   background-color: $main-color;
-}
-
-.login,
-.sign-up {
-  width: 50%;
-  height: 100%;
-  font-size: 1.6rem;
-  border: none;
-  border-radius: 0;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  font-weight: 700;
-  letter-spacing: 2px;
-
-  @include respond(tab-portrait) {
-    font-size: 1.8rem;
-    height: 8rem;
-  }
-}
-
-.login {
-  background-color: #000 !important;
-  color: #fff !important;
-}
-
-.login:before {
-  content: '' !important;
-  position: absolute;
-  right: 0;
-  top: 0;
-  height: 100%;
-  width: 100%;
-  z-index: -1;
-  transform: translateX(100%);
-  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-}
-.login:hover:before {
-  color: #fff !important;
-  background-color: $main-color;
-  transform: translateX(-0%);
-}
-
-.login:active:before {
-  transform: translateY(-0%);
-  background-color: #fff !important;
-  color: #000 !important;
-}
-
-.sign-up {
-  background-color: #fff;
-  color: $bg-color;
 }
 
 .Navbar {
@@ -141,6 +118,12 @@
 
       color: $main-color;
     }
+  }
+  &:active,
+  &:focus,
+  &:visited {
+    border-bottom: 3px solid $main-color;
+    color: #fff;
   }
 
   @include respond(tab-portrait) {
