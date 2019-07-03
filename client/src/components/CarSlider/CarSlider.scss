@@ -6,7 +6,7 @@
   width: 100vw;
 }
 
-.d-block .w-100 {
+.CarSlideImg .d-block .w-100 {
   @include respond(tab-landscape) {
     position: relative;
     left: -50%;
@@ -30,14 +30,16 @@
   }
 }
 
-.carousel-item {
+.CarSlider-container .carousel-item {
   position: relative;
+  height: 100vh;
+  width: 100vw;
+
   img {
+    position: absolute;
+    height: 100vh;
     top: 0;
-    bottom: 0;
-    left: 0;
     right: 0;
-    margin: auto;
   }
 
   @include respond(tab-landscape) {
