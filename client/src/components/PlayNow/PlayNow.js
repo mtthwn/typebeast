@@ -5,6 +5,9 @@ import './PlayNow.scss';
 import nissan from './../../img/gtx_md.png';
 
 const PlayNow = () => {
+  const maxSpeed = 177;
+  const acceleration = 5.5;
+
   return (
     <div className="PlayNow-container">
       <div className="PlayNow-content">
@@ -14,8 +17,12 @@ const PlayNow = () => {
         </div>
         <div className="PlayNow-specs">
           <h5>Specs</h5>
-          <ProgressBar now="177" max="250" label="177 mph" srOnly />
-          <ProgressBar now="5.5" max="10" label="5.5 seconds" srOnly />
+          <ProgressBar now={maxSpeed} max="250" label={`${maxSpeed} mph`} />
+          <ProgressBar
+            now={acceleration}
+            max="10"
+            label={`${acceleration} seconds`}
+          />
         </div>
         <img src={nissan} alt="ferrari side view" />
       </div>
