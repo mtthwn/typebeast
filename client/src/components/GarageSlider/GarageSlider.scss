@@ -10,15 +10,38 @@
   top: 0;
   padding: 0 0;
 
+  .slide {
+    position: relative;
+  }
   .carousel {
     position: relative;
-
     .CarSlide {
       position: absolute;
       height: 100vh;
 
       top: 0;
       right: -10%;
+    }
+    &-control-prev,
+    &-control-next {
+      position: absolute;
+      z-index: 10;
+      top: 82%;
+      left: 5%;
+      border: 3px solid $main-color;
+      height: 10rem;
+      width: 10rem;
+      opacity: 1;
+
+      &:hover {
+        background-color: $main-color;
+      }
+    }
+
+    &-control-next {
+      bottom: 0;
+      left: 95%;
+      transform: translateX(-100%);
     }
   }
 }
@@ -52,13 +75,13 @@
 .GarageSlider-BuyBtn {
   position: absolute;
   @include Main-btn;
-  width: 50%;
+  height: 10rem;
+  width: 40%;
+  left: 50%;
+  bottom: 5%;
   transform: translateX(-50%);
   font-weight: 600;
   font-size: 3rem;
-  bottom: 5%;
-  left: 50%;
-  height: 10rem;
 }
 
 @include respond(tab-landscape) {
@@ -66,36 +89,18 @@
   margin-top: 10;
 }
 
-.carousel-control-prev,
-.carousel-control-next {
-  border: 3px solid $main-color;
-  height: 10rem;
-  width: 10rem;
-  opacity: 1;
-  top: 80%;
-  &:hover {
-    background-color: $main-color;
-  }
+// .carousel-control-next {
+//   margin-right: 10rem;
 
-  @include respond(phone) {
-    height: 8rem;
-    width: 8rem;
-    top: 70%;
-  }
-}
+//   @include respond(phone) {
+//     margin-right: 5rem;
+//   }
+// }
 
-.carousel-control-next {
-  margin-right: 10rem;
+// .carousel-control-prev {
+//   margin-left: 10rem;
 
-  @include respond(phone) {
-    margin-right: 5rem;
-  }
-}
-
-.carousel-control-prev {
-  margin-left: 10rem;
-
-  @include respond(phone) {
-    margin-left: 5rem;
-  }
-}
+//   @include respond(phone) {
+//     margin-left: 5rem;
+//   }
+// }
