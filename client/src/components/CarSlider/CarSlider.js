@@ -26,6 +26,9 @@ export default () => {
             interval="3000"
           >
             <Carousel.Item>
+              <ImageSlider src={carSlide4} />
+            </Carousel.Item>
+            <Carousel.Item>
               <ImageSlider src={carSlide1} />
             </Carousel.Item>
             <Carousel.Item>
@@ -33,9 +36,6 @@ export default () => {
             </Carousel.Item>
             <Carousel.Item>
               <ImageSlider src={carSlide3} />
-            </Carousel.Item>
-            <Carousel.Item>
-              <ImageSlider src={carSlide4} />
             </Carousel.Item>
           </Carousel>
           <ImageSliderContent />
