@@ -88,10 +88,7 @@ module.exports = {
 
     User.findOneAndUpdate({ _id }, { currentCar: car })
       .then(user => {
-        console.log(user);
-      })
-      .then(() => {
-        res.status(200).json({ success: true })
+        res.status(200).json({ success: true, user })
       })
       .catch(e => {
         res.status(400).json({ success: false, message: 'Car selection unsuccessful!'})
