@@ -29,6 +29,7 @@
   width: 80%;
 }
 .card {
+  max-width: 28%;
   margin-right: 3rem;
   background-color: #111111;
   border: 1px solid $border-color;
@@ -53,8 +54,11 @@
 
   .card-text {
     h6 {
+      margin: 3px 0;
       color: $text-secondary;
+      font-size: 1rem;
       letter-spacing: 1px;
+      font-weight: 400;
     }
     h5 {
       font-size: 2rem;
@@ -153,4 +157,23 @@
     margin-bottom: 15rem;
     border-bottom: 0 !important;
   }
+}
+
+.ShopModal-title {
+  text-align: left;
+  // background-color: $bg-green;
+  border-bottom: 1px solid $border-color;
+  padding: 0.5rem 0rem;
+  margin-left: 0;
+  padding-left: 4rem;
+  font-size: 2rem;
+
+  svg {
+    margin-right: 1rem;
+    font-size: 2rem;
+    color: $bg-green;
+  }
+}
+
+.ShopModal {
 }
