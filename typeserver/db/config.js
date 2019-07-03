@@ -1,7 +1,8 @@
 const mongoose = require('mongoose');
 
 mongoose.connect('mongodb://localhost:27017/typebeast', {
-  useNewUrlParser: true
+  useNewUrlParser: true,
+  useFindAndModify: false
 });
 
 const db = mongoose.connection;

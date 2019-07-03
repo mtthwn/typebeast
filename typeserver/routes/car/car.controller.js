@@ -84,7 +84,9 @@ module.exports = {
     }
   },
   setUserCar: (req, res) => {
-    const { car, _id } = req.body;
+    const { car } = req.body;
+
+    const { _id } = req.user;
 
     User.findOneAndUpdate({ _id }, { currentCar: car })
       .then(user => {
