@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Carousel, Button } from 'react-bootstrap';
+import axios from 'axios';
 
 import SliderCaption from '../GarageSlider/SliderCaption';
 import ImageSlider from '../CarSlider/ImageSlider';
@@ -30,9 +31,22 @@ class GarageSliderLogic extends Component {
   }
 }
 
-const selectCurrentCar = _id => e => {
+const selectCurrentCar = (_id, car) => e => {
   e.preventDefault();
-  console.log('here!!', _id);
+  console.log('here!!', _id, car)
+  axios.post('http://127.0.0.1:8081/api/cars/update', {
+    _id,
+    car
+  })
+  .then((res) => {
+    console.log(res)
+  })
+  .then(() => {
+    alert('Current car changed')
+  })
+  .catch((e) => {
+    console.log(e)
+  })
 };
 
 export default ({ user }) => {
@@ -43,6 +57,7 @@ export default ({ user }) => {
           selectCurrentCar={selectCurrentCar}
           imgSrc={car.mediumImg}
           car={car}
+          user={user}
         />
         <ImageSlider className="CarSlide" src={car.largeImg} />
       </Carousel.Item>

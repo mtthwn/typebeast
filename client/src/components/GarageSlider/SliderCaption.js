@@ -1,7 +1,7 @@
 import React from 'react';
 import { Carousel, ProgressBar, Button } from 'react-bootstrap';
 
-export default ({ imgSrc, selectCurrentCar, car }) => {
+export default ({ imgSrc, selectCurrentCar, car, user }) => {
   const maxspeed = car.maxSpeed;
   const acceleration = car.acceleration;
 
@@ -20,7 +20,7 @@ export default ({ imgSrc, selectCurrentCar, car }) => {
       />
       <Button
         className="GarageSlider-BuyBtn"
-        onClick={selectCurrentCar(car._id)}
+        onClick={selectCurrentCar(user._id, car._id)}
       >
         Select
       </Button>
