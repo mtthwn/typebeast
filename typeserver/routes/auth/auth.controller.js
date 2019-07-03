@@ -16,14 +16,10 @@ module.exports = {
     const email = req.body.email.trim();
     const password = bcrypt.hashSync(req.body.password.trim(), 10);
 
-    const defaultCar = await Car.findOne({ name: 'Civic' });
-
     await User({
       username,
       email,
       password,
-      cars: [defaultCar._id],
-      currentCar: defaultCar._id
     })
       .save()
       .then(async savedUser => {
