@@ -83,7 +83,6 @@
 @mixin onHover-transform {
   &:hover {
     transform: scale(1.1);
-    // transform: translateY(-20px);
   }
 
   &:active {

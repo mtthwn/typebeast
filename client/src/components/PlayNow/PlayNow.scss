@@ -51,7 +51,8 @@
   letter-spacing: 2px;
 
   p {
-    font-size: 1.3rem;
+    font-size: 1.4rem;
+    font-weight: 400;
     line-height: 2rem;
     margin-bottom: 0;
     text-transform: uppercase;
@@ -72,12 +73,20 @@
 
 .PlayNow-specs {
   width: 30%;
+  .progress {
+    @include Progress-bar;
+    height: 1.5rem;
+    width: 100%;
+    margin-bottom: 1rem;
+  }
 }
+
 .PlayNow-content {
   display: flex;
   justify-content: space-between;
   width: 70%;
   margin-right: 2rem;
+
   @include respond(tab-portrait) {
     margin-right: 1rem;
   }
@@ -98,11 +107,8 @@
       display: none;
     }
   }
-
-  .progress {
-    margin-bottom: 2rem;
-  }
 }
+
 .PlayNow-btn {
   @include Main-btn;
   width: 45%;
