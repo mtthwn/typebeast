@@ -55,7 +55,7 @@ const Background = ({
 
   return onFinish ? (
     <div className="Background-img" style={onFinish ? bgFinish : bgStart}>
-      <Car onFinish={onFinish} positioning={1} />
+      <Car onFinish={onFinish} positioning={1} user={leaderboard[socket.id]} />
       <LeaderboardModal leaderboard={leaderboard} placings={placings} />
     </div>
   ) : (
