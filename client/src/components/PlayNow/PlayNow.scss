@@ -113,13 +113,8 @@
 .PlayNow-btn {
   @include Main-btn;
   width: 45%;
-  font-weight: 600;
-  font-size: 2rem;
-  height: 100%;
-  padding: 0 0;
   margin: 0 0;
   text-align: center;
-  vertical-align: middle;
 
   @include respond(tab-landscape) {
     padding: 0 2rem;
@@ -137,8 +132,20 @@
 a.PlayNow-btn {
   text-decoration: none;
   color: #fff;
-  padding: 5rem 0;
+  padding: 6rem 0;
+  font-size: 2rem;
   transition: all 0.3s $cubic;
+
+  @include respond(big-desktop) {
+    padding: 4.5rem 0;
+  }
+  @include respond(tab-landscape) {
+    padding: 6rem 0;
+  }
+
+  @include respond(phone) {
+    width: 1000vw;
+  }
 
   &:hover {
     background-color: $bg-green;
