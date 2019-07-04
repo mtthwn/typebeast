@@ -31,12 +31,14 @@
 }
 
 .Shop-Carlist-container {
-  width: 80%;
-  height: 100vh;
-  padding: 0rem 10rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  background-color: $bg-color;
+
+  width: 80%;
+  margin-top: 8rem;
+  padding: 0rem 10rem;
 
   .card-columns {
     display: flex;
@@ -45,49 +47,72 @@
     margin-bottom: 2rem;
     width: 80%;
   }
+
+  .card {
+    max-width: 28%;
+    margin-right: 3rem;
+    padding: 0rem 1rem;
+    background-color: #000;
+    border: 1px solid $border-color;
+    text-transform: uppercase;
+    transition: all 0.3s $cubic;
+    @include onHover-transform;
+
+    &:hover {
+      border: 2px solid $main-color;
+    }
+
+    &-img-top {
+      width: 90%;
+      padding: 1.5rem 3rem 1rem 1rem;
+      height: auto;
+    }
+
+    &-title {
+      color: #fff;
+      font-size: 1.5rem;
+      margin-bottom: 1.5rem;
+      font-weight: 400;
+      letter-spacing: 1px;
+    }
+    .progress {
+      @include Progress-bar;
+      background-color: $bg-color;
+      width: 100%;
+      height: 1.5rem;
+    }
+    &-footer {
+      margin-bottom: 1rem;
+    }
+  }
 }
 
-// .card {
-//   max-width: 28%;
-//   margin-right: 3rem;
-//   background-color: #111111;
-//   border: 1px solid $border-color;
-//   text-transform: uppercase;
-//   transition: all 0.3s ease-in;
+.Car-description {
+  h6 {
+    color: $text-secondary;
+    font-size: 1rem;
+    letter-spacing: 1px;
+    font-weight: 400;
+    margin-top: 1.5rem;
+    margin-bottom: 8px;
+  }
+}
 
-//   @include onHover-transform;
+.Buy-Btn {
+  @include Btn-RedHover;
+  border: 1px solid $border-color;
+  background-color: transparent;
+  font-size: 2rem;
+  height: 5rem;
+  width: 100%;
 
-//   .card-img-top {
-//     width: 100%;
-//     padding: 2.5rem 3rem 1.5rem 3rem;
-//     height: auto;
-//     margin: 0 auto;
-//   }
+  &:hover {
+    background-color: transparent;
+    border: 1px solid $main-color;
 
-//   .card-title {
-//     text-transform: uppercase;
-//     font-size: 1.8rem;
-//     font-weight: 700;
-//     letter-spacing: 1px;
-//   }
-
-//   .card-text {
-//     h6 {
-//       margin: 3px 0;
-//       color: $text-secondary;
-//       font-size: 1rem;
-//       letter-spacing: 1px;
-//       font-weight: 400;
-//     }
-//     h5 {
-//       font-size: 2rem;
-//     }
-
-//     h1 {
-//       font-size: 2rem;
-//       margin-bottom: 0;
-//     }
-//   }
+    color: #fff;
+  }
+}
 //   .card-body {
 //     padding: 2rem 4rem 1rem 4rem;
 //     color: #fff;
