@@ -17,6 +17,39 @@
     transform: translateY(-50%);
     z-index: 50;
     width: 30%;
+
+    @include respond(tab-portrait) {
+      width: 70%;
+      left: 20%;
+      top: 70%;
+      transform: translateY(-70%);
+    }
+
+    @include respond(tab-portrait) {
+      width: 80%;
+      left: 15%;
+      top: 70%;
+      transform: translateY(-70%);
+    }
+
+    h1 {
+      @include respond(tab-landscape) {
+        font-size: 6rem;
+        line-height: 6rem;
+      }
+    }
+
+    h5 {
+      @include respond(tab-landscape) {
+        font-size: 1.8rem;
+      }
+    }
+
+    p {
+      @include respond(tab-landscape) {
+        font-size: 2rem;
+      }
+    }
   }
 }
 
@@ -54,6 +87,25 @@
     height: 100vh;
     top: 0;
     right: 0;
+
+    @include respond(tab-landscape) {
+      height: 60vh;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
+    @include respond(tab-portrait) {
+      height: 60vh;
+      top: 5%;
+      right: 5%;
+
+      transform: translateY(-10%);
+    }
+
+    @include respond(phone) {
+      height: 50vh;
+      right: -9%;
+    }
   }
 
   @include respond(tab-landscape) {
