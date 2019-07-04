@@ -1,5 +1,3 @@
-const bcrypt = require('bcrypt');
-
 const { mongoose, db } = require('./../config');
 const Quote = require('./../model/Quote');
 const Car = require('./../model/Car');
