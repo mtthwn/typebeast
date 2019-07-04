@@ -4,16 +4,19 @@ import { Link } from 'react-router-dom';
 import './PlayNow.scss';
 import nissan from './../../img/gtx_md.png';
 
-const PlayNow = () => {
-  const maxSpeed = 177;
-  const acceleration = 5.5;
+const PlayNow = ({ currentCar }) => {
+  const maxSpeed = currentCar ? currentCar.maxSpeed : 177;
+  const acceleration = currentCar ? currentCar.acceleration : 5.5;
+  const make = currentCar ? currentCar.make : 'Nissan'
+  const model = currentCar ? currentCar.model : 'Silvia S15';
+  const image = currentCar ? currentCar.spriteFile : nissan;
 
   return (
     <div className="PlayNow-container">
       <div className="PlayNow-content">
         <div className="PlayNow-current">
           <h5>Car</h5>
-          <p>Nissan Silvia S15</p>
+          <p>{make} {model}</p>
         </div>
         <div className="PlayNow-specs">
           <h5>Specs</h5>
@@ -24,7 +27,7 @@ const PlayNow = () => {
             label={`${acceleration} seconds`}
           />
         </div>
-        <img src={nissan} alt="ferrari side view" />
+        <img src={image} alt="ferrari side view" />
       </div>
       <Link to="/play" className="PlayNow-btn">
         Play Now
