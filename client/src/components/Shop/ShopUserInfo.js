@@ -27,7 +27,7 @@ export default ({ user }) => {
             <FontAwesomeIcon icon={faCoins} />
             Coins
           </h5>
-          <h3>{user.cash}</h3>
+          <h2>{user.cash}</h2>
         </li>
       </ul>
     </div>

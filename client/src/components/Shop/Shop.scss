@@ -27,7 +27,18 @@
 .UserInfo-header {
   position: absolute;
   top: 15%;
-  left: 0;
+  left: 15%;
+
+  h1 {
+    font-size: 6rem;
+    margin-bottom: 0.5rem;
+  }
+  .border-bottom {
+    background-color: $main-color;
+    height: 5px;
+    width: 20%;
+    border-bottom: 0 !important;
+  }
 }
 
 .Shop-Carlist-container {
@@ -109,111 +120,52 @@
   &:hover {
     background-color: transparent;
     border: 1px solid $main-color;
-
     color: #fff;
   }
 }
-//   .card-body {
-//     padding: 2rem 4rem 1rem 4rem;
-//     color: #fff;
-//     background-color: #111111;
 
-//     .progress {
-//       @include Progress-bar;
-//       width: 100%;
-//       height: 1.5rem;
-//       margin-bottom: 1rem;
-//     }
-//   }
-//   .card-footer {
-//     padding: 0 0;
+.UserInfo-container {
+  h2 {
+    font-size: 4rem;
+    letter-spacing: -1px;
+    font-weight: 700;
+    margin-top: -0.5rem;
+  }
 
-//     .Buy-Btn {
-//       @include Main-btn;
-//       bottom: 0;
-//       right: 0;
-//       font-size: 2rem;
-//       margin: 0 0;
-//       padding: 1.5rem 0rem;
-//       width: 100%;
+  ul {
+    position: absolute;
+    bottom: 10%;
+    left: 10%;
+    padding-left: 0px;
+    list-style: none;
+    margin-left: 2rem;
+    li {
+      margin-bottom: 2rem;
+    }
+    img {
+      width: 90%;
+      margin-left: -1rem;
+      margin-bottom: 2rem;
+    }
+  }
+  svg {
+    margin-right: 1rem;
+    font-size: 1.5rem;
+    margin-bottom: 3px;
+  }
+}
 
-//       &:hover {
-//         background-color: #fff;
-//         color: #000;
-//       }
-//     }
-//   }
-// }
+.ShopModal-title {
+  text-align: left;
+  border-bottom: 1px solid $border-color;
+  padding: 0.5rem 0rem;
+  margin-left: 0;
+  padding-left: 4rem;
+  font-size: 2rem;
 
-// .UserInfo-container {
-//   // position: relative;
-//   // padding: 10rem 2rem 0rem 5rem;
-//   // height: 100vh;
-//   // width: 20%;
-//   // left: 0;
-//   // background-color: #111111;
-//   // color: #fff;
-//   // border-right: 1px solid $border-color;
-
-//   h1 {
-//     letter-spacing: -2px;
-//     font-size: 6rem;
-//     margin-bottom: 0;
-//   }
-
-//   h5 {
-//     font-size: 2rem;
-//     font-weight: 500;
-//   }
-
-//   h2,
-//   h3 {
-//     font-size: 4rem;
-//     letter-spacing: -1px;
-//     font-weight: 700;
-//     margin-top: -0.5rem;
-//   }
-
-//   svg {
-//     margin-right: 1rem;
-//     font-size: 1.5rem;
-//     margin-bottom: 3px;
-//   }
-
-//   img {
-//     margin-bottom: 5rem;
-//     width: 80%;
-//   }
-
-//   ul {
-//     padding-left: 0px;
-//     list-style: none;
-
-//     li {
-//       margin-bottom: 2rem;
-//     }
-//   }
-
-//   .border-bottom {
-//     background-color: $main-color;
-//     height: 5px;
-//     width: 20%;
-//     margin-bottom: 15rem;
-//     border-bottom: 0 !important;
-//   }
-// }
-
-// .ShopModal-title {
-//   text-align: left;
-//   border-bottom: 1px solid $border-color;
-//   padding: 0.5rem 0rem;
-//   margin-left: 0;
-//   padding-left: 4rem;
-//   font-size: 2rem;
-
-//   svg {
-//     margin-right: 1rem;
-//     font-size: 2rem;
-//     color: $bg-green;
-//   }
-// }
+  svg {
+    margin-right: 1rem;
+    font-size: 2rem;
+    color: $bg-green;
+  }
+}
