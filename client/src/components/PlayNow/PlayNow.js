@@ -5,7 +5,6 @@ import './PlayNow.scss';
 import nissan from './../../img/gtx_md.png';
 
 const PlayNow = ({ currentCar }) => {
-  console.log(currentCar);
   const maxSpeed = currentCar ? currentCar.maxSpeed : 177;
   const acceleration = currentCar ? currentCar.acceleration : 5.5;
   const make = currentCar ? currentCar.make : 'Nissan'
