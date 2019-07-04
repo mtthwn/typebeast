@@ -13,9 +13,10 @@ export default class Shop extends Component {
       user: {
         username: '',
         cars: [],
-        games: [],
+        games: []
       },
-      cars: []
+      cars: [],
+      show: false
     };
   }
 
@@ -27,7 +28,7 @@ export default class Shop extends Component {
 
       await instance.get('/cars').then(data => {
         const { cars } = data.data;
-        const userCars = this.state.user.cars
+        const userCars = this.state.user.cars;
 
         const displayCars = cars.filter(car => {
           return userCars.indexOf(car._id) < 0;
@@ -47,8 +48,7 @@ export default class Shop extends Component {
         car: _id
       })
       .then(response => {
-        alert('Successfully purchased!');
-        window.location.reload();
+        this.setState({ show: true });
       })
       .catch(e => console.log(e));
   };
@@ -56,7 +56,8 @@ export default class Shop extends Component {
   render() {
     return this.props.children({
       ...this.state,
-      buyCarFunction: this.buyCarFunction
+      buyCarFunction: this.buyCarFunction,
+      handleShow: this.handleShow
     });
   }
 }

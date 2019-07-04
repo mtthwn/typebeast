@@ -1,202 +1,179 @@
 @import './../../styles/Variables';
 @import './../../styles/Mixins';
+@import './../../styles/Typography';
 
-.GarageSlider-BuyBtn {
-  position: absolute;
-  z-index: 30;
-  @include Main-btn;
-  width: 130%;
-  font-weight: 600;
-  font-size: 3rem;
-  margin: 0 auto;
-  top: 82%;
-  left: 80%;
-  height: 10rem;
+.GarageSlider-container {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  left: 0%;
+  top: 0;
   padding: 0 0;
 
-  @include respond(tab-landscape) {
-    padding: 0 2rem;
-    top: 70%;
-    left: 55%;
-  }
-
-  @include respond(tab-portrait) {
-    width: 100%;
-    left: 70%;
-  }
-
-  @include respond(phone) {
-    width: 100%;
-    height: 8rem;
-    top: 55%;
-    left: 80%;
-  }
-}
-
-.carousel {
-  overflow: hidden;
-}
-
-.GarageSlider-container .carousel-item {
-  position: relative;
-  height: 100vh;
-  .CarSlide {
+  .carousel {
     position: relative;
-    padding: 10rem 25rem;
-    margin-left: 20rem;
-    height: auto;
-    width: 100%;
 
-    @include respond(tab-landscape) {
-      margin-top: 15rem;
-      padding: 5rem 15rem;
+    .CarSlide {
+      position: absolute;
+      height: 70vh;
+      top: 50%;
+      transform: translateY(-50%);
+      right: 0%;
+
+      @include respond(big-desktop) {
+        height: 80vh;
+        top: 50%;
+        right: -0%;
+      }
+
+      @media (max-width: 1350px) {
+        height: 70vh;
+        right: -5%;
+      }
+
+      @include respond(tab-landscape) {
+        height: 65vh;
+        top: 30%;
+        right: -4%;
+      }
+
+      @media (max-width: 1080px) {
+        height: 55vh;
+        right: 0%;
+      }
+
+      @include respond(tab-portrait) {
+        height: 55vh;
+        right: 0%;
+      }
+
+      @media (max-width: 910px) {
+        height: 45vh;
+        right: 10%;
+      }
+
+      @media (max-width: 800px) {
+        height: 35vh;
+        right: 5%;
+      }
+
+      @include respond(phone) {
+        height: 30vh;
+        top: 25%;
+      }
     }
 
-    @include respond(tab-portrait) {
-      margin-top: 20rem;
+    &-control-prev,
+    &-control-next {
+      position: absolute;
+      z-index: 10;
+      top: 82%;
+      left: 5%;
+      border: 3px solid $main-color;
+      height: 10rem;
+      width: 10rem;
+      opacity: 1;
+
+      &:hover {
+        background-color: $main-color;
+      }
     }
 
-    @include respond(phone) {
-      margin-top: 30rem;
-      margin-left: 10rem;
-      padding: 0 5rem;
+    &-control-next {
+      bottom: 0;
+      left: 95%;
+      transform: translateX(-100%);
     }
-  }
-  @include respond(tab-landscape) {
-    padding: 0rem 0rem;
-    margin-top: 10;
-  }
-}
-
-.carousel-control-prev,
-.carousel-control-next {
-  border: 3px solid $main-color;
-  height: 10rem;
-  width: 10rem;
-  opacity: 1;
-  top: 80%;
-  &:hover {
-    background-color: $main-color;
-  }
-
-  @include respond(phone) {
-    height: 8rem;
-    width: 8rem;
-    top: 70%;
-  }
-}
-
-.carousel-control-next {
-  margin-right: 10rem;
-
-  @include respond(phone) {
-    margin-right: 5rem;
-  }
-}
-
-.carousel-control-prev {
-  margin-left: 10rem;
-
-  @include respond(phone) {
-    margin-left: 5rem;
-  }
-}
-
-.carousel-caption {
-  padding: 20rem 0rem;
-  position: relative;
-  text-align: left;
-  width: 100%;
-  margin-left: -4.5rem;
-  height: 100vh;
-  color: #fff;
-
-  @include respond(tab-landscape) {
-    padding: 10rem 0rem;
-  }
-
-  h3 {
-    color: #fff;
-    font-family: $header-font;
-    font-style: italic;
-    font-size: 8rem;
-    letter-spacing: 2px;
-    line-height: 7rem;
-    text-transform: uppercase;
-    font-weight: 900;
-    margin-bottom: 2rem;
-
-    @include respond(tab-landscape) {
-      font-size: 6rem;
-      margin-bottom: 0;
-    }
-
-    @include respond(phone) {
-      font-size: 4rem;
-      line-height: 4rem;
-    }
-  }
-  h2 {
-    font-size: 5rem;
-  }
-
-  h5 {
-    font-size: 2rem;
-    @include respond(phone) {
-      font-size: 1.8rem !important;
-      line-height: 3rem;
-      margin-bottom: -0.5rem;
-    }
-  }
-  h6 {
-    font-size: 1.2rem;
-    font-weight: 500;
-    letter-spacing: 1px;
-    margin: 2rem 0rem 1rem 0rem;
-
-    @include respond(phone) {
-      font-size: 1rem;
-    }
-  }
-
-  .progress {
-    background-color: transparent;
-    border: 1px solid $border-color;
-    width: 70%;
-    height: 2rem;
-    font-weight: 700;
-    letter-spacing: 1px;
-    font-size: 0.9rem;
-
-    &-bar {
-      background-color: $main-color;
-    }
-  }
-}
-
-.coins {
-  letter-spacing: 1px;
-  margin-top: 0.5rem;
-  margin-left: 0.5rem;
-  font-size: 2rem;
-  font-weight: 700;
-  color: #fff;
-}
-
-img.Car-Sprite {
-  position: relative;
-  margin: 2rem 0rem;
-
-  @include respond(tab-landscape) {
-    width: 40%;
   }
 }
 
 .GarageSlider-content {
+  position: absolute;
+  left: 5%;
+  width: 30%;
+  top: 40%;
+  transform: translateY(-40%);
+  text-align: left;
+
+  @include respond(big-desktop) {
+    top: 40%;
+  }
+
   @include respond(tab-landscape) {
-    width: 35% !important;
-    bottom: -15% !important;
-    z-index: 1;
-    left: 12% !important;
+    width: 100%;
+    top: 55%;
+    transform: translateY(-40%);
+  }
+
+  @include respond(phone) {
+    width: 100%;
+    top: 50%;
+    transform: translateY(-40%);
+  }
+
+  h1 {
+    color: #fff;
+    font-family: $header-font;
+    font-style: italic;
+    font-size: 7rem;
+    line-height: 6rem;
+    letter-spacing: 2px;
+    font-weight: 900;
+    margin-bottom: 2rem;
+
+    @include respond(tab-landscape) {
+      line-height: 7rem;
+    }
+
+    @include respond(tab-portrait) {
+      line-height: 5rem;
+      font-size: 5rem;
+      margin-top: -1rem;
+      margin-bottom: 0rem;
+    }
+  }
+
+  h5 {
+    @include respond(tab-portrait) {
+      font-size: 2rem;
+    }
+  }
+
+  img {
+    margin: 2rem 0rem;
+    height: 8rem;
+
+    @include respond(tab-portrait) {
+      height: 6rem;
+    }
+  }
+  .progress {
+    @include Progress-bar;
+  }
+}
+
+.GarageSlider-BuyBtn {
+  position: absolute;
+  @include Main-btn;
+  height: 10rem;
+  width: 40%;
+  left: 50%;
+  bottom: 5%;
+  transform: translate(-50%, -5%);
+  font-weight: 600;
+  font-size: 3rem;
+
+  @include respond(tab-landscape) {
+    bottom: 6%;
+  }
+
+  @include respond(tab-portrait) {
+    bottom: 7.5%;
+    font-size: 2.5rem;
+  }
+
+  @include respond(phone) {
+    bottom: 7.5%;
+    font-size: 2rem;
   }
 }

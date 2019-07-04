@@ -3,7 +3,8 @@
 
 h1,
 h3,
-h5 {
+h5,
+h6 {
   text-transform: uppercase;
 }
 
@@ -43,6 +44,13 @@ h5 {
     font-weight: 500;
     line-height: 3.3rem;
   }
+}
+
+h6 {
+  font-size: 1.2rem;
+  font-weight: 500;
+  letter-spacing: 1px;
+  margin: 2rem 0rem 1rem 0rem;
 }
 
 p {

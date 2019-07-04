@@ -74,29 +74,3 @@
 .CarSlider-container {
   display: flex;
 }
-
-.GarageSlider-content {
-  position: absolute;
-  align-self: center;
-  z-index: 50;
-  width: 30%;
-  left: 10%;
-  text-transform: uppercase;
-
-  @include respond(tab-landscape) {
-    width: 75%;
-    bottom: -20%;
-    z-index: 1;
-    left: 15%;
-  }
-
-  @include respond(tab-portrait) {
-    width: 75%;
-    bottom: -10%;
-    left: 15%;
-  }
-
-  @include respond(phone) {
-    bottom: 0%;
-  }
-}

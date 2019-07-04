@@ -1,6 +1,7 @@
 import React from 'react';
 
 import ShopLogic from './ShopLogic';
+import ShopModal from './../../components/Shop/ShopModal';
 
 import ShopUserInfo from './../../components/Shop/ShopUserInfo';
 import CarList from './../../components/Shop/CarList';
@@ -16,6 +17,7 @@ export default () => (
         <div className="Shop-container">
           <ShopUserInfo user={props.user} />
           <CarList buyCarFunction={props.buyCarFunction} cars={props.cars} />
+          <ShopModal show={props.show} />
         </div>
       </div>
     )}

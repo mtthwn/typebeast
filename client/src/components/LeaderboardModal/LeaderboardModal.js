@@ -72,14 +72,14 @@ const LeaderboardModal = ({ leaderboard }) => {
             </thead>
             <tbody>{playerStats}</tbody>
           </Table>
-          <Button variant="none" href="/play" className="PlayAgain-btn">
-            Play Again
-          </Button>
           <Link to={'/'}>
             <Button variant="none" className="Home-btn">
               Home
             </Button>
           </Link>
+          <Button variant="none" href="/play" className="PlayAgain-btn">
+            Play Again
+          </Button>
         </Modal.Body>
       </Modal>
     </div>

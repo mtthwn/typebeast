@@ -2,7 +2,7 @@ import React from 'react';
 
 import BuyCardColumn from './BuyCardColumn';
 
-export default ({ cars, buyCarFunction }) => {
+export default ({ cars, buyCarFunction, show }) => {
   const carRows = [];
   let currentRow = [];
 
@@ -19,7 +19,9 @@ export default ({ cars, buyCarFunction }) => {
     carRows.push(currentRow);
   }
 
-  const rows = carRows.map(carRow => <BuyCardColumn buyCarFunction={buyCarFunction} cars={carRow} />);
+  const rows = carRows.map(carRow => (
+    <BuyCardColumn buyCarFunction={buyCarFunction} cars={carRow} show={show} />
+  ));
 
   return <div className="Shop-Carlist-container">{rows}</div>;
 };
