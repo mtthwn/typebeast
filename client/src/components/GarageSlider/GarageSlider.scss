@@ -149,6 +149,9 @@
   }
   .progress {
     @include Progress-bar;
+    &-bar {
+      text-transform: uppercase;
+    }
   }
 }
 
