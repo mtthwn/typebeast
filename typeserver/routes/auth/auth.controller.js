@@ -1,6 +1,8 @@
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
+const mongoose = require('mongoose');
+
 const User = require('./../../db/model/User');
 const Car = require('./../../db/model/Car');
 const { generateToken, getCleanUser } = require('./../../utils/auth');
@@ -78,9 +80,16 @@ module.exports = {
         return res.json({ success: false, message: err.message });
       }
 
-      User.findById({ _id: tokenUser._id })
+      User.findById({ _id: tokenUser._id})
         .populate('currentCar')
         .then(foundUser => {
+
+          // if (foundUser === null) {
+          //   return res.json({ success: false, user: {
+          //     username: 'Guest',
+          //     email: ''
+          //   }})
+          // }
           const user = getCleanUser(foundUser);
 
           res.status(200).json({
