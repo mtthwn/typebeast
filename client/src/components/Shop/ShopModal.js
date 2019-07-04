@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Modal, Button, Badge } from 'react-bootstrap';
+import { Modal, Button } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheckSquare } from '@fortawesome/free-solid-svg-icons';
 
@@ -21,11 +21,11 @@ export default ({ show }) => {
         </Modal.Title>
         <Modal.Body>
           <div className="Result-wrapper">
-            <img src={purchaseSuccessful} />
+            <img src={purchaseSuccessful} alt='successful purchase' />
           </div>
-          <Link to="/">
+          <Link to="/garage">
             <Button variant="none" className="Home-btn">
-              Home
+              Go to garage
             </Button>
           </Link>
           <Button variant="none" href="/shop" className="PlayAgain-btn">

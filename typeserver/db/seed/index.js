@@ -1,10 +1,12 @@
-const bcrypt = require('bcrypt');
-
 const { mongoose, db } = require('./../config');
 const Quote = require('./../model/Quote');
 const Car = require('./../model/Car');
 const Game = require('./../model/Game');
 const User = require('./../model/User');
+
+const seed = require('./quotes');
+const cars = require('./cars');
+const users = require('./users');
 
 let counter = 0;
 
