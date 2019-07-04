@@ -218,11 +218,7 @@ export default class PlayGameLogic extends Component {
 
     let value = e.target.value;
 
-    const {
-      index,
-      words,
-      wordsCompleted
-    } = this.state;
+    const { index, words, wordsCompleted } = this.state;
 
     if (value.length > words[index].length) {
       e.target.value = value.slice(0, words[index].length);

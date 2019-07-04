@@ -1,167 +1,162 @@
 @import './../../styles/Variables';
 @import './../../styles/Mixins';
+@import './../../styles/Typography';
 
 .Shop-container {
   display: flex;
+  position: relative;
+  height: 100vh;
   justify-content: space-between;
+}
+
+.UserInfo-container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 20%;
+  height: 100%;
+
+  ul {
+    position: absolute;
+    bottom: 10%;
+    left: 0;
+  }
+}
+
+.UserInfo-header {
+  position: absolute;
+  top: 15%;
+  left: 15%;
+
+  h1 {
+    font-size: 6rem;
+    margin-bottom: 0.5rem;
+  }
+  .border-bottom {
+    background-color: $main-color;
+    height: 5px;
+    width: 20%;
+    border-bottom: 0 !important;
+  }
 }
 
 .Shop-Carlist-container {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-content: center;
-  box-sizing: border-box;
-  width: 70%;
-  margin-right: 6%;
-  padding-top: 6%;
-}
+  background-color: $bg-color;
 
-.Shop-CarPrice {
-  display: flex;
-  align-content: flex-start;
-}
-.card-columns {
-  display: flex;
-  margin-right: 0;
-  margin-left: 10rem;
-  margin-bottom: 2rem;
   width: 80%;
-}
-.card {
-  max-width: 28%;
-  margin-right: 3rem;
-  background-color: #111111;
-  border: 1px solid $border-color;
-  text-transform: uppercase;
-  transition: all 0.3s ease-in;
+  margin-top: 8rem;
+  padding: 0rem 10rem;
 
-  @include onHover-transform;
-
-  .card-img-top {
-    width: 100%;
-    padding: 2.5rem 3rem 1.5rem 3rem;
-    height: auto;
-    margin: 0 auto;
+  .card-columns {
+    display: flex;
+    justify-self: center;
+    align-self: center;
+    margin-bottom: 2rem;
+    width: 80%;
   }
 
-  .card-title {
+  .card {
+    max-width: 28%;
+    margin-right: 3rem;
+    padding: 0rem 1rem;
+    background-color: #000;
+    border: 1px solid $border-color;
     text-transform: uppercase;
-    font-size: 1.5rem;
-    font-weight: 700;
-    letter-spacing: 1px;
-  }
+    transition: all 0.3s $cubic;
+    @include onHover-transform;
 
-  .card-text {
-    h6 {
-      margin: 3px 0;
-      color: $text-secondary;
-      font-size: 1rem;
-      letter-spacing: 1px;
+    &:hover {
+      border: 2px solid $main-color;
+    }
+
+    &-img-top {
+      width: 90%;
+      padding: 1.5rem 3rem 1rem 1rem;
+      height: auto;
+    }
+
+    &-title {
+      color: #fff;
+      font-size: 1.5rem;
+      margin-bottom: 1.5rem;
       font-weight: 400;
+      letter-spacing: 1px;
     }
-    h5 {
-      font-size: 2rem;
-    }
-
-    h1 {
-      font-size: 2rem;
-      margin-bottom: 0;
-    }
-  }
-  .card-body {
-    // border-top: 1px solid $border-color;
-    padding: 2rem 4rem 1rem 4rem;
-    color: #fff;
-    background-color: #111111;
-
     .progress {
       @include Progress-bar;
+      background-color: $bg-color;
       width: 100%;
       height: 1.5rem;
+    }
+    &-footer {
       margin-bottom: 1rem;
     }
   }
-  .card-footer {
-    padding: 0 0;
-  }
-  .Buy-Btn {
-    @include Main-btn;
+}
 
-    font-size: 2rem;
-    padding: 1.5rem 0rem;
-    width: 100%;
-
-    &:hover {
-      background-color: #fff;
-      color: #000;
-    }
+.Car-description {
+  h6 {
+    color: $text-secondary;
+    font-size: 1rem;
+    letter-spacing: 1px;
+    font-weight: 400;
+    margin-top: 1.5rem;
+    margin-bottom: 8px;
   }
 }
 
-.UserInfo {
-  display: flex;
-  flex-direction: column;
-  position: relative;
-  padding: 10rem 2rem 0rem 5rem;
-  height: 100vh;
-  width: 20%;
-  left: 0;
-  background-color: #111111;
-  color: #fff;
-  border-right: 1px solid $border-color;
+.Buy-Btn {
+  @include Btn-RedHover;
+  border: 1px solid $border-color;
+  background-color: transparent;
+  font-size: 2rem;
+  height: 5rem;
+  width: 100%;
 
-  h1 {
-    letter-spacing: -2px;
-    font-size: 6rem;
-    margin-bottom: 0;
+  &:hover {
+    background-color: transparent;
+    border: 1px solid $main-color;
+    color: #fff;
   }
+}
 
-  h5 {
-    font-size: 2rem;
-    font-weight: 500;
-  }
-
-  h2,
-  h3 {
+.UserInfo-container {
+  h2 {
     font-size: 4rem;
     letter-spacing: -1px;
     font-weight: 700;
     margin-top: -0.5rem;
   }
 
+  ul {
+    position: absolute;
+    bottom: 10%;
+    left: 10%;
+    padding-left: 0px;
+    list-style: none;
+    margin-left: 2rem;
+    li {
+      margin-bottom: 2rem;
+    }
+    img {
+      width: 90%;
+      margin-left: -1rem;
+      margin-bottom: 2rem;
+    }
+  }
   svg {
     margin-right: 1rem;
     font-size: 1.5rem;
     margin-bottom: 3px;
   }
-
-  img {
-    margin-bottom: 5rem;
-    width: 80%;
-  }
-
-  ul {
-    padding-left: 0px;
-    list-style: none;
-
-    li {
-      margin-bottom: 2rem;
-    }
-  }
-
-  .border-bottom {
-    background-color: $main-color;
-    height: 5px;
-    width: 20%;
-    margin-bottom: 15rem;
-    border-bottom: 0 !important;
-  }
 }
 
 .ShopModal-title {
   text-align: left;
-  // background-color: $bg-green;
   border-bottom: 1px solid $border-color;
   padding: 0.5rem 0rem;
   margin-left: 0;
@@ -173,7 +168,4 @@
     font-size: 2rem;
     color: $bg-green;
   }
-}
-
-.ShopModal {
 }

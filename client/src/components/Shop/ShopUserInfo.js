@@ -2,15 +2,12 @@ import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser, faCoins } from '@fortawesome/free-solid-svg-icons';
 
-// import nissan_sprite from './../../img/gtx_md.png';
-
 export default ({ user }) => {
-
-  let currentCarImage = 'https://i.imgur.com/8k3z73p.png'
+  let currentCarImage = 'https://i.imgur.com/8k3z73p.png';
 
   return (
-    <div className="CarSlider-content UserInfo">
-      <div className="Shop-header-title">
+    <div className="UserInfo-container">
+      <div className="UserInfo-header">
         <h1>Shop</h1>
         <div className="border-bottom"></div>
       </div>
@@ -30,7 +27,7 @@ export default ({ user }) => {
             <FontAwesomeIcon icon={faCoins} />
             Coins
           </h5>
-          <h3>{user.cash}</h3>
+          <h2>{user.cash}</h2>
         </li>
       </ul>
     </div>
