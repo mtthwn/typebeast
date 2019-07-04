@@ -15,7 +15,7 @@ export default () => (
         <div>
           <SocialMedia />
           <CarSlider />
-          <PlayNow userCar={props.user.currentCar} />
+          <PlayNow currentCar={props.user.currentCar} />
         </div>
       </div>
     )}
