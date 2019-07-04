@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Carousel } from 'react-bootstrap';
 
-import instance from './../../lib/axios'
+import instance from './../../lib/axios';
 import SliderCaption from '../GarageSlider/SliderCaption';
 import ImageSlider from '../CarSlider/ImageSlider';
 
@@ -26,23 +26,13 @@ class GarageSliderLogic extends Component {
   render() {
     return this.props.children({
       ...this.state,
-      handleSelect: this.handleSelect
+      handleSelect: this.handleSelect,
+      selectCurrentCar: this.selectCurrentCar
     });
   }
 }
 
-const selectCurrentCar = car => e => {
-  e.preventDefault();
- 
-  instance.post('/cars/update', {
-    car
-  }).then(res => {
-    console.log(res);
-    alert('Current car updated!');
-  }).catch(e => console.log(e));
-};
-
-export default ({ user }) => {
+export default ({ user, selectCurrentCar }) => {
   const renderCars = user.cars.map(car => {
     return (
       <Carousel.Item>
