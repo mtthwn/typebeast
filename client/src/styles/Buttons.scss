@@ -1,0 +1,19 @@
+@import './Variables';
+@import './Mixins';
+
+.btn-primary {
+  &:hover {
+    color: #fff !important;
+    background-color: #fff !important;
+  }
+
+  &:active {
+    color: #000 !important;
+  }
+}
+
+.btn-primary:active:before {
+  transform: translateY(-0%);
+  background-color: #fff !important;
+  color: #000 !important;
+}
