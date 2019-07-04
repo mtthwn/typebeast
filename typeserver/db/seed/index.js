@@ -32,18 +32,17 @@ const seed = [
       'Do not worry if you have built your castles in the air. They are where they should be. Now put the foundations under them.'
   },
   {
-    author: 'Lorii Myers',
+    author: 'George Bernard Shaw',
     quote:
-      'People rise to the occasion without hesitation when they feel inspired and challenged.'
+      'Reasonable people adapt themselves to the world. Unreasonable people attempt to adapt the world to themselves. All progress, therefore, depends on unreasonable people.'
   },
   {
-    author: 'Colin Powell',
-    quote:
-      'The day soldiers stop bringing you their problems is the day you have stopped leading them. They have either lost confidence that you can help them or concluded that you do not care. Either case is a failure of leadership.'
+    author: 'Albert Einstein',
+    quote: `Two things are infinite: the universe and human stupidity; and I'm not sure about the universe.`
   },
   {
-    quote: `I don't believe that if you do good, good things will happen. Everything is completely accidental and random. Sometimes bad things happen to very good people and sometimes good things happen to bad people. But at least if you try to do good things, then you're spending your time doing something worthwhile.`,
-    author: 'Helen Mirren'
+    quote: `Time may restore us in his course Goethe's sage mind and Byron's force: But where will Europe's latter hour Again find Wordsworth's healing power?`,
+    author: 'Matthew Arnold'
   },
   {
     quote: `When I have a bad day, I dream about opening up a gelato stand on the streets of Sydney, Australia. Doesn't everyone have a random escape fantasy?`,
@@ -120,7 +119,7 @@ const cars = [
     price: 5000,
     maxSpeed: 250,
     acceleration: 3.2
-  },
+  }
 ];
 
 const seedQuotes = async quotes => {
