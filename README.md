@@ -2,6 +2,12 @@
 
 TypeBeast is a typing game for the ages! A modern take on a classic game, TypeBeast aims to bring an immersive and addictive typing game experience to help you take your typing to the next level.
 
+## The team
+
+* [Justin Kwok](https://github.com/JSKwok)
+* [Daniel Tran](https://github.com/DTran23)
+* [Matthew An](https://github.com/my2an)
+
 ## Tech used
 
 * MongoDB with Mongoose
