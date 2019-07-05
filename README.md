@@ -1,5 +1,7 @@
 # TypeBeast 
 
+TypeBeast is a typing game for the ages! A modern take on a classic game, TypeBeast aims to bring an immersive and addictive typing game experience to help you take your typing to the next level.
+
 ## Getting Started
 
 Clone the repo and install the dependencies in the React server by running `yarn`. Then, install the api dependencies by running `npm install` in the typeserver directory.
