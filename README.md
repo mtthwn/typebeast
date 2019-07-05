@@ -22,7 +22,7 @@ Clone the repo and install the dependencies in the React server by running `yarn
 
 ## Running the app
 
-MongoDB must be running in the background in order to start the API. 
+MongoDB must be running in the background in order to start the API. You should also run the database seed script by executing `npm run seed` in the typeserver directory.
 
 ### Running the api
 
