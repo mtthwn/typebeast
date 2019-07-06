@@ -20,8 +20,8 @@ module.exports = [
     acceleration: 5
   },
   {
-    model: 'Ford',
-    make: 'Mustang GT 67',
+    model: 'Mustang GT 67',
+    make: 'Ford',
     spriteFile: 'https://i.imgur.com/nlH4JEk.png',
     mediumImg: 'https://i.imgur.com/7D2UQfN.png',
     largeImg: 'https://i.imgur.com/kYmO4vg.png',
@@ -40,8 +40,8 @@ module.exports = [
     acceleration: 3
   },
   {
-    model: 'McLaren',
-    make: 'P1',
+    model: 'P1',
+    make: 'McLaren',
     spriteFile: 'https://i.imgur.com/HXrjtI3.png',
     mediumImg: 'https://i.imgur.com/ZyFon8s.png',
     largeImg: 'https://i.imgur.com/N5ZzKJU.png',
