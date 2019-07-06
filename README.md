@@ -4,7 +4,7 @@ TypeBeast is a typing game for the ages! A modern take on a classic game, TypeBe
 
 
 ## Final Product 
-###### Welcome to TypeBeast! Register, login or play as a guest!
+###### Welcome to TypeBeast! Register, login, or play as a guest!
 ![home screen"](https://github.com/my2an/typebeast/blob/master/client/docs/guest.jpg)
 
 ###### Race with friends! Room numbers ensures everyone is in the same room. Words per minute, percentage completed, and current race position are updated realtime.
