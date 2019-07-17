@@ -1,7 +1,7 @@
 import React from 'react';
 import { Carousel, ProgressBar, Button } from 'react-bootstrap';
 
-export default ({ imgSrc, selectCurrentCar, car, user }) => {
+export default ({ imgSrc, selectCurrentCar, car, user, show }) => {
   const maxspeed = car.maxSpeed;
   const acceleration = car.acceleration;
 

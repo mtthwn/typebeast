@@ -13,9 +13,23 @@ export default class Garage extends Component {
         cars: [],
         email: null,
         games: []
-      }
+      },
+      show: false
     };
   }
+
+  selectCurrentCar = car => e => {
+    e.preventDefault();
+
+    instance
+      .post('/cars/update', {
+        car
+      })
+      .then(res => {
+        this.setState({ show: true });
+      })
+      .catch(e => console.log(e));
+  };
 
   async componentDidMount() {
     const user = await tokenValidationHelper();
@@ -30,7 +44,8 @@ export default class Garage extends Component {
 
   render() {
     return this.props.children({
-        ...this.state
-    })
+      ...this.state,
+      selectCurrentCar: this.selectCurrentCar
+    });
   }
 }
