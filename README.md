@@ -65,7 +65,7 @@ Server will run on `http://localhost:8080`
 
 ### Running the React App
 
-`cd client && yarn start`
+`cd client && npm start`
 
 App will run on `localhost:3000`
 
