@@ -45,7 +45,7 @@ TypeBeast is a typing game for the ages! A modern take on a classic game, TypeBe
 
 ## Getting Started
 
-Clone the repo and install the dependencies in the React server by running `yarn`. Then, install the api dependencies by running `npm install` in the typeserver directory.
+Clone the repo and install the dependencies in the React server by running `npm i`. Then, install the api dependencies by running `npm install` in the typeserver directory.
 
 ## Running the app
 
