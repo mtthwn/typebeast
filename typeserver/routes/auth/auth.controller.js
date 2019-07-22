@@ -21,7 +21,7 @@ module.exports = {
     await User({
       username,
       email,
-      password,
+      password
     })
       .save()
       .then(async savedUser => {
@@ -75,15 +75,18 @@ module.exports = {
       });
     }
 
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Methods', '*');
+    res.setHeader('Access-Control-Allow-Headers', '*');
+
     jwt.verify(token, process.env.JWT_SECRET, (err, tokenUser) => {
       if (err) {
         return res.json({ success: false, message: err.message });
       }
 
-      User.findById({ _id: tokenUser._id})
+      User.findById({ _id: tokenUser._id })
         .populate('currentCar')
         .then(foundUser => {
-
           // if (foundUser === null) {
           //   return res.json({ success: false, user: {
           //     username: 'Guest',

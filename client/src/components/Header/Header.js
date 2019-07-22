@@ -1,12 +1,15 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Nav, Navbar } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
 import { renderButtons, renderLinks } from './../../lib/headerHelpers'
 
+import UserContext from './../../context/user-context';
+
 import './Header.scss';
 
-export default ({ user }) => {
+export default () => {
+  const { user } = useContext(UserContext);
   const renderedButtons = renderButtons(user.username);
   const authLinks = renderLinks(user.username);
 

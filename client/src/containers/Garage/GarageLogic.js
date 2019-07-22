@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component} from 'react';
 
 import tokenValidationHelper from '../../lib/tokenValidationHelper';
 import instance from '../../lib/axios';
