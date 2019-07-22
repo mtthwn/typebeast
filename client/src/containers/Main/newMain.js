@@ -1,4 +1,4 @@
-import React, { Component, useState, useEffect, useReducer } from 'react';
+import React, { useEffect, useReducer } from 'react';
 
 import userReducer from './../../reducers/users';
 import UserContext from './../../context/user-context';
@@ -9,7 +9,7 @@ import PlayNow from './../../components/PlayNow/PlayNow';
 
 import Header from './../../components/Header/Header';
 
-import axios from 'axios';
+import validateToken from './../../lib/userValidation'
 
 const Main = () => {
   const [user, userDispatch] = useReducer(userReducer, {
@@ -20,41 +20,11 @@ const Main = () => {
   });
 
   useEffect(() => {
-    const validateToken = async () => {
-      try {
-        const token = localStorage.getItem('token');
-
-        if (!token) {
-          return;
-        } else {
-          const { data } = await axios.get(
-            `http://127.0.0.1:8081/api/auth/me/from/token`,
-            {
-              params: {
-                token: JSON.parse(token)
-              }
-            }
-          );
-
-          if (!data.success) {
-            return;
-          } else {
-            userDispatch({ type: 'UPDATE_USER', user: data.user });
-
-            localStorage.setItem('token', data.token);
-          }
-        }
-      } catch (e) {
-        localStorage.removeItem('token');
-        console.log(e.message);
-      }
-    };
-
-    validateToken();
+    validateToken(userDispatch);
   }, []);
 
   return (
-    <UserContext.Provider value={{user, currentCar: user.currentCar}}>
+    <UserContext.Provider value={{ user, currentCar: user.currentCar }}>
       <Header user={user} />
       <div>
         <SocialMedia />
