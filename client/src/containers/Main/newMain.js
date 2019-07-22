@@ -1,7 +1,14 @@
 import React, { Component, useState, useEffect, useReducer } from 'react';
 
 import userReducer from './../../reducers/users';
-import instance from '../../lib/axios';
+
+import CarSlider from './../../components/CarSlider/CarSlider';
+import SocialMedia from './../../components/SocialMedia/SocialMedia';
+import PlayNow from './../../components/PlayNow/PlayNow';
+
+import Header from './../../components/Header/Header';
+
+import axios from 'axios';
 
 const Main = () => {
   const [user, userDispatch] = useReducer(userReducer, {
@@ -12,7 +19,6 @@ const Main = () => {
   });
 
   useEffect(() => {
-    console.log('here');
     const validateToken = async () => {
       try {
         const token = localStorage.getItem('token');
@@ -20,13 +26,22 @@ const Main = () => {
         if (!token) {
           return;
         } else {
-          const userValidation = await instance.get(`/auth/me/from/token`, {
-            params: {
-              token: JSON.parse(token)
+          const { data } = await axios.get(
+            `http://127.0.0.1:8081/api/auth/me/from/token`,
+            {
+              params: {
+                token: JSON.parse(token)
+              }
             }
-          });
+          );
 
-          console.log(userValidation);
+          if (!data.success) {
+            return;
+          } else {
+            userDispatch({ type: 'UPDATE_USER', user: data.user });
+
+            localStorage.setItem('token', data.token);
+          }
         }
       } catch (e) {
         console.error(e.message);
@@ -36,9 +51,18 @@ const Main = () => {
     validateToken();
   }, []);
 
-  console.log(user);
+  console.log('here', user);
 
-  return <div>hello</div>;
+  return (
+    <div>
+      <Header user={user} />
+      <div>
+        <SocialMedia />
+        <CarSlider />
+        <PlayNow currentCar={user.currentCar} />
+      </div>
+    </div>
+  );
 };
 
 export { Main as default };
