@@ -4,7 +4,7 @@ const usersReducer = (state, action) => {
       return action.user;
     case 'LOGOUT_USER':
       return {
-        username: '',
+        username: 'Guest',
         cars: [],
         email: null,
         games: []
