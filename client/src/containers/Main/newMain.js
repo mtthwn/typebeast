@@ -13,7 +13,7 @@ import axios from 'axios';
 
 const Main = () => {
   const [user, userDispatch] = useReducer(userReducer, {
-    username: '',
+    username: 'Guest',
     cars: [],
     email: null,
     games: []
@@ -45,14 +45,13 @@ const Main = () => {
           }
         }
       } catch (e) {
-        console.error(e.message);
+        localStorage.removeItem('token');
+        console.log(e.message);
       }
     };
 
     validateToken();
   }, []);
-
-  console.log('here', user);
 
   return (
     <UserContext.Provider value={{user, currentCar: user.currentCar}}>
