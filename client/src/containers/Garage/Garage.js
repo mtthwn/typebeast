@@ -1,23 +1,26 @@
-import React from 'react';
+import React, { useState, useEffect, useReducer } from 'react';
 
-import GarageSlider from '../../components/GarageSlider/GarageSlider';
-import Header from '../../components/Header/Header';
-import GarageLogic from './GarageLogic';
-import GarageModal from '../../components/GarageSlider/GarageModal';
+import validateToken from './../../lib/userValidation';
+import userReducer from './../../reducers/users';
+import UserContext from './../../context/user-context';
 
-export default () => (
-  <GarageLogic>
-    {props => (
-      <div>
-        <Header user={props.user} />
-        <div>
-          <GarageSlider
-            user={props.user}
-            selectCurrentCar={props.selectCurrentCar}
-          />
-          <GarageModal show={props.show} />
-        </div>
-      </div>
-    )}
-  </GarageLogic>
-);
+const Garage = () => {
+  const [user, userDispatch] = useReducer(userReducer, {
+    username: 'Guest',
+    cars: [],
+    email: null,
+    games: []
+  });
+
+  useEffect(() => {
+    validateToken(userDispatch);
+  });
+
+  return (
+    <UserContext.Provider>
+      <h3>Hello {user.username}</h3>
+    </UserContext.Provider>
+  );
+};
+
+export { Garage as default };
