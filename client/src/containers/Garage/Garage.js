@@ -23,9 +23,9 @@ const Garage = () => {
     const getUserCars = async () => {
       try {
         const { data } = await instance.get('/cars/user');
-        const { cars } = data;
+        const userCars = data.cars
 
-        setCars(cars);
+        setCars(userCars);
       } catch (e) {
         console.log(e.message);
       }
@@ -37,7 +37,7 @@ const Garage = () => {
   return (
     <UserContext.Provider value={{ user, cars }}>
       <Header />
-
+      <GarageSlider />
     </UserContext.Provider>
   );
 };
