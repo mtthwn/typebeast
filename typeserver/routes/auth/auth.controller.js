@@ -74,25 +74,14 @@ module.exports = {
         message: 'No token was sent'
       });
     }
-
-    res.setHeader('Access-Control-Allow-Origin', '*');
-    res.setHeader('Access-Control-Allow-Methods', '*');
-    res.setHeader('Access-Control-Allow-Headers', '*');
-
     jwt.verify(token, process.env.JWT_SECRET, (err, tokenUser) => {
       if (err) {
-        return res.json({ success: false, message: err.message });
+        return res.status(304).json({ success: false, message: err.message });
       }
 
       User.findById({ _id: tokenUser._id })
         .populate('currentCar')
         .then(foundUser => {
-          // if (foundUser === null) {
-          //   return res.json({ success: false, user: {
-          //     username: 'Guest',
-          //     email: ''
-          //   }})
-          // }
           const user = getCleanUser(foundUser);
 
           res.status(200).json({
