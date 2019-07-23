@@ -29,7 +29,7 @@ const Main = () => {
       <div>
         <SocialMedia />
         <CarSlider />
-        <PlayNow currentCar={user.currentCar} />
+        <PlayNow />
       </div>
     </UserContext.Provider>
   );
