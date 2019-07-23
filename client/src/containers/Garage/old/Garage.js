@@ -1,9 +1,9 @@
 import React from 'react';
 
-import GarageSlider from '../../components/GarageSlider/GarageSlider';
-import Header from '../../components/Header/Header';
+import GarageSlider from '../../../components/GarageSlider/_old/GarageSlider';
+import Header from '../../../components/Header/Header';
 import GarageLogic from './GarageLogic';
-import GarageModal from '../../components/GarageSlider/GarageModal';
+import GarageModal from '../../../components/GarageSlider/GarageModal';
 
 export default () => (
   <GarageLogic>

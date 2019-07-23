@@ -1,67 +1,21 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { Carousel } from 'react-bootstrap';
 
-import instance from './../../lib/axios';
-import SliderCaption from '../GarageSlider/SliderCaption';
-import ImageSlider from '../CarSlider/ImageSlider';
-
+import UserContext from './../../context/user-context';
 import './GarageSlider.scss';
 
-class GarageSliderLogic extends Component {
-  constructor(props, context) {
-    super(props, context);
-    this.state = {
-      index: 0,
-      direction: null
-    };
-  }
+const GarageSlider = () => {
+  const { cars } = useContext(UserContext);
+  const [index, setIndex] = useState(0);
+  const [direction, setDirection] = useState(null);
 
-  handleSelect = (selectedIndex, e) => {
-    this.setState({
-      index: selectedIndex,
-      direction: e.direction
-    });
-  };
-
-  render() {
-    return this.props.children({
-      ...this.state,
-      handleSelect: this.handleSelect,
-      selectCurrentCar: this.selectCurrentCar
-    });
-  }
-}
-
-export default ({ user, selectCurrentCar }) => {
-  const renderCars = user.cars.map(car => {
+  const renderCars = cars.map(car => {
     return (
-      <Carousel.Item>
-        <SliderCaption
-          selectCurrentCar={selectCurrentCar}
-          imgSrc={car.mediumImg}
-          car={car}
-        />
-        <ImageSlider className="CarSlide" src={car.largeImg} />
-      </Carousel.Item>
-    );
+        <Carousel.Item>
+
+        </Carousel.Item>
+    )
   });
-  return (
-    <GarageSliderLogic>
-      {props => (
-        <div className="GarageSlider-container">
-          <Carousel
-            activeIndex={props.index}
-            direction={props.direction}
-            onSelect={props.handleSelect}
-            indicators={false}
-            fade={false}
-            controls={true}
-            interval="5000"
-          >
-            {renderCars}
-          </Carousel>
-        </div>
-      )}
-    </GarageSliderLogic>
-  );
 };
+
+export { GarageSlider as default }
