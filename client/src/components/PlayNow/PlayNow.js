@@ -1,10 +1,14 @@
-import React from 'react';
+import React, { useContext } from 'react';
+
 import { ProgressBar } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+
+import UserContext from './../../context/user-context';
 import './PlayNow.scss';
 import nissan from './../../img/gtx_md.png';
 
-const PlayNow = ({ currentCar }) => {
+const PlayNow = () => {
+  const { currentCar } = useContext(UserContext);
   const maxSpeed = currentCar ? currentCar.maxSpeed : 177;
   const acceleration = currentCar ? currentCar.acceleration : 5.5;
   const make = currentCar ? currentCar.make : 'Nissan'
