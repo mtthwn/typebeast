@@ -25,7 +25,7 @@ const Main = () => {
 
   return (
     <UserContext.Provider value={{ user, currentCar: user.currentCar }}>
-      <Header user={user} />
+      <Header/>
       <div>
         <SocialMedia />
         <CarSlider />
