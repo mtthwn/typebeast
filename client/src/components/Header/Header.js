@@ -8,8 +8,7 @@ import UserContext from './../../context/user-context';
 
 import './Header.scss';
 
-export default () => {
-  const { user } = useContext(UserContext);
+export default ({ user }) => {
   const renderedButtons = renderButtons(user.username);
   const authLinks = renderLinks(user.username);
 

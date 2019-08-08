@@ -1,38 +1,23 @@
-import React, { useEffect, useReducer } from 'react';
+import React from 'react';
 
-import userReducer from './../../reducers/users';
-import UserContext from './../../context/user-context';
-
+import MainLogic from './MainLogic';
 import CarSlider from './../../components/CarSlider/CarSlider';
 import SocialMedia from './../../components/SocialMedia/SocialMedia';
 import PlayNow from './../../components/PlayNow/PlayNow';
 
 import Header from './../../components/Header/Header';
 
-import validateToken from './../../lib/userValidation'
-
-const Main = () => {
-  const [user, userDispatch] = useReducer(userReducer, {
-    username: 'Guest',
-    cars: [],
-    email: null,
-    games: []
-  });
-
-  useEffect(() => {
-    validateToken(userDispatch);
-  }, []);
-
-  return (
-    <UserContext.Provider value={{ user, currentCar: user.currentCar }}>
-      <Header/>
+export default () => (
+  <MainLogic>
+    {props => (
       <div>
-        <SocialMedia />
-        <CarSlider />
-        <PlayNow />
+        <Header user={props.user} />
+        <div>
+          <SocialMedia />
+          <CarSlider />
+          <PlayNow currentCar={props.user.currentCar} />
+        </div>
       </div>
-    </UserContext.Provider>
-  );
-};
-
-export { Main as default };
+    )}
+  </MainLogic>
+);

@@ -7,8 +7,7 @@ import UserContext from './../../context/user-context';
 import './PlayNow.scss';
 import nissan from './../../img/gtx_md.png';
 
-const PlayNow = () => {
-  const { currentCar } = useContext(UserContext);
+const PlayNow = ({ currentCar }) => {
   const maxSpeed = currentCar ? currentCar.maxSpeed : 177;
   const acceleration = currentCar ? currentCar.acceleration : 5.5;
   const make = currentCar ? currentCar.make : 'Nissan'

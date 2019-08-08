@@ -25,6 +25,7 @@ module.exports = {
     })
       .save()
       .then(async savedUser => {
+        console.log(savedUser);
         const token = generateToken(savedUser);
         const user = getCleanUser(savedUser);
 
