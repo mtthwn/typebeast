@@ -16,7 +16,7 @@ export default () => {
     axios
       .get(`http://127.0.0.1:8081/api/auth/me/from/token`, {
         params: {
-          token: JSON.parse(token)
+          token
         }
       })
       .then(response => {
