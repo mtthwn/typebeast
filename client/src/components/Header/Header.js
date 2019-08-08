@@ -1,10 +1,8 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { Nav, Navbar } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
 import { renderButtons, renderLinks } from './../../lib/headerHelpers'
-
-import UserContext from './../../context/user-context';
 
 import './Header.scss';
 
