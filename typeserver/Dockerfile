@@ -10,4 +10,4 @@ COPY . .
 RUN npm install bcrypt
 
 EXPOSE 8080 8081
-  CMD ["npm", "run", "dev"]
+  CMD ["npm", "start"]
