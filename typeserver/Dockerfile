@@ -4,10 +4,9 @@ WORKDIR /usr/src/app
 
 COPY package*.json ./
 RUN npm install -g nodemon
-RUN npm install
+RUN npm install 
 
 COPY . .
-RUN npm install bcrypt
 
-EXPOSE 8080 8081
+EXPOSE 8080 
   CMD ["npm", "start"]

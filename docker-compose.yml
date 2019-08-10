@@ -5,14 +5,17 @@ services:
     build: ./client
     volumes:
       - ./client:/user/src/app:rw
-      - /usr/src/app/node_modules/
     ports: 
      - 3000:3000
   typebeast-server:
     build: ./typeserver
     volumes:
-      - ./server:/usr/src/app:rw
-      - /usr/src/app/node_modules/
+      - ./typeserver:/usr/src/app:rw
     ports:
       - 8081:8081
-      - 8000:8000
+  typebeast-socketserver:
+    build: ./socketserver
+    volumes:
+      - ./socketserver:/usr/src/app:rw
+    ports:
+      - 8080:8080

@@ -1,15 +1,15 @@
 import React, { useEffect, useReducer } from 'react';
 
-import userReducer from './../../reducers/users';
-import UserContext from './../../context/user-context';
+import userReducer from '../../../reducers/users';
+import UserContext from '../../../context/user-context';
 
-import CarSlider from './../../components/CarSlider/CarSlider';
-import SocialMedia from './../../components/SocialMedia/SocialMedia';
-import PlayNow from './../../components/PlayNow/PlayNow';
+import CarSlider from '../../../components/CarSlider/CarSlider';
+import SocialMedia from '../../../components/SocialMedia/SocialMedia';
+import PlayNow from '../../../components/PlayNow/PlayNow';
 
-import Header from './../../components/Header/Header';
+import Header from '../../../components/Header/Header';
 
-import validateToken from './../../lib/userValidation'
+import validateToken from '../../../lib/userValidation'
 
 const Main = () => {
   const [user, userDispatch] = useReducer(userReducer, {
