@@ -4,7 +4,9 @@
   "private": true,
   "scripts": {
     "start": "node ./bin/www",
-    "seed": "node ./db/seed"
+    "seed": "node ./db/seed",
+    "socket-server": "nodemon ./socketserver/server.js",
+    "dev": "npm run start > /dev/null | npm run socket-server"
   },
   "dependencies": {
     "axios": "^0.19.0",
@@ -23,5 +25,5 @@
   },
   "devDependencies": {
     "nodemon": "^1.18.10"
-  }    
+  }
 }
