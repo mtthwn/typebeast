@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const axios = require('axios');
 
@@ -14,30 +15,10 @@ const roomTracker = {
 
 const formattedClients = {};
 
-/*
-
-roomTracker object: {
-  total: 12,
-  room-1: {
-    users: 3,
-    quote: ''
-  }
-}
-
-formattedClients = {
-  room-1 :
-    socket-1 : {
-      username:
-      car:
-    }
-}
-
-*/
-
 const getQuote = room => {
   if (!roomTracker['room-' + roomNum]['quote']) {
     axios
-      .get('http://127.0.0.1:8081/api/quotes')
+      .get(`${process.env.TYPEAPI}/api/quotes`)
       .then(res => {
         room['quote'] = res.data.data.quote;
         // console.log(roomTracker);
