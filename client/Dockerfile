@@ -1,7 +1,7 @@
-FROM node:10.14
+FROM node:10.16.2-jessie
 
 # App directory
-WORKDIR /usr/src/app 
+WORKDIR /app 
 
 # install dependencies
 COPY package*.json ./

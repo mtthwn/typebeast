@@ -1,6 +1,6 @@
-FROM node:10.16
+FROM node:10.16-jessie
 
-WORKDIR /usr/src/app
+WORKDIR /app
 
 COPY package*.json ./
 RUN npm install -g nodemon
