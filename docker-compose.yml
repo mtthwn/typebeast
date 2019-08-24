@@ -1,0 +1,22 @@
+version: '3'
+
+services:
+  typebeast-client:
+    build: ./client
+    volumes:
+      - ./client:/user/src/app:rw
+    ports:
+      - 3000:3000
+  typebeast-server:
+    build: ./typeserver
+    volumes:
+      - ./typeserver:/usr/src/app:rw
+    ports:
+      - 8081:8081
+  typebeast-socketserver:
+    build: ./socketserver
+    volumes:
+      - ./socketserver:/usr/src/app:rw
+
+    ports:
+      - 8080:8080
