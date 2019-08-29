@@ -17,6 +17,5 @@ services:
     build: ./socketserver
     volumes:
       - ./socketserver:/usr/src/app:rw
-
     ports:
       - 8080:8080

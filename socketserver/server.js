@@ -21,7 +21,6 @@ const getQuote = room => {
       .get(`${process.env.TYPEAPI}/api/quotes`)
       .then(res => {
         room['quote'] = res.data.data.quote;
-        // console.log(roomTracker);
       })
       .catch(e => console.log(e.message));
   }
@@ -31,8 +30,8 @@ let alreadyInRoom = false;
 
 io.on('connection', function(socket) {
   roomTracker.totalUsers++;
-  console.log(`===============================`);
-  console.log('\nA user connected: ', socket.id, '/Users in server:', roomTracker.totalUsers);
+  // console.log(`===============================`);
+  // console.log('\nA user connected: ', socket.id, '/Users in server:', roomTracker.totalUsers);
 
   // Handler to receive username and vehicle. Must happen first.
   socket.on('user-info', data => {
@@ -93,8 +92,8 @@ io.on('connection', function(socket) {
       JSON.stringify(formattedClients[`room-${roomNum}`])
     );
 
-    console.log(roomTracker)
-    console.log(formattedClients)
+    // console.log(roomTracker)
+    // console.log(formattedClients)
 
     // Set up variable to get array of socket IDs in current room
     // let clients = io.sockets.adapter.rooms['room-' + roomNum];
@@ -156,10 +155,10 @@ io.on('connection', function(socket) {
       formattedClients: formattedClients[Object.keys(socket.rooms)[1]]
     });
 
-    console.log(`===============================`);
-    console.log('A user disconnected', socket.id);
-    console.log(roomTracker)
-    console.log(formattedClients)
+    // console.log(`===============================`);
+    // console.log('A user disconnected', socket.id);
+    // console.log(roomTracker)
+    // console.log(formattedClients)
   });
 
   socket.on('disconnect', function() {

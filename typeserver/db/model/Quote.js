@@ -1,6 +1,6 @@
-const mongoose = require('mongoose');
+const mongoose = require('mongoose')
 
-const { Schema } = mongoose;
+const { Schema } = mongoose
 
 const QuoteSchema = new Schema({
   author: {
@@ -12,8 +12,8 @@ const QuoteSchema = new Schema({
     required: true,
     unique: true
   }
-});
+})
 
-const Quote = mongoose.model('Quote', QuoteSchema);
+const Quote = mongoose.model('Quote', QuoteSchema)
 
-module.exports = Quote;
+module.exports = Quote

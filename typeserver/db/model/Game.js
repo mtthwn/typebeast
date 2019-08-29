@@ -1,6 +1,6 @@
-const mongoose = require('mongoose');
+const mongoose = require('mongoose')
 
-const { Schema } = mongoose;
+const { Schema } = mongoose
 
 const GameSchema = new Schema({
   stats: [{ type: Schema.Types.ObjectId, ref: 'GameStat' }],
@@ -10,15 +10,15 @@ const GameSchema = new Schema({
   },
   socketId: {
     type: String,
-    required: true,
+    required: true
   },
   quote: {
     type: Schema.Types.ObjectId,
     ref: 'Quote',
     required: true
   }
-});
+})
 
-const Game = mongoose.model('Game', GameSchema);
+const Game = mongoose.model('Game', GameSchema)
 
-module.exports = Game;
+module.exports = Game

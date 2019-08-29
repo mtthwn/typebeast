@@ -1,4 +1,4 @@
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcrypt')
 
 module.exports = [
   {
@@ -13,4 +13,4 @@ module.exports = [
     games: [],
     password: bcrypt.hashSync('goodbye', 10)
   }
-];
+]
