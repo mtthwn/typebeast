@@ -1,8 +1,8 @@
-const mongoose = require('mongoose');
+const mongoose = require('mongoose')
 
-const { Schema } = mongoose;
+const { Schema } = mongoose
 
-const Car = require('./Car');
+const Car = require('./Car')
 
 const UserSchema = new Schema({
   username: {
@@ -37,23 +37,23 @@ const UserSchema = new Schema({
     required: true,
     default: 100000
   }
-});
+})
 
 UserSchema.pre('save', function(next) {
-  let user = this;
+  let user = this
 
   Car.findOne({ model: 'Silvia S15' })
     .then(car => {
-      user.currentCar = car._id;
-      user.cars = [car._id];
+      user.currentCar = car._id
+      user.cars = [car._id]
 
-      next();
+      next()
     })
     .catch(e => {
-      console.log(e);
-    });
-});
+      console.log(e)
+    })
+})
 
-const User = mongoose.model('User', UserSchema);
+const User = mongoose.model('User', UserSchema)
 
-module.exports = User;
+module.exports = User

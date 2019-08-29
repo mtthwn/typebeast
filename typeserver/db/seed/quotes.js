@@ -30,4 +30,4 @@ module.exports = [
     quote: `When life offers you a dream so far beyond any of your expectations, it's not reasonable to grieve when it comes to an end.`,
     author: 'Stephanie Meyer'
   }
-];
+]

@@ -59,4 +59,4 @@ module.exports = [
     maxSpeed: 250,
     acceleration: 3.2
   }
-];
+]

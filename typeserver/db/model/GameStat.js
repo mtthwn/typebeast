@@ -1,6 +1,6 @@
-const mongoose = require('mongoose');
+const mongoose = require('mongoose')
 
-const { Schema } = mongoose;
+const { Schema } = mongoose
 
 const GameStatSchema = new Schema({
   player: {
@@ -14,12 +14,12 @@ const GameStatSchema = new Schema({
     default: 0
   },
   quote: {
-    type: Schema.Types.ObjectId, 
+    type: Schema.Types.ObjectId,
     ref: 'Quote',
     required: true
   }
-});
+})
 
-const GameStat = mongoose.model('GameStat', GameStatSchema);
+const GameStat = mongoose.model('GameStat', GameStatSchema)
 
-module.exports = GameStat;
+module.exports = GameStat
