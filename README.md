@@ -2,8 +2,6 @@
 
 TypeBeast is a typing game for the ages! A modern take on a classic game, TypeBeast aims to bring an immersive and addictive typing game experience to help you take your typing to the next level.
 
-Feel free to play the game [here!](http://13.90.102.207:3000/)
-
 ## Final Product 
 ###### Welcome to TypeBeast! Register, login, or play as a guest!
 ![home screen"](https://github.com/my2an/typebeast/blob/master/client/docs/guest.jpg)
